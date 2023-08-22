@@ -1,0 +1,42 @@
+.auth {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 17px;
+    margin-right: 17px;
+  }
+
+  .logo-login {
+    border-radius: 50%;
+    width: 117px;
+    height: 117px;
+    justify-content: ;
+  }
+
+  .login-form {
+    display: grid;
+    /* align-items: center; */
+    justify-content: center;
+    
+    gap: 17px;
+  }
+
+  /* .login-box {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  } */
+
+  /* .login-logo {
+    border-radius: 50%;
+    width: 77px;
+    height: 77px;
+  } */
+
+
+
+  /* .login-popup {
+    width: 499px;
+    height: 400;
+  } */
+
