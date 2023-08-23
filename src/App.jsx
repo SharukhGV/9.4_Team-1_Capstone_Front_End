@@ -3,7 +3,9 @@ import ArtistsGraphic from './assets/artistsgraphic.jpg';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Auth from './components/auth/Auth';
-//import Home from './pages/home'; //FAILS TO IMPORT ??!!
+import Landing from './pages/landing/Landing';
+
+//will need to import fonts library
 
 function App() {
 
@@ -20,11 +22,7 @@ function App() {
       </header>
       <main>
         <Routes>
-          {/* <Route path='/' element={<Home />} /> */}
-
-
-
-
+          {/* <Route path='/' element={<Landing />} /> */}
         </Routes>
       </main>
     </div>
