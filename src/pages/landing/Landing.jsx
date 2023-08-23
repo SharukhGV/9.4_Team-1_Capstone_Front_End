@@ -29,7 +29,13 @@ export default function Landing() {
         </div>
         </header>
         <main>
-            
+            <div>
+                {/* carousel goes here */}
+            </div>
+            {/* <h3> Top Categories </h3> */}
+            <div>
+                {/* top categories here */}
+            </div>
         </main>
         </> 
     )

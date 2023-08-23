@@ -1,0 +1,9 @@
+.footer {
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.footer p {
+    color: #3C415C;
+}
