@@ -1,0 +1,66 @@
+.header-branding {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    /* justify-content: space-between; */
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    /* height: 100px; */
+  }
+  
+  .home-logo {
+    border-radius: 50%;
+    width: 147px;
+    height: 147px;
+    /* margin-top: 77px; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+  }
+  
+  .artists-graphic {
+    width: 90%;
+    
+    /* max-width: 400px; */
+    /* height: auto; */
+    /* margin-top: 20px; */
+  }
+  
+  .header-h2 {
+    font-family: 'Bellota', cursive;
+    color: #800080;
+    font-weight: lighter;
+    font-size: xx-large;
+    margin-bottom: 0;
+  }
+  
+  .header-h4 {
+    font-family: 'Roboto', sans-serif;
+    color: #1A237E;
+    font-weight: lighter;
+    font-size: large;
+    margin-top: 4px;
+  }
+  
+  .header-points {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    /* display: flex;
+    justify-content: space-between; */
+    width: 90%;
+    gap: 10px;
+    /* justify-content: space-evenly;
+    align-items: center;
+    justify-items: center;
+    align-content: center; */
+  }
+  
+  .header-points p {
+    color: #3C415C;
+    font-size: 14px;
+  }
+  
+  header {
+    border-bottom: solid 1px #3278B2;
+  }

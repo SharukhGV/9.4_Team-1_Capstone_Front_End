@@ -2,27 +2,7 @@
   margin: 0 auto;
 }
 
-header {
-  /* display: flex; */
-  justify-content: center;
-  /* justify-content: space-between; */
-  align-items: center;
-  /* height: 100px; */
-}
 
-.home-logo {
-  border-radius: 50%;
-  width: 147px;
-  height: 147px;
-  /* margin-top: 77px; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-}
-
-.artists-graphic {
-  width: 77%;
-  
-}
 
 /* .header-branding {
   /* display: flex; */
