@@ -60,7 +60,6 @@ export default function CatCarousel() {
               ))
             }
             <button onClick={nextSlide} className='arrow'> <ArrowForwardIosIcon /> </button>
-        </div>
-        
+        </div> 
     )
 }
