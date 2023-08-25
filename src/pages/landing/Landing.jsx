@@ -13,7 +13,6 @@ import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 import ceramicsImg from '../../assets/categoryImg/ceramicsImg.jpg';
 import graffitiImg from '../../assets/categoryImg/graffitiImg.jpg';
 import paintingImg from '../../assets/categoryImg/paintingImg.jpg';
-import visualImg from '../../assets/categoryImg/visualImg.jpg';
 import photographyImg from '../../assets/categoryImg/photographyImg.jpg';
 import filmmakingImg from '../../assets/categoryImg/filmmakingImg.jpg';
 import fashionDesignImg from '../../assets/categoryImg/fashionDesignImg.jpg';
@@ -26,18 +25,16 @@ export default function Landing() {
 
   const artsImgs = [
     { name: 'Ceramics', imageUrl: ceramicsImg },
-    { name: 'Visual Arts', imageUrl: visualImg },
     { name: 'Photography', imageUrl: photographyImg }, 
     { name: 'Painting', imageUrl: paintingImg },
     { name: 'Graffiti', imageUrl: graffitiImg },
     { name: 'Filmmaking', imageUrl: filmmakingImg }, 
     { name: 'Fashion Design', imageUrl: fashionDesignImg }, //change this image
     { name: 'Drawing', imageUrl: drawingImg }, 
-    { name: 'Digital Art', imageUrl: digitalArtImg },
+    { name: 'Digital Artistry', imageUrl: digitalArtImg },
     { name: 'Sculpturing', imageUrl: sculptureImg },
     { name: 'Printmaking', imageUrl: printmakingImg }, //consider replacement
   ] 
-  //double check fonts
 
   const [currentImg, setCurrentImg] = useState(0);
 
