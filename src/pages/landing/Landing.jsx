@@ -1,6 +1,10 @@
 import './landing.css';
 import Auth from '../../components/auth/Auth';
 import { useState } from 'react';
+//docs for cards: https://mui.com/joy-ui/react-card/ 
+import Card from '@mui/joy/Card';
+import CardContent from '@mui/joy/CardContent';
+import CardOverflow from '@mui/joy/CardOverflow';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -11,30 +15,29 @@ import graffitiImg from '../../assets/categoryImg/graffitiImg.jpg';
 import paintingImg from '../../assets/categoryImg/paintingImg.jpg';
 import visualImg from '../../assets/categoryImg/visualImg.jpg';
 import photographyImg from '../../assets/categoryImg/photographyImg.jpg';
-import filmmakingImg from '../../assets/categoryImg/filmmaking.jpg';
+import filmmakingImg from '../../assets/categoryImg/filmmakingImg.jpg';
 import fashionDesignImg from '../../assets/categoryImg/fashionDesignImg.jpg';
 import drawingImg from '../../assets/categoryImg/drawingImg.jpg';
 import digitalArtImg from '../../assets/categoryImg/digitalArtImg.jpg';
 import sculptureImg from '../../assets/categoryImg/sculptureImg.jpg';
 import printmakingImg from '../../assets/categoryImg/printmakingImg.jpg';
 
-//make the carousel a component and lazy load it, lazy load each image as well
-
 export default function Landing() {
 
   const artsImgs = [
     { name: 'Ceramics', imageUrl: ceramicsImg },
     { name: 'Visual Arts', imageUrl: visualImg },
-    { name: 'Photography', imageUrl: photographyImg },
+    { name: 'Photography', imageUrl: photographyImg }, 
     { name: 'Painting', imageUrl: paintingImg },
     { name: 'Graffiti', imageUrl: graffitiImg },
-    { name: 'Filmmaking', imageUrl: filmmakingImg },
-    { name: 'Fashion Design', imageUrl: fashionDesignImg },
-    { name: 'Drawing', imageUrl: drawingImg },
+    { name: 'Filmmaking', imageUrl: filmmakingImg }, 
+    { name: 'Fashion Design', imageUrl: fashionDesignImg }, //change this image
+    { name: 'Drawing', imageUrl: drawingImg }, 
     { name: 'Digital Art', imageUrl: digitalArtImg },
     { name: 'Sculpturing', imageUrl: sculptureImg },
-    { name: 'Printmaking', imageUrl: printmakingImg },
-  ] //get rid of pics once you figure out how to showcase these without using unsplash or perhaps a better option; unless allowed by unsplash ofcourse
+    { name: 'Printmaking', imageUrl: printmakingImg }, //consider replacement
+  ] 
+  //double check fonts
 
   const [currentImg, setCurrentImg] = useState(0);
 
@@ -53,28 +56,6 @@ export default function Landing() {
     artsImgs[(currentImg + 2) % artsImgs.length],
     artsImgs[(currentImg + 3) % artsImgs.length],
   ];
-
-  // const useStyles = makeStyles((theme) => ({
-  //   imageContainer: {
-  //     position: 'relative',
-  //     maxWidth: '100%',
-  //   },
-  //   image: {
-  //     width: '100%',
-  //     height: 'auto',
-  //     display: 'block',
-  //   },
-  //   textOverlay: {
-  //     position: 'absolute',
-  //     top: '50%',
-  //     left: '50%',
-  //     transform: 'translate(-50%, -50%)',
-  //     background: 'rgba(0, 0, 0, 0.7)',
-  //     color: 'white',
-  //     padding: '10px',
-  //     borderRadius: '4px',
-  //   }
-  // }))
 
     return (
         <>
@@ -96,7 +77,7 @@ export default function Landing() {
         <br />
         </div>
         <br />
-        <div className='header-bottom' />
+        <div className='div' />
         <br />
         </header>
         <br />
@@ -113,10 +94,30 @@ export default function Landing() {
             }
               <button onClick={nextSlide} className='arrow'> <ArrowForwardIosIcon /> </button>
           </div>
-            {/* <h3> Top Categories </h3> */}
-            <div>
-                {/* top categories here */}
-            </div>
+          <br />
+          <div>
+          <h3 className='top-categories-h3'> Top Categories </h3>
+          <br />
+          <div >
+          <p className='top-category-p'> Photography </p>
+          <button onClick={prevSlide} className='arrow'> <ArrowBackIosIcon /> </button>
+          <button onClick={nextSlide} className='arrow'> <ArrowForwardIosIcon /> </button>
+          </div>
+          {/* <div className='div' /> */}
+          <div >
+          <p className='top-category-p'> Painting </p>
+          <button onClick={prevSlide} className='arrow'> <ArrowBackIosIcon /> </button>
+          <button onClick={nextSlide} className='arrow'> <ArrowForwardIosIcon /> </button>
+          </div>
+          {/* <div className='div' /> */}
+          <div>
+          <p className='top-category-p'> Digital Art </p>
+          <button onClick={prevSlide} className='arrow'> <ArrowBackIosIcon /> </button>
+          <button onClick={nextSlide} className='arrow'> <ArrowForwardIosIcon /> </button>
+          </div>
+          {/* <div className='div' /> */}
+          </div>
+          <br />
         </main>
         </> 
     )
