@@ -1,10 +1,10 @@
-/* .navbar {
+.navbar {
     display: flex;
     gap: 10px;
-    justify-content: flex-end;
     margin-top: 17px;
     margin-right: 17px;
-  } */
+    border-bottom: 5px solid #7CA0E7;
+}
 
 .navbar-logo {
     border-radius: 50%;
@@ -14,14 +14,14 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
-  }
+}
 
-  .explore-btn, .profile-btn {
+.explore-btn,
+.profile-btn {
     background: linear-gradient(to bottom, #7CA0E7, #1A237E);
     color: white;
     width: 90px;
     border-color: #7CA0E7;
     border-radius: 4px;
-    /* font-family: 'Open Sans'; */
     font-family: 'Lato';
-  }
+}

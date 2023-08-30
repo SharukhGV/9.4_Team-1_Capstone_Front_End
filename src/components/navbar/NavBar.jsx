@@ -10,7 +10,7 @@ import Auth from '../../components/auth/Auth';
 
 export default function NavBar() {
 
-    const [loggedOut, setLoggedOut] = useState(false);
+    const [loggedOut, setLoggedOut] = useState(true);
 
 
     return (
