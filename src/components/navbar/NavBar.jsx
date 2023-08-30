@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import './navbar.css'
 import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 
+import { Popover, Typography } from '@mui/material';
+
 import Auth from '../../components/auth/Auth';
 
 
 export default function NavBar() {
 
-    const [loggedOut, setLoggedOut] = useState(true);
+    const [loggedOut, setLoggedOut] = useState(false);
 
 
     return (
