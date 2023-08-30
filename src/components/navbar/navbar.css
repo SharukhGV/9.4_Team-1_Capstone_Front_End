@@ -1,0 +1,9 @@
+.navbar-logo {
+    border-radius: 50%;
+    width: 147px;
+    height: 147px;
+    margin-top: 40px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
