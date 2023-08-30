@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import './navbar.css'
 import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 
-import { Popover, Typography } from '@mui/material';
-
+import BasicPopover from '../../assets/mui/popover/popover';
 import Auth from '../../components/auth/Auth';
+import { Popover } from '@mui/material';
 
 
 export default function NavBar() {
 
-    const [loggedOut, setLoggedOut] = useState(true);
+    const [loggedOut, setLoggedOut] = useState(false);
 
 
     return (
@@ -43,9 +43,7 @@ export default function NavBar() {
                     <input type="text" placeholder="Search..." />
 
                     <Link to="/profile">
-                        <button className='profile-btn'>
-                            Profile
-                        </button>
+                       <Popover className='login-btn' />
                     </Link>
 
                 </div>
