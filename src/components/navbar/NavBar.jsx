@@ -1,24 +1,27 @@
 import './navbar.css'
-import Logo from '../../assets/Craftopia-Circular-Logo.svg';
+import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
+
+import Auth from '../../components/auth/Auth';
+
 
 export default function NavBar() {
 
-    handleLoginClick = () => {
+    function handleLoginClick() {
         console.log('Login button clicked');
-      }
-    
-      handleSignUpClick = () => {
+    }
+
+    function handleSignUpClick() {
         console.log('Sign Up button clicked');
-      }
+    }
 
     return (
         <div className='navbar'>
-        <img src={Logo} alt='circ-logo' className='navbar-logo' />
+            <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
 
-        <input type="text" placeholder="Search..." />
+            <input type="text" placeholder="Search..." />
 
-        <button onClick={this.handleLoginClick}>Login</button>
-        <button onClick={this.handleSignUpClick}>Sign Up</button>
+            <Auth craftopiaLogo={craftopiaLogo} />
+
         </div>
     )
 }
