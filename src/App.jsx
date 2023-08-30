@@ -13,7 +13,7 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<Landing />} />
-          <Route path='/Home' element={<Home />} />
+          <Route path='/home' element={<Home />} />
           {/* change to lowercase home if issue */}
         </Routes>
       </main>

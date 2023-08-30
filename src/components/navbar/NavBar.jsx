@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './navbar.css'
 import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 
@@ -6,21 +8,50 @@ import Auth from '../../components/auth/Auth';
 
 export default function NavBar() {
 
-    function handleLoginClick() {
-        console.log('Login button clicked');
-    }
+    const [loggedOut, setLoggedOut] = useState(true);
 
-    function handleSignUpClick() {
-        console.log('Sign Up button clicked');
-    }
 
     return (
         <div className='navbar'>
-            <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
 
-            <input type="text" placeholder="Search..." />
+            {loggedOut ? (
+                <div>
+                    <Link to='/'>
+                        <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
+                    </Link>
 
-            <Auth craftopiaLogo={craftopiaLogo} />
+                    <Link to="/home">
+                        <button className='explore-btn'>Explore</button>
+                    </Link>
+
+                    <input type="text" placeholder="Search..." />
+
+                    <Auth craftopiaLogo={craftopiaLogo} loggedOut={loggedOut} setLoggedOut={setLoggedOut} />
+
+                </div>
+            ) : (
+                <div>
+                    <Link to='/'>
+                        <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
+                    </Link>
+                    <Link to="/home">
+                        <button className='explore-btn'>Explore</button>
+                    </Link>
+
+                    <input type="text" placeholder="Search..." />
+
+                    <Link to="/profile">
+                        <button className='profile-btn'>
+                            Profile
+                        </button>
+                    </Link>
+
+                </div>
+
+            )
+            }
+
+
 
         </div>
     )

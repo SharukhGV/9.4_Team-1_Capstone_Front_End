@@ -1,4 +1,5 @@
 //import NavBar from "../../components/navbar/NavBar";
+import { useState } from "react";
 import CatCarousel from "../../components/categories-carousel/CatCarousel";
 import './home.css';
 
@@ -8,14 +9,14 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 export default function Home() {
 
     //apply state for the quiz ad
+    const [quizComplete, setQuizComplete] = useState(false);
 
     return (
 
         <div>
-            {/* navbar goes here */}
             <CatCarousel />
             <div className="home-header">
-                <h3 className="home-h3"> Insight Your Creativity </h3>
+                <h3 className="home-h3"> Ignite Your Creativity </h3>
             </div>
             <div>
                 {/* post box here 
