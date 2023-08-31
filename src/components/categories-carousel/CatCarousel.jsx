@@ -34,7 +34,7 @@ export default function CatCarousel() {
 
     function prevSlide() {
         setCurrentImg((prevImg) => (prevImg === 0 ? artsImgs.length - 1 : prevImg - 1));
-    }
+    } 
     
     function nextSlide() {
         setCurrentImg((prevImg) => (prevImg === artsImgs.length - 1 ? 0 : prevImg + 1));

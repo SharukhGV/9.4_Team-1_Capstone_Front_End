@@ -26,7 +26,7 @@ export default function Landing() {
           <div className='branding-text'>
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
-          <button className='join-btn'> Join The Fun </button>
+          <button className='join-btn'> Join Us </button>
           </div>
           <div>
           <img src={ArtistsGraphic} className='artists-graphic' />
