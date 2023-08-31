@@ -8,9 +8,7 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import CardOverflow from '@mui/joy/CardOverflow';
 import { Typography } from '@mui/material';
-
-import { AwesomeButton } from 'react-awesome-button';
-
+import { Button } from '@mui/joy';
 
 import CatCarousel from '../../components/categories-carousel/CatCarousel';
 
@@ -33,9 +31,7 @@ export default function Landing() {
           <div className='branding-text'>
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
-          <AwesomeButton type='primary'> Join The Fun </AwesomeButton>
-          
-          {/* <Button className='join-btn' variant='soft' size='sm' sx={{ color: 'white', fontFamily: 'Lato'}}> <Typography sx={{ fontWeight: 'regular', fontSize: 12 }} > Join Us </Typography> </Button> */}
+          <button className='join-btn'> Join The Fun </button>
           </div>
           <div>
           <img src={ArtistsGraphic} className='artists-graphic' />

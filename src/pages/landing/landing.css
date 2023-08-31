@@ -51,7 +51,15 @@
 
 .join-btn {
   background: linear-gradient(to bottom, #9CD393, #388E3C);
+  color: white;
+  border-radius: 7px;
+  height: 24px;
+  width: 94px;
+  border-style: none;
+  font-family: 'Open Sans', sans-serif;
 }
+
+
 
 .arrow {
   border: none;
