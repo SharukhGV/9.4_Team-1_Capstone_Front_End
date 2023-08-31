@@ -51,11 +51,6 @@
 
 .join-btn {
   background: linear-gradient(to bottom, #9CD393, #388E3C);
-  color: white;
-  width: 90px;
-  border-color: #28652b;
-  border-radius: 4px;
-  font-family: 'Lato';
 }
 
 .arrow {

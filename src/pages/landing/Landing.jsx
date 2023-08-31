@@ -5,6 +5,8 @@ import { useState } from 'react';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import CardOverflow from '@mui/joy/CardOverflow';
+import { Button } from '@mui/joy';
+import { Typography } from '@mui/material';
 
 import CatCarousel from '../../components/categories-carousel/CatCarousel';
 
@@ -19,24 +21,27 @@ export default function Landing() {
         <>
         {/* <Auth craftopiaLogo={craftopiaLogo} /> */}
         <header>
+        
         <div className='header-branding'>
+        <Card sx={{ border: 1, borderColor: '#D1C4E9', width: '87%' }} >
         {/* <img className='landing-logo' src={craftopiaLogo} alt='craftopia logo' /> */}
-        <br />
         <div className='landing-action'>  
           <div className='branding-text'>
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
-          <button className='join-btn'> Join Us </button>
+          <Button className='join-btn' variant='soft' size='sm' sx={{ color: 'white', fontFamily: 'Lato'}}> <Typography sx={{ fontWeight: 'regular', fontSize: 12 }} > Join Us </Typography> </Button>
           </div>
           <div>
           <img src={ArtistsGraphic} className='artists-graphic' />
           </div>
         </div>
-        <br />
+        </Card >
         </div>
+        
         <br />
-        <div className='div' />
+        {/* <div className='div' /> */}
         <br />
+        
         </header>
         <br />
         <main>
