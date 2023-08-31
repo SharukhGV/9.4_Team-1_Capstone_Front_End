@@ -17,10 +17,10 @@ export default function Landing() {
 
     return (
         <>
-        <Auth craftopiaLogo={craftopiaLogo} />
+        {/* <Auth craftopiaLogo={craftopiaLogo} /> */}
         <header>
         <div className='header-branding'>
-        <img className='landing-logo' src={craftopiaLogo} alt='craftopia logo' />
+        {/* <img className='landing-logo' src={craftopiaLogo} alt='craftopia logo' /> */}
         <br />
         <div className='landing-action'>  
           <div className='branding-text'>
