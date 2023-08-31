@@ -22,7 +22,11 @@ export default function NavBar() {
             {loggedOut ? (
                 <div>
                     <Link to='/'>
-                        <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
+                        <img
+                            src={craftopiaLogo}
+                            alt='circ-logo'
+                            className='navbar-logo'
+                        />
                     </Link>
 
                     {/* Remove button later */}
@@ -32,19 +36,28 @@ export default function NavBar() {
                         <button className='explore-btn'>Explore</button>
                     </Link>
 
-                    <input 
-                    type="text" 
-                    placeholder="Search..."
-                    value={searchText}
-                    onChange={handleSearchInput} />
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchText}
+                        onChange={handleSearchInput}
+                    />
 
-                    <Auth craftopiaLogo={craftopiaLogo} loggedOut={loggedOut} setLoggedOut={setLoggedOut} />
+                    <Auth
+                        craftopiaLogo={craftopiaLogo}
+                        loggedOut={loggedOut}
+                        setLoggedOut={setLoggedOut}
+                    />
 
                 </div>
             ) : (
                 <div>
                     <Link to='/'>
-                        <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
+                        <img
+                            src={craftopiaLogo}
+                            alt='circ-logo'
+                            className='navbar-logo'
+                        />
                     </Link>
 
                     {/* Remove button later */}
@@ -54,14 +67,18 @@ export default function NavBar() {
                         <button className='explore-btn'>Explore</button>
                     </Link>
 
-                    <input 
-                    type="text" 
-                    placeholder="Search..."
-                    value={searchText}
-                    onChange={handleSearchInput} />
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchText}
+                        onChange={handleSearchInput}
+                    />
 
                     <Link to="/profile">
-                        <BasicPopover className='login-btn' buttonText='Profile' popoverContent='Profile options will go here' />
+                        <BasicPopover
+                            className='login-btn'
+                            buttonText='Profile'
+                            popoverContent='Profile options will go here' />
                     </Link>
 
                 </div>
