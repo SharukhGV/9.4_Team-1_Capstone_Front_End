@@ -10,7 +10,7 @@ import { Popover } from '@mui/material';
 
 export default function NavBar() {
 
-    const [loggedOut, setLoggedOut] = useState(false);
+    const [loggedOut, setLoggedOut] = useState(true);
 
 
     return (
@@ -21,6 +21,9 @@ export default function NavBar() {
                     <Link to='/'>
                         <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
                     </Link>
+
+                    {/* Remove button later */}
+                    <button onClick={() => setLoggedOut(!loggedOut)}>Temp Button see login view of NavBar</button>
 
                     <Link to="/home">
                         <button className='explore-btn'>Explore</button>
@@ -36,6 +39,10 @@ export default function NavBar() {
                     <Link to='/'>
                         <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
                     </Link>
+
+                    {/* Remove button later */}
+                    <button onClick={() => setLoggedOut(!loggedOut)}>Temp Button see login view of NavBar</button>
+
                     <Link to="/home">
                         <button className='explore-btn'>Explore</button>
                     </Link>
@@ -43,7 +50,7 @@ export default function NavBar() {
                     <input type="text" placeholder="Search..." />
 
                     <Link to="/profile">
-                       <Popover className='login-btn' />
+                        <BasicPopover className='login-btn' buttonText='Profile' popoverContent='Profile options will go here' />
                     </Link>
 
                 </div>
