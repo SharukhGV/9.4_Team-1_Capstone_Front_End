@@ -5,6 +5,8 @@ import './home.css';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Button } from "@mui/joy";
+import { Typography } from "@mui/material";
 
 export default function Home() {
 
@@ -15,9 +17,14 @@ export default function Home() {
 
         <div>
             <CatCarousel />
+            <br />
             <div className="home-header">
-                <h3 className="home-h3"> Ignite Your Creativity </h3>
+                <h4 className="home-h4"> Let's Make Things a Little More Personal </h4>
+                <p> Take our quick assesment for a better curated homepage </p>
+                {/* <br /> */}
+                <Button sx={{ background: 'linear-gradient(to bottom, #9CD393, #388E3C)', height: '25%'}}> <Typography fontFamily='Open Sans, sans-serif'> Take Assesment </Typography> </Button>
             </div>
+            <br />
             <div>
                 {/* post box here 
                 REDESIGNING*/}

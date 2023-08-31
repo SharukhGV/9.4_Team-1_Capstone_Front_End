@@ -4,10 +4,12 @@
     width: 90%;
 }
 
-.home-h3 {
-  font-family: 'Bellota', cursive;
-  color: #800080;
-  font-weight: lighter;
+.home-h4 {
+  font-family: 'Lato', sans-serif;
+  color: #1A237E;
+  /* font-weight: light; */
+  margin-bottom: 0px;
+  /* font-size: large; */
 }
 
 .home-header {
@@ -15,6 +17,10 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+.home-header p {
+  font-family: 'Open Sans', sans-serif;
 }
 
 .arrow {
