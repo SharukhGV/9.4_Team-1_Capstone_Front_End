@@ -1,20 +1,41 @@
-import React, { useState } from 'react';
-import './auth.css';
-import { Box, Modal } from '@mui/material';
-
+import React, {useState} from 'react'
+import axios from 'axios'
+import './auth.css'
+import {Box, Modal} from '@mui/material'
+const API = import.meta.env.VITE_REACT_APP_API_URL
 export default function Auth(props) {
-  const [loginOpen, setLoginOpen] = useState(false);
-  const [signupOpen, setSignupOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false)
+  const [signupOpen, setSignupOpen] = useState(false)
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  })
+  const handleLoginOpen = () => setLoginOpen(true)
+  const handleLoginClose = () => setLoginOpen(false)
 
-  const handleLoginOpen = () => setLoginOpen(true);
-  const handleLoginClose = () => setLoginOpen(false);
+  const handleSignupOpen = () => setSignupOpen(true)
+  const handleSignupClose = () => setSignupOpen(false)
+  const handleTextChange = e => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    })
+  }
+  const addUser = newUser => {
+    console.log(newUser)
+    axios.post(`${API}/auth/signup`, newUser)
+    .then(res=>{
+      console.log(res.data.message)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
 
-  const handleSignupOpen = () => setSignupOpen(true);
-  const handleSignupClose = () => setSignupOpen(false);
-
+  }
   function handleSubmit(event) {
-    event.preventDefault();
-
+    event.preventDefault()
+    
+    addUser(user)
     //form logic here
   }
 
@@ -32,7 +53,7 @@ export default function Auth(props) {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  };
+  }
 
   const styleSignup = {
     position: 'absolute',
@@ -48,48 +69,70 @@ export default function Auth(props) {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  };
+  }
   //width and height doesnt apply to signUp form
 
   return (
     <div className='auth'>
       <div>
-        <button onClick={handleLoginOpen} className='login-btn'> Login </button>
+        <button onClick={handleLoginOpen} className='login-btn'>
+          {' '}
+          Login{' '}
+        </button>
         <Modal open={loginOpen} onClose={handleLoginClose}>
           <Box sx={styleLogin} className='login-box'>
-          <button onClick={handleLoginClose} className='cancel-login'> &times; </button>
-          <img src={props.craftopiaLogo} className='logo-login'/>
-          <br />
-          <form className='login-form'>
-            <input placeholder='Email / Username' style={{ width: '300px' }} />
-            <input placeholder='Password' style={{ width: '300px' }} />
-            <button type='submit' className='login-btn' > Login </button>
-          </form>
+            <button onClick={handleLoginClose} className='cancel-login'>
+              {' '}
+              &times;{' '}
+            </button>
+            <img src={props.craftopiaLogo} className='logo-login' />
+            <br />
+            <form className='login-form'>
+              <input placeholder='Email / Username' style={{width: '300px'}} />
+              <input placeholder='Password' style={{width: '300px'}} />
+              <button type='submit' className='login-btn'>
+                {' '}
+                Login{' '}
+              </button>
+            </form>
           </Box>
         </Modal>
       </div>
       <div>
-        <button className='signup-btn' onClick={handleSignupOpen}> Sign Up </button>
+        <button className='signup-btn' onClick={handleSignupOpen}>
+          {' '}
+          Sign Up{' '}
+        </button>
         <Modal open={signupOpen} onClose={handleSignupClose}>
           <Box sx={styleSignup}>
-            <button onClick={handleSignupClose} className='cancel-login'> &times; </button>
-            <img src={props.craftopiaLogo} className='logo-login'/>
+            <button onClick={handleSignupClose} className='cancel-login'>
+              {' '}
+              &times;{' '}
+            </button>
+            <img src={props.craftopiaLogo} className='logo-login' />
             <br />
             <form onSubmit={handleSubmit} className='login-form'>
-              <input placeholder='Name' style={{ width: '300px' }} />
-              <input placeholder='Email' style={{ width: '300px' }} />
-              <input placeholder='DOB' style={{ width: '300px' }} />
-              <input placeholder='Username' style={{ width: '300px' }} />
-              <input placeholder='City, State' style={{ width: '300px' }} />
-              <input placeholder='Password' style={{ width: '300px' }} />
-              <input placeholder='Confirm Password' style={{ width: '300px' }} />
-              <button type='submit' className='login-btn' > Sign Up </button>
-            </form> 
+              <input placeholder='Name' style={{width: '300px'}} />
+              <input
+                type='email'
+                name='email'
+                placeholder='Email'
+                style={{width: '300px'}}
+                onChange={handleTextChange}
+              />
+              <input placeholder='DOB' style={{width: '300px'}} />
+              <input placeholder='Username' style={{width: '300px'}} />
+              <input placeholder='City, State' style={{width: '300px'}} />
+              <input placeholder='Password' name='password' type='password' style={{width: '300px'}} onChange={handleTextChange} />
+              <input placeholder='Confirm Password' style={{width: '300px'}} />
+              <button type='submit' className='login-btn'>
+                {' '}
+                Sign Up{' '}
+              </button>
+            </form>
           </Box>
         </Modal>
       </div>
     </div>
-  );
+  )
 }
-
- 
