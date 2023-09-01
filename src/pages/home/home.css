@@ -4,10 +4,18 @@
     width: 90%;
 }
 
-.home-h3 {
-  font-family: 'Bellota', cursive;
-  color: #800080;
-  font-weight: lighter;
+.header-h2 {
+  font-size: x-large;
+}
+
+.home-h4 {
+  /* font-family: 'Lato', sans-serif; */
+  font-family: 'Roboto';
+  color: #1A237E;
+  font-weight:400;
+  margin-bottom: 0px;
+  font-size: larger;
+  /* font-size: large; */
 }
 
 .home-header {
@@ -15,6 +23,11 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+.assesment-p {
+  font-family: 'Open Sans';
+  color: #3C415C;
 }
 
 .arrow {
@@ -25,6 +38,61 @@
 
 .user-connect-p {
   color: #800080;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Lato';
   text-align: center;
+}
+
+.take-assesment-btn {
+  background: linear-gradient(to bottom, #9CD393, #388E3C);
+  color: white;
+  border-radius: 7px;
+  height: 27px;
+  width: 104px;
+  border-style: none;
+  font-family: 'Open Sans';
+}
+
+.post-ctas {
+  display: flex;
+  flex-direction: row;
+  /* grid-template-columns: 1fr 1fr; */
+  gap: 20px;
+  /* width: 80%; */
+  /* justify-items: center; */
+  justify-content: center;
+}
+
+.post-cta {
+  width: 40%;
+}
+
+.post-cta-sect {
+  text-align: center;
+}
+
+.post-cta-sect h3 {
+  font-family: 'Bellota', cursive;
+  color: #800080;
+}
+
+.post-cta-sect h4 {
+  font-family: 'Lato';
+  color: #1A237E;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.post-cta-p {
+  font-family: 'Open Sans';
+}
+
+.cta-btn {
+  background: linear-gradient(to bottom, #9CD393, #388E3C);
+  color: white;
+  border-radius: 7px;
+  height: 27px;
+  width: 104px;
+  border-style: none;
+  font-family: 'Open Sans';
+  align-self: center;
 }
