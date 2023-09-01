@@ -10,7 +10,7 @@
     border-radius: 50%;
     width: 117px;
     height: 117px;
-    margin-bottom: 27px;
+    /* margin-bottom: 27px; */
     /* justify-content: center; */
   }
 
@@ -21,24 +21,20 @@
     gap: 27px;
   }
 
-  input {
-    border: none;
-    background-color: #f8f8f8;
-    border-bottom: solid 1px #3C415C;
-  }
-
-  input::placeholder {
-    color: #3C415C;
-  }
-
   .login-btn, .signup-btn {
     background: linear-gradient(to bottom, #7CA0E7, #1A237E);
     color: white;
-    width: 90px;
+    width: 94px;
+    height: 19px;
     border-color: #7CA0E7;
     border-radius: 4px;
     /* font-family: 'Open Sans'; */
-    font-family: 'Lato';
+    font-family: 'Open Sans';
+    border-style: none;
+  }
+
+  .login-btn {
+    margin-top: 20px;
   }
 
   form button {
@@ -58,22 +54,5 @@
 
 
 
-  /* .login-box {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-  } */
 
-  /* .login-logo {
-    border-radius: 50%;
-    width: 77px;
-    height: 77px;
-  } */
-
-
-
-  /* .login-popup {
-    width: 499px;
-    height: 400;
-  } */
 

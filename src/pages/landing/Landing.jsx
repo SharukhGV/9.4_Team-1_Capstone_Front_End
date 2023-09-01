@@ -1,6 +1,7 @@
 import './landing.css';
 import Auth from '../../components/auth/Auth';
 import { useState } from 'react';
+import NavBar from '../../components/navbar/NavBar';
 
 
 //docs for cards: https://mui.com/joy-ui/react-card/ 
@@ -21,17 +22,18 @@ export default function Landing() {
 
     return (
         <>
-        {/* <Auth craftopiaLogo={craftopiaLogo} /> */}
+        {/* <NavBar /> */}
         <header>
         
         <div className='header-branding'>
-        <Card sx={{ border: 1, borderColor: '#D1C4E9', width: '87%' }} >
-        {/* <img className='landing-logo' src={craftopiaLogo} alt='craftopia logo' /> */}
+        <Card sx={{ width: '87%' }} >
+        {/* border: 1, borderColor: '#D1C4E9',
+        <img className='landing-logo' src={craftopiaLogo} alt='craftopia logo' /> */}
         <div className='landing-action'>  
           <div className='branding-text'>
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
-          <button className='join-btn'> Join The Fun </button>
+          <button className='join-btn' > Join The Party </button>
           </div>
           <div>
           <img src={ArtistsGraphic} className='artists-graphic' />
@@ -39,7 +41,6 @@ export default function Landing() {
         </div>
         </Card >
         </div>
-        
         <br />
         {/* <div className='div' /> */}
         <br />

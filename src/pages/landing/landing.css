@@ -36,7 +36,7 @@
 }
   
 .header-h4 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto';
   color: #1A237E;
   font-weight: lighter;
   font-size: large;
@@ -56,10 +56,8 @@
   height: 24px;
   width: 94px;
   border-style: none;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans';
 }
-
-
 
 .arrow {
   border: none;
@@ -68,7 +66,7 @@
 }
 
 .top-categories-h3 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto';
   font-weight: 400;
   text-align: center;
   color: #800080;
@@ -77,7 +75,7 @@
 .top-category-p {
   margin-left: 7%;
   color: #1A237E;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Lato';
 }
 
 
