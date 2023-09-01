@@ -1,20 +1,45 @@
+
 import { useState } from 'react';
 import './auth.css';
 import { Box, Modal, TextField } from '@mui/material';
 
+import axios from 'axios'
+import './auth.css'
+const API = import.meta.env.VITE_REACT_APP_API_URL
+
 export default function Auth(props) {
-  const [loginOpen, setLoginOpen] = useState(false);
-  const [signupOpen, setSignupOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false)
+  const [signupOpen, setSignupOpen] = useState(false)
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  })
+  const handleLoginOpen = () => setLoginOpen(true)
+  const handleLoginClose = () => setLoginOpen(false)
 
-  const handleLoginOpen = () => setLoginOpen(true);
-  const handleLoginClose = () => setLoginOpen(false);
+  const handleSignupOpen = () => setSignupOpen(true)
+  const handleSignupClose = () => setSignupOpen(false)
+  const handleTextChange = e => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    })
+  }
+  const addUser = newUser => {
+    console.log(newUser)
+    axios.post(`${API}/auth/signup`, newUser)
+    .then(res=>{
+      console.log(res.data.message)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
 
-  const handleSignupOpen = () => setSignupOpen(true);
-  const handleSignupClose = () => setSignupOpen(false);
-
+  }
   function handleSubmit(event) {
-    event.preventDefault();
-
+    event.preventDefault()
+    
+    addUser(user)
     //form logic here
   }
 
@@ -32,8 +57,8 @@ export default function Auth(props) {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    // fontFamily: 'Open Sans',
   };
+
 
   const styleSignup = {
     position: 'absolute',
@@ -49,14 +74,16 @@ export default function Auth(props) {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    // fontFamily: 'Open Sans',
   };
   //width and height doesnt apply to signUp form
 
   return (
     <div className='auth'>
       <div>
-        <button onClick={handleLoginOpen} className='login-btn'> Login </button>
+        <button onClick={handleLoginOpen} className='login-btn'>
+          {' '}
+          Login{' '}
+        </button>
         <Modal open={loginOpen} onClose={handleLoginClose}>
           <Box sx={styleLogin} className='login-box'>
           <button onClick={handleLoginClose} className='cancel-login'> &times; </button>
@@ -71,7 +98,10 @@ export default function Auth(props) {
         </Modal>
       </div>
       <div>
-        <button className='signup-btn' onClick={handleSignupOpen}> Sign Up </button>
+        <button className='signup-btn' onClick={handleSignupOpen}>
+          {' '}
+          Sign Up{' '}
+        </button>
         <Modal open={signupOpen} onClose={handleSignupClose}>
           <Box sx={styleSignup} >
             <button onClick={handleSignupClose} className='cancel-login'> &times; </button>
@@ -91,7 +121,5 @@ export default function Auth(props) {
         </Modal>
       </div>
     </div>
-  );
+  )
 }
-
- 
