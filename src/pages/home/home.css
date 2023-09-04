@@ -55,6 +55,8 @@
   flex-direction: row;
   gap: 20px;
   justify-content: center;
+  position: absolute;
+  bottom: 142px;
 }
 
 .post-cta {
@@ -63,22 +65,27 @@
 
 .post-cta-sect {
   text-align: center;
+  margin-bottom: 0;
 }
-
+ 
 .post-cta-sect h3 {
   font-family: 'Bellota', cursive;
   color: #800080;
+  font-size: 27px;
 }
 
 .post-cta-sect h4 {
   font-family: 'Lato';
   color: #1A237E;
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 20px;
   margin-bottom: 0;
 }
 
 .post-cta-p {
   font-family: 'Open Sans';
+  color: black;
+  margin-top: 0;
 }
 
 .cta-btn {
@@ -100,4 +107,98 @@
   background-color: #f8f8f8;
   font-size: larger;
 }
+
+.artistsGraphic {
+  width: 90%;
+  position: relative;
+  object-fit: cover;
+}
+
+.overlay-card {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.content-container {
+  position: relative;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  justify-tracks: center;
+  align-content: center;
+  align-tracks: center;
+}
+
+.upperLeft-txtSect {
+  display: flex;
+  gap: 17px;
+}
+
+.text-placeholder {
+  border-bottom: 1px solid #1A237E;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.text-placeholder::placeholder {
+  font-family: 'Lato';
+  font-size: 14px;
+  color: #3C415C;
+}
+
+.bottomLeft-txtSect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: 7px;
+  display: flex;
+  gap: 17px;
+  margin-bottom: 7px;
+}
+
+.bottomRight-actionBtns {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  gap: 7px;
+  margin-right: 7px;
+}
+
+.bottomRight-actionBtns button {
+  color: white;
+  border-radius: 7px;
+  height: 24px;
+  border: none;
+  font-family: 'Lato';
+  font-size: 14px;
+  /* min-width: 37px; */
+  width: 61px;
+  margin-bottom: 7px;
+}
+
+.preview-btn {
+  background-color: #1A237E;
+}
+
+.post-btn {
+  background-color: #388E3C;
+}
+
+
+
+/* background: linear-gradient(to bottom, #9CD393, #388E3C);
+color: white;
+border-radius: 7px;
+height: 27px;
+width: 104px;
+border-style: none;
+font-family: 'Open Sans';
+align-self: center; */
+
+
 

@@ -3,14 +3,18 @@ import { useState } from "react";
 import CatCarousel from "../../components/categories-carousel/CatCarousel";
 import './home.css';
 import cameraImg from '../../assets/cameraImg.png';
+import artistsGraphic from '../../assets/artistsgraphic.jpg';
 
 import { Box, Modal, TextField, Select, FormControl, InputLabel, MenuItem } from '@mui/material';
 import { Textarea, Card, Button, styled } from "@mui/joy";
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { fontFamily } from "@mui/system";
 
 export default function Home() {
+
+    const [postCtaCategory, setPostCtaCategory] = useState('');
 
     const [postModalOpen, setPostModalOpen] = useState(false);
     const [itemModalOpen, setItemModalOpen] = useState(false);
@@ -27,7 +31,7 @@ export default function Home() {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: '70%',
-        height: 340,
+        height: 240,
         bgcolor: '#f8f8f8',
         border: '1px solid #D1C4E9', //change this
         boxShadow: 14,
@@ -49,6 +53,8 @@ export default function Home() {
     width: 1px;
     `;
 
+    //function handlePostSelectChange() 
+
     return (
 
         <div>
@@ -68,43 +74,59 @@ export default function Home() {
             <div className="div" />          
             <div className="post-cta-sect">
                 <h3> Connect & Exchange: Share Knowledge or Supplies </h3>
+                <div className="content-container">
+                <img src={artistsGraphic} className="artistsGraphic"/>
                 <div className="post-ctas">
                 <div className="post-cta">
-                    <Card >
+                    <Card className='overlay-card' sx={{ backgroundColor: 'rgba(209, 196, 233, 0.75)'}} >
                         <h4> Share Your Expertise </h4>
                         <p className="post-cta-p"> No matter your level, share insights. Post tutorials, guides, and classes. Inspire and empower fellow creatives. </p>
                         <button className="cta-btn" onClick={handlePostModalOpen} > Make a Post </button>
-                        <Modal open={postModalOpen} onClose={handlePostModalClose}>
+                        <Modal open={postModalOpen} onClose={handlePostModalClose} >
                             <Box sx={stylePostModel}>
                                 <button className="close-modal" onClick={handlePostModalClose}> &times; </button>
-                                <TextField variant="standard" label='Title' />
-                                <Textarea minRows={7} placeholder="Share your creative know-how..." startDecorator={<Button component='label' startDecorator={<img src={cameraImg} width='30px' />} size="small"> <VisuallyHiddenInput type='file' /> </Button>} >                 
-                                </Textarea>
-                                <FormControl sx={{ minWidth: 170 }}>
-                                    <InputLabel> Skill Category </InputLabel>
-                                    <Select>
-                                        <MenuItem value=''> <em>None</em></MenuItem>
-                                        <MenuItem> Photography </MenuItem>
-                                        <MenuItem> Filmmaking </MenuItem>
-                                        <MenuItem> Digital Arts </MenuItem>
-                                        <MenuItem> Ceramics </MenuItem>
-                                        <MenuItem> Drawing </MenuItem>
-                                        <MenuItem> Sculpture </MenuItem>
-                                        <MenuItem> Printmaking </MenuItem>
-                                        <MenuItem> Painting </MenuItem>
-                                        <MenuItem> Fashion Design </MenuItem>
-                                        <MenuItem> Graffiti </MenuItem>
+                                {/* <TextField variant="standard" label='Title' /> */}
+                                <Textarea minRows={9} sx={{ width: '99%' }} placeholder="Share your creative know-how..." 
+                                startDecorator={
+                                <div>
+                                    <div className="upperLeft-txtSect">
+                                    <Button component='label' startDecorator={<img src={cameraImg} width='30px' />} size="small">
+                                        <VisuallyHiddenInput type='file' />
+                                    </Button>
+                                    <input placeholder="Title" className="text-placeholder" /> 
+                                    </div>
+                                    <div className="bottomLeft-txtSect">
+                                    <FormControl variant="standard" sx={{ minWidth: 170 }}>
+                                    <InputLabel sx={{ fontFamily: 'Lato'}}> Skill Category </InputLabel>
+                                    <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)} >
+                                        {/* <MenuItem value=''> <em>None</em></MenuItem> */}
+                                        <MenuItem value='Photography'> Photography </MenuItem>
+                                        <MenuItem value='Filmaking'> Filmmaking </MenuItem>
+                                        <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
+                                        <MenuItem value='Ceramics'> Ceramics </MenuItem>
+                                        <MenuItem value='Drawing'> Drawing </MenuItem>
+                                        <MenuItem value='Sculpture'> Sculpture </MenuItem>
+                                        <MenuItem value='Printmaking'> Printmaking </MenuItem>
+                                        <MenuItem value='Painting'> Painting </MenuItem>
+                                        <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
+                                        <MenuItem value='Graffiti'> Graffiti </MenuItem>
                                     </Select>
-                                </FormControl>
-                                <TextField variant="standard" label='Tags' />
-                                <button> Preview </button>
-                                <button> Post </button>
+                                    </FormControl>
+                                    <TextField variant="standard" label='Tags' className="txt-tags" />
+                                    </div>
+                                    <div className="bottomRight-actionBtns">
+                                    <button className="preview-btn"> Preview </button>
+                                    <button className="post-btn"> Post </button>
+                                    </div>
+                                </div>
+                                } >                 
+                                </Textarea>
                             </Box>
                         </Modal>
                     </Card>
                 </div>
                 <div className="post-cta">
-                    <Card>
+                    <Card className='overlay-card' sx={{ backgroundColor: 'rgba(209, 196, 233, 0.75)'}} >
                         <h4> Trade Your Treasures </h4>
                         <p className="post-cta-p"> Give new life to neglected supplies. Exchange for fresh inspiration. Trade and discover possibilities. </p>
                         <button className="cta-btn" onClick={handleItemPostOpen}> Publish an Item </button>
@@ -114,6 +136,7 @@ export default function Home() {
                             </Box>
                         </Modal>
                     </Card>
+                </div>
                 </div>
                 </div>
             </div>
