@@ -2,9 +2,10 @@ import NavBar from "../../components/navbar/NavBar";
 import { useState } from "react";
 import CatCarousel from "../../components/categories-carousel/CatCarousel";
 import './home.css';
+import cameraImg from '../../assets/cameraImg.png';
 
 import { Box, Modal, TextField, Select, FormControl, InputLabel, MenuItem } from '@mui/material';
-import { Textarea, Card } from "@mui/joy";
+import { Textarea, Card, Button, styled } from "@mui/joy";
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -36,6 +37,18 @@ export default function Home() {
         alignItems: 'center',
     }
 
+    const VisuallyHiddenInput = styled('input')`
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    white-space: nowrap;
+    width: 1px;
+    `;
+
     return (
 
         <div>
@@ -46,7 +59,7 @@ export default function Home() {
                 <br />
                 <CatCarousel />
                 <br />
-                <h4 className="home-h4"> Let's Make Things a Little More Personal </h4>
+                <h4 className="home-h4"> Let's Get Personal </h4>
                 <p className="assesment-p"> Take our quick assesment for a better curated homepage </p>
                 {/* <br /> */}
                 <button className="take-assesment-btn"> Take Assesment </button>
@@ -59,13 +72,13 @@ export default function Home() {
                 <div className="post-cta">
                     <Card >
                         <h4> Share Your Expertise </h4>
-                        <p className="post-cta-p"> Whether you're a seasoned pro or just starting out, you can contribute to our community by sharing your knowledge. Create and post tutorials, guides, and classes to help others learn and grow in their creative journey. Your insights can inspire and empower fellow artists and enthusiasts. </p>
+                        <p className="post-cta-p"> No matter your level, share insights. Post tutorials, guides, and classes. Inspire and empower fellow creatives. </p>
                         <button className="cta-btn" onClick={handlePostModalOpen} > Make a Post </button>
                         <Modal open={postModalOpen} onClose={handlePostModalClose}>
                             <Box sx={stylePostModel}>
                                 <button className="close-modal" onClick={handlePostModalClose}> &times; </button>
                                 <TextField variant="standard" label='Title' />
-                                <Textarea>
+                                <Textarea minRows={7} placeholder="Share your creative know-how..." startDecorator={<Button component='label' startDecorator={<img src={cameraImg} width='30px' />} size="small"> <VisuallyHiddenInput type='file' /> </Button>} >                 
                                 </Textarea>
                                 <FormControl sx={{ minWidth: 170 }}>
                                     <InputLabel> Skill Category </InputLabel>
@@ -93,12 +106,11 @@ export default function Home() {
                 <div className="post-cta">
                     <Card>
                         <h4> Trade Your Treasures </h4>
-                        <p className="post-cta-p"> Have unused art supplies, equipment, or gear collecting dust? Give them a new life and find something you need in return. Post your items for trade and discover a world of possibilities. Whether it's brushes, cameras, or other creative tools, your surplus can become someone else's inspiration. </p>
+                        <p className="post-cta-p"> Give new life to neglected supplies. Exchange for fresh inspiration. Trade and discover possibilities. </p>
                         <button className="cta-btn" onClick={handleItemPostOpen}> Publish an Item </button>
                         <Modal open={itemModalOpen} onClose={handleItemPostClose}>
                             <Box sx={stylePostModel}>
-                                <button onClick={handleItemPostClose}> &times; </button>
-                                <p> STUFF IN HERE </p>
+                                <button onClick={handleItemPostClose}> &times; </button> 
                             </Box>
                         </Modal>
                     </Card>
