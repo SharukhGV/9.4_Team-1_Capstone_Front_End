@@ -14,7 +14,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='/home' element={<Home />} />
-          {/* change to lowercase home if issue */}
         </Routes>
       </main>
       <Footer />

@@ -1,4 +1,5 @@
 import { Box, Modal, TextField } from '@mui/material';
+import { useState } from 'react';
 
 export default function SignUp(props) {
 
@@ -33,7 +34,7 @@ export default function SignUp(props) {
               <TextField variant='standard' label='City, State' style={{ width: '300px' }} />
               <TextField variant='standard' label='Password' style={{ width: '300px' }} />
               <TextField variant='standard' label='Confirm Password' style={{ width: '300px' }} />
-              <button type='submit' className='login-btn' > Sign Up </button>
+              <button type='submit' className='signup-btn' > Sign Up </button>
             </form> 
             </Box>
         </Modal>

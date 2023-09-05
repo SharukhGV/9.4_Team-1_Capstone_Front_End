@@ -23,7 +23,6 @@ export default function Landing() {
 
   return (
     <>
-
         {/* <NavBar /> */}
     <header>
       <div className='header-branding'>
