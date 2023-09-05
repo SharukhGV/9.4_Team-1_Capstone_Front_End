@@ -1,8 +1,7 @@
 import './landing.css';
-import Auth from '../../components/auth/Auth';
+import SignUp from '../../components/auth/signUp';
 import { useState } from 'react';
 import NavBar from '../../components/navbar/NavBar';
-
 
 //docs for cards: https://mui.com/joy-ui/react-card/ 
 import Card from '@mui/joy/Card';
@@ -20,32 +19,31 @@ import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 
 export default function Landing() {
 
-    return (
-        <>
+   const [joinOpen, setJoinOpen] = useState(false);
+
+  return (
+    <>
+
         {/* <NavBar /> */}
-        <header>
-        
-        <div className='header-branding'>
+    <header>
+      <div className='header-branding'>
         <Card sx={{ width: '87%' }} >
-        {/* border: 1, borderColor: '#D1C4E9',
-        <img className='landing-logo' src={craftopiaLogo} alt='craftopia logo' /> */}
         <div className='landing-action'>  
           <div className='branding-text'>
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
-          <button className='join-btn' > Join The Party </button>
+          <button className='join-btn' onClick={() => setJoinOpen(true)} > Join The Party </button>
+          <SignUp joinOpen={joinOpen} setJoinOpen={setJoinOpen} craftopiaLogo={craftopiaLogo} />
           </div>
           <div>
           <img src={ArtistsGraphic} className='artists-graphic' />
           </div>
         </div>
         </Card >
-        </div>
+      </div>
         <br />
-        {/* <div className='div' /> */}
         <br />
-        
-        </header>
+    </header>
         <br />
         <main>
           <CatCarousel />
@@ -58,22 +56,19 @@ export default function Landing() {
           <button className='arrow'> <ArrowBackIosIcon /> </button>
           <button className='arrow'> <ArrowForwardIosIcon /> </button>
           </div>
-          {/* <div className='div' /> */}
           <div >
           <p className='top-category-p'> Painting </p>
           <button className='arrow'> <ArrowBackIosIcon /> </button>
           <button className='arrow'> <ArrowForwardIosIcon /> </button>
           </div>
-          {/* <div className='div' /> */}
           <div>
           <p className='top-category-p'> Digital Art </p>
           <button className='arrow'> <ArrowBackIosIcon /> </button>
           <button className='arrow'> <ArrowForwardIosIcon /> </button>
           </div>
-          {/* <div className='div' /> */}
           </div>
           <br />
         </main>
-        </> 
-    )
+    </> 
+  )
 }
