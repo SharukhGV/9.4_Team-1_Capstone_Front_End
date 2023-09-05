@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import './auth.css';
 import { Box, Modal, TextField } from '@mui/material';
