@@ -8,12 +8,14 @@ import './auth.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 
 export default function Auth(props) {
+
   const [loginOpen, setLoginOpen] = useState(false)
   const [signupOpen, setSignupOpen] = useState(false)
   const [user, setUser] = useState({
     email: '',
     password: '',
   })
+
   const handleLoginOpen = () => setLoginOpen(true)
   const handleLoginClose = () => setLoginOpen(false)
 
@@ -25,6 +27,7 @@ export default function Auth(props) {
       [e.target.name]: e.target.value,
     })
   }
+
   const addUser = newUser => {
     console.log(newUser)
     axios.post(`${API}/auth/signup`, newUser)
@@ -34,8 +37,8 @@ export default function Auth(props) {
     .catch(err=>{
       console.log(err)
     })
-
   }
+
   function handleSubmit(event) {
     event.preventDefault()
     
@@ -58,7 +61,6 @@ export default function Auth(props) {
     flexDirection: 'column',
     alignItems: 'center',
   };
-
 
   const styleSignup = {
     position: 'absolute',
