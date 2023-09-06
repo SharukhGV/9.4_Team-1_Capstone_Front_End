@@ -1,6 +1,39 @@
 import { Box, Modal, TextField } from '@mui/material';
+import { useState } from 'react';
+
+const API = import.meta.env.VITE_REACT_APP_API_URL
 
 export default function SignUp(props) {
+
+    const [user, setUser] = useState({
+        email: '',
+        password: '',
+      })
+
+    const handleTextChange = e => { 
+        setUser({
+          ...user,
+          [e.target.name]: e.target.value,
+        })
+    }
+    
+    const addUser = newUser => {
+        console.log(newUser)
+        axios.post(`${API}/auth/signup`, newUser)
+        .then(res=>{
+          console.log(res.data.message)
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault()
+        
+        addUser(user)
+        //form logic here
+    }
 
     const styleJoin = {
         position: 'absolute',
@@ -26,14 +59,14 @@ export default function SignUp(props) {
             <img src={props.craftopiaLogo} className='logo-login'/>
             <br />
             <form className='login-form'>
-              <TextField variant='standard' label='Name' style={{ width: '300px' }} />
-              <TextField variant='standard' label='Email' style={{ width: '300px' }} />
-              <TextField variant='standard' label='DOB' style={{ width: '300px' }} />
-              <TextField variant='standard' label='Username' style={{ width: '300px' }} />
-              <TextField variant='standard' label='City, State' style={{ width: '300px' }} />
-              <TextField variant='standard' label='Password' style={{ width: '300px' }} />
-              <TextField variant='standard' label='Confirm Password' style={{ width: '300px' }} />
-              <button type='submit' className='login-btn' > Sign Up </button>
+              <TextField variant='standard' label='Name' style={{ width: '300px' }} name='name'  />
+              <TextField variant='standard' label='Email' style={{ width: '300px' }} name='email'  />
+              <TextField variant='standard' label='DOB' style={{ width: '300px' }} name='DOB'  />
+              <TextField variant='standard' label='Username' style={{ width: '300px' }} name='username'  />
+              <TextField variant='standard' label='City, State' style={{ width: '300px' }} name='cityState'  />
+              <TextField variant='standard' label='Password' style={{ width: '300px' }} name='password'  />
+              <TextField variant='standard' label='Confirm Password' style={{ width: '300px' }} name='confirmPassword' />
+              <button type='submit' className='signup-btn' > Sign Up </button>
             </form> 
             </Box>
         </Modal>
