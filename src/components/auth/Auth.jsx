@@ -10,16 +10,12 @@ export default function Auth(props) {
 
   const [loginOpen, setLoginOpen] = useState(false)
   const [signupOpen, setSignupOpen] = useState(false)
+
   const [user, setUser] = useState({
     email: '',
     password: '',
   })
 
-  const handleLoginOpen = () => setLoginOpen(true)
-  const handleLoginClose = () => setLoginOpen(false)
-
-  const handleSignupOpen = () => setSignupOpen(true)
-  const handleSignupClose = () => setSignupOpen(false)
   const handleTextChange = e => {
     setUser({
       ...user,
@@ -81,13 +77,13 @@ export default function Auth(props) {
   return (
     <div className='auth'>
       <div>
-        <button onClick={handleLoginOpen} className='login-btn'>
+        <button onClick={() => setLoginOpen(true)} className='login-btn'>
           {' '}
           Login{' '}
         </button>
-        <Modal open={loginOpen} onClose={handleLoginClose}>
+        <Modal open={loginOpen} onClose={() => setLoginOpen(false)}>
           <Box sx={styleLogin} className='login-box'>
-          <button onClick={handleLoginClose} className='cancel-login'> &times; </button>
+          <button onClick={() => setLoginOpen(false)} className='cancel-login'> &times; </button>
           <img src={props.craftopiaLogo} className='logo-login'/>
           <br />
           <form className='login-form'>
@@ -99,16 +95,16 @@ export default function Auth(props) {
         </Modal>
       </div>
       <div>
-        <button className='signup-btn' onClick={handleSignupOpen}>
+        <button className='signup-btn' onClick={() => setSignupOpen(true)}>
           {' '}
           Sign Up{' '}
         </button>
-        <Modal open={signupOpen} onClose={handleSignupClose}>
+        <Modal open={signupOpen} onClose={() => setSignupOpen(false)}>
           <Box sx={styleSignup} >
-            <button onClick={handleSignupClose} className='cancel-login'> &times; </button>
+            <button onClick={() => setSignupOpen(false)} className='cancel-login'> &times; </button>
             <img src={props.craftopiaLogo} className='logo-login'/>
             <br />
-            <form onSubmit={handleSubmit} className='login-form'>
+            <form onSubmit={handleSubmit} className='login-form' onChange={handleTextChange}>
               <TextField variant='standard' label='Name' style={{ width: '300px' }} />
               <TextField variant='standard' label='Email' style={{ width: '300px' }} />
               <TextField variant='standard' label='DOB' style={{ width: '300px' }} />

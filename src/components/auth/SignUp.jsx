@@ -1,28 +1,39 @@
 import { Box, Modal, TextField } from '@mui/material';
-//import { useState } from 'react';
-const API = `http://localhost:8000`;
-//import.meta.env.VITE_REACT_APP_API_URL
+import { useState } from 'react';
+
+const API = import.meta.env.VITE_REACT_APP_API_URL
 
 export default function SignUp(props) {
 
-    // const [newUser, setNewUser] = useState({
-    //     name: '',
-    //     email: '',
-    //     DOB: '',
-    //     username: '',
-    //     cityState: '',
-    //     password: '',
-    //     confirmPassword: '',
-    // });
+    const [user, setUser] = useState({
+        email: '',
+        password: '',
+      })
 
+    const handleTextChange = e => { 
+        setUser({
+          ...user,
+          [e.target.name]: e.target.value,
+        })
+    }
+    
+    const addUser = newUser => {
+        console.log(newUser)
+        axios.post(`${API}/auth/signup`, newUser)
+        .then(res=>{
+          console.log(res.data.message)
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+    }
 
-    // const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [DOB, setDOB] = useState(0);
-    // const [username, setUsername] = useState('');
-    // const [cityState, setCityState] = useState([]);
-    // const [password, setPassword] = useState('');
-    // const [confirmPassword, setConfirmPassword] = useState('');
+    function handleSubmit(event) {
+        event.preventDefault()
+        
+        addUser(user)
+        //form logic here
+    }
 
     const styleJoin = {
         position: 'absolute',
@@ -39,43 +50,6 @@ export default function SignUp(props) {
         flexDirection: 'column',
         alignItems: 'center',
     };
-
-    //console.log(name) works
-
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-
-    //     try {
-    //         const response = await fetch(`${API}/signup`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(newUser),
-    //         });
-
-    //         if (response.ok) {
-    //             console.log('success')
-    //             //show success message and func for what happens when user created
-    //         }
-    //         else {
-    //             console.error('Error:', response.statusText);
-    //             //display errors and what not
-    //         } 
-    //     } catch (error) {
-    //         console.error('Error:', error)   
-    //     }
-    // }
-
-    // const handleInputChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setNewUser({
-    //         ...newUser,
-    //         [name]: value,
-    //     });
-    // };
-
-    
 
     return (
         <>
