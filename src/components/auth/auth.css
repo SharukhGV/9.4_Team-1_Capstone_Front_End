@@ -1,9 +1,6 @@
 .auth {
     display: flex;
-    gap: 10px;
     justify-content: flex-end;
-    margin-top: 17px;
-    margin-right: 17px;
   }
 
   .logo-login {
@@ -25,16 +22,22 @@
     background: linear-gradient(to bottom, #7CA0E7, #1A237E);
     color: white;
     width: 94px;
-    height: 19px;
+    height: 100%;
     border-color: #7CA0E7;
     border-radius: 4px;
-    /* font-family: 'Open Sans'; */
     font-family: 'Open Sans';
     border-style: none;
   }
 
-  .login-btn {
-    margin-top: 20px;
+  .logout-btn{
+    background: linear-gradient(to bottom, #7CA0E7, #1A237E);
+    color: white;
+    width: 94px;
+    /* height: 100%; */
+    border-color: #7CA0E7;
+    border-radius: 4px;
+    font-family: 'Open Sans';
+    border-style: none;
   }
 
   form button {
@@ -76,6 +79,10 @@
     background-color: #f8f8f8;
     border-bottom: solid 2px #7CA0E7;
 
+  }
+  .auth-btns{
+    display: flex;
+    flex-direction: row;
   }
 
 

@@ -9,8 +9,6 @@ const API = import.meta.env.VITE_REACT_APP_API_URL
 axios.defaults.withCredentials = true
 
 export default function Auth(props) {
-  const [loginOpen, setLoginOpen] = useState(false)
-  const [signupOpen, setSignupOpen] = useState(false)
   const [tab, setTab] = useState(false)
   const [modal, setModal] = useState(false)
   const [loginError, setLoginError] = useState()
@@ -55,6 +53,7 @@ export default function Auth(props) {
         .post(`${API}/auth/signup`, newUser)
         .then(res => {
           props.handleSignIn(res.data.user)
+          setModal(false)
           console.log(res.data.message)
         })
         .catch(err => {
@@ -69,6 +68,7 @@ export default function Auth(props) {
       .post(`${API}/auth/login`, user)
       .then(res => {
         props.handleSignIn(res.data.user)
+        setModal(false)
         console.log(res.data.message)
       })
       .catch(err => {
@@ -97,7 +97,7 @@ export default function Auth(props) {
     <div className='auth'>
       <div>
         {!props.authUser && (
-          <aside>
+          <aside className='auth-btns'>
             <button
               onClick={() => {
                 setModal(true)
@@ -130,7 +130,7 @@ export default function Auth(props) {
               {' '}
               &times;{' '}
             </button>
-            <img src={props.craftopiaLogo} className='logo-login' />
+            {/* <img src={props.craftopiaLogo} className='logo-login' /> */}
             {!tab ? (
               <div>
                 <br />
@@ -220,7 +220,7 @@ export default function Auth(props) {
       </div>
       <div>
         {props.authUser && (
-          <>
+          <div className='auth-btns'>
             <Link to='/profile'>
               <BasicPopover
                 className='login-btn'
@@ -228,8 +228,8 @@ export default function Auth(props) {
                 popoverContent='Profile options will go here'
               />
             </Link>
-            <button onClick={props.handleLogout}>Logout</button>
-          </>
+            <button className='logout-btn' onClick={props.handleLogout}>Logout</button>
+          </div>
         )}
       </div>
     </div>

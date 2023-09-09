@@ -13,27 +13,30 @@ export default function NavBar({user, handleLogout, handleSignIn}) {
   }
   return (
     <div className='navbar'>
-        <div>
-          <Link to='/'>
-            <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
-          </Link>
-          <Link to='/home'>
-            <button className='explore-btn'>Explore</button>
-          </Link>
+      <Link to='/'>
+        <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
+      </Link>
+        <aside className='search-aside'>
           <input
             type='text'
             placeholder='Search...'
+            className='search-bar'
             value={searchText}
             onChange={handleSearchInput}
           />
-          <Auth
-            authUser={user}
-            craftopiaLogo={craftopiaLogo}
-            handleLogout={handleLogout}
-            handleSignIn={handleSignIn}
-          />
-          
-        </div>
+          <button>🔎</button>
+        </aside>
+      <div className='navbar-btns'>
+        <Link to='/home'>
+          <button className='explore-btn'>Explore</button>
+        </Link>
+        <Auth
+          authUser={user}
+          craftopiaLogo={craftopiaLogo}
+          handleLogout={handleLogout}
+          handleSignIn={handleSignIn}
+        />
+      </div>
     </div>
   )
 }
