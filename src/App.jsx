@@ -1,12 +1,22 @@
 import {useState, useEffect} from 'react'
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, Navigate, useNavigate, Outlet} from 'react-router-dom'
 import axios from 'axios'
-import './App.css'
 import NavBar from './components/navbar/NavBar'
 import Landing from './pages/landing/Landing'
 import Footer from './components/footer/Footer'
 import Home from './pages/home/Home'
+import Profile from './pages/profile/Profile'
+import './App.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
+
+const ProtectedRoute = ({user, redirectPath = '/'}) => {
+  if (!user) {
+    return <Navigate to={redirectPath} replace />
+  }
+
+  return <Outlet />
+}
+
 function App() {
   const [user, setUser] = useState(undefined)
   const handleSignIn = authUser => {
@@ -20,38 +30,39 @@ function App() {
   }
   useEffect(() => {
     function checkToken() {
-      console.log('what')
-      // const cookieValue = document.cookie
-      //   .split('; ')
-      //   .find(row => row.startsWith('checkToken='))
-      //   .split('=')[1]
-      if (true) {
-        axios
-          .post(`${API}/auth/token`, {
-            withCredentials: true,
-          })
-          .then(res => {
-            console.log(res, 'huh')
-            handleSignIn(res.data.user[0])
-          })
-          .catch(err => {
-            console.log(err)
-            // setError(err.response.data.error)
-            // setTimeout(()=>{setError()},3000)
-          })
-      }else {
-        setUser()
-      }
+      axios
+        .post(`${API}/auth/token`, {
+          withCredentials: true,
+        })
+        .then(res => {
+          console.log(res, 'huh')
+          handleSignIn(res.data.user[0])
+        })
+        .catch(err => {
+          console.log(err)
+          // setError(err.response.data.error)
+          // setTimeout(()=>{setError()},3000)
+        })
     }
     checkToken()
   }, [])
   return (
     <div className='App'>
-      <NavBar user={user} handleLogout={handleLogout} handleSignIn={handleSignIn}/>
+      <NavBar
+        user={user}
+        handleLogout={handleLogout}
+        handleSignIn={handleSignIn}
+      />
       <main>
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='/home' element={<Home />} />
+          <Route element={<ProtectedRoute user={user} />}>
+            <Route
+              path='/:username/profile'
+              element={<Profile user={user} />}
+            />
+          </Route>
         </Routes>
       </main>
       <Footer />
