@@ -23,9 +23,7 @@
 
 .categoryImg {
     position: relative;
-    /* width: 190px; */
-    width: 100%;
-    max-width: 190px;
+    /* width: 100%; */
     object-fit: cover;
     height: 80px;
     transition: transform 0.2s ease-in-out;
@@ -35,7 +33,7 @@
 .img-name {
     font-family: 'Roboto', sans-serif;
     position: absolute;
-    bottom: 17px;
+    bottom: 11px;
     left: 50%;
     transform: translateX(-50%);
     color: white;
