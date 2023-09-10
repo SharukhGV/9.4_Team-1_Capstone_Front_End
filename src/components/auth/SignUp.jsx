@@ -57,14 +57,16 @@ export default function SignUp(props) {
             <Box sx={styleJoin}>
             <button className='cancel-login' onClick={() => props.setJoinOpen(false)}> &times; </button>
             <br />
-            <form className='login-form'>
-              <TextField variant='standard' label='Name' style={{ width: '300px' }} name='name'  />
-              <TextField variant='standard' label='Email' style={{ width: '300px' }} name='email'  />
+            <form className='login-form' onSubmit={handleSubmit}>
+              <input type='email' name='email' id='email' onChange={handleTextChange}/>
+              <input type='password' name='password' id='password' onChange={handleTextChange}/>
+              {/* <TextField variant='standard' label='Name' style={{ width: '300px' }} name='name'  />
+              <TextField variant='standard' label='Email' style={{ width: '300px' }} name='email' onChange={handleTextChange}  />
               <TextField variant='standard' label='DOB' style={{ width: '300px' }} name='DOB'  />
               <TextField variant='standard' label='Username' style={{ width: '300px' }} name='username'  />
               <TextField variant='standard' label='City, State' style={{ width: '300px' }} name='cityState'  />
-              <TextField variant='standard' label='Password' style={{ width: '300px' }} name='password'  />
-              <TextField variant='standard' label='Confirm Password' style={{ width: '300px' }} name='confirmPassword' />
+              <TextField variant='standard' type='password' label='Password' style={{ width: '300px' }} name='password' onChange={handleTextChange}  />
+              <TextField variant='standard' label='Confirm Password' style={{ width: '300px' }} name='confirmPassword' /> */}
               <button type='submit' className='signup-btn' > Sign Up </button>
             </form> 
             </Box>

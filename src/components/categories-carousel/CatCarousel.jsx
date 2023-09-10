@@ -54,8 +54,8 @@ export default function CatCarousel() {
         <div className='slider-container'>
             <button onClick={prevSlide} className='arrow'> <ArrowBackIosIcon /> </button>
             {
-              visibleImgs.map(img => (
-                <Card component='li' sx={{ height: 40 , width: '100%' }}>
+              visibleImgs.map((img,i) => (
+                <Card component='li' sx={{ height: 40 , width: '100%' }} key={`image-${i}`}>
                 {/* <div className='imgDiv' key={img.name}> */}
                     <CardCover >
                         <img src={img.imageUrl} alt={img.name} className='categoryImg' loading='lazy' />
