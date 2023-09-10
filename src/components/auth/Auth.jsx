@@ -72,7 +72,6 @@ export default function Auth(props) {
     flexDirection: 'column',
     alignItems: 'center',
   };
-  //width and height doesnt apply to signUp form
 
   return (
     <div className='auth'>

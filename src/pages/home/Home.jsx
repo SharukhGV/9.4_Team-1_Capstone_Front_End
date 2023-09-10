@@ -17,6 +17,7 @@ export default function Home() {
 
     const [postModalOpen, setPostModalOpen] = useState(false);
     const [itemModalOpen, setItemModalOpen] = useState(false);
+    const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
 
     const [itemCategory, setItemCategory] = useState([]);
 
@@ -59,6 +60,19 @@ export default function Home() {
         alignItems: 'center',
     }
 
+    const assesmentModalStyle = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '70%',
+        height: 240,
+        bgcolor: '#f8f8f8',
+        border: '1px solid #D1C4E9', //change this
+        boxShadow: 14,
+        p: 4,
+    }
+
     const VisuallyHiddenInput = styled('input')`
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
@@ -93,7 +107,14 @@ export default function Home() {
                 <h4 className="home-h4"> Let's Get Personal </h4>
                 <p className="assesment-p"> Take our quick assesment for a better curated homepage </p>
                 {/* <br /> */}
-                <button className="take-assesment-btn"> Take Assesment </button>
+                <button className="take-assesment-btn" onClick={() => setAssesmentModalOpen(true)}> Take Assesment </button>
+                {/* assesment Modal is here */}
+                <Modal open={assesmentModalOpen} onClose={() => setAssesmentModalOpen(false)}>
+                    <Box sx={assesmentModalStyle}>
+                        <button onClick={() => setAssesmentModalOpen(false)}> &times; </button>
+                        <p> These quick assesment questions will help us curate your homapage with suggestions on equipment, hobby discoveries & more </p>
+                    </Box>
+                </Modal>
             </div>
             <br />
             <div className="div" />          
@@ -162,7 +183,20 @@ export default function Home() {
                                 <Input placeholder='Name' />
                                 <FormControl variant="standard" sx={{ m: 1, width: 300 }}>
                                     <InputLabel sx={{ fontFamily: 'Lato', marginLeft: '7px' }}> Item Category </InputLabel>
-                                    <Select multiple value={itemCategory} MenuProps={MenuProps} onChange={handleItemCatSelect} input={<OutlinedInput label='Tag' />} renderValue={(selected) => selected.join(', ')} >
+                                    <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)} >
+                                        {/* <MenuItem value=''> <em>None</em></MenuItem> */}
+                                        <MenuItem value='Photography'> Photography </MenuItem>
+                                        <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
+                                        <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
+                                        <MenuItem value='Ceramics'> Ceramics </MenuItem>
+                                        <MenuItem value='Drawing'> Drawing </MenuItem>
+                                        <MenuItem value='Sculpture'> Sculpture </MenuItem>
+                                        <MenuItem value='Printmaking'> Printmaking </MenuItem>
+                                        <MenuItem value='Painting'> Painting </MenuItem>
+                                        <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
+                                        <MenuItem value='Graffiti'> Graffiti </MenuItem>
+                                    </Select>
+                                    {/* <Select multiple value={itemCategory} MenuProps={MenuProps} onChange={handleItemCatSelect} input={<OutlinedInput label='Tag' />} renderValue={(selected) => selected.join(', ')} >
                                         {
                                             categories.map((category) => (
                                                 <MenuItem key={category} value={category}>
@@ -171,11 +205,24 @@ export default function Home() {
                                                 </MenuItem>
                                             ))
                                         } 
-                                    </Select>
+                                    </Select> */}
                                     </FormControl>
                                     <FormControl variant="standard" sx={{ m: 1, width: 340 }}>
                                     <InputLabel sx={{ fontFamily: 'Lato', marginLeft: '7px' }}> Willing to trade for items in these categories:  </InputLabel>
-                                    <Select multiple value={itemCategory} MenuProps={MenuProps} input={<OutlinedInput label='Tag' />} renderValue={(selected) => selected.join(', ')} >
+                                    <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)} >
+                                        {/* <MenuItem value=''> <em>None</em></MenuItem> */}
+                                        <MenuItem value='Photography'> Photography </MenuItem>
+                                        <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
+                                        <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
+                                        <MenuItem value='Ceramics'> Ceramics </MenuItem>
+                                        <MenuItem value='Drawing'> Drawing </MenuItem>
+                                        <MenuItem value='Sculpture'> Sculpture </MenuItem>
+                                        <MenuItem value='Printmaking'> Printmaking </MenuItem>
+                                        <MenuItem value='Painting'> Painting </MenuItem>
+                                        <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
+                                        <MenuItem value='Graffiti'> Graffiti </MenuItem>
+                                    </Select>
+                                    {/* <Select multiple value={itemCategory} MenuProps={MenuProps} input={<OutlinedInput label='Tag' />} renderValue={(selected) => selected.join(', ')} >
                                         {
                                             categories.map((category) => (
                                                 <MenuItem key={category} value={category}>
@@ -184,7 +231,7 @@ export default function Home() {
                                                 </MenuItem>
                                             ))
                                         } 
-                                    </Select>
+                                    </Select> */}
                                     </FormControl>
                                     <Button component='label' startDecorator={<img src={cameraImg} width='30px' />} size="small" sx={{ backgroundColor: 'white' }}>
                                         <VisuallyHiddenInput type='file' />
