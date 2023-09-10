@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './catCarousel.css';
 
+import { Card, CardCover, CardContent } from '@mui/joy';
+
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
@@ -52,11 +54,17 @@ export default function CatCarousel() {
         <div className='slider-container'>
             <button onClick={prevSlide} className='arrow'> <ArrowBackIosIcon /> </button>
             {
-              visibleImgs.map(img => (
-                <div className='imgDiv' key={img.name}>
-                  <img src={img.imageUrl} alt={img.name} className='categoryImg' loading='lazy' />
-                  <p className='img-name'> {img.name} </p>
-                </div> 
+              visibleImgs.map((img,i) => (
+                <Card component='li' sx={{ height: 40 , width: '100%' }} key={`image-${i}`}>
+                {/* <div className='imgDiv' key={img.name}> */}
+                    <CardCover >
+                        <img src={img.imageUrl} alt={img.name} className='categoryImg' loading='lazy' />
+                    </CardCover>
+                    <CardContent>
+                        <p className='img-name'> {img.name} </p>
+                    </CardContent>
+                {/* </div> */}
+                </Card> 
               ))
             }
             <button onClick={nextSlide} className='arrow'> <ArrowForwardIosIcon /> </button>
