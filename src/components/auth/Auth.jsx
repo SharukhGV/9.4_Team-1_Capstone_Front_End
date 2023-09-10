@@ -1,16 +1,13 @@
 import {useState} from 'react'
 import './auth.css'
 import {Box, Modal, TextField} from '@mui/material'
-import {Link} from 'react-router-dom'
-import BasicPopover from '../../assets/mui/popover/popover'
 import axios from 'axios'
 import './auth.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 axios.defaults.withCredentials = true
 
-export default function Auth(props) {
-  const [tab, setTab] = useState(false)
-  const [modal, setModal] = useState(false)
+export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
+
   const [loginError, setLoginError] = useState()
   const [signupError, setSignupError] = useState()
   const [user, setUser] = useState({
@@ -52,7 +49,7 @@ export default function Auth(props) {
       axios
         .post(`${API}/auth/signup`, newUser)
         .then(res => {
-          props.handleSignIn(res.data.user)
+          handleSignIn(res.data.user)
           setModal(false)
           console.log(res.data.message)
         })
@@ -67,7 +64,7 @@ export default function Auth(props) {
     axios
       .post(`${API}/auth/login`, user)
       .then(res => {
-        props.handleSignIn(res.data.user)
+        handleSignIn(res.data.user)
         setModal(false)
         console.log(res.data.message)
       })
@@ -95,31 +92,6 @@ export default function Auth(props) {
   console.log(user)
   return (
     <div className='auth'>
-      <div>
-        {!props.authUser && (
-          <aside className='auth-btns'>
-            <button
-              onClick={() => {
-                setModal(true)
-                setTab(false)
-              }}
-              className='login-btn'
-            >
-              {' '}
-              Login{' '}
-            </button>
-            <button
-              className='signup-btn'
-              onClick={() => {
-                setModal(true)
-                setTab(true)
-              }}
-            >
-              {' '}
-              Sign Up{' '}
-            </button>
-          </aside>
-        )}
         <Modal open={modal} onClose={() => setModal(false)}>
           <Box sx={styleLogin} className='login-box'>
             <aside className='modal-nav'>
@@ -217,21 +189,6 @@ export default function Auth(props) {
             )}
           </Box>
         </Modal>
-      </div>
-      <div>
-        {props.authUser && (
-          <div className='auth-btns'>
-            <Link to='/profile'>
-              <BasicPopover
-                className='login-btn'
-                buttonText='Profile'
-                popoverContent='Profile options will go here'
-              />
-            </Link>
-            <button className='logout-btn' onClick={props.handleLogout}>Logout</button>
-          </div>
-        )}
-      </div>
     </div>
   )
 }
