@@ -4,8 +4,9 @@ import CatCarousel from "../../components/categories-carousel/CatCarousel";
 import './home.css';
 import cameraImg from '../../assets/cameraImg.png';
 import artistsGraphic from '../../assets/artistsgraphic.jpg';
+import Assesment from "../../components/assesment/Assesment";
 
-import { Box, Modal, TextField, Select, FormControl, InputLabel, MenuItem, Input, Checkbox, ListItemText, OutlinedInput } from '@mui/material';
+import { Box, Modal, TextField, Select, FormControl, InputLabel, MenuItem, Input } from '@mui/material';
 import { Textarea, Card, Button, styled } from "@mui/joy";
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -60,19 +61,6 @@ export default function Home() {
         alignItems: 'center',
     }
 
-    const assesmentModalStyle = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '70%',
-        height: 240,
-        bgcolor: '#f8f8f8',
-        border: '1px solid #D1C4E9', //change this
-        boxShadow: 14,
-        p: 4,
-    }
-
     const VisuallyHiddenInput = styled('input')`
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
@@ -108,13 +96,7 @@ export default function Home() {
                 <p className="assesment-p"> Take our quick assesment for a better curated homepage </p>
                 {/* <br /> */}
                 <button className="take-assesment-btn" onClick={() => setAssesmentModalOpen(true)}> Take Assesment </button>
-                {/* assesment Modal is here */}
-                <Modal open={assesmentModalOpen} onClose={() => setAssesmentModalOpen(false)}>
-                    <Box sx={assesmentModalStyle}>
-                        <button onClick={() => setAssesmentModalOpen(false)}> &times; </button>
-                        <p> These quick assesment questions will help us curate your homapage with suggestions on equipment, hobby discoveries & more </p>
-                    </Box>
-                </Modal>
+                <Assesment assesmentModalOpen={assesmentModalOpen} setAssesmentModalOpen={setAssesmentModalOpen} />
             </div>
             <br />
             <div className="div" />          

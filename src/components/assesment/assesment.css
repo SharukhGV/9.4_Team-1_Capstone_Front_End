@@ -1,0 +1,31 @@
+* {
+    text-align: center;
+}
+
+.x-btn {
+    float: inline-end;
+    border: none;
+    background-color: #f8f8f8;
+    font-size: large;
+}
+
+.questions-sect {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+}
+
+.btns {
+    justify-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 240px;
+    height: 19px;
+}
+
+.later-btn {
+    background-color: linear-gradient(to bottom, #7CA0E7, #1A237E);
+}
+
+
+

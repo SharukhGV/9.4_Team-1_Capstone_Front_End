@@ -56,7 +56,6 @@ export default function SignUp(props) {
         <Modal open={props.joinOpen} onClose={() => props.setJoinOpen(false)}>
             <Box sx={styleJoin}>
             <button className='cancel-login' onClick={() => props.setJoinOpen(false)}> &times; </button>
-            <img src={props.craftopiaLogo} className='logo-login'/>
             <br />
             <form className='login-form'>
               <TextField variant='standard' label='Name' style={{ width: '300px' }} name='name'  />
