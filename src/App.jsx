@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div className='App'>
-      <NavBar />
+      {/* <NavBar /> */}
       <main>
         <Routes>
           <Route path='/' element={<Landing />} />

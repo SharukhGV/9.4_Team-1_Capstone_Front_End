@@ -28,13 +28,13 @@ export default function CatCarousel() {
         { name: 'Fashion Design', imageUrl: fashionDesignImg }, //change this image
         { name: 'Drawing', imageUrl: drawingImg }, 
         { name: 'Digital Artistry', imageUrl: digitalArtImg },
-        { name: 'Sculpturing', imageUrl: sculptureImg },
+        { name: 'Sculpting', imageUrl: sculptureImg },
         { name: 'Printmaking', imageUrl: printmakingImg }, //consider replacement
     ] 
 
     function prevSlide() {
         setCurrentImg((prevImg) => (prevImg === 0 ? artsImgs.length - 1 : prevImg - 1));
-    }
+    } 
     
     function nextSlide() {
         setCurrentImg((prevImg) => (prevImg === artsImgs.length - 1 ? 0 : prevImg + 1));

@@ -2,6 +2,7 @@
     background-color: white;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
 }
 
 .footer p {
