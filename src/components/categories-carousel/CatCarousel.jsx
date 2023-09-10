@@ -28,7 +28,7 @@ export default function CatCarousel() {
         { name: 'Fashion Design', imageUrl: fashionDesignImg }, //change this image
         { name: 'Drawing', imageUrl: drawingImg }, 
         { name: 'Digital Artistry', imageUrl: digitalArtImg },
-        { name: 'Sculpturing', imageUrl: sculptureImg },
+        { name: 'Sculpting', imageUrl: sculptureImg },
         { name: 'Printmaking', imageUrl: printmakingImg }, //consider replacement
     ] 
 
