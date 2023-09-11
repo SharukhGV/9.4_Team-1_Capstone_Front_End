@@ -1,34 +1,33 @@
 import {useEffect, useState} from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
 import axios from 'axios'
-import {Card, CardContent, Button} from '@mui/material'
+import {Card, CardContent, Button, TextareaAutosize, TextField} from '@mui/material'
 import profile_pic from '../../assets/blank_profile.jpeg'
 import './profile.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 
-
-
-export default function Profile({user}) {
+export default function ProfileEdit({user}) {
   const {username} = useParams()
   const navigate = useNavigate()
-  const [posts, setPosts] = useState([])
-  const [tools, setTools] = useState([])
+  const [updatedUser, setUpdatedUser] = useState(user)
 
-  useEffect(() => {
-    const getPosts = async () => {
-      const res = await axios.get(`${API}/posts/${user.user_id}`)
-      const data = await res.json()
-      console.log(data)
-      setPosts(data)
-    }
-    const getTools = async () => {
-      const res = await axios.get(`${API}/tools/${user.user_id}`)
-      const data = await res.json()
-      setTools(data)
-    }
-    getPosts()
-    getTools()
-  }, [])
+  const saveChanges = () => {}
+  const cancelChanges = () => {}
+  //   useEffect(() => {
+  //     const getPosts = async () => {
+  //       const res = await axios.get(`${API}/posts/${user.user_id}`)
+  //       const data = await res.json()
+  //       console.log(data)
+  //       setPosts(data)
+  //     }
+  //     const getTools = async () => {
+  //       const res = await axios.get(`${API}/tools/${user.user_id}`)
+  //       const data = await res.json()
+  //       setTools(data)
+  //     }
+  //     getPosts()
+  //     getTools()
+  //   }, [])
   return (
     <div>
       <Card
@@ -47,21 +46,26 @@ export default function Profile({user}) {
               src={profile_pic}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
-            <aside className='profile-desc'>
+            <aside className='profile-desc-edit'>
               <h1>{user.username}</h1>
-
-              <h3>{user.city_state}</h3>
-              <p>{user.aboutme}</p>
+                <TextField value={updatedUser.city_state} sx={{marginBottom:4}}/>
+              <TextareaAutosize value={updatedUser.aboutme} sx={{width:'100%'}}/>
+              {/* <p>{user.aboutme}</p> */}
             </aside>
           </div>
           {user.username === username && (
-            <Button onClick={()=>navigate(`/${username}/profile/edit`)} variant='contained' color='warning'>
-              Edit
-            </Button>
+            <div>
+              <Button onClick={saveChanges} variant='contained' color='primary'>
+                Save
+              </Button>
+              <Button onClick={cancelChanges} variant='contained' color='error'>
+                Cancel
+              </Button>
+            </div>
           )}
         </CardContent>
       </Card>
-      <div>
+      {/* <div>
         <Card className='profile-posts'>
           <CardContent>
             {posts.length < 1 ? (
@@ -104,7 +108,7 @@ export default function Profile({user}) {
             )}
           </CardContent>
         </Card>
-      </div>
+      </div> */}
     </div>
   )
 }

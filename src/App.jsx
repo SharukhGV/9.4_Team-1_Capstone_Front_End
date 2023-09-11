@@ -6,6 +6,7 @@ import Landing from './pages/landing/Landing'
 import Footer from './components/footer/Footer'
 import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
+import ProfileEdit from './pages/profile/ProfileEdit'
 import './App.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 
@@ -62,6 +63,9 @@ function App() {
               path='/:username/profile'
               element={<Profile user={user} />}
             />
+            <Route
+              path='/:username/profile/edit'
+              element={<ProfileEdit user={user}/>}/>
           </Route>
         </Routes>
       </main>
