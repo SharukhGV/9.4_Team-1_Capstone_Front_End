@@ -1,5 +1,5 @@
 import './landing.css';
-import SignUp from '../../components/auth/signUp';
+
 import { useState } from 'react';
 import NavBar from '../../components/navbar/NavBar';
 
@@ -33,7 +33,6 @@ export default function Landing() {
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
           <button className='join-btn' onClick={() => setJoinOpen(true)} > Join The Party </button>
-          <SignUp joinOpen={joinOpen} setJoinOpen={setJoinOpen} craftopiaLogo={craftopiaLogo} />
           </div>
           </Card> 
           <div>
