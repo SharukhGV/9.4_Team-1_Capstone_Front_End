@@ -2,7 +2,7 @@ import './landing.css';
 
 import { useState } from 'react';
 import CatCarousel from '../../components/categories-carousel/CatCarousel';
-import ToolsCard from '../../components/tools/toolsCard';
+import ToolsCard from '../../components/tools/ToolsCard';
 
 //docs for cards: https://mui.com/joy-ui/react-card/ 
 import Card from '@mui/joy/Card';
