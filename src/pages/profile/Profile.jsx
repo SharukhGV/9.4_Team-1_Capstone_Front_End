@@ -18,7 +18,6 @@ export default function Profile({user}) {
     const getPosts = async () => {
       const res = await axios.get(`${API}/posts/${user.user_id}`)
       const data = await res.json()
-      console.log(data)
       setPosts(data)
     }
     const getTools = async () => {

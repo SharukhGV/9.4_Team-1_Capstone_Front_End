@@ -20,6 +20,7 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 
 function App() {
   const [user, setUser] = useState(undefined)
+  const [error,setError] = useState()
   const handleSignIn = authUser => {
     setUser(authUser)
   }
@@ -36,13 +37,11 @@ function App() {
           withCredentials: true,
         })
         .then(res => {
-          console.log(res, 'huh')
-          handleSignIn(res.data.user[0])
+          handleSignIn(res.data.user)
         })
         .catch(err => {
-          console.log(err)
-          // setError(err.response.data.error)
-          // setTimeout(()=>{setError()},3000)
+          setError(err.response.data.error)
+          setTimeout(()=>{setError()},3000)
         })
     }
     checkToken()
