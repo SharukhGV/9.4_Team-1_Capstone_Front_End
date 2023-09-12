@@ -1,5 +1,4 @@
-import NavBar from "../../components/navbar/NavBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CatCarousel from "../../components/categories-carousel/CatCarousel";
 import './home.css';
 import cameraImg from '../../assets/cameraImg.png';
@@ -13,37 +12,23 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export default function Home() {
-
     const [postCtaCategory, setPostCtaCategory] = useState('');
-
     const [postModalOpen, setPostModalOpen] = useState(false);
     const [itemModalOpen, setItemModalOpen] = useState(false);
     const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
+    const [assesmentCompleted, setAssesmentCompleted] = useState(false); 
 
-    const [itemCategory, setItemCategory] = useState([]);
+    const [itemCategory, setItemCategory] = useState([]); //unnecesary ? 
 
-    const ITEM_HEIGHT = 48;
-    const ITEM_PADDING_TOP = 8;
-    const MenuProps = {
-        PaperProps: {
-            style: {
-                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-                width: 250,
-            },
-        },
-    };
-
-    const categories = [
-        'Photography',
-        'Filmmaking', 
-        'Ceramics', 
-        'Digital Arts', 
-        'Drawing', 
-        'Sculpture', 
-        'Printmaking', 
-        'Painting', 
-        'Fashion Design', 
-        'Graffiti'];
+    useEffect(() => {
+        if (assesmentCompleted === true) {
+            setAssesmentModalOpen(false)
+        }
+        else {
+            setAssesmentModalOpen(true);
+        }
+        //conditional is assesment not already completed then pop up, wether assesment is completed or not should the assesment asnwers be in backend ? 
+    }, []); //should be applied after a couple of seconds ? ... unnecesary
 
     const stylePostModel = {
         position: 'absolute',
@@ -53,7 +38,6 @@ export default function Home() {
         width: '70%',
         height: 240,
         bgcolor: '#f8f8f8',
-        border: '1px solid #D1C4E9', //change this
         boxShadow: 14,
         p: 4,
         display: 'flex',
@@ -73,8 +57,6 @@ export default function Home() {
     width: 1px;
     `;
 
-    //function handlePostSelectChange() 
-
     const handleItemCatSelect = (event) => {
         const {
             target: { value },
@@ -83,7 +65,6 @@ export default function Home() {
     };
 
     return (
-
         <div>
             {/* <NavBar /> */}
             <br />
@@ -92,11 +73,17 @@ export default function Home() {
                 <br />
                 <CatCarousel />
                 <br />
-                <h4 className="home-h4"> Let's Get Personal </h4>
-                <p className="assesment-p"> Take our quick assesment for a better curated homepage </p>
-                {/* <br /> */}
-                <button className="take-assesment-btn" onClick={() => setAssesmentModalOpen(true)}> Take Assesment </button>
-                <Assesment assesmentModalOpen={assesmentModalOpen} setAssesmentModalOpen={setAssesmentModalOpen} />
+                {
+                    !assesmentCompleted && (
+                        <div className="assesment-sect"> 
+                        <h4 className="home-h4"> Let's Get Personal </h4>
+                        <p className="assesment-p"> Take our quick assesment for a better curated homepage </p>
+                        {/* <br /> */}
+                        <button className="take-assesment-btn" onClick={() => setAssesmentModalOpen(true)}> Take Assesment </button>
+                        <Assesment assesmentModalOpen={assesmentModalOpen} setAssesmentModalOpen={setAssesmentModalOpen} assesmentCompleted={assesmentCompleted} setAssesmentCompleted={setAssesmentCompleted} />
+                        </div> 
+                    )
+                }
             </div>
             <br />
             <div className="div" />          
@@ -113,8 +100,7 @@ export default function Home() {
                         <Modal open={postModalOpen} onClose={() => setPostModalOpen(false)} >
                             <Box sx={stylePostModel}>
                                 <button className="close-modal" onClick={() => setPostModalOpen(false)}> &times; </button>
-                                {/* <TextField variant="standard" label='Title' /> */}
-                                <Textarea minRows={9} sx={{ width: '99%' }} placeholder="Share your creative know-how..." 
+                                <Textarea minRows={9} sx={{ width: '100%' }} placeholder="Share your creative know-how..." 
                                 startDecorator={
                                 <div>
                                     <div className="upperLeft-txtSect">
@@ -122,13 +108,11 @@ export default function Home() {
                                         <VisuallyHiddenInput type='file' />
                                     </Button>
                                     <Input placeholder="Title" focused />
-                                    {/* <input placeholder="Title" className="text-placeholder" />  */}
                                     </div>
                                     <div className="bottomLeft-txtSect">
                                     <FormControl variant="standard" sx={{ minWidth: 170 }}>
                                     <InputLabel sx={{ fontFamily: 'Lato'}}> Category </InputLabel>
                                     <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)} >
-                                        {/* <MenuItem value=''> <em>None</em></MenuItem> */}
                                         <MenuItem value='Photography'> Photography </MenuItem>
                                         <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
                                         <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
@@ -166,7 +150,6 @@ export default function Home() {
                                 <FormControl variant="standard" sx={{ m: 1, width: 300 }}>
                                     <InputLabel sx={{ fontFamily: 'Lato', marginLeft: '7px' }}> Item Category </InputLabel>
                                     <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)} >
-                                        {/* <MenuItem value=''> <em>None</em></MenuItem> */}
                                         <MenuItem value='Photography'> Photography </MenuItem>
                                         <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
                                         <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
@@ -178,21 +161,10 @@ export default function Home() {
                                         <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
                                         <MenuItem value='Graffiti'> Graffiti </MenuItem>
                                     </Select>
-                                    {/* <Select multiple value={itemCategory} MenuProps={MenuProps} onChange={handleItemCatSelect} input={<OutlinedInput label='Tag' />} renderValue={(selected) => selected.join(', ')} >
-                                        {
-                                            categories.map((category) => (
-                                                <MenuItem key={category} value={category}>
-                                                    <Checkbox checked={itemCategory.indexOf(category) > -1} />
-                                                    <ListItemText primary={category} /> 
-                                                </MenuItem>
-                                            ))
-                                        } 
-                                    </Select> */}
                                     </FormControl>
                                     <FormControl variant="standard" sx={{ m: 1, width: 340 }}>
                                     <InputLabel sx={{ fontFamily: 'Lato', marginLeft: '7px' }}> Willing to trade for items in these categories:  </InputLabel>
                                     <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)} >
-                                        {/* <MenuItem value=''> <em>None</em></MenuItem> */}
                                         <MenuItem value='Photography'> Photography </MenuItem>
                                         <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
                                         <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
@@ -204,16 +176,6 @@ export default function Home() {
                                         <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
                                         <MenuItem value='Graffiti'> Graffiti </MenuItem>
                                     </Select>
-                                    {/* <Select multiple value={itemCategory} MenuProps={MenuProps} input={<OutlinedInput label='Tag' />} renderValue={(selected) => selected.join(', ')} >
-                                        {
-                                            categories.map((category) => (
-                                                <MenuItem key={category} value={category}>
-                                                    <Checkbox checked={itemCategory.indexOf(category) > -1} />
-                                                    <ListItemText primary={category} /> 
-                                                </MenuItem>
-                                            ))
-                                        } 
-                                    </Select> */}
                                     </FormControl>
                                     <Button component='label' startDecorator={<img src={cameraImg} width='30px' />} size="small" sx={{ backgroundColor: 'white' }}>
                                         <VisuallyHiddenInput type='file' />
@@ -239,3 +201,4 @@ export default function Home() {
         </div>
     )
 }
+

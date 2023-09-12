@@ -16,6 +16,20 @@ export default function Assesment(props) {
         p: 4,
     }
 
+    function handleAssesmentBtns(event) {
+        event.preventDefault();
+
+        props.setAssesmentModalOpen(false);
+
+        if (event.target.value === 'later-btn') {
+            props.setAssesmentCompleted(false);
+        }
+
+        else {
+            props.setAssesmentCompleted(true);
+        }
+    }
+
     return (
         <>
         <Modal open={props.assesmentModalOpen} onClose={() => props.setAssesmentModalOpen(false)}>
@@ -56,8 +70,8 @@ export default function Assesment(props) {
                 </div>
                 <br />
                 <div className="btns">
-                    <button className="later-btn"> Complete Later </button>
-                    <button className="done-btn"> Done </button>
+                    <button className="later-btn" value='later-btn' onClick={(event) => handleAssesmentBtns(event) }> Complete Later </button>
+                    <button className="done-btn" value='done-btn' onClick={(event) => handleAssesmentBtns(event) }> Done </button>
                 </div>
             </Box>
         </Modal>

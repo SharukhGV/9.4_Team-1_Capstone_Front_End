@@ -1,5 +1,4 @@
 import './landing.css';
-import SignUp from '../../components/auth/signUp';
 import Auth from '../../components/auth/Auth';
 import { useState } from 'react';
 
@@ -17,9 +16,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArtistsGraphic from '../../assets/artistsgraphic.jpg';
 import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 
-export default function Landing() {
+export default function Landing({ modal, setModal}) {
 
-   const [joinOpen, setJoinOpen] = useState(false);
+   //const [joinOpen, setJoinOpen] = useState(false);
 
   return (
     <>
@@ -31,8 +30,8 @@ export default function Landing() {
           <div className='branding-text'>
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
-          <button className='join-btn' onClick={() => setJoinOpen(true)} > Join The Fun </button>
-          {/* <Auth /> */}
+          <button className='join-btn' onClick={() => setModal(true)} > Join The Fun </button>
+          <Auth />
           {/* <SignUp joinOpen={joinOpen} setJoinOpen={setJoinOpen} craftopiaLogo={craftopiaLogo} /> */}
           </div>
           </Card> 
