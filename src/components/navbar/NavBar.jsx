@@ -11,7 +11,6 @@ export default function NavBar({user, handleLogout, handleSignIn}) {
   const [tab, setTab] = useState(false)
   const [modal, setModal] = useState(false)
   function handleSearchInput(event) {
-    console.log(searchText)
     setSearchText(event.target.value)
   }
   return (
