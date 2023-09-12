@@ -51,25 +51,22 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
         .then(res => {
           handleSignIn(res.data.user)
           setModal(false)
-          console.log(res.data.message)
         })
         .catch(err => {
-          console.log(err)
+          setSignupError(err)
         })
     }
   }
   function handleLogin(e) {
     e.preventDefault()
-    console.log(user)
     axios
       .post(`${API}/auth/login`, user)
       .then(res => {
         handleSignIn(res.data.user)
         setModal(false)
-        console.log(res.data.message)
       })
       .catch(err => {
-        console.log(err)
+        setLoginError(err)
       })
   }
 
@@ -89,7 +86,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
     flexDirection: 'column',
     alignItems: 'center',
   }
-  console.log(user)
+
   return (
     <div className='auth'>
         <Modal open={modal} onClose={() => setModal(false)}>
@@ -118,6 +115,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
                   <TextField
                     label='Password'
                     variant='standard'
+                    type='password'
                     name='password'
                     onChange={handleLoginText}
                     sx={{width: '300px'}}
@@ -176,6 +174,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
                   <TextField
                     variant='standard'
                     label='Confirm Password'
+                    type='password'
                     style={{width: '300px'}}
                     name='confirm_password'
                     onChange={handleSignupText}
