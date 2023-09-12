@@ -6,6 +6,12 @@ const users = [
     username: 'felizj171',
     dob: '01/15/1996',
     city_state: 'Brooklyn, NY',
+    aboutme:`LinkedIn:Juan Feliz | Personal Website: www.felizjuan.com
+    Nothing better than creating fun and engaging interfaces that capture the attention of your viewers.
+    ...now if only we knew how to do that.
+    Oh wait that's right all it takes is practice, collaboration, patience, and a little more practice.
+    Current Pursuit felloiw trying to level up.
+    Part of IBM's Call for Code Initiative`
   },
   {
     name: 'Michel B',

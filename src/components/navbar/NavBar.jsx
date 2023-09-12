@@ -61,7 +61,7 @@ export default function NavBar({user, handleLogout, handleSignIn, modal, setModa
         )}
         {user && (
           <div className='auth-btns'>
-            <Link to='/profile'>
+            <Link to={`${user.username}/profile`}>
               <BasicPopover
                 className='login-btn'
                 buttonText='Profile'
