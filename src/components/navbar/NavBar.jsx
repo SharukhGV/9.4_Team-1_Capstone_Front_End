@@ -5,18 +5,20 @@ import BasicPopover from '../../assets/mui/popover/popover'
 
 import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg'
 import Auth from '../../components/auth/Auth'
+//import Assesment from '../assesment/Assesment.jsx';
 
-export default function NavBar({user, handleLogout, handleSignIn}) {
-  const [searchText, setSearchText] = useState('')
-  const [tab, setTab] = useState(false)
-  const [modal, setModal] = useState(false)
+export default function NavBar({user, handleLogout, handleSignIn, modal, setModal}) {
+  const [searchText, setSearchText] = useState('');
+  const [tab, setTab] = useState(false);
+  const [signedUp, setSignedUp] = useState(false);
+  
   function handleSearchInput(event) {
-    console.log(searchText)
+    //console.log(searchText)
     setSearchText(event.target.value)
   }
   return (
     <div className='navbar'>
-      <Link to='/'>
+      <Link to='/home'>
         <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
       </Link>
       <aside className='search-aside'>
@@ -48,8 +50,8 @@ export default function NavBar({user, handleLogout, handleSignIn}) {
             <button
               className='signup-btn'
               onClick={() => {
-                setModal(true)
-                setTab(true)
+                setModal(true);
+                setTab(true);
               }}
             >
               {' '}
@@ -79,7 +81,14 @@ export default function NavBar({user, handleLogout, handleSignIn}) {
         setTab={setTab}
         handleLogout={handleLogout}
         handleSignIn={handleSignIn}
+        signedUp={signedUp}
+        setSignedUp={setSignedUp}
       />
+      {/* {
+        signedUp && modal && (
+          <Assesment assesmentModalOpen={modal} setAssesmentModalOpen={setModal} />
+        )
+      } */}
     </div>
   )
 }
