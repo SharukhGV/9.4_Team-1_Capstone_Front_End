@@ -60,7 +60,13 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
   function handleLogin(e) {
     e.preventDefault()
     axios
-      .post(`${API}/auth/login`, user)
+      .post(`${API}/auth/login`, user,{
+        credentials:'include',
+        mode:'cors',
+        headers:{
+          "Content-Type":"application/json"
+        }
+      })
       .then(res => {
         handleSignIn(res.data.user)
         setModal(false)
