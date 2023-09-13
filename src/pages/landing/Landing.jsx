@@ -1,5 +1,5 @@
 import './landing.css';
-
+import Auth from '../../components/auth/Auth';
 import { useState } from 'react';
 import CatCarousel from '../../components/categories-carousel/CatCarousel';
 import ToolsCard from '../../components/tools/ToolsCard';
@@ -11,19 +11,17 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import { Typography } from '@mui/material';
 import { Button } from '@mui/joy';
 
-
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArtistsGraphic from '../../assets/artistsgraphic.jpg';
 import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 
-export default function Landing() {
+export default function Landing({ modal, setModal}) {
 
-   const [joinOpen, setJoinOpen] = useState(false);
+   //const [joinOpen, setJoinOpen] = useState(false);
 
   return (
     <>
-        {/* <NavBar /> */}
     <header>
       <div className='header-branding'>
         {/* <Card sx={{ width: '87%' }} > */}
@@ -32,7 +30,8 @@ export default function Landing() {
           <div className='branding-text'>
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
-          <button className='join-btn' onClick={() => setJoinOpen(true)} > Join The Party </button>
+          <button className='join-btn' onClick={() => setModal(true)} > Join The Fun </button>
+          <Auth />
           </div>
           </Card> 
           <div>
