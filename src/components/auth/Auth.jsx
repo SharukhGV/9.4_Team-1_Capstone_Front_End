@@ -8,7 +8,8 @@ const API = import.meta.env.VITE_REACT_APP_API_URL
 axios.defaults.withCredentials = true
 
 export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,setSignedUp}) {
-  const [cookies,setCookie] = useCookies()  const navigate = useNavigate();
+  const [cookies,setCookie] = useCookies();  
+  const navigate = useNavigate();
   const [loginError, setLoginError] = useState()
   const [signupError, setSignupError] = useState()
   const [user, setUser] = useState({
