@@ -7,7 +7,7 @@ const API = import.meta.env.VITE_REACT_APP_API_URL
 axios.defaults.withCredentials = true
 
 export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
-  const [setCookie] = useCookies()
+  const [cookies,setCookie] = useCookies()
   const [loginError, setLoginError] = useState()
   const [signupError, setSignupError] = useState()
   const [user, setUser] = useState({
@@ -68,6 +68,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
         setModal(false)
       })
       .catch(err => {
+        // console.log(err)
         setLoginError(err)
       })
   }

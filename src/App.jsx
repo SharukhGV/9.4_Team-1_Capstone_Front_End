@@ -40,7 +40,8 @@ function App() {
           handleSignIn(res.data.user)
         })
         .catch(err => {
-          setError(err.response.data.error)
+          console.log(err)
+          setError(err)
           setTimeout(()=>{setError()},3000)
         })
     }
