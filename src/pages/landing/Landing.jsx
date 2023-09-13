@@ -1,7 +1,8 @@
 import './landing.css';
-import SignUp from '../../components/auth/signUp';
+
 import { useState } from 'react';
-import NavBar from '../../components/navbar/NavBar';
+import CatCarousel from '../../components/categories-carousel/CatCarousel';
+import ToolsCard from '../../components/tools/ToolsCard';
 
 //docs for cards: https://mui.com/joy-ui/react-card/ 
 import Card from '@mui/joy/Card';
@@ -10,7 +11,6 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import { Typography } from '@mui/material';
 import { Button } from '@mui/joy';
 
-import CatCarousel from '../../components/categories-carousel/CatCarousel';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -33,7 +33,6 @@ export default function Landing() {
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
           <button className='join-btn' onClick={() => setJoinOpen(true)} > Join The Party </button>
-          <SignUp joinOpen={joinOpen} setJoinOpen={setJoinOpen} craftopiaLogo={craftopiaLogo} />
           </div>
           </Card> 
           <div>
@@ -54,6 +53,7 @@ export default function Landing() {
           <div >
           <p className='top-category-p'> Photography </p>
           <button className='arrow'> <ArrowBackIosIcon /> </button>
+          <ToolsCard />
           <button className='arrow'> <ArrowForwardIosIcon /> </button>
           </div>
           <div >
