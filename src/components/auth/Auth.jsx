@@ -1,14 +1,14 @@
 import {useState} from 'react';
 import { useNavigate } from 'react-router';
-import './auth.css'
-import {Box, Modal, TextField} from '@mui/material'
+import {useCookies} from 'react-cookie'
 import axios from 'axios'
-//import Assesment from '../assesment/Assesment.jsx';
+import {Box, Modal, TextField} from '@mui/material'
+import './auth.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 axios.defaults.withCredentials = true
 
 export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,setSignedUp}) {
-  const navigate = useNavigate();
+  const [cookies,setCookie] = useCookies()  const navigate = useNavigate();
   const [loginError, setLoginError] = useState()
   const [signupError, setSignupError] = useState()
   const [user, setUser] = useState({
@@ -50,6 +50,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
       axios
         .post(`${API}/auth/signup`, newUser)
         .then(res => {
+          setCookie('token', res.data.token)
           handleSignIn(res.data.user);
           setModal(false);
           navigate('/home');
@@ -65,12 +66,14 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
     axios
       .post(`${API}/auth/login`, user)
       .then(res => {
+        setCookie('token', res.data.token)
         handleSignIn(res.data.user);
         setModal(false);
         navigate('/home');
         //console.log(res.data.message)
       })
       .catch(err => {
+        // console.log(err)
         setLoginError(err)
       })
   }
