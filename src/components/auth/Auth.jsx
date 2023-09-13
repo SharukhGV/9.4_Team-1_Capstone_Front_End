@@ -1,13 +1,13 @@
 import {useState} from 'react'
-import './auth.css'
-import {Box, Modal, TextField} from '@mui/material'
+import {useCookies} from 'react-cookie'
 import axios from 'axios'
+import {Box, Modal, TextField} from '@mui/material'
 import './auth.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 axios.defaults.withCredentials = true
 
 export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
-
+  const [cookies,setCookie] = useCookies()
   const [loginError, setLoginError] = useState()
   const [signupError, setSignupError] = useState()
   const [user, setUser] = useState({
@@ -49,6 +49,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
       axios
         .post(`${API}/auth/signup`, newUser)
         .then(res => {
+          setCookie('token', res.data.token)
           handleSignIn(res.data.user)
           setModal(false)
         })
@@ -60,18 +61,14 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
   function handleLogin(e) {
     e.preventDefault()
     axios
-      .post(`${API}/auth/login`, user,{
-        credentials:'include',
-        mode:'cors',
-        headers:{
-          "Content-Type":"application/json"
-        }
-      })
+      .post(`${API}/auth/login`, user)
       .then(res => {
+        setCookie('token', res.data.token)
         handleSignIn(res.data.user)
         setModal(false)
       })
       .catch(err => {
+        // console.log(err)
         setLoginError(err)
       })
   }
