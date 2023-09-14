@@ -19,11 +19,13 @@ export default function NavBar({user, handleLogout, handleSignIn, modal, setModa
   }
   return (
     <>
+    <nav>
     <Link> <img src={craftopiaLogo} className='nav-logo' /> </Link>
-    <Link> Explore </Link>
-    <div>
-    <button className='search-btn'> <img src={searchIcon} className='search-icon' /> </button>
-    <Input type='text' placeholder='Search' value={searchText} onChange={handleSearchInput} size='xsmall' sx={{ width: '140px' }} />
+    <Link className='explore-link'> Explore </Link>
+  <div className='nav-right-container'>
+    <div >
+      <button className='search-btn'> <img src={searchIcon} className='search-icon' /> </button>
+      <Input type='text' placeholder='Search' value={searchText} onChange={handleSearchInput} size='xsmall' sx={{ width: '140px' }} />
     </div>
          {!user && (
           <aside className='auth-btns'>
@@ -73,86 +75,9 @@ export default function NavBar({user, handleLogout, handleSignIn, modal, setModa
         signedUp={signedUp}
         setSignedUp={setSignedUp}
         />
-        <div className='div' />
+    </div>  
+    </nav>
+    <div className='div' />
     </>
-    //   <div className='nav'>
-    //   <Link to='/home' > <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' /> </Link>
-    //       {/* <div className='top-left-nav'> */}
-    // {/* <div className='nav-center'> */}
-    //         {/* <div className='nav-left'> */}
-            
-              
-    //             {/* will be changed to explore page */}
-    //         {/* </div> */}
-    //       {/* </div> */}
-    //     <div className='navbar-btns'>
-    //     {!user && (
-    //       <aside className='auth-btns'>
-    //         <button
-    //           onClick={() => {
-    //             setModal(true)
-    //             setTab(false)
-    //           }}
-    //           className='login-btn'
-    //         >
-    //           {' '}
-    //           Login{' '}
-    //         </button>
-    //         <button
-    //           className='signup-btn'
-    //           onClick={() => {
-    //             setModal(true);
-    //             setTab(true);
-    //           }}
-    //         >
-    //           {' '}
-    //           Sign Up{' '}
-    //         </button>
-    //       </aside>
-    //     )}
-    //     {user && (
-    //       <div className='auth-btns'>
-    //         <Link to='/profile'>
-    //           <BasicPopover
-    //             className='login-btn'
-    //             buttonText='Profile'
-    //             popoverContent='Profile options will go here'
-    //           />
-    //         </Link>
-    //         <button className='logout-btn' onClick={handleLogout}>
-    //           Logout
-    //         </button>
-    //       </div>
-    //     )}
-    //     <aside className='search-aside'>
-    //             <button className='search-btn'> <img src={searchIcon} className='search-icon' /> </button>
-    //               <Input
-    //                 type='text'
-    //                 placeholder='Search'
-    //                 className='search-bar'
-    //                 value={searchText}
-    //                 onChange={handleSearchInput}
-    //                 size='xsmall'
-    //                 sx={{ width: '140px' }}
-    //               />
-    //     </aside>
-    //     <div className='left-nav'>
-    //     <Link to='/landing' className='explore-nav'> Explore </Link>
-    //     </div>
-    //     </div>
-    // {/* </div> */}
-    //   {/* <br /> */}
-    //   <div className='div' />
-    //   <Auth
-    //     modal={modal}
-    //     tab={tab}
-    //     setModal={setModal}
-    //     setTab={setTab}
-    //     handleLogout={handleLogout}
-    //     handleSignIn={handleSignIn}
-    //     signedUp={signedUp}
-    //     setSignedUp={setSignedUp}
-    //   />
-    //   </div>
   )
 }
