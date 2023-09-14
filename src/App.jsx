@@ -6,6 +6,7 @@ import Landing from './pages/landing/Landing'
 import Footer from './components/footer/Footer'
 import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
+import ProfileEdit from './pages/profile/ProfileEdit'
 import './App.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 
@@ -19,6 +20,7 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 function App() {
   const [modal, setModal] = useState(false);
   const [user, setUser] = useState(undefined)
+  const [error,setError] = useState()
   const handleSignIn = authUser => {
     setUser(authUser)
   }
@@ -35,13 +37,11 @@ function App() {
           withCredentials: true,
         })
         .then(res => {
-          console.log(res, 'huh')
-          handleSignIn(res.data.user[0])
+          handleSignIn(res.data.user)
         })
         .catch(err => {
-          console.log(err)
-          // setError(err.response.data.error)
-          // setTimeout(()=>{setError()},3000)
+          setError(err.response.data.error)
+          setTimeout(()=>{setError()},3000)
         })
     }
     checkToken()
@@ -64,6 +64,9 @@ function App() {
               path='/:username/profile'
               element={<Profile user={user} />}
             />
+            <Route
+              path='/:username/profile/edit'
+              element={<ProfileEdit user={user}/>}/>
           </Route>
         </Routes>
       </main>

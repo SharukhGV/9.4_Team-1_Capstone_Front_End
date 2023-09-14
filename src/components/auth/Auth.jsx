@@ -56,13 +56,12 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
           //console.log(res.data.message)
         })
         .catch(err => {
-          console.log(err)
+          setSignupError(err)
         })
     }
   }
   function handleLogin(e) {
     e.preventDefault()
-    console.log(user)
     axios
       .post(`${API}/auth/login`, user)
       .then(res => {
@@ -72,15 +71,9 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
         //console.log(res.data.message)
       })
       .catch(err => {
-        console.log(err)
+        setLoginError(err)
       })
   }
-
-  // function showAssesment() {
-  //   return (
-  //     <Assesment assesmentModalOpen={modal} setAssesmentModalOpen={setModal} />
-  //   )
-  // }
 
   const styleAuth = {
     position: 'absolute',
@@ -99,6 +92,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
     alignItems: 'center',
   }
  console.log(user)
+
   return (
     <>
     <div className='auth'>
@@ -127,6 +121,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
                   <TextField
                     label='Password'
                     variant='standard'
+                    type='password'
                     name='password'
                     onChange={handleLoginText}
                     sx={{width: '300px'}}
@@ -189,6 +184,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
                   <TextField
                     variant='standard'
                     label='Confirm Password'
+                    type='password'
                     style={{width: '300px'}}
                     name='confirm_password'
                     onChange={handleSignupText}
