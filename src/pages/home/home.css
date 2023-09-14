@@ -189,5 +189,9 @@
   background-color: #388E3C;
 }
 
+:focus-visible {
+  outline-style: none;
+}
+
 
 
