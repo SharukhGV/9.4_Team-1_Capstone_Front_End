@@ -1,19 +1,18 @@
-import "./toolsCard.css";
+// import "./postsCard.css";
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-
-export default function ToolsCard({
-  name,
-  description,
-  price,
-  quantity,
-  condition,
+// key={individualpost.id} name={individualpost.name_posts} description={individualpost.description} price={individualpost.price} quantity={individualpost.stock_quantity} condition={individualpost.item_condition} thumbnail={individualpost.thumbnail} userid={individualpost.user_id} index={index}
+function PostsCard({
+  createdTime,
   thumbnail,
-  userid,
+  body,
+  tags,
+  title,
+  edited,
   index,
   inKEY,
 }) {
@@ -29,28 +28,31 @@ export default function ToolsCard({
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              <strong>Name:</strong>
-              {name}
+              <strong>Title:</strong>
+              {title}
             </Typography>
 
             <Typography>
-              <strong>Price:</strong>
-              {price}
+              <strong>created@:</strong>
+              {createdTime}
             </Typography>
 
             <Typography>
-              <strong>Quantity:</strong>
-              {quantity}
+              {edited}?<span> </span> :{" "}
+              <span>
+                <strong>edited:</strong>
+                {edited}
+              </span>
             </Typography>
 
             <Typography variant="body2" color="text.secondary">
-              <strong>Description:</strong>
-              {description}
+              <strong>tags:</strong>
+              {tags}
             </Typography>
 
             <Typography variant="body2" color="text.secondary">
-              <strong>Condition:</strong>
-              {condition}
+              <strong>Body:</strong>
+              {body}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -63,3 +65,4 @@ export default function ToolsCard({
     </span>
   );
 }
+export default PostsCard;

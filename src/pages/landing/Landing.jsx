@@ -2,7 +2,9 @@ import './landing.css';
 
 import { useState } from 'react';
 import CatCarousel from '../../components/categories-carousel/CatCarousel';
-import ToolsCard from '../../components/tools/ToolsCard';
+// import ToolsCard from '../../components/tools/ToolsCard';
+import { Slide } from '@mui/material';
+
 
 //docs for cards: https://mui.com/joy-ui/react-card/ 
 import Card from '@mui/joy/Card';
@@ -16,7 +18,9 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArtistsGraphic from '../../assets/artistsgraphic.jpg';
 import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
-
+import Tools from '../../components/tools/Tools';
+import Posts from '../../components/posts/Posts';
+// import ToolsCard from '../../components/tools/ToolsCard';
 export default function Landing() {
 
    const [joinOpen, setJoinOpen] = useState(false);
@@ -44,9 +48,39 @@ export default function Landing() {
         <br />
     </header>
         <br />
-        <main>
+
+
+
+<Posts />
+        {/* <main>
           <CatCarousel />
           <br />
+          <h3 className='top-categories-h3'> Hobby Enthusiast Tools </h3>
+          <br />
+          <div >
+          <button className='arrow'> <ArrowBackIosIcon /> </button> */}
+          <Tools />
+          {/* < ToolsCard />
+          <button className='arrow'> <ArrowForwardIosIcon /> </button>
+          </div>
+          <br />
+        </main> */}
+
+
+
+
+
+
+
+{/* <div>< Tools /></div> */}
+
+
+        {/* <main>
+          <CatCarousel />
+          <br />
+
+<div><Tools/></div>
+
           <div>
           <h3 className='top-categories-h3'> Top Categories </h3>
           <br />
@@ -68,7 +102,7 @@ export default function Landing() {
           </div>
           </div>
           <br />
-        </main>
+        </main> */}
     </> 
   )
 }
