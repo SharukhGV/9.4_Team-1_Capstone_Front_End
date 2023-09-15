@@ -18,17 +18,29 @@ const ProtectedRoute = ({ user, redirectPath = "/" }) => {
   if (!user) {
     return <Navigate to={redirectPath} replace />;
   }
+  return <Outlet />
+}
 
   return <Outlet />;
 };
 
 function App() {
+  const [modal, setModal] = useState(false);
+  const [user, setUser] = useState(undefined)
+  const [cookies,removeCookie] = useCookies()
+  const [error,setError] = useState()
+  const handleSignIn = authUser => {
+    setUser(authUser)
+  }
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState();
   const handleSignIn = (authUser) => {
     setUser(authUser);
   };
   const handleLogout = () => {
+    setUser(undefined)
+    removeCookie('token')
+  }
     setUser(undefined);
     axios.post(`${API}/auth/logout`, {
       withCredentials: true,
@@ -37,7 +49,7 @@ function App() {
   useEffect(() => {
     function checkToken() {
       axios
-        .post(`${API}/auth/token`, {
+        .post(`${API}/auth/token`, {cookie:cookies.token}, {
           withCredentials: true,
         })
         .then((res) => {
@@ -58,9 +70,13 @@ function App() {
         user={user}
         handleLogout={handleLogout}
         handleSignIn={handleSignIn}
+        modal={modal}
+        setModal={setModal}
       />
       <main>
         <Routes>
+          <Route path='/' element={<Landing modal={modal} setModal={setModal} />} />
+          <Route path='/home' element={<Home />} />
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
           <Route element={<ProtectedRoute user={user} />}>

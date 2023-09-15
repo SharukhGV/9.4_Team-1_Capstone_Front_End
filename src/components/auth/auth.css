@@ -1,88 +1,106 @@
 .auth {
-    display: flex;
-    justify-content: flex-end;
-  }
+  display: flex;
+  justify-content: flex-end;
+}
 
-  .logo-login {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    /* margin-bottom: 27px; */
-    /* justify-content: center; */
-  }
+.login-form, .signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 27px;
+  margin-top: 2px;
+}
 
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 27px;
-  }
+.login-btn, .signup-btn {
+  background: linear-gradient(to bottom, #7CA0E7, #1A237E);
+  color: white;
+  width: 94px;
+  height: 100%;
+  border-color: #7CA0E7;
+  border-radius: 4px;
+  font-family: 'Open Sans';
+  border-style: none;
+  margin-top: 17px;
+}
 
-  .login-btn, .signup-btn {
-    background: linear-gradient(to bottom, #7CA0E7, #1A237E);
-    color: white;
-    width: 94px;
-    height: 100%;
-    border-color: #7CA0E7;
-    border-radius: 4px;
-    font-family: 'Open Sans';
-    border-style: none;
-  }
+.logout-btn{
+  background: linear-gradient(to bottom, #7CA0E7, #1A237E);
+  color: white;
+  width: 94px;
+  border-color: #7CA0E7;
+  border-radius: 4px;
+  font-family: 'Open Sans';
+  border-style: none;
+}
 
-  .logout-btn{
-    background: linear-gradient(to bottom, #7CA0E7, #1A237E);
-    color: white;
-    width: 94px;
-    /* height: 100%; */
-    border-color: #7CA0E7;
-    border-radius: 4px;
-    font-family: 'Open Sans';
-    border-style: none;
-  }
+form button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  form button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.cancel-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  font-size: larger;
+}
 
-  .cancel-login {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background-color:transparent;
-    font-size: larger;
-  }
+.modal-nav{
+  display:flex;
+  flex-direction: row;
+  width:100%;
+  justify-content: space-evenly;
+}
 
-  .modal-nav{
-    display:flex;
-    flex-direction: row;
-    width:100%;
-    justify-content: space-evenly;
-    
-  }
+.modal-nav-btn{
+  border:none;
+  width:50%;
+  font-size: medium;
+  background-color: #f8f8f8;
+}
 
-  .modal-nav-btn{
-    border:none;
-    width:50%;
-    font-size: medium;
-    background-color: #f8f8f8;
+.modal-nav-btn:hover{
+  cursor: pointer;
+  background-color: #7CA0E7;
+}
 
-  }
-  .modal-nav-btn:hover{
-    cursor: pointer;
-    background-color: #7CA0E7;
-  }
+.selected{
+  background-color: #f8f8f8;
+  border-bottom: solid 2px #7CA0E7;
+}
 
-  .selected{
-    background-color: #f8f8f8;
-    border-bottom: solid 2px #7CA0E7;
+.auth-btns{
+  display: flex;
+  flex-direction: row;
+}
 
-  }
-  .auth-btns{
-    display: flex;
-    flex-direction: row;
-  }
+.signup-branding {
+  display: flex;
+  flex-flow: column;
+}
+
+.signup-branding h3 {
+  font-family: 'Lato';
+  display: flex;
+  color: #800080;
+  font-weight: 400;
+  margin-bottom: 7px;
+}
+
+.signup-branding p {
+  font-family: 'Open Sans';
+  margin-top: 0;
+  color: #1A237E;
+}
+
+
+
+
+
+
+
 
 
