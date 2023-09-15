@@ -21,8 +21,7 @@ const ProtectedRoute = ({ user, redirectPath = "/" }) => {
   return <Outlet />
 }
 
-  return <Outlet />;
-};
+
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -32,15 +31,11 @@ function App() {
   const handleSignIn = authUser => {
     setUser(authUser)
   }
-  const [user, setUser] = useState(undefined);
-  const [error, setError] = useState();
-  const handleSignIn = (authUser) => {
-    setUser(authUser);
-  };
+  
   const handleLogout = () => {
     setUser(undefined)
     removeCookie('token')
-  }
+ 
     setUser(undefined);
     axios.post(`${API}/auth/logout`, {
       withCredentials: true,
