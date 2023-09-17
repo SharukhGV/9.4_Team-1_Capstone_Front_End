@@ -7,7 +7,7 @@ import './auth.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 axios.defaults.withCredentials = true
 
-export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,setSignedUp}) {
+export default function Auth({modal,tab,setModal,setTab,handleSignIn}) {
   const [cookies,setCookie] = useCookies();  
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState()
@@ -95,10 +95,9 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
     flexDirection: 'column',
     alignItems: 'center',
   }
- console.log(user)
+
 
   return (
-    <>
     <div className='auth'>
         <Modal open={modal} onClose={() => setModal(false)}>
           <Box sx={styleAuth} className='login-box'>
@@ -203,27 +202,6 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
             )}
           </Box>
         </Modal>
-        {/* {
-          signedUp && modal (
-            <Assesment assesmentModalOpen={modal} setAssesmentModalOpen={setModal} />
-          )
-        } */}
     </div>
-    {/* <div>
-      {
-        signedUp && (
-          <Assesment assesmentModalOpen={modal} setAssesmentModalOpen={setModal} />
-        )
-      }
-    </div> */}
-    {/* <div>
-      {
-        signedUp && modal && (
-          setModal(false), perhaps it was this that affected it ?
-          <Assesment assesmentModalOpen={modal} setAssesmentModalOpen={setModal} />
-        )
-      }
-    </div> */}
-    </>
   )
 }

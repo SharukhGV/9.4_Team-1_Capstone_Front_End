@@ -35,7 +35,7 @@ export default function Landing({ modal, setModal}) {
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
           <button className='join-btn' onClick={() => setModal(true)} > Join The Fun </button>
-          <Auth />
+          <Auth modal={modal} setModal={setModal} />
           </div>
           </Card> 
           <div>
