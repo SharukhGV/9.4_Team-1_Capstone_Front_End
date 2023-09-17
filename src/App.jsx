@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import ProfileEdit from "./pages/profile/ProfileEdit";
+import Post from './components/posts/Post';
 import "./App.css";
 import ToolsEditForm from "./components/tools/ToolsEditForm";
 import ToolsNewForm from "./components/tools/ToolsNewForm";
@@ -28,7 +29,8 @@ function App() {
   const [modal, setModal] = useState(false);
   const [user, setUser] = useState(undefined)
   const [cookies,removeCookie] = useCookies()
-  const [error,setError] = useState()
+  const [error,setError] = useState();
+
   const handleSignIn = authUser => {
     setUser(authUser)
   }
@@ -75,6 +77,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
+          <Route path='/post/id' element={<Post />} />
           <Route element={<ProtectedRoute user={user} />}>
             <Route
               path="/:username/profile"
