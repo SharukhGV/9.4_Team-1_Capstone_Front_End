@@ -32,7 +32,7 @@ export default function Profile({user}) {
       <Card
         variant='outlined'
         sx={{
-          width: '90vw',
+          width: '90%',
           marginLeft: 'auto',
           marginRight: 'auto',
           marginTop: 10,
@@ -64,7 +64,7 @@ export default function Profile({user}) {
           )}
         </CardContent>
       </Card>
-      <div>
+      <div className='users-posts-and-tools'>
         <Card className='profile-posts'>
           <CardContent>
             {posts.length < 1 ? (
@@ -84,16 +84,13 @@ export default function Profile({user}) {
                 ))}
               </div>
             )}
+            <Button onClick={()=>navigate(`/tools/${user.username}/new`)} variant='contained' color='primary'>
+              New
+            </Button>
           </CardContent>
         </Card>
-        <Card className='profile-tools'>
-        <Button onClick={()=>navigate(`/tools/${user.username}/new`)} variant='contained' color='warning'>
-              New Tools Post
-            </Button>
-            
-            <Button onClick={()=>navigate(`/tools/${user.username}`)} variant='contained' color='warning'>
-              All Your Tools
-            </Button>           <CardContent>
+        <Card className='profile-tools'>          
+           <CardContent>
             {tools.length < 1 ? (
               <div>
                 <p>No Tools yet </p>
@@ -111,6 +108,9 @@ export default function Profile({user}) {
                 ))}
               </div>
             )}
+            <Button onClick={()=>navigate(`/tools/${user.username}/new`)} variant='contained' color='primary'>
+              New
+            </Button>
           </CardContent>
         </Card>
       </div>

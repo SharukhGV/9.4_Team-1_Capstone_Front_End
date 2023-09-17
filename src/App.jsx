@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react'
-import {Routes, Route, Navigate, useNavigate, Outlet} from 'react-router-dom'
+import {Routes, Route, Navigate, Outlet} from 'react-router-dom'
+import {useCookies} from 'react-cookie'
 import axios from 'axios'
+
 import NavBar from './components/navbar/NavBar'
 import Landing from './pages/landing/Landing'
 import Footer from './components/footer/Footer'
@@ -8,12 +10,13 @@ import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
 import ProfileEdit from './pages/profile/ProfileEdit'
 import Post from './components/posts/Post'
-import './App.css'
 import ToolsEditForm from './components/tools/ToolsEditForm'
 import ToolsNewForm from './components/tools/ToolsNewForm'
 import ToolsDetails from './components/tools/ToolsDetails'
 import ToolsUserDetails from './components/tools/ToolsUserDetails'
-import {useCookies} from 'react-cookie'
+
+import './App.css'
+
 const API = import.meta.env.VITE_REACT_APP_API_URL
 
 const ProtectedRoute = ({user, redirectPath = '/'}) => {
@@ -76,8 +79,6 @@ function App() {
             path='/'
             element={<Landing modal={modal} setModal={setModal} />}
           />
-          <Route path='/home' element={<Home />} />
-          <Route path='/' element={<Landing />} />
           <Route path='/home' element={<Home />} />
           <Route path='/post/id' element={<Post />} />
           <Route element={<ProtectedRoute user={user} />}>
