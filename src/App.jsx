@@ -82,7 +82,7 @@ function App() {
           />
           <Route path='/home' element={<Home />} />
           <Route path='/post/id' element={<Post />} />
-          <Route path='/:username/post/new' element={<NewPost />} />
+          <Route path='/:username/post/new' element={<NewPost user={user} />} />
           <Route element={<ProtectedRoute user={user} />}>
             <Route
               path='/:username/profile'

@@ -13,11 +13,11 @@ import Assesment from "../../components/assesment/Assesment";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Box, Modal, TextField, Select, FormControl, InputLabel, MenuItem, Input } from '@mui/material';
-import { Textarea, Card, Button } from "@mui/joy";
+import { Card, Button } from "@mui/joy";
 import { styled } from "@mui/system";
 
 export default function Home({ user }) {
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     const [postCtaCategory, setPostCtaCategory] = useState('');
     const [itemModalOpen, setItemModalOpen] = useState(false);
     const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
@@ -63,14 +63,14 @@ export default function Home({ user }) {
             tags: '',
             body: ''
         });
-    }
+    }//necessary ?
 
-    const displayImg = () => {
-        if (file) {
-            setFile([...file, file]);
-            setFile(null);
-        }
-    }
+    // const displayImg = () => {
+    //     if (file) {
+    //         setFile([...file, file]);
+    //         setFile(null);
+    //     }
+    // }
  
     const stylePostModel = {
         position: 'absolute',
@@ -130,8 +130,7 @@ export default function Home({ user }) {
                     <Card className='overlay-card' sx={{ backgroundColor: 'rgba(209, 196, 233, 0.75)'}} >
                         <h4> Share Your Expertise </h4>
                         <p className="post-cta-p"> No matter your level, share insights. Post tutorials, guides, and classes. Inspire and empower fellow creatives. </p>
-                        <button className="cta-btn" onClick={() => setPostModalOpen(true)} > Make a Post </button> 
-                        {/* REDIRECT TO POST MAKER COMP HERE */}
+                        <button className="cta-btn" onClick={() => navigate('/:username/post/new')} > Make a Post </button> 
                     </Card>
                 </div>
                 <div className="post-cta">
