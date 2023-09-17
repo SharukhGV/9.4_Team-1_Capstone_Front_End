@@ -1,14 +1,14 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import {useCookies} from 'react-cookie'
+import { useCookies } from 'react-cookie'
 import axios from 'axios'
-import {Box, Modal, TextField} from '@mui/material'
+import { Box, Modal, TextField } from '@mui/material'
 import './auth.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 axios.defaults.withCredentials = true
 
-export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,setSignedUp}) {
-  const [cookies,setCookie] = useCookies();  
+export default function Auth({ modal, tab, setModal, setTab, handleSignIn, signedUp, setSignedUp }) {
+  const [cookies, setCookie] = useCookies();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState()
   const [signupError, setSignupError] = useState()
@@ -95,16 +95,16 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
     flexDirection: 'column',
     alignItems: 'center',
   }
- console.log(user)
+  console.log(user)
 
   return (
     <>
-    <div className='auth'>
+      <div className='auth'>
         <Modal open={modal} onClose={() => setModal(false)}>
           <Box sx={styleAuth} className='login-box'>
             <aside className='modal-nav'>
-              <button className={!tab?'modal-nav-btn':'modal-nav-btn selected'} onClick={() => setTab(true)}>Sign Up</button>
-              <button className={tab?'modal-nav-btn':'modal-nav-btn selected'} onClick={() => setTab(false)}>Log-in</button>
+              <button className={!tab ? 'modal-nav-btn' : 'modal-nav-btn selected'} onClick={() => setTab(true)}>Sign Up</button>
+              <button className={tab ? 'modal-nav-btn' : 'modal-nav-btn selected'} onClick={() => setTab(false)}>Log-in</button>
             </aside>
             <button onClick={() => setModal(false)} className='cancel-btn'>
               {' '}
@@ -117,7 +117,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
                   <TextField
                     label='Email'
                     variant='standard'
-                    sx={{width: '300px'}}
+                    sx={{ width: '300px' }}
                     name='email'
                     className='input'
                     onChange={handleLoginText}
@@ -128,7 +128,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
                     type='password'
                     name='password'
                     onChange={handleLoginText}
-                    sx={{width: '300px'}}
+                    sx={{ width: '300px' }}
                   />
                   <button type='submit' className='login-btn'>
                     {' '}
@@ -140,40 +140,40 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
               <div>
                 <br />
                 <div className='signup-branding' >
-                <h3> Sign Up </h3>
-                <p> & explore your creative potantial without limits! </p>
+                  <h3> Sign Up </h3>
+                  <p> & explore your creative potantial without limits! </p>
                 </div>
                 <form onSubmit={handleSignup} className='signup-form'>
                   <TextField
                     variant='standard'
                     label='Name'
-                    style={{width: '300px'}}
+                    style={{ width: '300px' }}
                   />
                   <TextField
                     variant='standard'
                     label='Email'
-                    style={{width: '300px'}}
+                    style={{ width: '300px' }}
                     name='email'
                     onChange={handleSignupText}
                   />
                   <TextField
                     variant='standard'
                     label='DOB'
-                    style={{width: '300px'}}
+                    style={{ width: '300px' }}
                     name='dob'
                     onChange={handleSignupText}
                   />
                   <TextField
                     variant='standard'
                     label='Username'
-                    style={{width: '300px'}}
+                    style={{ width: '300px' }}
                     name='username'
                     onChange={handleSignupText}
                   />
                   <TextField
                     variant='standard'
                     label='City, State'
-                    style={{width: '300px'}}
+                    style={{ width: '300px' }}
                     name='city_state'
                     onChange={handleSignupText}
                   />
@@ -181,7 +181,7 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
                     variant='standard'
                     type='password'
                     label='Password'
-                    style={{width: '300px'}}
+                    style={{ width: '300px' }}
                     name='password'
                     onChange={handleSignupText}
                   />
@@ -189,12 +189,12 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
                     variant='standard'
                     label='Confirm Password'
                     type='password'
-                    style={{width: '300px'}}
+                    style={{ width: '300px' }}
                     name='confirm_password'
                     onChange={handleSignupText}
                   />
                   <button type='submit' className='signup-btn' >
-                  {/* onClick={() => setSignedUp(true)} */}
+                    {/* onClick={() => setSignedUp(true)} */}
                     {' '}
                     Sign Up{' '}
                   </button>
@@ -208,15 +208,15 @@ export default function Auth({modal,tab,setModal,setTab,handleSignIn,signedUp,se
             <Assesment assesmentModalOpen={modal} setAssesmentModalOpen={setModal} />
           )
         } */}
-    </div>
-    {/* <div>
+      </div>
+      {/* <div>
       {
         signedUp && (
           <Assesment assesmentModalOpen={modal} setAssesmentModalOpen={setModal} />
         )
       }
     </div> */}
-    {/* <div>
+      {/* <div>
       {
         signedUp && modal && (
           setModal(false), perhaps it was this that affected it ?
