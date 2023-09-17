@@ -13,7 +13,7 @@ import ToolsEditForm from "./components/tools/ToolsEditForm";
 import ToolsNewForm from "./components/tools/ToolsNewForm";
 import ToolsDetails from "./components/tools/ToolsDetails";
 import ToolsUserDetails from "./components/tools/ToolsUserDetails";
-import {useCookies} from "react-cookie"
+import {useCookies} from "react-cookie";
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 const ProtectedRoute = ({ user, redirectPath = "/" }) => {
@@ -22,8 +22,6 @@ const ProtectedRoute = ({ user, redirectPath = "/" }) => {
   }
   return <Outlet />
 }
-
-
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -74,11 +72,10 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<Landing modal={modal} setModal={setModal} />} />
-          <Route path='/home' element={<Home />} />
-          <Route path="/" element={<Landing />} />
-          <Route path="/home" element={<Home />} />
-          <Route path='/post/id' element={<Post />} />
-          <Route element={<ProtectedRoute user={user} />}>
+          <Route element={<ProtectedRoute user={user} />} >
+            <Route path='/:username/home' element={<Home user={user} />} />
+            <Route path="/:username/post/:id" element={<Post user={user} />} />
+            <Route path="/:username/post/preview" element={<Post user={user} />} />
             <Route
               path="/:username/profile"
               element={<Profile user={user} />}

@@ -16,7 +16,7 @@ import { Box, Modal, TextField, Select, FormControl, InputLabel, MenuItem, Input
 import { Textarea, Card, Button } from "@mui/joy";
 import { styled } from "@mui/system";
 
-export default function Home() {
+export default function Home({ user }) {
     //const navigate = useNavigate();
     const [postCtaCategory, setPostCtaCategory] = useState('');
     const [postModalOpen, setPostModalOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function Home() {
         title: '',
         tags: '',
         body: '',
-    })
+    })//seperate to component 
 
     function handleFileSelection(event) {
         setFile(event.target.files[0]);
@@ -42,6 +42,7 @@ export default function Home() {
         formData.append('title', post.title);
         formData.append('tags', post.tags);
         formData.append('body', post.body);
+        formData.append('user_id' ,user.user_id);
 
         axios.post(`${API}/posts`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
         .then(res => console.log(res.data))
@@ -49,11 +50,11 @@ export default function Home() {
     }
 
     function previewPost() {
-        //const id = 7; //random number
+        const id = 7; //random number
         sendToServer();
         //resetForm();
 
-        //navigate(`post/${id}`);
+        navigate(`/${user.username}/post/preview`)
     }
 
     function resetForm() {

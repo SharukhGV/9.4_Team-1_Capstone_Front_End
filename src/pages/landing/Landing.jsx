@@ -17,8 +17,8 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArtistsGraphic from '../../assets/artistsgraphic.jpg';
 import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
-import Tools from '../../components/tools/Tools';
-import Posts from '../../components/posts/Posts';
+// import Tools from '../../components/tools/Tools';
+// import Posts from '../../components/posts/Posts';
 
 export default function Landing({ modal, setModal}) {
 
@@ -50,7 +50,7 @@ export default function Landing({ modal, setModal}) {
 
 
 
-<Posts />
+{/* <Posts /> UNCOMMENT HERE */}
         {/* <main>
           <CatCarousel />
           <br />
@@ -58,7 +58,7 @@ export default function Landing({ modal, setModal}) {
           <br />
           <div >
           <button className='arrow'> <ArrowBackIosIcon /> </button> */}
-          <Tools />
+          {/* <Tools />  UNCOMMENT HERE*/}
           {/* < ToolsCard />
           <button className='arrow'> <ArrowForwardIosIcon /> </button>
           </div>
