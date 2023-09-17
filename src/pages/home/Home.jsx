@@ -16,10 +16,9 @@ import { Box, Modal, TextField, Select, FormControl, InputLabel, MenuItem, Input
 import { Textarea, Card, Button } from "@mui/joy";
 import { styled } from "@mui/system";
 
-export default function Home() {
+export default function Home({ user }) {
     //const navigate = useNavigate();
     const [postCtaCategory, setPostCtaCategory] = useState('');
-    const [postModalOpen, setPostModalOpen] = useState(false);
     const [itemModalOpen, setItemModalOpen] = useState(false);
     const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
     const [assesmentCompleted, setAssesmentCompleted] = useState(false); 
@@ -28,7 +27,7 @@ export default function Home() {
         title: '',
         tags: '',
         body: '',
-    })
+    })//seperate to component 
 
     function handleFileSelection(event) {
         setFile(event.target.files[0]);
@@ -42,6 +41,7 @@ export default function Home() {
         formData.append('title', post.title);
         formData.append('tags', post.tags);
         formData.append('body', post.body);
+        formData.append('user_id' ,user.user_id);
 
         axios.post(`${API}/posts`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
         .then(res => console.log(res.data))
@@ -49,11 +49,11 @@ export default function Home() {
     }
 
     function previewPost() {
-        //const id = 7; //random number
+        const id = 7; //random number
         sendToServer();
         //resetForm();
 
-        //navigate(`post/${id}`);
+        navigate(`/${user.username}/post/preview`)
     }
 
     function resetForm() {
@@ -130,54 +130,8 @@ export default function Home() {
                     <Card className='overlay-card' sx={{ backgroundColor: 'rgba(209, 196, 233, 0.75)'}} >
                         <h4> Share Your Expertise </h4>
                         <p className="post-cta-p"> No matter your level, share insights. Post tutorials, guides, and classes. Inspire and empower fellow creatives. </p>
-                        <button className="cta-btn" onClick={() => setPostModalOpen(true)} > Make a Post </button>
-                        <Modal open={postModalOpen} onClose={() => setPostModalOpen(false)} >
-                            <Box sx={stylePostModel}>
-                                <button className="close-modal" onClick={() => setPostModalOpen(false)}> &times; </button>
-                                <Textarea minRows={9} sx={{ width: '100%' }} placeholder="Share your creative know-how..." onChange={(event) => setPost({ ...post, body: event.target.value })} 
-                                startDecorator={
-                                <div>
-                                    <div className="upperLeft-txtSect">
-                                    <Button component='label' variant="contained" href="#file-upload" startDecorator={<img src={cameraImg} width='30px' />} size="small" sx={{ backgroundColor: 'white' }} >
-                                        <VisuallyHiddenInput multiple type='file' name='file' onChange={handleFileSelection} />
-                                        {/* if issue check mui usage or wrap around form*/}
-                                    </Button>
-                                   
-                                    {/* <button onClick={sendToServer}> send to server test btn </button> */}
-                                    <Input placeholder="Title" focused onChange={(event) => setPost({ ...post, title: event.target.value })} />
-                                    </div>
-                                    {/* <div>
-                                        {file.map((iFile, index) => (
-                                            <img key={index} src={iFile} alt={`File ${index}`} style={{ width: '30px' }} />
-                                        ))}
-                                    </div> */}
-                                    <div className="bottomLeft-txtSect">
-                                    <FormControl variant="standard" sx={{ minWidth: 170 }}>
-                                    <InputLabel sx={{ fontFamily: 'Lato'}}> Category </InputLabel>
-                                    <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)} >
-                                        <MenuItem value='Photography'> Photography </MenuItem>
-                                        <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
-                                        <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
-                                        <MenuItem value='Ceramics'> Ceramics </MenuItem>
-                                        <MenuItem value='Drawing'> Drawing </MenuItem>
-                                        <MenuItem value='Sculpture'> Sculpture </MenuItem>
-                                        <MenuItem value='Printmaking'> Printmaking </MenuItem>
-                                        <MenuItem value='Painting'> Painting </MenuItem>
-                                        <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
-                                        <MenuItem value='Graffiti'> Graffiti </MenuItem>
-                                    </Select>
-                                    </FormControl>
-                                    <TextField variant="standard" label='Tags' className="txt-tags" onChange={(event) => setPost({ ...post, tags: event.target.value })} />
-                                    </div>
-                                    <div className="bottomRight-actionBtns">
-                                    <button className="preview-btn" onClick={previewPost}> Preview </button>
-                                    <button className="post-btn" onClick={sendToServer}> Post </button>
-                                    </div>
-                                </div>
-                                } >                 
-                                </Textarea>
-                            </Box>
-                        </Modal>
+                        <button className="cta-btn" onClick={() => setPostModalOpen(true)} > Make a Post </button> 
+                        {/* REDIRECT TO POST MAKER COMP HERE */}
                     </Card>
                 </div>
                 <div className="post-cta">
