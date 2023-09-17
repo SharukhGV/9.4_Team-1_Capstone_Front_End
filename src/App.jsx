@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react'
-import {Routes, Route, Navigate, useNavigate, Outlet} from 'react-router-dom';
-import {useCookies} from 'react-cookie'
+import {Routes, Route, Navigate, useNavigate, Outlet} from 'react-router-dom'
 import axios from 'axios'
 import NavBar from './components/navbar/NavBar'
 import Landing from './pages/landing/Landing'
@@ -8,7 +7,13 @@ import Footer from './components/footer/Footer'
 import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
 import ProfileEdit from './pages/profile/ProfileEdit'
+import Post from './components/posts/Post'
 import './App.css'
+import ToolsEditForm from './components/tools/ToolsEditForm'
+import ToolsNewForm from './components/tools/ToolsNewForm'
+import ToolsDetails from './components/tools/ToolsDetails'
+import ToolsUserDetails from './components/tools/ToolsUserDetails'
+import {useCookies} from 'react-cookie'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 
 const ProtectedRoute = ({user, redirectPath = '/'}) => {
@@ -19,10 +24,10 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 }
 
 function App() {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(false)
   const [user, setUser] = useState(undefined)
-  const [cookies,removeCookie] = useCookies()
-  const [error,setError] = useState()
+  const [cookies, removeCookie] = useCookies()
+  const [error, setError] = useState()
 
   useEffect(() => {
     checkToken()
@@ -38,16 +43,22 @@ function App() {
   }
   function checkToken() {
     axios
-      .post(`${API}/auth/token`, {cookie:cookies.token}, {
-        withCredentials: true,
-      })
+      .post(
+        `${API}/auth/token`,
+        {cookie: cookies.token},
+        {
+          withCredentials: true,
+        }
+      )
       .then(res => {
         handleSignIn(res.data.user)
       })
       .catch(err => {
         console.log(err)
         setError(err)
-        setTimeout(()=>{setError()},3000)
+        setTimeout(() => {
+          setError()
+        }, 3000)
       })
   }
   return (
@@ -61,8 +72,14 @@ function App() {
       />
       <main>
         <Routes>
-          <Route path='/' element={<Landing modal={modal} setModal={setModal} />} />
+          <Route
+            path='/'
+            element={<Landing modal={modal} setModal={setModal} />}
+          />
           <Route path='/home' element={<Home />} />
+          <Route path='/' element={<Landing />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/post/id' element={<Post />} />
           <Route element={<ProtectedRoute user={user} />}>
             <Route
               path='/:username/profile'
@@ -70,7 +87,26 @@ function App() {
             />
             <Route
               path='/:username/profile/edit'
-              element={<ProfileEdit user={user} refreshUser={checkToken}/>}/>
+              element={<ProfileEdit user={user} refreshUser={checkToken} />}
+            />
+            <Route
+              path='/tools/:username'
+              element={<ToolsDetails user={user} />}
+            />
+            <Route
+              path='/tools/:username/new'
+              element={<ToolsNewForm user={user} />}
+            />
+
+            <Route
+              path='/tools/:username/:id'
+              element={<ToolsUserDetails user={user} />}
+            />
+
+            <Route
+              path='/tools/:username/:id/edit'
+              element={<ToolsEditForm user={user} />}
+            />
           </Route>
         </Routes>
       </main>

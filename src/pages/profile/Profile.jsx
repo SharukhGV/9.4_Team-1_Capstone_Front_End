@@ -87,7 +87,13 @@ export default function Profile({user}) {
           </CardContent>
         </Card>
         <Card className='profile-tools'>
-          <CardContent>
+        <Button onClick={()=>navigate(`/tools/${user.username}/new`)} variant='contained' color='warning'>
+              New Tools Post
+            </Button>
+            
+            <Button onClick={()=>navigate(`/tools/${user.username}`)} variant='contained' color='warning'>
+              All Your Tools
+            </Button>           <CardContent>
             {tools.length < 1 ? (
               <div>
                 <p>No Tools yet </p>
