@@ -6,8 +6,6 @@ import profile_pic from '../../assets/blank_profile.jpeg'
 import './profile.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 
-
-
 export default function Profile({user}) {
   const {username} = useParams()
   const navigate = useNavigate()
@@ -15,15 +13,16 @@ export default function Profile({user}) {
   const [tools, setTools] = useState([])
 
   useEffect(() => {
-    const getPosts = async () => {
-      const res = await axios.get(`${API}/posts/${user.user_id}`)
-      const data = await res.json()
-      setPosts(data)
+    console.log(user)
+    const getPosts = () => {
+      axios.get(`${API}/posts/${user.user_id}`)
+      .then(res=>console.log(res))
+      // setPosts(data)
     }
-    const getTools = async () => {
-      const res = await axios.get(`${API}/tools/${user.user_id}`)
-      const data = await res.json()
-      setTools(data)
+    const getTools = () => {
+       axios.get(`${API}/tools/${user.user_id}`)
+       .then(res=>console.log(res))
+      // setTools(data)
     }
     getPosts()
     getTools()
@@ -33,7 +32,7 @@ export default function Profile({user}) {
       <Card
         variant='outlined'
         sx={{
-          width: '90vw',
+          width: '90%',
           marginLeft: 'auto',
           marginRight: 'auto',
           marginTop: 10,
@@ -43,7 +42,8 @@ export default function Profile({user}) {
           <div className='profile-card'>
             <img
               className='profile-img'
-              src={profile_pic}
+              // src={user.profile_pic}
+              src={`https://craftopia-media-bucket.s3.us-east-2.amazonaws.com/felizj171-profile-pic`}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
             <aside className='profile-desc'>
@@ -54,13 +54,17 @@ export default function Profile({user}) {
             </aside>
           </div>
           {user.username === username && (
-            <Button onClick={()=>navigate(`/tools/${user.username}/new`)} variant='contained' color='warning'>
+            <Button
+              onClick={() => navigate(`/${username}/profile/edit`)}
+              variant='contained'
+              color='warning'
+            >
               Edit
             </Button>
           )}
         </CardContent>
       </Card>
-      <div>
+      <div className='users-posts-and-tools'>
         <Card className='profile-posts'>
           <CardContent>
             {posts.length < 1 ? (
@@ -80,16 +84,13 @@ export default function Profile({user}) {
                 ))}
               </div>
             )}
+            <Button onClick={()=>navigate(`/tools/${user.username}/new`)} variant='contained' color='primary'>
+              New
+            </Button>
           </CardContent>
         </Card>
-        <Card className='profile-tools'>
-        <Button onClick={()=>navigate(`/tools/${user.username}/new`)} variant='contained' color='warning'>
-              New Tools Post
-            </Button>
-            
-            <Button onClick={()=>navigate(`/tools/${user.username}`)} variant='contained' color='warning'>
-              All Your Tools
-            </Button>           <CardContent>
+        <Card className='profile-tools'>          
+           <CardContent>
             {tools.length < 1 ? (
               <div>
                 <p>No Tools yet </p>
@@ -107,6 +108,9 @@ export default function Profile({user}) {
                 ))}
               </div>
             )}
+            <Button onClick={()=>navigate(`/tools/${user.username}/new`)} variant='contained' color='primary'>
+              New
+            </Button>
           </CardContent>
         </Card>
       </div>
