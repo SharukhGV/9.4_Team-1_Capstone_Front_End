@@ -23,30 +23,33 @@ function App() {
   const [user, setUser] = useState(undefined)
   const [cookies,removeCookie] = useCookies()
   const [error,setError] = useState()
+
+  useEffect(() => {
+    checkToken()
+  }, [])
+
   const handleSignIn = authUser => {
     setUser(authUser)
   }
+
   const handleLogout = () => {
     setUser(undefined)
     removeCookie('token')
   }
-  useEffect(() => {
-    function checkToken() {
-      axios
-        .post(`${API}/auth/token`, {cookie:cookies.token}, {
-          withCredentials: true,
-        })
-        .then(res => {
-          handleSignIn(res.data.user)
-        })
-        .catch(err => {
-          console.log(err)
-          setError(err)
-          setTimeout(()=>{setError()},3000)
-        })
-    }
-    checkToken()
-  }, [])
+  function checkToken() {
+    axios
+      .post(`${API}/auth/token`, {cookie:cookies.token}, {
+        withCredentials: true,
+      })
+      .then(res => {
+        handleSignIn(res.data.user)
+      })
+      .catch(err => {
+        console.log(err)
+        setError(err)
+        setTimeout(()=>{setError()},3000)
+      })
+  }
   return (
     <div className='App'>
       <NavBar
@@ -65,7 +68,7 @@ function App() {
             />
             <Route
               path='/:username/profile/edit'
-              element={<ProfileEdit user={user}/>}/>
+              element={<ProfileEdit user={user} refreshUser={checkToken}/>}/>
           </Route>
         </Routes>
       </main>
