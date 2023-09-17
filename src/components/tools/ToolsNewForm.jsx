@@ -17,8 +17,9 @@ function ToolsNewForm({ user }) {
   const navigate = useNavigate();
 
   const addtool = (newtool) => {
+    console.log(files["thumbnail"])
     const newForm = new FormData();
-newForm.append("thumbnail",files[thumbnail])
+newForm.append("thumbnail",files["thumbnail"])
 
 // newForm.append("user_id", user.user_id)
 for (const key in newtool){
@@ -26,7 +27,7 @@ for (const key in newtool){
 }
 console.log(newForm)
     axios
-      .post(`${API}/tools`, newtool, {
+      .post(`${API}/tools`, newForm, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((response) => {

@@ -12,6 +12,7 @@ import ToolsEditForm from "./components/tools/ToolsEditForm";
 import ToolsNewForm from "./components/tools/ToolsNewForm";
 import ToolsDetails from "./components/tools/ToolsDetails";
 import ToolsUserDetails from "./components/tools/ToolsUserDetails";
+import {useCookies} from "react-cookie"
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 const ProtectedRoute = ({ user, redirectPath = "/" }) => {
