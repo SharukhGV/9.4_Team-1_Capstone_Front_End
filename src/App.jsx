@@ -8,6 +8,7 @@ import Footer from './components/footer/Footer'
 import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
 import ProfileEdit from './pages/profile/ProfileEdit'
+import Post from './components/posts/Post';
 import './App.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL
 
@@ -22,7 +23,8 @@ function App() {
   const [modal, setModal] = useState(false);
   const [user, setUser] = useState(undefined)
   const [cookies,removeCookie] = useCookies()
-  const [error,setError] = useState()
+  const [error,setError] = useState();
+
   const handleSignIn = authUser => {
     setUser(authUser)
   }
@@ -60,6 +62,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Landing modal={modal} setModal={setModal} />} />
           <Route path='/home' element={<Home />} />
+          <Route path='/post/id' element={<Post />} />
           <Route element={<ProtectedRoute user={user} />}>
             <Route
               path='/:username/profile'

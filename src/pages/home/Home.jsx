@@ -1,35 +1,77 @@
-import { useState, useEffect } from "react";
-import CatCarousel from "../../components/categories-carousel/CatCarousel";
 import './home.css';
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router';
+import axios from "axios";
+const API = import.meta.env.VITE_REACT_APP_API_URL;
+
+import CatCarousel from "../../components/categories-carousel/CatCarousel";
 import cameraImg from '../../assets/cameraImg.png';
 import artistsGraphic from '../../assets/artistsgraphic.jpg';
 import Assesment from "../../components/assesment/Assesment";
-
-import { Box, Modal, TextField, Select, FormControl, InputLabel, MenuItem, Input } from '@mui/material';
-import { Textarea, Card, Button, styled } from "@mui/joy";
+//import Post from '../../components/posts/Post';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Box, Modal, TextField, Select, FormControl, InputLabel, MenuItem, Input } from '@mui/material';
+import { Textarea, Card, Button } from "@mui/joy";
+import { styled } from "@mui/system";
 
 export default function Home() {
+    //const navigate = useNavigate();
     const [postCtaCategory, setPostCtaCategory] = useState('');
     const [postModalOpen, setPostModalOpen] = useState(false);
     const [itemModalOpen, setItemModalOpen] = useState(false);
     const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
     const [assesmentCompleted, setAssesmentCompleted] = useState(false); 
+    const [file, setFile] = useState(null);
+    const [post, setPost] = useState({
+        title: '',
+        tags: '',
+        body: '',
+    })
 
-    const [itemCategory, setItemCategory] = useState([]); //unnecesary ? 
+    function handleFileSelection(event) {
+        setFile(event.target.files[0]);
+    }
 
-    useEffect(() => {
-        if (assesmentCompleted === true) {
-            setAssesmentModalOpen(false)
+    const sendToServer = async event => {
+        //event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('title', post.title);
+        formData.append('tags', post.tags);
+        formData.append('body', post.body);
+
+        axios.post(`${API}/posts`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+        .then(res => console.log(res.data))
+        .catch(error => console.log(error))
+    }
+
+    function previewPost() {
+        //const id = 7; //random number
+        sendToServer();
+        //resetForm();
+
+        //navigate(`post/${id}`);
+    }
+
+    function resetForm() {
+        setFile(null);
+        setPost({
+            title: '',
+            tags: '',
+            body: ''
+        });
+    }
+
+    const displayImg = () => {
+        if (file) {
+            setFile([...file, file]);
+            setFile(null);
         }
-        else {
-            setAssesmentModalOpen(true);
-        }
-        //conditional is assesment not already completed then pop up, wether assesment is completed or not should the assesment asnwers be in backend ? 
-    }, []); //should be applied after a couple of seconds ? ... unnecesary
-
+    }
+ 
     const stylePostModel = {
         position: 'absolute',
         top: '50%',
@@ -57,16 +99,8 @@ export default function Home() {
     width: 1px;
     `;
 
-    const handleItemCatSelect = (event) => {
-        const {
-            target: { value },
-        } = event;
-        setItemCategory(typeof value === 'string' ? value.split(',') : value);
-    };
-
     return (
         <div>
-            {/* <NavBar /> */}
             <br />
             <div className="home-header">
                 <h2 className="header-h2"> Ignight Your Creativity, Equip Your Creativity </h2>
@@ -100,15 +134,23 @@ export default function Home() {
                         <Modal open={postModalOpen} onClose={() => setPostModalOpen(false)} >
                             <Box sx={stylePostModel}>
                                 <button className="close-modal" onClick={() => setPostModalOpen(false)}> &times; </button>
-                                <Textarea minRows={9} sx={{ width: '100%' }} placeholder="Share your creative know-how..." 
+                                <Textarea minRows={9} sx={{ width: '100%' }} placeholder="Share your creative know-how..." onChange={(event) => setPost({ ...post, body: event.target.value })} 
                                 startDecorator={
                                 <div>
                                     <div className="upperLeft-txtSect">
-                                    <Button component='label' startDecorator={<img src={cameraImg} width='30px' />} size="small" sx={{ backgroundColor: 'white' }}>
-                                        <VisuallyHiddenInput type='file' />
+                                    <Button component='label' variant="contained" href="#file-upload" startDecorator={<img src={cameraImg} width='30px' />} size="small" sx={{ backgroundColor: 'white' }} >
+                                        <VisuallyHiddenInput multiple type='file' name='file' onChange={handleFileSelection} />
+                                        {/* if issue check mui usage or wrap around form*/}
                                     </Button>
-                                    <Input placeholder="Title" focused />
+                                   
+                                    {/* <button onClick={sendToServer}> send to server test btn </button> */}
+                                    <Input placeholder="Title" focused onChange={(event) => setPost({ ...post, title: event.target.value })} />
                                     </div>
+                                    {/* <div>
+                                        {file.map((iFile, index) => (
+                                            <img key={index} src={iFile} alt={`File ${index}`} style={{ width: '30px' }} />
+                                        ))}
+                                    </div> */}
                                     <div className="bottomLeft-txtSect">
                                     <FormControl variant="standard" sx={{ minWidth: 170 }}>
                                     <InputLabel sx={{ fontFamily: 'Lato'}}> Category </InputLabel>
@@ -125,11 +167,11 @@ export default function Home() {
                                         <MenuItem value='Graffiti'> Graffiti </MenuItem>
                                     </Select>
                                     </FormControl>
-                                    <TextField variant="standard" label='Tags' className="txt-tags" />
+                                    <TextField variant="standard" label='Tags' className="txt-tags" onChange={(event) => setPost({ ...post, tags: event.target.value })} />
                                     </div>
                                     <div className="bottomRight-actionBtns">
-                                    <button className="preview-btn"> Preview </button>
-                                    <button className="post-btn"> Post </button>
+                                    <button className="preview-btn" onClick={previewPost}> Preview </button>
+                                    <button className="post-btn" onClick={sendToServer}> Post </button>
                                     </div>
                                 </div>
                                 } >                 
@@ -201,4 +243,6 @@ export default function Home() {
         </div>
     )
 }
+
+//first lets make the posts and that way we can add the file to the serve once the post is made?
 
