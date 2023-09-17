@@ -1,8 +1,10 @@
 import './landing.css';
-
+import Auth from '../../components/auth/Auth';
 import { useState } from 'react';
 import CatCarousel from '../../components/categories-carousel/CatCarousel';
-import ToolsCard from '../../components/tools/ToolsCard';
+// import ToolsCard from '../../components/tools/ToolsCard';
+import { Slide } from '@mui/material';
+
 
 //docs for cards: https://mui.com/joy-ui/react-card/ 
 import Card from '@mui/joy/Card';
@@ -11,19 +13,19 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import { Typography } from '@mui/material';
 import { Button } from '@mui/joy';
 
-
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArtistsGraphic from '../../assets/artistsgraphic.jpg';
 import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
+import Tools from '../../components/tools/Tools';
+import Posts from '../../components/posts/Posts';
 
-export default function Landing() {
+export default function Landing({ modal, setModal}) {
 
-   const [joinOpen, setJoinOpen] = useState(false);
+   //const [joinOpen, setJoinOpen] = useState(false);
 
   return (
     <>
-        {/* <NavBar /> */}
     <header>
       <div className='header-branding'>
         {/* <Card sx={{ width: '87%' }} > */}
@@ -32,7 +34,8 @@ export default function Landing() {
           <div className='branding-text'>
           <h2 className='header-h2'> Ignite Your Creativity </h2>
           <h4 className='header-h4'> Explore Gear & Community to Cultivate Inspired Artistry </h4>
-          <button className='join-btn' onClick={() => setJoinOpen(true)} > Join The Party </button>
+          <button className='join-btn' onClick={() => setModal(true)} > Join The Fun </button>
+          <Auth />
           </div>
           </Card> 
           <div>
@@ -44,9 +47,39 @@ export default function Landing() {
         <br />
     </header>
         <br />
-        <main>
+
+
+
+<Posts />
+        {/* <main>
           <CatCarousel />
           <br />
+          <h3 className='top-categories-h3'> Hobby Enthusiast Tools </h3>
+          <br />
+          <div >
+          <button className='arrow'> <ArrowBackIosIcon /> </button> */}
+          <Tools />
+          {/* < ToolsCard />
+          <button className='arrow'> <ArrowForwardIosIcon /> </button>
+          </div>
+          <br />
+        </main> */}
+
+
+
+
+
+
+
+{/* <div>< Tools /></div> */}
+
+
+        {/* <main>
+          <CatCarousel />
+          <br />
+
+<div><Tools/></div>
+
           <div>
           <h3 className='top-categories-h3'> Top Categories </h3>
           <br />
@@ -68,7 +101,7 @@ export default function Landing() {
           </div>
           </div>
           <br />
-        </main>
+        </main> */}
     </> 
   )
 }

@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {Routes, Route, Navigate, useNavigate, Outlet} from 'react-router-dom'
+import {Routes, Route, Navigate, useNavigate, Outlet} from 'react-router-dom';
 import {useCookies} from 'react-cookie'
 import axios from 'axios'
 import NavBar from './components/navbar/NavBar'
@@ -15,11 +15,11 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
   if (!user) {
     return <Navigate to={redirectPath} replace />
   }
-
   return <Outlet />
 }
 
 function App() {
+  const [modal, setModal] = useState(false);
   const [user, setUser] = useState(undefined)
   const [cookies,removeCookie] = useCookies()
   const [error,setError] = useState()
@@ -56,10 +56,12 @@ function App() {
         user={user}
         handleLogout={handleLogout}
         handleSignIn={handleSignIn}
+        modal={modal}
+        setModal={setModal}
       />
       <main>
         <Routes>
-          <Route path='/' element={<Landing />} />
+          <Route path='/' element={<Landing modal={modal} setModal={setModal} />} />
           <Route path='/home' element={<Home />} />
           <Route element={<ProtectedRoute user={user} />}>
             <Route

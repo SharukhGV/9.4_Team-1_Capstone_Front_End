@@ -2,37 +2,32 @@ import {useState} from 'react'
 import {Link} from 'react-router-dom'
 import './navbar.css'
 import BasicPopover from '../../assets/mui/popover/popover'
+import { Input } from '@mui/material'
 
-import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg'
+import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
+import searchIcon from '../../assets/search.png';
 import Auth from '../../components/auth/Auth'
 
-export default function NavBar({user, handleLogout, handleSignIn}) {
-  const [searchText, setSearchText] = useState('')
-  const [tab, setTab] = useState(false)
-  const [modal, setModal] = useState(false)
+export default function NavBar({user, handleLogout, handleSignIn, modal, setModal}) {
+  const [searchText, setSearchText] = useState('');
+  const [tab, setTab] = useState(false);
+  const [signedUp, setSignedUp] = useState(false);
+  
   function handleSearchInput(event) {
+    //console.log(searchText)
     setSearchText(event.target.value)
   }
   return (
-    <div className='navbar'>
-      <Link to='/'>
-        <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
-      </Link>
-      <aside className='search-aside'>
-        <input
-          type='text'
-          placeholder='Search...'
-          className='search-bar'
-          value={searchText}
-          onChange={handleSearchInput}
-        />
-        <button>🔎</button>
-      </aside>
-      <div className='navbar-btns'>
-        <Link to='/home'>
-          <button className='explore-btn'>Explore</button>
-        </Link>
-        {!user && (
+    <>
+    <nav>
+    <Link> <img src={craftopiaLogo} className='nav-logo' /> </Link>
+    <Link className='explore-link'> Explore </Link>
+  <div className='nav-right-container'>
+    <div >
+      <button className='search-btn'> <img src={searchIcon} className='search-icon' /> </button>
+      <Input type='text' placeholder='Search' value={searchText} onChange={handleSearchInput} size='xsmall' sx={{ width: '140px' }} />
+    </div>
+         {!user && (
           <aside className='auth-btns'>
             <button
               onClick={() => {
@@ -47,8 +42,8 @@ export default function NavBar({user, handleLogout, handleSignIn}) {
             <button
               className='signup-btn'
               onClick={() => {
-                setModal(true)
-                setTab(true)
+                setModal(true);
+                setTab(true);
               }}
             >
               {' '}
@@ -70,15 +65,19 @@ export default function NavBar({user, handleLogout, handleSignIn}) {
             </button>
           </div>
         )}
-      </div>
-      <Auth
+        <Auth
         modal={modal}
         tab={tab}
         setModal={setModal}
         setTab={setTab}
         handleLogout={handleLogout}
         handleSignIn={handleSignIn}
-      />
-    </div>
+        signedUp={signedUp}
+        setSignedUp={setSignedUp}
+        />
+    </div>  
+    </nav>
+    <div className='div' />
+    </>
   )
 }
