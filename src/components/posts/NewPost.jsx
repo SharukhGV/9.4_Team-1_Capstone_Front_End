@@ -18,7 +18,6 @@ const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function NewPost({user}) {
   const navigate = useNavigate();
-  const [postCategory, setPostCategory] = useState('');
   const [file, setFile] = useState(null);
   const [post, setPost] = useState({
     title: '',
@@ -30,11 +29,8 @@ export default function NewPost({user}) {
     setFile(event.target.files[0]);
   }
 
-  //now on sendtoServer make it a conditional of deoending on which button was pressed it will either
-  //redirect to the preview page or the index page of the post
-
   const sendToServer = async event => {
-    event.preventDefault(); //redirect to index post page
+    event.preventDefault(); 
     const formData = new FormData();
     formData.append('file', file);
     formData.append('title', post.title);
@@ -42,25 +38,12 @@ export default function NewPost({user}) {
     formData.append('body', post.body);
     formData.append('user_id', user.user_id);
 
-    //make into itenerary conditional
-    if (event.target.value === 'preview-btn') {
-      // event.preventDefault(); ?
-      navigate(`/${user.username}/post/preview`);
-      //resetform
-    } else if (event.target.value === 'post-btn') {
-    }
-
-    // else if (event.target.value === 'post-btn') {
-    //     navigate(`/post/`)
-    //     ///post/:id
-    // }
-
     axios
       .post(`${API}/posts`, formData, {
         headers: {'Content-Type': 'multipart/form-data'},
       })
       .then(res => {
-        console.log(res.data);
+        //console.log(res.data.title);
         navigate(`/${user.username}/post/${res.data}`);
       })
       .catch(error => console.log(error));
@@ -132,15 +115,14 @@ export default function NewPost({user}) {
             <MenuItem value='Graffiti'> Graffiti </MenuItem>
           </Select>
         </FormControl>
-        {/* <TextField variant="standard" label='Tags' className="txt-tags" onChange={(event) => setPost({ ...post, tags: event.target.value })} /> */}
         <div className='bottomRight-actionBtns'>
-          <button className='preview-btn' value='preview-btn'>
+          <button className='preview-btn' 
+          onClick={() => navigate(`/:username/post/preview`,
+          { state: { title: post.title, category: post.category, body: post.body, file: file }})}>
             {' '}
             Preview{' '}
           </button>
-          {/* previewpost func on onClick 
-                    send to server and got to its index page*/}
-          <button className='post-btn' onClick={sendToServer} value='post-btn'>
+          <button className='post-btn' onClick={sendToServer} >
             {' '}
             Post{' '}
           </button>
