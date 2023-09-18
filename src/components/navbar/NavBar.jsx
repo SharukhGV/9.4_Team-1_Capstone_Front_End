@@ -1,46 +1,60 @@
-import {useState} from 'react'
-import {Link} from 'react-router-dom'
-import './navbar.css'
-import BasicPopover from '../../assets/mui/popover/popover'
+import {useState} from 'react';
+import {Link} from 'react-router-dom';
+import './navbar.css';
+import BasicPopover from '../../assets/mui/popover/popover';
+import {Input} from '@mui/material';
 
-import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg'
-import Auth from '../../components/auth/Auth'
-//import Assesment from '../assesment/Assesment.jsx';
+import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
+import searchIcon from '../../assets/search.png';
+import Auth from '../../components/auth/Auth';
 
-export default function NavBar({user, handleLogout, handleSignIn, modal, setModal}) {
+export default function NavBar({
+  user,
+  handleLogout,
+  handleSignIn,
+  modal,
+  setModal,
+}) {
   const [searchText, setSearchText] = useState('');
-  const [tab, setTab] = useState(false);
   const [signedUp, setSignedUp] = useState(false);
-  
+  const [tab, setTab] = useState(false);
   function handleSearchInput(event) {
-    //console.log(searchText)
-    setSearchText(event.target.value)
+    setSearchText(event.target.value);
   }
   return (
-    <div className='navbar'>
-      <Link to='/home'>
-        <img src={craftopiaLogo} alt='circ-logo' className='navbar-logo' />
-      </Link>
-      <aside className='search-aside'>
-        <input
-          type='text'
-          placeholder='Search...'
-          className='search-bar'
-          value={searchText}
-          onChange={handleSearchInput}
-        />
-        <button>🔎</button>
-      </aside>
-      <div className='navbar-btns'>
+    <nav>
+      <div className='top-left'>
         <Link to='/home'>
-          <button className='explore-btn'>Explore</button>
+          {' '}
+          <img src={craftopiaLogo} className='nav-logo' />{' '}
         </Link>
+        <Link className='explore-link' to='/'>
+          {' '}
+          Explore{' '}
+        </Link>
+      </div>
+      <div className='nav-right-container'>
+        <div>
+          <button className='search-btn'>
+            {' '}
+            <img src={searchIcon} className='search-icon' />{' '}
+          </button>
+          <Input
+            type='text'
+            placeholder='Search...'
+            value={searchText}
+            onChange={handleSearchInput}
+            size='xsmall'
+            sx={{width: '140px'}}
+            className='search-input'
+          />
+        </div>
         {!user && (
           <aside className='auth-btns'>
             <button
               onClick={() => {
-                setModal(true)
-                setTab(false)
+                setModal(true);
+                setTab(false);
               }}
               className='login-btn'
             >
@@ -62,33 +76,29 @@ export default function NavBar({user, handleLogout, handleSignIn, modal, setModa
         {user && (
           <div className='auth-btns'>
             <Link to={`${user.username}/profile`}>
-              <BasicPopover
+            <button className='logout-btn' >
+              Profile
+            </button>
+              {/* <BasicPopover
                 className='login-btn'
                 buttonText='Profile'
                 popoverContent='Profile options will go here'
-              />
+              /> */}
             </Link>
             <button className='logout-btn' onClick={handleLogout}>
               Logout
             </button>
           </div>
         )}
+        <Auth
+          modal={modal}
+          tab={tab}
+          setTab={setTab}
+          setModal={setModal}
+          handleLogout={handleLogout}
+          handleSignIn={handleSignIn}
+        />
       </div>
-      <Auth
-        modal={modal}
-        tab={tab}
-        setModal={setModal}
-        setTab={setTab}
-        handleLogout={handleLogout}
-        handleSignIn={handleSignIn}
-        signedUp={signedUp}
-        setSignedUp={setSignedUp}
-      />
-      {/* {
-        signedUp && modal && (
-          <Assesment assesmentModalOpen={modal} setAssesmentModalOpen={setModal} />
-        )
-      } */}
-    </div>
-  )
+    </nav>
+  );
 }

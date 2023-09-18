@@ -1,19 +1,22 @@
-import ToolsCard from "./ToolsCard";
-import { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
-import Carousel from "react-material-ui-carousel";
+import ToolsCard from './ToolsCard';
+import {useState} from 'react';
+import {useEffect} from 'react';
+import axios from 'axios';
+import Carousel from 'react-material-ui-carousel';
 
-function Tools() {
+function Tools({user}) {
   const API = import.meta.env.VITE_REACT_APP_API_URL;
   const [tools, setTools] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${API}/tools`)
-      .then((response) => setTools(response.data))
-      .catch((e) => console.error("catch", e));
-  }, [API]);
+    const getTools = () => {
+      axios
+        .get(`${API}/tools`)
+        .then(response => setTools(response.data))
+        .catch(e => console.error('catch', e));
+    };
+    getTools();
+  }, []);
 
   // console.log(tools)
   return (
@@ -21,6 +24,7 @@ function Tools() {
       {tools.map((individualTool, index) => {
         return (
           <ToolsCard
+            key={`tool-key-${individualTool.tool_id}`}
             inKEY={individualTool.tool_id}
             name={individualTool.name_tools}
             description={individualTool.description}
