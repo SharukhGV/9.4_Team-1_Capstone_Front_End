@@ -48,13 +48,12 @@ export default function Home({ user }) {
         .catch(error => console.log(error))
     }
 
-    function previewPost() {
-        const id = 7; //random number
-        sendToServer();
-        //resetForm();
-
-        navigate(`/${user.username}/post/preview`)
-    }
+    // function previewPost() {
+    //     const id = 7; //random number
+    //     sendToServer();
+    //     //resetForm();
+    //     navigate(`/${user.username}/post/preview`)
+    // }
 
     function resetForm() {
         setFile(null);
