@@ -1,0 +1,22 @@
+.tool-form {
+  display: flex;
+  flex-direction: column;
+}
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+  height: 50%;
+}
+.img {
+  height: 100%;
+  width: 100%;
+}
+.image-box {
+  height: 8vw;
+  width: 8vw;
+  border: dotted grey 1px;
+  overflow: hidden;
+  margin-right: 15px;
+}

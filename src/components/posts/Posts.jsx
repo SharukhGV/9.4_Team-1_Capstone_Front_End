@@ -16,7 +16,7 @@ function Posts() {
         .then(response => setposts(response.data))
         .catch(e => console.error('catch', e));
     };
-    getPosts()
+    getPosts();
   }, []);
 
   return (

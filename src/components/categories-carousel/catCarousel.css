@@ -1,41 +1,41 @@
 .slider-container {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    gap: 19px;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 19px;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .arrow {
-    border: none;
-    background-color: #f8f8f8;
-    color: #1A237E;
+  border: none;
+  background-color: #f8f8f8;
+  color: #1a237e;
 }
 
 .imgDiv {
-    position: relative;
-    text-align: center;
-    flex: 1;
+  position: relative;
+  text-align: center;
+  flex: 1;
 }
 
 .categoryImg {
-    position: relative;
-    /* width: 100%; */
-    object-fit: cover;
-    height: 80px;
-    transition: transform 0.2s ease-in-out;
-    filter: brightness(0.7) blur(0.9px);
+  position: relative;
+  /* width: 100%; */
+  object-fit: cover;
+  height: 80px;
+  transition: transform 0.2s ease-in-out;
+  filter: brightness(0.7) blur(0.9px);
 }
 
 .img-name {
-    font-family: 'Roboto', sans-serif;
-    position: absolute;
-    bottom: 11px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    z-index: 2;
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  bottom: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  z-index: 2;
 }

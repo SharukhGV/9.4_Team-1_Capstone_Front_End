@@ -20,22 +20,21 @@
   flex-direction: column;
 }
 .users-posts-and-tools {
-  
   width: 90%;
-  display:flex;
+  display: flex;
   flex-direction: row;
-  margin-right:auto;
-  margin-left:auto;
+  margin-right: auto;
+  margin-left: auto;
   margin-top: 5%;
-  margin-bottom:5%;
+  margin-bottom: 5%;
   justify-content: space-evenly;
 }
 
-.profile-posts{
-    width:50%;
-    margin-right: 2.5%;
+.profile-posts {
+  width: 50%;
+  margin-right: 2.5%;
 }
-.profile-tools{
-    width:50%;
-    margin-left:2.5%;
+.profile-tools {
+  width: 50%;
+  margin-left: 2.5%;
 }

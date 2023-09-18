@@ -1,13 +1,23 @@
 import {useState, useEffect} from 'react';
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
-import { Select, TextField, MenuItem } from '@mui/material';
-//import './toolsForm.css'
+import {
+  Select,
+  TextField,
+  MenuItem,
+  Button,
+  InputLabel,
+  FormControl,
+} from '@mui/material';
+import {styled} from '@mui/material/styles';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+import './toolsForm.css';
+
 function ToolsNewForm({user}) {
   const API = import.meta.env.VITE_REACT_APP_API_URL;
-  const [files, setFiles] = useState({});
-
-  const [tool, settool] = useState({
+  const [images, setImages] = useState([]);
+  const [tool, setTool] = useState({
     user_id: user.user_id,
     name_tools: '',
     item_condition: '',
@@ -18,69 +28,90 @@ function ToolsNewForm({user}) {
   });
   const navigate = useNavigate();
 
-  const addtool = newtool => {
-    console.log(files['thumbnail']);
-    const newForm = new FormData();
-    newForm.append('thumbnail', files['thumbnail']);
+  const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
 
-    // newForm.append("user_id", user.user_id)
-    for (const key in newtool) {
-      newForm.append(key, newtool[key]);
+  const addTool = newTool => {
+    const newForm = new FormData();
+    images.forEach((image, i) => {
+      newForm.append(`file-${i}`, image.data);
+    });
+    for (const key in newTool) {
+      newForm.append(key, newTool[key]);
     }
-    console.log(newForm);
     axios
       .post(`${API}/tools`, newForm, {
         headers: {'Content-Type': 'multipart/form-data'},
       })
       .then(response => {
         console.log(response.data);
-        // console.log(newForm)
-        // settool(response.data); // set the entire `tool` object
-        // navigate(`/${user}/tools`);
       })
       .catch(e => console.error('catch', e));
   };
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
 
-  function handleFileUploads(event) {
-    setFiles({...files, [event.target.name]: event.target.files[0]});
+  function handleImages(event) {
+    setImages([
+      ...images,
+      {
+        preview: URL.createObjectURL(event.target.files[0]),
+        data: event.target.files[0],
+      },
+    ]);
   }
 
   const handleTextChange = event => {
     if (event.target.id === 'price' || event.target.id === 'stock_quantity') {
-      settool({...tool, [event.target.id]: Number(event.target.value)});
+      setTool({...tool, [event.target.id]: Number(event.target.value)});
+    } else {
+      setTool({...tool, [event.target.id]: event.target.value});
     }
-    //   if (event.target.id === "stock_quantity") {
-    //     settool({ ...tool, [event.target.id]: Number(event.target.value) });
-    //   }
-    else {
-      settool({...tool, [event.target.id]: event.target.value});
-    }
-
-    // settool({ ...tool, [event.target.id]: event.target.value });
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    addtool(tool);
+    addTool(tool);
   };
 
   return (
     <div className='edit'>
       <form className='tool-form' onSubmit={handleSubmit}>
-        {/* <TextField type="hidden" id="user_id" name="user_id" value={userShow2}></TextField> */}
-        <label htmlFor='thumbnail'>Picture of Tool:</label>
-
-        <input
-          type='file'
-          id='thumbnail-input'
-          name='thumbnail'
-          accept='image/*'
-          alt='thumbnail input'
-          onChange={handleFileUploads}
-        />
+        <div className='images'>
+          {images.map((image, i) => (
+            <aside className='image-box' key={`${image.data.name}-${i}`}>
+              <img className='img' src={image.preview} alt='preview' />
+            </aside>
+          ))}
+          <Button
+            component='label'
+            type='file'
+            id='thumbnail-input'
+            name='thumbnail'
+            accept='image/*'
+            alt='thumbnail input'
+            variant='contained'
+            onChange={handleImages}
+            startIcon={<CloudUploadIcon />}
+          >
+            Upload Image
+            <VisuallyHiddenInput type='file' />
+          </Button>
+        </div>
 
         <TextField
           label='Listing Title'
+          sx={{margin: 4}}
           id='name'
           name='name'
           type='text'
@@ -89,25 +120,30 @@ function ToolsNewForm({user}) {
         />
         <TextField
           label='Description'
+          sx={{margin: 4}}
           id='description'
           type='text'
           onChange={handleTextChange}
         />
         <TextField
-        label='Price'
+          label='Price'
+          sx={{margin: 4}}
           id='price'
           type='number'
           name='price'
           onChange={handleTextChange}
         />
+        <InputLabel id='condition-label'>Condition</InputLabel>
         <Select
+          labelId='condition-label'
+          sx={{margin: 4}}
+          // label='Condition'
           onChange={handleTextChange}
-          label='Condition'
-          name='item_condition'
-          id='item_condition'
+          name='condition'
+          id='condition'
           value={tool.item_condition}
         >
-          <MenuItem value=''>--Please choose an option--</MenuItem>
+          {/* <MenuItem value=''>--Please choose an option--</MenuItem> */}
           <MenuItem value='good'>good</MenuItem>
           <MenuItem value='neutral'>neutral</MenuItem>
           <MenuItem value='bad'>bad</MenuItem>
@@ -115,19 +151,37 @@ function ToolsNewForm({user}) {
 
         <TextField
           label='Stock Quantity'
-          id='stock_quantity'
+          sx={{margin: 4}}
+          id='stock'
           type='number'
-          name='stock_quantity'
-          value={tool.stock_quantity}
-          placeholder='Quantity of Your Item!'
+          name='stock'
           onChange={handleTextChange}
         />
-
-        <input type='submit' />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            width: '90%',
+          }}
+        >
+          <Button
+            variant='contained'
+            color='error'
+            sx={{width: '10%'}}
+            onClick={() => navigate(-1)}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant='contained'
+            sx={{width: '10%', marginLeft: '5%'}}
+            type='submit'
+          >
+            Submit
+          </Button>
+        </div>
       </form>
-      <Link to={`/${user}/tools`}>
-        <button>Go Back to All Tool Listings!</button>
-      </Link>
     </div>
   );
 }

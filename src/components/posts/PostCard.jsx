@@ -1,10 +1,10 @@
 // import "./postsCard.css";
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import {Button, CardActionArea, CardActions} from '@mui/material';
 // key={individualpost.id} name={individualpost.name_posts} description={individualpost.description} price={individualpost.price} quantity={individualpost.stock_quantity} condition={individualpost.item_condition} thumbnail={individualpost.thumbnail} userid={individualpost.user_id} index={index}
 function PostsCard({
   createdTime,
@@ -18,16 +18,16 @@ function PostsCard({
 }) {
   return (
     <span key={inKEY}>
-      <Card sx={{ maxWidth: 250 }}>
+      <Card sx={{maxWidth: 250}}>
         <CardActionArea>
           <CardMedia
-            component="img"
-            height="140"
+            component='img'
+            height='140'
             image={thumbnail} //add in img from data
-            alt="item thumbnail" //add in name from data
+            alt='item thumbnail' //add in name from data
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant='h5' component='div'>
               <strong>Title:</strong>
               {title}
             </Typography>
@@ -38,26 +38,26 @@ function PostsCard({
             </Typography>
 
             <Typography>
-              {edited}?<span> </span> :{" "}
+              {edited}?<span> </span> :{' '}
               <span>
                 <strong>edited:</strong>
                 {edited}
               </span>
             </Typography>
 
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant='body2' color='text.secondary'>
               <strong>tags:</strong>
               {tags}
             </Typography>
 
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant='body2' color='text.secondary'>
               <strong>Body:</strong>
               {body}
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size='small' color='primary'>
             Add to Cart
           </Button>
         </CardActions>

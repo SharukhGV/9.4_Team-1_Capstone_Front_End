@@ -1,6 +1,6 @@
 .div {
   margin: 0 auto;
-  border-bottom: solid 1px #3278B2;
+  border-bottom: solid 1px #3278b2;
   width: 90%;
 }
 
@@ -10,8 +10,8 @@
 
 .home-h4 {
   font-family: 'Roboto';
-  color: #1A237E;
-  font-weight:400;
+  color: #1a237e;
+  font-weight: 400;
   margin-bottom: 0px;
   font-size: larger;
 }
@@ -25,13 +25,13 @@
 
 .assesment-p {
   font-family: 'Open Sans';
-  color: #3C415C;
+  color: #3c415c;
 }
 
 .arrow {
   border: none;
   background-color: #f8f8f8;
-  color: #1A237E;
+  color: #1a237e;
 }
 
 .user-connect-p {
@@ -41,7 +41,7 @@
 }
 
 .take-assesment-btn {
-  background: linear-gradient(to bottom, #9CD393, #388E3C);
+  background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   border-radius: 7px;
   height: 27px;
@@ -67,7 +67,7 @@
   text-align: center;
   margin-bottom: 0;
 }
- 
+
 .post-cta-sect h3 {
   font-family: 'Bellota', cursive;
   color: #800080;
@@ -76,7 +76,7 @@
 
 .post-cta-sect h4 {
   font-family: 'Lato';
-  color: #1A237E;
+  color: #1a237e;
   font-weight: 700;
   font-size: 20px;
   margin-bottom: 0;
@@ -89,7 +89,7 @@
 }
 
 .cta-btn {
-  background: linear-gradient(to bottom, #9CD393, #388E3C);
+  background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   border-radius: 7px;
   height: 27px;
@@ -138,7 +138,7 @@
 }
 
 .text-placeholder {
-  border-bottom: 1px solid #1A237E;
+  border-bottom: 1px solid #1a237e;
   border-top: none;
   border-left: none;
   border-right: none;
@@ -147,7 +147,7 @@
 .text-placeholder::placeholder {
   font-family: 'Lato';
   font-size: 14px;
-  color: #3C415C;
+  color: #3c415c;
 }
 
 .bottomLeft-txtSect {
@@ -182,16 +182,13 @@
 }
 
 .preview-btn {
-  background-color: #1A237E;
+  background-color: #1a237e;
 }
 
 .post-btn {
-  background-color: #388E3C;
+  background-color: #388e3c;
 }
 
 :focus-visible {
   outline-style: none;
 }
-
-
-

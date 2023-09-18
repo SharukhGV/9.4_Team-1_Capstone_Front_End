@@ -26,7 +26,7 @@
   align-items: center;
   text-align: center;
 }
-  
+
 .header-h2 {
   font-family: 'Bellota', cursive;
   color: #800080;
@@ -34,10 +34,10 @@
   font-size: xx-large;
   margin-bottom: 0;
 }
-  
+
 .header-h4 {
   font-family: 'Roboto';
-  color: #1A237E;
+  color: #1a237e;
   font-weight: lighter;
   font-size: large;
   margin-top: 4px;
@@ -45,12 +45,12 @@
 
 .div {
   margin: 0 auto;
-  border-bottom: solid 1px #3278B2;
+  border-bottom: solid 1px #3278b2;
   width: 90%;
 }
 
 .join-btn {
-  background: linear-gradient(to bottom, #9CD393, #388E3C);
+  background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   border-radius: 7px;
   height: 27px;
@@ -64,7 +64,7 @@
 .arrow {
   border: none;
   background-color: #f8f8f8;
-  color: #1A237E;
+  color: #1a237e;
 }
 
 .top-categories-h3 {
@@ -76,8 +76,6 @@
 
 .top-category-p {
   margin-left: 7%;
-  color: #1A237E;
+  color: #1a237e;
   font-family: 'Lato';
 }
-
-
