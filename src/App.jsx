@@ -15,6 +15,7 @@ import ToolsNewForm from './components/tools/ToolsNewForm'
 import ToolsDetails from './components/tools/ToolsDetails'
 import ToolsUserDetails from './components/tools/ToolsUserDetails'
 import NewPost from './components/posts/NewPost'
+import PostPreview from './components/posts/PostPreview'
 
 import './App.css'
 
@@ -81,9 +82,10 @@ function App() {
             element={<Landing modal={modal} setModal={setModal} />}
           />
           <Route path='/home' element={<Home />} />
-          <Route path='/post/id' element={<Post />} />
-          <Route path='/:username/post/new' element={<NewPost user={user} />} />
+          <Route path='/post/:id' element={<Post />} />
           <Route element={<ProtectedRoute user={user} />}>
+            <Route path='/:username/post/new' element={<NewPost user={user} />} />
+            <Route path='/:username/post/preview' element={<PostPreview user={user} />} />
             <Route
               path='/:username/profile'
               element={<Profile user={user} />}

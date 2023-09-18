@@ -4,14 +4,16 @@ import { useState } from "react";
 import cameraImg from '../../assets/cameraImg.png';
 import { styled } from "@mui/system";
 import axios from "axios";
+import { useNavigate } from "react-router";
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function NewPost({ user }) {
-    const [postCtaCategory, setPostCtaCategory] = useState('');
+    const navigate = useNavigate();
+    const [postCategory, setPostCategory] = useState('');
     const [file, setFile] = useState(null);
     const [post, setPost] = useState({
         title: '',
-        tags: '',
+        category: '',
         body: '',
     })
 
@@ -19,20 +21,42 @@ export default function NewPost({ user }) {
         setFile(event.target.files[0]);
     }
 
+    //now on sendtoServer make it a conditional of deoending on which button was pressed it will either 
+    //redirect to the preview page or the index page of the post 
+
     const sendToServer = async event => {
         event.preventDefault(); //redirect to index post page 
-
         const formData = new FormData();
         formData.append('file', file);
         formData.append('title', post.title);
-        formData.append('tags', post.tags);
+        formData.append('category', post.category);
         formData.append('body', post.body);
         formData.append('user_id' ,user.user_id);
 
-        axios.post(`${API}/posts`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
-        .then(res => console.log(res.data))
-        .catch(error => console.log(error))
+        //make into itenerary conditional
+        if (event.target.value === 'preview-btn') {
+            // event.preventDefault(); ?
+            navigate(`/${user.username}/post/preview`);
+            //resetform
+        }
+
+        else if (event.target.value === 'post-btn') {
+        }
+        
+        // else if (event.target.value === 'post-btn') {
+            //     navigate(`/post/`)
+            //     ///post/:id
+            // }
+            
+            axios.post(`${API}/posts`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+            .then(res => {
+                console.log(res.data)
+                navigate(`/${user.username}/post/${res.data}`)
+            })        
+            .catch(error => console.log(error))
     }
+
+    console.log(post)
 
     const VisuallyHiddenInput = styled('input')`
     clip: rect(0 0 0 0);
@@ -61,7 +85,8 @@ export default function NewPost({ user }) {
             <div>
                 <FormControl variant="standard" sx={{ minWidth: 170 }}>
                     <InputLabel sx={{ fontFamily: 'Lato'}}> Category </InputLabel>
-                    <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)}>
+                    <Select onChange={(event) => setPost({ ...post, category: event.target.value })}>
+                        <MenuItem value=''> Category </MenuItem>
                         <MenuItem value='Photography'> Photography </MenuItem>
                         <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
                         <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
@@ -74,12 +99,12 @@ export default function NewPost({ user }) {
                         <MenuItem value='Graffiti'> Graffiti </MenuItem>
                     </Select>
                 </FormControl>
-                <TextField variant="standard" label='Tags' className="txt-tags" onChange={(event) => setPost({ ...post, tags: event.target.value })} />
+                {/* <TextField variant="standard" label='Tags' className="txt-tags" onChange={(event) => setPost({ ...post, tags: event.target.value })} /> */}
                 <div className="bottomRight-actionBtns">
-                    <button className="preview-btn" > Preview </button> 
+                    <button className="preview-btn" value='preview-btn'> Preview </button> 
                     {/* previewpost func on onClick 
                     send to server and got to its index page*/}
-                    <button className="post-btn" onClick={sendToServer}> Post </button>
+                    <button className="post-btn" onClick={sendToServer} value='post-btn' > Post </button>
                 </div>
             </div>
         </div>
