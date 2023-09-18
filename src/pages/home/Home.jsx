@@ -61,10 +61,8 @@ export default function Home({user}) {
   };
 
   function previewPost() {
-    const id = 7; //random number
     sendToServer();
     //resetForm();
-
     navigate(`/${user.username}/post/preview`);
   }
 

@@ -47,8 +47,8 @@ export default function Profile({user}) {
           <div className='profile-card'>
             <img
               className='profile-img'
-              // src={user.profile_pic}
-              src={`https://craftopia-media-bucket.s3.us-east-2.amazonaws.com/felizj171-profile-pic`}
+              src={user.profile_pic}
+              // src={`felizj171-profile-pic`}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
             <aside className='profile-desc'>
