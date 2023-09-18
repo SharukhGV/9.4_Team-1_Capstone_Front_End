@@ -14,6 +14,7 @@ import ToolsEditForm from './components/tools/ToolsEditForm'
 import ToolsNewForm from './components/tools/ToolsNewForm'
 import ToolsDetails from './components/tools/ToolsDetails'
 import ToolsUserDetails from './components/tools/ToolsUserDetails'
+import NewPost from './components/posts/NewPost'
 
 import './App.css'
 
@@ -84,6 +85,7 @@ function App() {
           />
           <Route path='/home' element={<Home />} />
           <Route path='/post/id' element={<Post />} />
+          <Route path='/:username/post/new' element={<NewPost user={user} />} />
           <Route element={<ProtectedRoute user={user} />}>
             <Route
               path='/:username/profile'

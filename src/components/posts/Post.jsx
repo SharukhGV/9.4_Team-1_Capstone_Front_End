@@ -10,11 +10,16 @@
 //         </>
 //     )
 // }
+import { useLocation } from "react-router";
 
 export default function Post() {
+    const location = useLocation();
+    const postData = location.state.post;
+    const postFile = location.state.file;
 
     return (
         <>
+        <h1> {postData.title} </h1>
         </>
     )
 }

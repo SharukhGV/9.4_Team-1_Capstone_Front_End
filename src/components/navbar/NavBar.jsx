@@ -23,6 +23,7 @@ export default function NavBar({
   }
   return (
     <nav>
+      <div className='top-left'>
       <Link to='/home'>
         {' '}
         <img src={craftopiaLogo} className='nav-logo' />{' '}
@@ -31,6 +32,7 @@ export default function NavBar({
         {' '}
         Explore{' '}
       </Link>
+      </div>
       <div className='nav-right-container'>
         <div>
           <button className='search-btn'>
@@ -39,11 +41,12 @@ export default function NavBar({
           </button>
           <Input
             type='text'
-            placeholder='Search'
+            placeholder='Search...'
             value={searchText}
             onChange={handleSearchInput}
             size='xsmall'
             sx={{width: '140px'}}
+            className='search-input'
           />
         </div>
         {!user && (
