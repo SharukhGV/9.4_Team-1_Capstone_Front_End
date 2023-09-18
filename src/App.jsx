@@ -28,6 +28,7 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 
 function App() {
   const [modal, setModal] = useState(false)
+  const [tab, setTab] = useState(false);
   const [user, setUser] = useState(undefined)
   const [cookies, removeCookie] = useCookies()
   const [error, setError] = useState()
@@ -72,6 +73,8 @@ function App() {
         handleSignIn={handleSignIn}
         modal={modal}
         setModal={setModal}
+        tab={tab}
+        setTab={setTab}
       />
       <main>
         <Routes>
@@ -91,21 +94,21 @@ function App() {
               element={<ProfileEdit user={user} refreshUser={checkToken} />}
             />
             <Route
-              path='/tools/:username'
+              path='/:username/tools/'
               element={<ToolsDetails user={user} />}
             />
             <Route
-              path='/tools/:username/new'
+              path='/:username/tools/new'
               element={<ToolsNewForm user={user} />}
             />
 
             <Route
-              path='/tools/:username/:id'
+              path='/:username//tools/:id'
               element={<ToolsUserDetails user={user} />}
             />
 
             <Route
-              path='/tools/:username/:id/edit'
+              path='/:username/tools/:id/edit'
               element={<ToolsEditForm user={user} />}
             />
           </Route>

@@ -11,6 +11,7 @@ import CardContent from '@mui/joy/CardContent'
 import CardOverflow from '@mui/joy/CardOverflow'
 import {Typography} from '@mui/material'
 import {Button} from '@mui/joy'
+/////////////
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
@@ -19,8 +20,7 @@ import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg'
 import Tools from '../../components/tools/Tools'
 import Posts from '../../components/posts/Posts'
 
-export default function Landing({user, modal, setModal}) {
-  //const [joinOpen, setJoinOpen] = useState(false);
+export default function Landing({setModal}) {
 
   return (
     <div>
@@ -39,7 +39,6 @@ export default function Landing({user, modal, setModal}) {
                   {' '}
                   Join The Fun{' '}
                 </button>
-                <Auth modal={modal} setModal={setModal} />
               </div>
             </Card>
             <div>

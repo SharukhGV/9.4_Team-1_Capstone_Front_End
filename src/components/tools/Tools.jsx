@@ -24,6 +24,7 @@ function Tools({user}) {
       {tools.map((individualTool, index) => {
         return (
           <ToolsCard
+            key={`tool-key-${individualTool.tool_id}`}
             inKEY={individualTool.tool_id}
             name={individualTool.name_tools}
             description={individualTool.description}

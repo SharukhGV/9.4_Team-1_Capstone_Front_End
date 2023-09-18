@@ -12,6 +12,9 @@ export default function Profile({user}) {
   const [posts, setPosts] = useState([])
   const [tools, setTools] = useState([])
 
+  const handleDelete =e=>{
+    axios.delete(`${API}/tools`)
+  }
   useEffect(() => {
     console.log(user)
     const getPosts = () => {
@@ -19,10 +22,13 @@ export default function Profile({user}) {
       .then(res=>console.log(res))
       // setPosts(data)
     }
+    
     const getTools = () => {
        axios.get(`${API}/tools/${user.user_id}`)
-       .then(res=>console.log(res))
-      // setTools(data)
+       .then(res=>{
+        console.log(res)
+      setTools(res.data)
+       })
     }
     getPosts()
     getTools()
@@ -84,7 +90,7 @@ export default function Profile({user}) {
                 ))}
               </div>
             )}
-            <Button onClick={()=>navigate(`/tools/${user.username}/new`)} variant='contained' color='primary'>
+            <Button onClick={()=>navigate(`/${user.username}/post/new`)} variant='contained' color='primary'>
               New
             </Button>
           </CardContent>
@@ -98,17 +104,18 @@ export default function Profile({user}) {
             ) : (
               <div>
                 {tools.map(tool => (
-                  <Card>
+                  <Card key={`tool-${tool.tool_id}`} sx={{width:'15vw', height:'20vw'}}>
                     <CardContent>
                       <img src={tool.thumbnail} alt='thumbnail' />
                       <p>{tool.title}</p>
                       <p>{tool.created_at}</p>
+                      <Button onClick={handleDelete}>X</Button>
                     </CardContent>
                   </Card>
                 ))}
               </div>
             )}
-            <Button onClick={()=>navigate(`/tools/${user.username}/new`)} variant='contained' color='primary'>
+            <Button onClick={()=>navigate(`/${user.username}/tools/new`)} variant='contained' color='primary'>
               New
             </Button>
           </CardContent>

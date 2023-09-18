@@ -13,12 +13,11 @@ export default function NavBar({
   handleLogout,
   handleSignIn,
   modal,
-  setModal,
+  setModal
 }) {
   const [searchText, setSearchText] = useState('');
-  const [tab, setTab] = useState(false);
   const [signedUp, setSignedUp] = useState(false);
-
+  const [tab, setTab] = useState(false)
   function handleSearchInput(event) {
     setSearchText(event.target.value);
   }
@@ -88,8 +87,8 @@ export default function NavBar({
         <Auth
           modal={modal}
           tab={tab}
-          setModal={setModal}
           setTab={setTab}
+          setModal={setModal}
           handleLogout={handleLogout}
           handleSignIn={handleSignIn}
         />
