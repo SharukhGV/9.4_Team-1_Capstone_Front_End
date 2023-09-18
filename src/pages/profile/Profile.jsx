@@ -1,38 +1,37 @@
-import {useEffect, useState} from 'react'
-import {useParams, useNavigate} from 'react-router-dom'
-import axios from 'axios'
-import {Card, CardContent, Button} from '@mui/material'
-import profile_pic from '../../assets/blank_profile.jpeg'
-import './profile.css'
-const API = import.meta.env.VITE_REACT_APP_API_URL
+import {useEffect, useState} from 'react';
+import {useParams, useNavigate} from 'react-router-dom';
+import axios from 'axios';
+import {Card, CardContent, Button} from '@mui/material';
+import profile_pic from '../../assets/blank_profile.jpeg';
+import CancelIcon from '@mui/icons-material/Cancel';
+import './profile.css';
+const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function Profile({user}) {
-  const {username} = useParams()
-  const navigate = useNavigate()
-  const [posts, setPosts] = useState([])
-  const [tools, setTools] = useState([])
+  const {username} = useParams();
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+  const [tools, setTools] = useState([]);
 
-  const handleDelete =e=>{
-    axios.delete(`${API}/tools`)
-  }
+  const handleDelete = e => {
+    axios.delete(`${API}/tools`);
+  };
   useEffect(() => {
-    console.log(user)
+    console.log(user);
     const getPosts = () => {
-      axios.get(`${API}/posts/${user.user_id}`)
-      .then(res=>console.log(res))
+      axios.get(`${API}/posts/${user.user_id}`).then(res => console.log(res));
       // setPosts(data)
-    }
-    
+    };
+
     const getTools = () => {
-       axios.get(`${API}/tools/${user.user_id}`)
-       .then(res=>{
-        console.log(res)
-      setTools(res.data)
-       })
-    }
-    getPosts()
-    getTools()
-  }, [])
+      axios.get(`${API}/tools/${user.user_id}`).then(res => {
+        console.log(res);
+        setTools(res.data);
+      });
+    };
+    getPosts();
+    getTools();
+  }, []);
   return (
     <div>
       <Card
@@ -90,13 +89,17 @@ export default function Profile({user}) {
                 ))}
               </div>
             )}
-            <Button onClick={()=>navigate(`/${user.username}/post/new`)} variant='contained' color='primary'>
+            <Button
+              onClick={() => navigate(`/${user.username}/post/new`)}
+              variant='contained'
+              color='primary'
+            >
               New
             </Button>
           </CardContent>
         </Card>
-        <Card className='profile-tools'>          
-           <CardContent>
+        <Card className='profile-tools'>
+          <CardContent>
             {tools.length < 1 ? (
               <div>
                 <p>No Tools yet </p>
@@ -104,23 +107,36 @@ export default function Profile({user}) {
             ) : (
               <div>
                 {tools.map(tool => (
-                  <Card key={`tool-${tool.tool_id}`} sx={{width:'15vw', height:'20vw'}}>
+                  <Card
+                    key={`tool-${tool.tool_id}`}
+                    sx={{width: '15vw', height: '20vw'}}
+                  >
                     <CardContent>
                       <img src={tool.thumbnail} alt='thumbnail' />
                       <p>{tool.title}</p>
                       <p>{tool.created_at}</p>
-                      <Button onClick={handleDelete}>X</Button>
+                      <Button
+                        variant='contained'
+                        color='error'
+                        onClick={handleDelete}
+                      >
+                        <CancelIcon />
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}
               </div>
             )}
-            <Button onClick={()=>navigate(`/${user.username}/tools/new`)} variant='contained' color='primary'>
+            <Button
+              onClick={() => navigate(`/${user.username}/tools/new`)}
+              variant='contained'
+              color='primary'
+            >
               New
             </Button>
           </CardContent>
         </Card>
       </div>
     </div>
-  )
+  );
 }

@@ -1,7 +1,14 @@
 import {useState, useEffect} from 'react';
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
-import {Select, TextField, MenuItem, Button, InputLabel} from '@mui/material';
+import {
+  Select,
+  TextField,
+  MenuItem,
+  Button,
+  InputLabel,
+  FormControl,
+} from '@mui/material';
 import {styled} from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
@@ -35,9 +42,9 @@ function ToolsNewForm({user}) {
 
   const addTool = newTool => {
     const newForm = new FormData();
-    images.forEach((image,i)=>{
-      newForm.append(`file-${i}`, image.data)
-    })
+    images.forEach((image, i) => {
+      newForm.append(`file-${i}`, image.data);
+    });
     for (const key in newTool) {
       newForm.append(key, newTool[key]);
     }
@@ -50,9 +57,9 @@ function ToolsNewForm({user}) {
       })
       .catch(e => console.error('catch', e));
   };
-  useEffect(()=>{
-    console.log(images)
-  },[images])
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
 
   function handleImages(event) {
     setImages([
@@ -81,26 +88,25 @@ function ToolsNewForm({user}) {
     <div className='edit'>
       <form className='tool-form' onSubmit={handleSubmit}>
         <div className='images'>
-          {images.map((image,i) => (
+          {images.map((image, i) => (
             <aside className='image-box' key={`${image.data.name}-${i}`}>
               <img className='img' src={image.preview} alt='preview' />
             </aside>
           ))}
-            <Button
-              component='label'
-              type='file'
-              id='thumbnail-input'
-              name='thumbnail'
-              accept='image/*'
-              alt='thumbnail input'
-              variant='contained'
-              onChange={handleImages}
-              startIcon={<CloudUploadIcon />}
-            >
-              Upload Image
-              <VisuallyHiddenInput type='file' />
-            </Button>
-
+          <Button
+            component='label'
+            type='file'
+            id='thumbnail-input'
+            name='thumbnail'
+            accept='image/*'
+            alt='thumbnail input'
+            variant='contained'
+            onChange={handleImages}
+            startIcon={<CloudUploadIcon />}
+          >
+            Upload Image
+            <VisuallyHiddenInput type='file' />
+          </Button>
         </div>
 
         <TextField
@@ -127,10 +133,11 @@ function ToolsNewForm({user}) {
           name='price'
           onChange={handleTextChange}
         />
-        <InputLabel id='condition'>Condition</InputLabel>
+        <InputLabel id='condition-label'>Condition</InputLabel>
         <Select
+          labelId='condition-label'
           sx={{margin: 4}}
-          label='Condition'
+          // label='Condition'
           onChange={handleTextChange}
           name='condition'
           id='condition'
@@ -150,14 +157,31 @@ function ToolsNewForm({user}) {
           name='stock'
           onChange={handleTextChange}
         />
-
-        <Button variant='contained' sx={{width: '10%'}} type='submit'>
-          Submit
-        </Button>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            width: '90%',
+          }}
+        >
+          <Button
+            variant='contained'
+            color='error'
+            sx={{width: '10%'}}
+            onClick={() => navigate(-1)}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant='contained'
+            sx={{width: '10%', marginLeft: '5%'}}
+            type='submit'
+          >
+            Submit
+          </Button>
+        </div>
       </form>
-      <Link to={`/${user}/tools`}>
-        <button>Go Back to All Tool Listings!</button>
-      </Link>
     </div>
   );
 }

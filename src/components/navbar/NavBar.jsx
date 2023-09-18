@@ -13,25 +13,25 @@ export default function NavBar({
   handleLogout,
   handleSignIn,
   modal,
-  setModal
+  setModal,
 }) {
   const [searchText, setSearchText] = useState('');
   const [signedUp, setSignedUp] = useState(false);
-  const [tab, setTab] = useState(false)
+  const [tab, setTab] = useState(false);
   function handleSearchInput(event) {
     setSearchText(event.target.value);
   }
   return (
     <nav>
       <div className='top-left'>
-      <Link to='/home'>
-        {' '}
-        <img src={craftopiaLogo} className='nav-logo' />{' '}
-      </Link>
-      <Link className='explore-link' to='/'>
-        {' '}
-        Explore{' '}
-      </Link>
+        <Link to='/home'>
+          {' '}
+          <img src={craftopiaLogo} className='nav-logo' />{' '}
+        </Link>
+        <Link className='explore-link' to='/'>
+          {' '}
+          Explore{' '}
+        </Link>
       </div>
       <div className='nav-right-container'>
         <div>
@@ -76,11 +76,14 @@ export default function NavBar({
         {user && (
           <div className='auth-btns'>
             <Link to={`${user.username}/profile`}>
-              <BasicPopover
+            <button className='logout-btn' >
+              Profile
+            </button>
+              {/* <BasicPopover
                 className='login-btn'
                 buttonText='Profile'
                 popoverContent='Profile options will go here'
-              />
+              /> */}
             </Link>
             <button className='logout-btn' onClick={handleLogout}>
               Logout

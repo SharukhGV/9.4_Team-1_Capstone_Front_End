@@ -1,51 +1,52 @@
-import {useState, useEffect} from 'react'
-import {Routes, Route, Navigate, Outlet} from 'react-router-dom'
-import {useCookies} from 'react-cookie'
-import axios from 'axios'
+import {useState, useEffect} from 'react';
+import {Routes, Route, Navigate, Outlet} from 'react-router-dom';
+import {useCookies} from 'react-cookie';
+import axios from 'axios';
 
-import NavBar from './components/navbar/NavBar'
-import Landing from './pages/landing/Landing'
-import Footer from './components/footer/Footer'
-import Home from './pages/home/Home'
-import Profile from './pages/profile/Profile'
-import ProfileEdit from './pages/profile/ProfileEdit'
-import Post from './components/posts/Post'
-import ToolsEditForm from './components/tools/ToolsEditForm'
-import ToolsNewForm from './components/tools/ToolsNewForm'
-import ToolsDetails from './components/tools/ToolsDetails'
-import ToolsUserDetails from './components/tools/ToolsUserDetails'
-import NewPost from './components/posts/NewPost'
+import NavBar from './components/navbar/NavBar';
+import Landing from './pages/landing/Landing';
+import Footer from './components/footer/Footer';
+import Home from './pages/home/Home';
+import Profile from './pages/profile/Profile';
+import ProfileEdit from './pages/profile/ProfileEdit';
+import Post from './components/posts/Post';
+import ToolsEditForm from './components/tools/ToolsEditForm';
+import ToolsNewForm from './components/tools/ToolsNewForm';
+import ToolsDetails from './components/tools/ToolsDetails';
+import ToolsUserDetails from './components/tools/ToolsUserDetails';
+import NewPost from './components/posts/NewPost';
 
-import './App.css'
+import './App.css';
 
-const API = import.meta.env.VITE_REACT_APP_API_URL
+const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 const ProtectedRoute = ({user, redirectPath = '/'}) => {
   if (!user) {
-    return <Navigate to={redirectPath} replace />
+    return <Navigate to={redirectPath} replace />;
   }
-  return <Outlet />
-}
+  return <Outlet />;
+};
 
 function App() {
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
   const [tab, setTab] = useState(false);
-  const [user, setUser] = useState(undefined)
-  const [cookies, removeCookie] = useCookies()
-  const [error, setError] = useState()
+  const [user, setUser] = useState(undefined);
+  const [cookies, removeCookie] = useCookies();
+  const [error, setError] = useState();
 
   useEffect(() => {
-    checkToken()
-  }, [])
+    checkToken();
+  }, []);
 
   const handleSignIn = authUser => {
-    setUser(authUser)
-  }
+    setUser(authUser);
+  };
 
   const handleLogout = () => {
-    setUser(undefined)
-    removeCookie('token')
-  }
+    setUser(undefined);
+    axios.post(`${API}/auth/logout`);
+    removeCookie('token');
+  };
   function checkToken() {
     axios
       .post(
@@ -56,15 +57,15 @@ function App() {
         }
       )
       .then(res => {
-        handleSignIn(res.data.user)
+        handleSignIn(res.data.user);
       })
       .catch(err => {
-        console.log(err)
-        setError(err)
+        console.log(err);
+        setError(err);
         setTimeout(() => {
-          setError()
-        }, 3000)
-      })
+          setError();
+        }, 3000);
+      });
   }
   return (
     <div className='App'>
@@ -85,8 +86,11 @@ function App() {
           />
           <Route path='/home' element={<Home />} />
           <Route path='/post/id' element={<Post />} />
-          <Route path='/:username/post/new' element={<NewPost user={user} />} />
           <Route element={<ProtectedRoute user={user} />}>
+            <Route
+              path='/:username/post/new'
+              element={<NewPost user={user} />}
+            />
             <Route
               path='/:username/profile'
               element={<Profile user={user} />}
@@ -118,7 +122,7 @@ function App() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

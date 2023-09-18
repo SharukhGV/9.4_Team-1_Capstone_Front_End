@@ -3,7 +3,8 @@
   justify-content: flex-end;
 }
 
-.login-form, .signup-form {
+.login-form,
+.signup-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,23 +12,24 @@
   margin-top: 2px;
 }
 
-.login-btn, .signup-btn {
-  background: linear-gradient(to bottom, #7CA0E7, #1A237E);
+.login-btn,
+.signup-btn {
+  background: linear-gradient(to bottom, #7ca0e7, #1a237e);
   color: white;
   width: 94px;
   height: 100%;
-  border-color: #7CA0E7;
+  border-color: #7ca0e7;
   border-radius: 4px;
   font-family: 'Open Sans';
   border-style: none;
   margin-top: 17px;
 }
 
-.logout-btn{
-  background: linear-gradient(to bottom, #7CA0E7, #1A237E);
+.logout-btn {
+  background: linear-gradient(to bottom, #7ca0e7, #1a237e);
   color: white;
   width: 94px;
-  border-color: #7CA0E7;
+  border-color: #7ca0e7;
   border-radius: 4px;
   font-family: 'Open Sans';
   border-style: none;
@@ -48,31 +50,31 @@ form button {
   font-size: larger;
 }
 
-.modal-nav{
-  display:flex;
+.modal-nav {
+  display: flex;
   flex-direction: row;
-  width:100%;
+  width: 100%;
   justify-content: space-evenly;
 }
 
-.modal-nav-btn{
-  border:none;
-  width:50%;
+.modal-nav-btn {
+  border: none;
+  width: 50%;
   font-size: medium;
   background-color: #f8f8f8;
 }
 
-.modal-nav-btn:hover{
+.modal-nav-btn:hover {
   cursor: pointer;
-  background-color: #7CA0E7;
+  background-color: #7ca0e7;
 }
 
-.selected{
+.selected {
   background-color: #f8f8f8;
-  border-bottom: solid 2px #7CA0E7;
+  border-bottom: solid 2px #7ca0e7;
 }
 
-.auth-btns{
+.auth-btns {
   display: flex;
   flex-direction: row;
 }
@@ -93,14 +95,5 @@ form button {
 .signup-branding p {
   font-family: 'Open Sans';
   margin-top: 0;
-  color: #1A237E;
+  color: #1a237e;
 }
-
-
-
-
-
-
-
-
-
