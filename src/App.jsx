@@ -85,7 +85,7 @@ function App() {
             path='/'
             element={<Landing modal={modal} setModal={setModal} />}
           />
-          <Route path='/home' element={<Home />} />
+          <Route path='/home' element={<Home user={user} />} />
           <Route path='/post/:id' element={<Post />} />
           <Route element={<ProtectedRoute user={user} />}>
             <Route
