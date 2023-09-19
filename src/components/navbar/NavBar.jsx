@@ -28,10 +28,10 @@ export default function NavBar({
           {' '}
           <img src={craftopiaLogo} className='nav-logo' />{' '}
         </Link>
-        <Link className='explore-link' >
+        {/* <Link className='explore-link' to='/posts' >
           {' '}
           Explore{' '}
-        </Link>
+        </Link> */}
       </div>
       <div className='nav-right-container'>
         <div>

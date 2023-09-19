@@ -16,6 +16,7 @@ import ToolsDetails from './components/tools/ToolsDetails';
 import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import PostPreview from './components/posts/PostPreview';
+import Explore from './pages/explore/Explore'
 
 import './App.css';
 
@@ -85,6 +86,7 @@ function App() {
             path='/'
             element={<Landing modal={modal} setModal={setModal} />}
           />
+          {/* <Route path='/' element={<Explore />} /> stays differente landing page for logged in users */}
           {/* home needs to be in protected route because its only for logged in users */}
           <Route path='/post/:id' element={<Post />} />
           

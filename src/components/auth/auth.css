@@ -44,7 +44,7 @@ form button {
 .cancel-btn {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 14px;
   border: none;
   background-color: transparent;
   font-size: larger;
@@ -59,19 +59,23 @@ form button {
 
 .modal-nav-btn {
   border: none;
-  width: 50%;
+  width: 40%;
   font-size: medium;
   background-color: #f8f8f8;
+
 }
 
 .modal-nav-btn:hover {
   cursor: pointer;
-  background-color: #7ca0e7;
+  /* border-bottom: solid 1px #388E3C; */
+  background-color: #1a237e;
+  color: white;
+  border-radius: 4px;
 }
 
 .selected {
   background-color: #f8f8f8;
-  border-bottom: solid 2px #7ca0e7;
+  border-bottom: solid 1px #3278B2;
 }
 
 .auth-btns {
@@ -84,7 +88,7 @@ form button {
   flex-flow: column;
 }
 
-.signup-branding h3 {
+.signup-branding h3, .login-branding h3 {
   font-family: 'Lato';
   display: flex;
   color: #800080;
@@ -97,3 +101,9 @@ form button {
   margin-top: 0;
   color: #1a237e;
 }
+
+.signup-sect, .login-sect {
+  margin-top: 9px;
+}
+
+

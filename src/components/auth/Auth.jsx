@@ -2,8 +2,10 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router';
 import {useCookies} from 'react-cookie';
 import axios from 'axios';
-import {Box, Modal, TextField} from '@mui/material';
+import {Box, TextField} from '@mui/material';
+import { Modal, ModalDialog, ModalClose } from '@mui/joy';
 import './auth.css';
+import { style } from '@mui/system';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
@@ -79,27 +81,25 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
       });
   }
 
-  const styleAuth = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    overflow: 'scroll',
-    transform: 'translate(-50%, -50%)',
-    width: 370,
-    height: 'fitContent',
+  const authStyle = {
+    // position: 'absolute',
+    width: 470,
+    height: 'fitcontent',
     bgcolor: '#f8f8f8',
-    border: '1px solid #f8f8f8',
-    boxShadow: 14,
+    // border: '1px solid #1a237e',
+    boxShadow: 17,
     p: 2,
-    display: 'flex',
-    flexDirection: 'column',
+    // display: 'flex',
+    // flexDirection: 'column',
     alignItems: 'center',
-  };
+  }
 
   return (
     <div className='auth'>
       <Modal open={modal} onClose={() => setModal(false)}>
-        <Box sx={styleAuth} className='login-box'>
+        <ModalDialog variant="soft" sx={authStyle}  >
+          {/* <ModalClose /> */}
+        {/* <Box sx={styleAuth} className='login-box'> */}
           <aside className='modal-nav'>
             <button
               className={!tab ? 'modal-nav-btn' : 'modal-nav-btn selected'}
@@ -114,13 +114,19 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
               Log-in
             </button>
           </aside>
+          {/* <br /> */}
           <button onClick={() => setModal(false)} className='cancel-btn'>
             {' '}
             &times;{' '}
           </button>
+          {/* <br /> */}
+          <div className='auth-sect' >
           {!tab ? (
-            <div>
-              <br />
+            <div className='login-sect'>
+              <div className='login-branding'>
+                <h3> Welcome Back </h3>
+              </div>
+              {/* <br /> */}
               <form className='login-form' onSubmit={handleLogin}>
                 <TextField
                   label='Email'
@@ -145,10 +151,10 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
               </form>
             </div>
           ) : (
-            <div>
-              <br />
+            <div className='signup-sect'>
+              {/* <br /> */}
               <div className='signup-branding'>
-                <h3> Sign Up </h3>
+                <h3> Join Craftopia </h3>
                 <p> & explore your creative potantial without limits! </p>
               </div>
               <form onSubmit={handleSignup} className='signup-form'>
@@ -207,7 +213,9 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
               </form>
             </div>
           )}
-        </Box>
+        {/* </Box> */}
+        </div>
+        </ModalDialog>
       </Modal>
     </div>
   );

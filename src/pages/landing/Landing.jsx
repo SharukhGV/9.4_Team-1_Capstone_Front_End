@@ -4,14 +4,7 @@ import {useState} from 'react';
 import CatCarousel from '../../components/categories-carousel/CatCarousel';
 // import ToolsCard from '../../components/tools/ToolsCard';
 import {Slide} from '@mui/material';
-
-//docs for cards: https://mui.com/joy-ui/react-card/
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import CardOverflow from '@mui/joy/CardOverflow';
-import {Typography} from '@mui/material';
-import {Button} from '@mui/joy';
-/////////////
+import { Card } from '@mui/joy';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
