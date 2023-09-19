@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {Card, CardContent, Button} from '@mui/material';
+import ToolsCard from '../../components/tools/ToolsCard';
 import profile_pic from '../../assets/blank_profile.jpeg';
 import CancelIcon from '@mui/icons-material/Cancel';
 import './profile.css';
@@ -14,7 +15,8 @@ export default function Profile({user}) {
   const [tools, setTools] = useState([]);
 
   const handleDelete = e => {
-    axios.delete(`${API}/tools`);
+    console.log(e.target.name)
+    // axios.delete(`${API}/tools`);
   };
   useEffect(() => {
     console.log(user);
@@ -48,7 +50,7 @@ export default function Profile({user}) {
             <img
               className='profile-img'
               src={user.profile_pic}
-              // src={`felizj171-profile-pic`}
+              // src={`https://craftopia-media-bucket.s3.us-east-2.amazonaws.com/felizj171-profile-pic`}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
             <aside className='profile-desc'>
@@ -107,23 +109,22 @@ export default function Profile({user}) {
             ) : (
               <div>
                 {tools.map(tool => (
-                  <Card
-                    key={`tool-${tool.tool_id}`}
-                    sx={{width: '15vw', height: '20vw'}}
-                  >
-                    <CardContent>
-                      <img src={tool.thumbnail} alt='thumbnail' />
-                      <p>{tool.title}</p>
-                      <p>{tool.created_at}</p>
-                      <Button
-                        variant='contained'
-                        color='error'
-                        onClick={handleDelete}
-                      >
-                        <CancelIcon />
-                      </Button>
-                    </CardContent>
-                  </Card>
+                  <ToolsCard
+                    key={`profile-tool-key${tool.tool_id}`}
+                    tool={tool}
+                  />
+                  // <Card
+                  //   key={`tool-${tool.tool_id}`}
+                  //   sx={{width: '15vw', height: '20vw'}}
+                  // >
+                  //   <CardContent>
+                  //     <img src={tool.thumbnail} alt='thumbnail' />
+                  //     <p>{tool.title}</p>
+                  //     <p>{tool.created_at}</p>
+                    
+                  //       <CancelIcon  name={tool.tool_id} onClick={handleDelete}/>
+                  //   </CardContent>
+                  // </Card>
                 ))}
               </div>
             )}

@@ -164,7 +164,7 @@ export default function Home({user}) {
                 </p>
                 <button
                   className='cta-btn'
-                  onClick={() => navigate('/:username/post/new')}
+                  onClick={() => navigate(`/${user.username}/post/new`)}
                 >
                   {' '}
                   Make a Post{' '}

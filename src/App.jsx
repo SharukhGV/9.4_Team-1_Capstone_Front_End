@@ -49,6 +49,7 @@ function App() {
     removeCookie('token');
   };
   function checkToken() {
+    if(cookies.token){
     axios
       .post(
         `${API}/auth/token`,
@@ -61,12 +62,13 @@ function App() {
         handleSignIn(res.data.user);
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         setError(err);
         setTimeout(() => {
           setError();
         }, 3000);
       });
+    }
   }
   return (
     <div className='App'>
@@ -85,7 +87,7 @@ function App() {
             path='/'
             element={<Landing modal={modal} setModal={setModal} />}
           />
-          <Route path='/home' element={<Home />} />
+          <Route path='/home' element={<Home user={user} />} />
           <Route path='/post/:id' element={<Post />} />
           <Route element={<ProtectedRoute user={user} />}>
             <Route
