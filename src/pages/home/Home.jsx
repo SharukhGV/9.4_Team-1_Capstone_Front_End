@@ -116,6 +116,7 @@ export default function Home({user}) {
               setAssesmentModalOpen={setAssesmentModalOpen}
               assesmentCompleted={assesmentCompleted}
               setAssesmentCompleted={setAssesmentCompleted}
+              user={user}
             />
           </div>
         )}

@@ -86,15 +86,13 @@ function App() {
             path='/'
             element={<Landing modal={modal} setModal={setModal} />}
           />
-          {/* <Route path='/' element={<Explore />} /> stays differente landing page for logged in users */}
-          {/* home needs to be in protected route because its only for logged in users */}
+          <Route path='/home' element={<Home user={user} />} />
           <Route path='/post/:id' element={<Post />} />
-          
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />
           <Route path='/tools/:id' element={<ToolsUserDetails />} />
           <Route element={<ProtectedRoute user={user} />}>
-          <Route path='/home/:username' element={<Home user={user} />} />
+          {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path='/:username/post/:id' element={<Post user={user} />} />
             <Route
               path='/:username/post/new'
