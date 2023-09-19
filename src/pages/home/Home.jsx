@@ -8,7 +8,8 @@ import CatCarousel from '../../components/categories-carousel/CatCarousel';
 import cameraImg from '../../assets/cameraImg.png';
 import artistsGraphic from '../../assets/artistsgraphic.jpg';
 import Assesment from '../../components/assesment/Assesment';
-//import Post from '../../components/posts/Post';
+
+//REDIRECT POST BTN TO POST/TOOLS
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -27,8 +28,8 @@ import {styled} from '@mui/system';
 
 export default function Home({user}) {
   const navigate = useNavigate();
-  const [postCtaCategory, setPostCtaCategory] = useState('');
-  const [itemModalOpen, setItemModalOpen] = useState(false);
+//   const [postCtaCategory, setPostCtaCategory] = useState('');
+//   const [itemModalOpen, setItemModalOpen] = useState(false);
   const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
   const [assesmentCompleted, setAssesmentCompleted] = useState(false);
   const [file, setFile] = useState(null);
@@ -36,35 +37,11 @@ export default function Home({user}) {
     title: '',
     tags: '',
     body: '',
-  }); //seperate to component
+  }); 
 
-  function handleFileSelection(event) {
-    setFile(event.target.files[0]);
-  }
-
-  const sendToServer = async event => {
-    //event.preventDefault();
-
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('title', post.title);
-    formData.append('tags', post.tags);
-    formData.append('body', post.body);
-    formData.append('user_id', user.user_id);
-
-    axios
-      .post(`${API}/posts`, formData, {
-        headers: {'Content-Type': 'multipart/form-data'},
-      })
-      .then(res => console.log(res.data))
-      .catch(error => console.log(error));
-  };
-
-  function previewPost() {
-    sendToServer();
-    //resetForm();
-    navigate(`/${user.username}/post/preview`);
-  }
+//   function handleFileSelection(event) {
+//     setFile(event.target.files[0]);
+//   }
 
   function resetForm() {
     setFile(null);
@@ -82,32 +59,32 @@ export default function Home({user}) {
   //     }
   // }
 
-  const stylePostModel = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '70%',
-    height: 240,
-    bgcolor: '#f8f8f8',
-    boxShadow: 14,
-    p: 4,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  };
+//   const stylePostModel = {
+//     position: 'absolute',
+//     top: '50%',
+//     left: '50%',
+//     transform: 'translate(-50%, -50%)',
+//     width: '70%',
+//     height: 240,
+//     bgcolor: '#f8f8f8',
+//     boxShadow: 14,
+//     p: 4,
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//   };
 
-  const VisuallyHiddenInput = styled('input')`
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    white-space: nowrap;
-    width: 1px;
-  `;
+//   const VisuallyHiddenInput = styled('input')`
+//     clip: rect(0 0 0 0);
+//     clip-path: inset(50%);
+//     height: 1px;
+//     overflow: hidden;
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+//     white-space: nowrap;
+//     width: 1px;
+//   `;
 
   return (
     <div>
@@ -127,7 +104,6 @@ export default function Home({user}) {
               {' '}
               Take our quick assesment for a better curated homepage{' '}
             </p>
-            {/* <br /> */}
             <button
               className='take-assesment-btn'
               onClick={() => setAssesmentModalOpen(true)}
@@ -164,7 +140,8 @@ export default function Home({user}) {
                 </p>
                 <button
                   className='cta-btn'
-                  onClick={() => navigate('/:username/post/new')}
+                  onClick={() => navigate(`/${user.username}/post/new`)}
+                  //used to :username
                 >
                   {' '}
                   Make a Post{' '}
@@ -184,12 +161,12 @@ export default function Home({user}) {
                 </p>
                 <button
                   className='cta-btn'
-                  onClick={() => setItemModalOpen(true)}
+                  onClick={() => navigate(`/${user.username}/tools/new`)}
                 >
                   {' '}
                   Publish an Item{' '}
                 </button>
-                <Modal
+                {/* <Modal
                   open={itemModalOpen}
                   onClose={() => setItemModalOpen(false)}
                 >
@@ -260,7 +237,7 @@ export default function Home({user}) {
                       <VisuallyHiddenInput type='file' />
                     </Button>
                   </Box>
-                </Modal>
+                </Modal> */}
               </Card>
             </div>
           </div>
@@ -287,4 +264,3 @@ export default function Home({user}) {
   );
 }
 
-//first lets make the posts and that way we can add the file to the serve once the post is made?

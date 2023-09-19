@@ -54,7 +54,7 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
           setCookie('token', res.data.token);
           handleSignIn(res.data.user);
           setModal(false);
-          navigate('/home');
+          navigate(`/home/:${user.username}`);
           //console.log(res.data.message)
         })
         .catch(err => {
@@ -70,7 +70,7 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
         setCookie('token', res.data.token);
         handleSignIn(res.data.user);
         setModal(false);
-        navigate('/home');
+        navigate(`/home/:${user.username}`);
         //console.log(res.data.message)
       })
       .catch(err => {

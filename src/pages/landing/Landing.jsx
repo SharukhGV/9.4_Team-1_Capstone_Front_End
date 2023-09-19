@@ -36,7 +36,7 @@ export default function Landing({setModal}) {
                 </h4>
                 <button className='join-btn' onClick={() => setModal(true)}>
                   {' '}
-                  Join The Fun{' '}
+                  Join Craftopia{' '}
                 </button>
               </div>
             </Card>
@@ -44,8 +44,13 @@ export default function Landing({setModal}) {
               <img src={ArtistsGraphic} className='artists-graphic' />
             </div>
           </div>
+          <br />
+          {/* <br />
+          <div className='div'> </div>
+          <br /> */}
         </div>
         <br />
+        <CatCarousel />
         <br />
       </header>
       <br />

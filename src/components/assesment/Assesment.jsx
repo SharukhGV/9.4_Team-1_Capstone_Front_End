@@ -2,6 +2,7 @@ import {Modal, Box, FormGroup, FormControlLabel, Checkbox} from '@mui/material';
 import './assesment.css';
 
 export default function Assesment(props) {
+
   const assesmentModalStyle = {
     position: 'absolute',
     top: '50%',
@@ -102,6 +103,7 @@ export default function Assesment(props) {
                 <FormControlLabel
                   control={<Checkbox size='xsmall' />}
                   label='Painting'
+                  
                 />
                 <FormControlLabel
                   control={<Checkbox size='xsmall' />}
