@@ -26,11 +26,11 @@ export default function CatCarousel() {
     {name: 'Painting', imageUrl: paintingImg},
     {name: 'Graffiti', imageUrl: graffitiImg},
     {name: 'Filmmaking', imageUrl: filmmakingImg},
-    {name: 'Fashion Design', imageUrl: fashionDesignImg}, //change this image
+    {name: 'Fashion Design', imageUrl: fashionDesignImg}, 
     {name: 'Drawing', imageUrl: drawingImg},
     {name: 'Digital Artistry', imageUrl: digitalArtImg},
     {name: 'Sculpting', imageUrl: sculptureImg},
-    {name: 'Printmaking', imageUrl: printmakingImg}, //consider replacement
+    {name: 'Printmaking', imageUrl: printmakingImg}, 
   ];
 
   function prevSlide() {

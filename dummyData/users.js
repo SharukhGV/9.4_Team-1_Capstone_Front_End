@@ -38,4 +38,5 @@ const users = [
     city_state: 'Queens, NY',
   },
 ]
+
 export default users
