@@ -43,11 +43,9 @@
   margin-top: 4px;
 }
 
-.div {
-  margin: 0 auto;
-  border-bottom: solid 1px #3278b2;
-  width: 90%;
-}
+/* .div {
+  background-color: #388e3c;
+} */
 
 .join-btn {
   background: linear-gradient(to bottom, #9cd393, #388e3c);

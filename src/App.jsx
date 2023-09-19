@@ -16,6 +16,7 @@ import ToolsDetails from './components/tools/ToolsDetails';
 import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import PostPreview from './components/posts/PostPreview';
+import Explore from './pages/explore/Explore'
 
 import './App.css';
 
@@ -85,9 +86,14 @@ function App() {
             path='/'
             element={<Landing modal={modal} setModal={setModal} />}
           />
-          <Route path='/home' element={<Home />} />
+          <Route path='/home' element={<Home user={user} />} />
           <Route path='/post/:id' element={<Post />} />
+          {/* create public profile view for outside viewers */}
+          <Route path='/tools' element={<ToolsDetails />} />
+          <Route path='/tools/:id' element={<ToolsUserDetails />} />
           <Route element={<ProtectedRoute user={user} />}>
+          {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
+            <Route path='/:username/post/:id' element={<Post user={user} />} />
             <Route
               path='/:username/post/new'
               element={<NewPost user={user} />}

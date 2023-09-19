@@ -1,7 +1,5 @@
 import {Textarea, Card, Button} from '@mui/joy';
 import {
-  Box,
-  Modal,
   TextField,
   Select,
   FormControl,
@@ -26,7 +24,7 @@ export default function NewPost({user}) {
   });
 
   function handleFileSelection(event) {
-    setFile(event.target.files[0]);
+    setFile(event.target.files[0]); //set to inline
   }
 
   const sendToServer = async event => {
@@ -43,13 +41,13 @@ export default function NewPost({user}) {
         headers: {'Content-Type': 'multipart/form-data'},
       })
       .then(res => {
-        //console.log(res.data.title);
-        navigate(`/${user.username}/post/${res.data}`);
+        console.log(res.data);
+        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`, { state: { title: post.title, category: post.category, body: post.body, file: file }});
       })
       .catch(error => console.log(error));
   };
 
-  console.log(post);
+  //console.log(post);
 
   const VisuallyHiddenInput = styled('input')`
     clip: rect(0 0 0 0);
