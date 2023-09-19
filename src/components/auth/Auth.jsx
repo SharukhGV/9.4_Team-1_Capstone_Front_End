@@ -1,20 +1,25 @@
 import axios from 'axios';
 import './auth.css';
+import dayjs from 'dayjs';
 import {useState} from 'react';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import {useNavigate} from 'react-router';
 import {useCookies} from 'react-cookie';
+import users from '../../../dummyData/users';
 import {Box, TextField, FormControl} from '@mui/material';
 import { Modal, ModalDialog } from '@mui/joy';
-import users from '../../../dummyData/users';
-//import { style } from '@mui/system';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true; ??
 
 export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies();
-  const [loginError, setLoginError] = useState();
-  const [signupError, setSignupError] = useState();
+  const [authError, setAuthError] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [dob, setDob] = useState(null);
+
+  console.log(dob)//works but recieved data is annoying 
 
   const [user, setUser] = useState({
     email: '',
@@ -32,29 +37,38 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
     city_state: '',
   });
 
-  const handleLoginText = e => {
-    //e.preventDefault();
-
+  const handleLoginText = (event) => {
+    ///event.preventDefault();
     setUser({
       ...user,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
-  };
 
-  const handleSignupText = e => {
+    if (event.target.key === 'Enter') {
+      handleLogin();
+    }
+  };
+  //you can turn this into less code
+  const handleSignupText = (event) => {
     setNewUser({
       ...newUser,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
+
+    if (event.target.key === 'Enter') {
+      handleSignup();
+    }
   };
 
   function handleSignup(event) {
     event.preventDefault();
     if (newUser.password !== newUser.confirm_password) {
-      setSignupError({
-        password: 'passwords do not match',
-        confirm_password: 'passwords do not match',
-      });
+      setAuthError(true)
+      setPasswordError('passwords do not match')
+      //setSignupError({
+      //   password: 'passwords do not match',
+      //   confirm_password: 'passwords do not match',
+      // });
     } else {
       axios
         .post(`${API}/auth/signup`, newUser)
@@ -66,18 +80,23 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
           // navigate(`/home/:${user.username}`);
           //console.log(res.data.message)
         })
-        .catch(err => {
-          setSignupError(err);
+        .catch(error => {
+          console.log(error);
+          //setSignupError(err);
         });
     }
   }
 
-  function handleLogin(e) {//itinerary
-    e.preventDefault();
+  function handleLogin(event) {//itinerary
+    event.preventDefault();
 
-    if (user.email && user.password) {
-      console.log('user & email filled')
-    } //works
+    const existingUser = users.find((aUser) => aUser.email.toLowerCase() === user.email.toLowerCase());
+
+    if (!existingUser) {
+      setAuthError(true);
+      setEmailError('Oops, not a registered user yet');
+      return;
+    } 
 
     axios
       .post(`${API}/auth/login`, user)
@@ -89,9 +108,10 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
         //navigate(`/home/:${user.username}`); 
         //console.log(res.data.message)
       })
-      .catch(err => {
-        // console.log(err)
-        setLoginError(err);
+      .catch(error => {
+        console.log(error);
+        setAuthError(true);
+        setPasswordError('Wrong password.');
       });
   }
 
@@ -145,6 +165,8 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   name='email'
                   className='input'
                   onChange={handleLoginText}
+                  error={authError}
+                  helperText={authError ? emailError : ''}
                 />
                 <TextField
                   required
@@ -155,6 +177,9 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   name='password'
                   onChange={handleLoginText}
                   sx={{width: '340px'}}
+                  error={authError}
+                  helperText={authError ? passwordError : ''}
+                  //apply eyeball
                 />
                 <button type='submit' className='login-btn'>
                   {' '}
@@ -174,6 +199,7 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   variant='standard'
                   label='Name'
                   style={{width: '340px'}}
+                  onChange={handleSignupText}
                 />
                 <TextField
                   required
@@ -182,15 +208,26 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   style={{width: '340px'}}
                   name='email'
                   onChange={handleSignupText}
+                  //needs to be a valid email address either containing an @ or using a library that checks for validity
                 />
-                <TextField
-                  
+                <DatePicker
+                size='small'
+                style={{width: '340px'}}
+                disableFuture={true}
+                shrink={true}
+                label='DOB'
+                format='MM/DD/YYYY'
+                formatDensity='spacious'
+                value={dob}
+                onChange={(newValue) => setDob(newValue)} />
+                {/* <TextField
                   variant='standard'
                   label='DOB'
                   style={{width: '340px'}}
                   name='dob'
                   onChange={handleSignupText}
-                />
+                  //apply way for date to be entered mui has 
+                /> */}
                 <TextField
                   required
                   variant='standard'
@@ -198,14 +235,15 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   style={{width: '340px'}}
                   name='username'
                   onChange={handleSignupText}
+                  //is uniqueness of name being checked on backend ? 
                 />
                 <TextField
-                  
                   variant='standard'
                   label='City, State'
                   style={{width: '340px'}}
                   name='city_state'
                   onChange={handleSignupText}
+                  //format input 
                 />
                 <TextField
                   required
@@ -215,6 +253,8 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   style={{width: '340px'}}
                   name='password'
                   onChange={handleSignupText}
+                  error={authError}
+                  helperText={authError ? passwordError : ''}
                 />
                 <TextField
                   required
@@ -224,14 +264,15 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   style={{width: '340px'}}
                   name='confirm_password'
                   onChange={handleSignupText}
+                  error={authError}
+                  helperText={authError ? passwordError : ''}
                 />
                 <button type='submit' className='signup-btn'>
-                  {/* onClick={() => setSignedUp(true)} */} Sign Up{' '}
+                  Sign Up{' '}
                 </button>
               </form>
             </div>
           )}
-        {/* </Box> */}
         </div>
         </Box>
         </ModalDialog>
