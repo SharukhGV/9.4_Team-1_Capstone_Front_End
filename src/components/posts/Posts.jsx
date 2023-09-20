@@ -73,8 +73,6 @@ function Posts() {
     updateVisiblePosts();
   } 
 
-
-
   //console.log(posts)
   //theres also post.category
   //or we can just make the whole thing show dique 'most popular'
