@@ -8,36 +8,39 @@ import {
   Button,
   InputLabel,
   FormControl,
+  Card,
+  CardContent,
+  CardActionArea,
 } from '@mui/material';
 import {styled} from '@mui/material/styles';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-
+import CloudUploadIcon from '@mui/icons-material/CloudUploadOutlined';
 import './toolsForm.css';
+const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 function ToolsNewForm({user}) {
-  const API = import.meta.env.VITE_REACT_APP_API_URL;
+  const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [tool, setTool] = useState({
     user_id: user.user_id,
-    name_tools: '',
-    item_condition: '',
+    created_by:user.username,
+    name: '',
+    condition: '',
     price: 0,
-    stock_quantity: 0,
+    stock: 0,
     description: '',
     thumbnail: '',
   });
-  const navigate = useNavigate();
 
   const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
+    // clipPath: 'inset(50%)',
     height: 1,
     overflow: 'hidden',
     position: 'absolute',
     bottom: 0,
     left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
+    // whiteSpace: 'nowrap',
+    // width: 1,
   });
 
   const addTool = newTool => {
@@ -48,19 +51,17 @@ function ToolsNewForm({user}) {
     for (const key in newTool) {
       newForm.append(key, newTool[key]);
     }
-    axios
-      .post(`${API}/tools`, newForm, {
-        headers: {'Content-Type': 'multipart/form-data'},
-      })
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(e => console.error('catch', e));
+   
+    // axios
+    //   .post(`${API}/tools`, newForm, {
+    //     headers: {'Content-Type': 'multipart/form-data'},
+    //   })
+    //   .then(response => {
+    //     navigate(-1)
+    //     console.log(response.data);
+    //   })
+    //   .catch(e => console.error('catch', e));
   };
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
-
   function handleImages(event) {
     setImages([
       ...images,
@@ -71,6 +72,11 @@ function ToolsNewForm({user}) {
     ]);
   }
 
+  const removeImage = i => {
+    const updatedImages = [...images];
+    updatedImages.splice(i, 1);
+    setImages(updatedImages);
+  };
   const handleTextChange = event => {
     if (event.target.id === 'price' || event.target.id === 'stock_quantity') {
       setTool({...tool, [event.target.id]: Number(event.target.value)});
@@ -79,6 +85,12 @@ function ToolsNewForm({user}) {
     }
   };
 
+  const handleSelect = e => {
+    setTool({
+      ...tool,
+      condition: e.target.value,
+    });
+  };
   const handleSubmit = event => {
     event.preventDefault();
     addTool(tool);
@@ -86,32 +98,11 @@ function ToolsNewForm({user}) {
 
   return (
     <div className='edit'>
+      <h1>Create a Listing</h1>
       <form className='tool-form' onSubmit={handleSubmit}>
-        <div className='images'>
-          {images.map((image, i) => (
-            <aside className='image-box' key={`${image.data.name}-${i}`}>
-              <img className='img' src={image.preview} alt='preview' />
-            </aside>
-          ))}
-          <Button
-            component='label'
-            type='file'
-            id='thumbnail-input'
-            name='thumbnail'
-            accept='image/*'
-            alt='thumbnail input'
-            variant='contained'
-            onChange={handleImages}
-            startIcon={<CloudUploadIcon />}
-          >
-            Upload Image
-            <VisuallyHiddenInput type='file' />
-          </Button>
-        </div>
-
         <TextField
+          sx={{marginBottom: 2}}
           label='Listing Title'
-          sx={{margin: 4}}
           id='name'
           name='name'
           type='text'
@@ -120,43 +111,49 @@ function ToolsNewForm({user}) {
         />
         <TextField
           label='Description'
-          sx={{margin: 4}}
+          sx={{marginBottom: 2}}
           id='description'
           type='text'
           onChange={handleTextChange}
         />
-        <TextField
-          label='Price'
-          sx={{margin: 4}}
-          id='price'
-          type='number'
-          name='price'
-          onChange={handleTextChange}
-        />
-        <InputLabel id='condition-label'>Condition</InputLabel>
-        <Select
-          labelId='condition-label'
-          sx={{margin: 4}}
-          // label='Condition'
-          onChange={handleTextChange}
-          name='condition'
-          id='condition'
-          value={tool.item_condition}
-        >
-          {/* <MenuItem value=''>--Please choose an option--</MenuItem> */}
-          <MenuItem value='good'>good</MenuItem>
-          <MenuItem value='neutral'>neutral</MenuItem>
-          <MenuItem value='bad'>bad</MenuItem>
-        </Select>
 
-        <TextField
-          label='Stock Quantity'
-          sx={{margin: 4}}
-          id='stock'
-          type='number'
-          name='stock'
-          onChange={handleTextChange}
-        />
+        <div className='price-condition-stock'>
+          <FormControl sx={{width: '48%'}}>
+            <InputLabel id='condition-label'>Condition</InputLabel>
+            <Select
+              labelId='condition-label'
+              // sx={{}}
+              // label='Condition'
+              onChange={handleSelect}
+              name='condition'
+              id='condition'
+              value={tool.condition}
+            >
+              <MenuItem value=''>--Please choose an option--</MenuItem>
+              <MenuItem value='good'>good</MenuItem>
+              <MenuItem value='neutral'>neutral</MenuItem>
+              <MenuItem value='bad'>bad</MenuItem>
+            </Select>
+          </FormControl>
+
+          <TextField
+            label='Price'
+            sx={{width: '25%'}}
+            id='price'
+            type='number'
+            name='price'
+            onChange={handleTextChange}
+          />
+          <TextField
+            label='Stock Quantity'
+            sx={{width: '25%'}}
+            id='stock'
+            type='number'
+            name='stock'
+            onChange={handleTextChange}
+          />
+        </div>
+        <h2>Upload Images</h2>
         <div
           style={{
             display: 'flex',
@@ -165,6 +162,49 @@ function ToolsNewForm({user}) {
             width: '90%',
           }}
         >
+          <div className='images'>
+            {images.map((image, i) => (
+              <div className='uploaded-images' key={`${image.data.name}-${i}`}>
+                <aside className='image-box' >
+                  <img className='img' src={image.preview} alt='preview' />
+                </aside>
+                <Button
+                  variant='contained'
+                  color='error'
+                  onClick={() => removeImage(i)}
+                >
+                  remove
+                </Button>
+              </div>
+            ))}
+            <Card
+              sx={{
+                width: '8vw',
+                height: '8vw',
+                position: 'relative',
+                backgroundColor: 'lightgrey',
+              }}
+            >
+              <CardContent></CardContent>
+              <CardActionArea
+                sx={{position: 'absolute', bottom: 0, width: '100%'}}
+              >
+                <Button
+                  component='label'
+                  type='file'
+                  accept='image/*'
+                  variant='contained'
+                  onChange={handleImages}
+                  startIcon={<CloudUploadIcon />}
+                >
+                  Select
+                  <VisuallyHiddenInput type='file' />
+                </Button>
+              </CardActionArea>
+            </Card>
+          </div>
+        </div>
+        <div className='form-buttons'>
           <Button
             variant='contained'
             color='error'

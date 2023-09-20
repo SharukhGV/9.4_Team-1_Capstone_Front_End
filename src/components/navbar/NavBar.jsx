@@ -24,7 +24,7 @@ export default function NavBar({
   return (
     <nav>
       <div className='top-left'>
-        <Link to='/'>
+        <Link to='/home'>
           {' '}
           <img src={craftopiaLogo} className='nav-logo' />{' '}
         </Link>

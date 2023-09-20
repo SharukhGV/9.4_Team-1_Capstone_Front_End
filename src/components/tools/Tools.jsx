@@ -21,19 +21,20 @@ function Tools({user}) {
   // console.log(tools)
   return (
     <Carousel>
-      {tools.map((individualTool, index) => {
+      {tools.map((tool, index) => {
         return (
           <ToolsCard
-            key={`tool-key-${individualTool.tool_id}`}
-            inKEY={individualTool.tool_id}
-            name={individualTool.name_tools}
-            description={individualTool.description}
-            price={individualTool.price}
-            quantity={individualTool.stock_quantity}
-            condition={individualTool.item_condition}
-            thumbnail={individualTool.thumbnail}
-            userid={individualTool.user_id}
-            index={index}
+            key={`tool-key-${tool.tool_id}`}
+            tool={tool}
+            // inKEY={individualTool.tool_id}
+            // name={individualTool.name_tools}
+            // description={individualTool.description}
+            // price={individualTool.price}
+            // quantity={individualTool.stock_quantity}
+            // condition={individualTool.item_condition}
+            // thumbnail={individualTool.thumbnail}
+            // userid={individualTool.user_id}
+            // index={index}
           />
         );
       })}

@@ -28,6 +28,7 @@ export default function NewPost({ user }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [openPreview, setOpenPreview] = useState(false);
   const [post, setPost] = useState({
+    created_by:user.username,
     title: '',
     category: '',
     body: '',
@@ -103,7 +104,7 @@ export default function NewPost({ user }) {
       })
       .then(res => {
         console.log(res.data);
-        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`, { state: { title: post.title, category: post.category, body: post.body }});
+        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`, { state: { title: post.title, category: post.category, body: post.body, file: file }});
       })
       .catch(error => console.log(error));
   };

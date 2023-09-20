@@ -1,6 +1,20 @@
 .tool-form {
+  position: relative;
+  width:70%;
   display: flex;
   flex-direction: column;
+  text-align: center;
+  /* justify-content: space-evenly; */
+  margin-left: auto;
+  margin-right: auto;
+  padding:5%;
+  border:solid #7851a9 5px;
+}
+.price-condition-stock{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5%;
 }
 .images {
   display: flex;
@@ -8,6 +22,7 @@
   justify-content: center;
   width: 90%;
   height: 50%;
+  margin-bottom:5%;
 }
 .img {
   height: 100%;
@@ -19,4 +34,9 @@
   border: dotted grey 1px;
   overflow: hidden;
   margin-right: 15px;
+}
+.form-buttons{
+  position:absolute;
+  bottom:5%;
+  right:5%;
 }
