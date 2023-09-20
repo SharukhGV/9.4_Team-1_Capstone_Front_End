@@ -1,4 +1,8 @@
-import {Textarea, Card, Button} from '@mui/joy';
+'./NewPost.css';
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+
 import {
   TextField,
   Select,
@@ -7,41 +11,99 @@ import {
   MenuItem,
   Input,
 } from '@mui/material';
-import {useState} from 'react';
-import cameraImg from '../../assets/cameraImg.png';
-import {styled} from '@mui/system';
-import axios from 'axios';
-import {useNavigate} from 'react-router';
+import { styled } from '@mui/system';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import placeholderImg from '../../assets/placeholder-img.jpeg';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
+import { Textarea, Card, Button, CardCover, CardContent, Modal, Sheet, ModalDialog } from '@mui/joy';
+
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
-export default function NewPost({user}) {
+export default function NewPost({ user }) {
   const navigate = useNavigate();
-  const [file, setFile] = useState(null);
+  const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
+  const [files, setFiles] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [openPreview, setOpenPreview] = useState(false);
   const [post, setPost] = useState({
     created_by:user.username,
     title: '',
     category: '',
     body: '',
+    user_id: user.user_id,
   });
 
   function handleFileSelection(event) {
-    setFile(event.target.files[0]); //set to inline
+    const newSelectedFiles = [...files];
+    setSelectedFile(event.target.files[0])
+    newSelectedFiles.push(event.target.files[0]);
+    setFiles(newSelectedFiles); 
+    
+    //addPlaceHolder();
   }
+
+  // function prevSlide() {
+  //   setCurrentPlaceholder(prevImg =>
+  //     prevImg === 0 ? placeholders.length - 1 : prevImg - 1
+  //   );
+  // };
+
+  // function nextSlide() {
+  //   setCurrentPlaceholder(prevImg =>
+  //     prevImg === placeholders.length - 1 ? 0 : prevImg + 1
+  //   );
+  // } 
+
+  // const addPlaceHolder = () => {
+  //   if (files.length < placeholders.length) {
+  //     setFiles([...files, null]);
+  //   }
+  // }
+
+  // const removePlaceholder = (index) => {
+  //   const newFiles = [...files];
+  //   newFiles.splice(index, 1);
+  //   setFiles(newFiles);
+  // }
+
+  // function handleFileSelection(event, index) {
+  //   const newSelectedFiles = [...files];
+  //   newSelectedFiles[index] = event.target.files[0];
+  //   setFiles(newSelectedFiles);
+  //   addPlaceHolder();
+  // }
+
+  //apply lazyloading to images & everything possible
+
+  // const visibleImgs = [
+  //   placeholders[currentPlaceholder],
+  //   placeholders[(currentPlaceholder + 1) % placeholders.length],
+  //   //placeholders[(currentPlaceholder + 2) % placeholders.length],
+  // ];
 
   const sendToServer = async event => {
     event.preventDefault(); 
     const formData = new FormData();
-    formData.append('file', file);
+    files.forEach((file, index) => {
+      if (file) {
+        formData.append(`file-${index}`, file);
+      }
+    })//must be sent as array
+    //does this work for the backend ?
+    // formData.append('files', files); 
     formData.append('title', post.title);
     formData.append('category', post.category);
     formData.append('body', post.body);
-    formData.append('user_id', user.user_id);
+    formData.append('user_id', post.user_id);
 
     axios
       .post(`${API}/posts`, formData, {
         headers: {'Content-Type': 'multipart/form-data'},
       })
       .then(res => {
+        console.log(res.data);
         navigate(`/${user.username}/post/${res.data.createdPost.post_id}`, { state: { title: post.title, category: post.category, body: post.body, file: file }});
       })
       .catch(error => console.log(error));
@@ -63,37 +125,58 @@ export default function NewPost({user}) {
 
   return (
     <div>
+      <main>
+        <h4> Share Your Expertise </h4>
+        <p> No matter your level, you can inspire and empower fellow creatives. Post tutorials, guides, and classes. </p>
       <Input
         placeholder='Title'
         focused
-        onChange={event => setPost({...post, title: event.target.value})}
+        onChange={(event) => setPost({ ...post, title: event.target.value })}
       />
       {/* <br /> */}
+      <div className='content-sect'>
+      <div className='img-slider-container'>
+        {/* <button
+        //  onClick={prevSlide}
+          className='arrow'>
+          <KeyboardArrowUpIcon fontSize='large' />
+        </button> */}
+        <div>
+          <Button component='label' variant='contained' href='#file-upload'>
+            <VisuallyHiddenInput type='file' onChange={handleFileSelection} />
+            <Card component='li'>
+              <CardCover>
+                {//maybe the issue is that it should be looking fo rlength ? 
+                selectedFile ? (
+                  <div>
+                    <img src={URL.createObjectURL(selectedFile)} />
+                    {/* <img src={URL.createObjectURL(files[currentPlaceholder])} loading='lazy' /> */}
+                    {/* <button onClick={() => removePlaceholder(currentPlaceholder)}> Remove </button> */}
+                  </div>
+                ) : (
+                  <img src={placeholderImg} loading='lazy' />
+                )}
+              </CardCover>
+              
+            </Card>
+          </Button>
+        </div>
+        {/* <button className='arrow'
+        //  onClick={nextSlide}
+         >
+          <KeyboardArrowDownIcon fontSize='large' />
+        </button> */}
+      </div>
+      <div>
       <Textarea
-        minRows={19}
-        sx={{width: '100%'}}
+        className='textarea'
+        minRows={11}
+        sx={{width: '94%'}}
         placeholder='Share your creative know-how...'
         onChange={event => setPost({...post, body: event.target.value})}
-        startDecorator={
-          <div>
-            <Button
-              component='label'
-              variant='contained'
-              href='#file-upload'
-              startDecorator={<img src={cameraImg} width='30px' />}
-              size='small'
-              sx={{backgroundColor: 'white'}}
-            >
-              <VisuallyHiddenInput
-                multiple
-                type='file'
-                name='file'
-                onChange={handleFileSelection}
-              />
-            </Button>
-          </div>
-        }
       />
+      </div>
+      </div>
       <div>
         <FormControl variant='standard' sx={{minWidth: 170}}>
           <InputLabel sx={{fontFamily: 'Lato'}}> Category </InputLabel>
@@ -114,11 +197,13 @@ export default function NewPost({user}) {
           </Select>
         </FormControl>
         <div className='bottomRight-actionBtns'>
-          <button className='preview-btn' 
-          onClick={() => navigate(`/:username/post/preview`,
-          { state: { title: post.title, category: post.category, body: post.body, file: file }})}>
+          <button className='preview-btn' onClick={() => setOpenPreview(true)}
+          // onClick={() => navigate(`/:username/post/preview`,
+          // { state: { title: post.title, category: post.category, body: post.body }})}
+          >
             {' '}
             Preview{' '}
+            {/* onclick modal pop up */}
           </button>
           <button className='post-btn' onClick={sendToServer} >
             {' '}
@@ -126,6 +211,20 @@ export default function NewPost({user}) {
           </button>
         </div>
       </div>
+      <div className='preview-modal'>
+        <Modal open={openPreview} onClose={() => setOpenPreview(false)}>
+          <ModalDialog layout='fullscreen' >
+            {/* <button onClick={setOpenPreview(false)}> &times; </button> */}
+            {/* <h3> {post.title} </h3> */}
+            <div>
+            {/* <p> {post.category} </p>
+            <img src={selectedFile} />
+            <p> {post.body} </p> */}
+            </div>
+          </ModalDialog>
+        </Modal>
+      </div>
+      </main>
     </div>
   );
 }

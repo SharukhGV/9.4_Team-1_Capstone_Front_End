@@ -34,11 +34,10 @@ export default function NavBar({
         </Link> */}
       </div>
       <div className='nav-right-container'>
-        <div>
+        {/* <div>
           <button className='search-btn'>
             {' '}
             <img src={searchIcon} className='search-icon' />
-            {/* {' '} */}
           </button>
           <Input
             type='text'
@@ -53,16 +52,16 @@ export default function NavBar({
                 fontSize: '17px',
                 marginBottom: '-2px',
               },
-            }}
-            // '&::placeholder': {
-            //   fontFamily: 'Roboto',
+            }} */}
+            {/* // '&::placeholder': { */}
+            {/* //   fontFamily: 'Roboto',
             //   fontSize: '12px',
               
               
             // }}}
-            className='search-input'
-          />
-        </div>
+        //     className='search-input'
+        //   />
+        // </div> */}
         {!user && (
           <aside className='auth-btns'>
             <button
