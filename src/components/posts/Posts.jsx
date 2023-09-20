@@ -66,15 +66,20 @@ function Posts() {
   //   updateVisiblePosts();
   // } 
 
-  // function nextSlide() {
-  //   setCurrentPost(prevPost =>
-  //     prevPost === posts.length - 1 ? 0 : prevPost + 1
-  //   );
-  //   updateVisiblePosts();
-  // } 
+  function prevSlide() {
+    setCurrentPost(prevPost =>
+      prevPost === 0 ? posts.length - 1 : prevPost - 1
+    );
+    updateVisiblePosts();
+  } 
 
+  function nextSlide() {
+    setCurrentPost(prevPost =>
+      prevPost === posts.length - 1 ? 0 : prevPost + 1
+    );
+    updateVisiblePosts();
+  } 
 
-//console.log(visiblePosts)
   //console.log(posts)
   //theres also post.category
   //or we can just make the whole thing show dique 'most popular'
