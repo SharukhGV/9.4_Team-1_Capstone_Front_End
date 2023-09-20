@@ -14,45 +14,67 @@ function Posts() {
   const [posts, setposts] = useState([]);
   const [currentPost, setCurrentPost] = useState(0);
   const [visiblePosts, setVisiblePosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const getPosts = () => {
     axios.get(`${API}/posts`)
     .then((response) => {
-        setposts(response.data)
+        setposts(response.data);
+        //console.log(response.data); //succesfull
     })
     .catch(error => console.error('catch', error))
     .finally(() => {
-      updateVisiblePosts();
+      const theVisiblePosts = [
+        posts[(currentPost - 1 + posts.length) % posts.length],
+        posts[currentPost],
+        posts[(currentPost + 1) % posts.length],
+        posts[(currentPost + 2) % posts.length],
+        posts[(currentPost + 3) % posts.length],
+      ];
+      setVisiblePosts(theVisiblePosts);
+      // updateVisiblePosts();
+      // setLoading(false);
     })
+  }
+  getPosts();
 }, []);
 
-  function updateVisiblePosts() {
-    const theVisiblePosts = [
-      posts[(currentPost - 1 + posts.length) % posts.length],
-      posts[currentPost],
-      posts[(currentPost + 1) % posts.length],
-      posts[(currentPost + 2) % posts.length],
-      posts[(currentPost + 3) % posts.length],
-    ];
-    setVisiblePosts(theVisiblePosts);
-  }
+// useEffect(() => {
+//   console.log(`loggin posts ${posts}`);
+// }, [posts])
 
-  function prevSlide() {
-    setCurrentPost(prevPost =>
-      prevPost === 0 ? posts.length - 1 : prevPost - 1
-    );
-    updateVisiblePosts();
-  } 
+// useEffect(() => {
+//   console.log(`logging visibleposts ${visiblePosts}`)
+// }, [visiblePosts])
 
-  function nextSlide() {
-    setCurrentPost(prevPost =>
-      prevPost === posts.length - 1 ? 0 : prevPost + 1
-    );
-    updateVisiblePosts();
-  } 
+  // function updateVisiblePosts() {
+  //     theVisiblePosts = [
+  //     posts[(currentPost - 1 + posts.length) % posts.length],
+  //     posts[currentPost],
+  //     posts[(currentPost + 1) % posts.length],
+  //     posts[(currentPost + 2) % posts.length],
+  //     posts[(currentPost + 3) % posts.length],
+  //   ];
+  //   //setVisiblePosts(theVisiblePosts);
+  // }
+
+  // function prevSlide() {
+  //   setCurrentPost(prevPost =>
+  //     prevPost === 0 ? posts.length - 1 : prevPost - 1
+  //   );
+  //   updateVisiblePosts();
+  // } 
+
+  // function nextSlide() {
+  //   setCurrentPost(prevPost =>
+  //     prevPost === posts.length - 1 ? 0 : prevPost + 1
+  //   );
+  //   updateVisiblePosts();
+  // } 
 
 
-
+//console.log(visiblePosts)
   //console.log(posts)
   //theres also post.category
   //or we can just make the whole thing show dique 'most popular'
@@ -61,25 +83,25 @@ function Posts() {
     <>
     <h4> Top User Posts </h4>
     <div className='slider-container'>
-      <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
-      {
-        updateVisiblePosts ? visiblePosts.map((post, i) => (
+      <button className='arrow' >{' '} <ArrowBackIosIcon />{' '} </button>
+      { 
+        visiblePosts.map((post, i) => (
           <Card component='li' variant='solid' key={`post-${i}`} sx={{ height: 119 }}  >
             <CardOverflow>
               <AspectRatio ratio='2'>
               <img loading='lazy' />
               </AspectRatio>
             <CardContent>
-              <Typography> {post?.title} </Typography>
+              {/* <Typography> {post.title} </Typography> */}
               <Typography> This is post description </Typography>
               {/* <p> {post?.title || 'Loading...'} </p> */}
               {/* <p> post description? try typography comp </p> */}
             </CardContent>
             </CardOverflow>
           </Card>
-        )) : null
+        ))
       }
-       <button className='arrow' onClick={nextSlide}>
+       <button className='arrow' >
         {' '}
         <ArrowForwardIosIcon />{' '}
       </button>
