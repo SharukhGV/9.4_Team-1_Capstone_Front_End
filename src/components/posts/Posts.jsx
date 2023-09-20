@@ -21,18 +21,9 @@ function Posts() {
 
   return (
     <Carousel>
-      {posts.map((individualpost, index) => {
+      {posts.map((post) => {
         return (
-          <PostsCard
-            inKEY={individualpost.user_id}
-            title={individualpost.title}
-            tags={individualpost.tags}
-            body={individualpost.body}
-            edited={individualpost.edited_at}
-            createdTime={individualpost.created_at}
-            thumbnail={individualpost.thumbnail}
-            index={index}
-          />
+          <PostsCard post={post} key={`post-key${post.post_id}`}/>
         );
       })}
     </Carousel>

@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {Card, CardContent, Button, CardActionArea} from '@mui/material';
+import PostCard from '../../components/posts/PostCard';
 import ToolsCard from '../../components/tools/ToolsCard';
 import profile_pic from '../../assets/blank_profile.jpeg';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -13,17 +14,15 @@ export default function Profile({user}) {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [tools, setTools] = useState([]);
-  const [updatePost, setUpdatePost] = useState(false)
-  const [updateTool, setUpdateTool] = useState(false)
   useEffect(() => {
+    getPosts();
     getTools();
-  }, [updateTool]);
-  useEffect(()=>{
-    getPosts()
-  },[updatePost])
+  }, []);
+
   const getPosts = () => {
-    axios.get(`${API}/posts/${user.user_id}`).then(res => console.log(res));
-    // setPosts(data)
+    axios.get(`${API}/posts/${user.user_id}`).then(res => {
+      setPosts(res.data);
+    });
   };
 
   const getTools = () => {
@@ -78,16 +77,16 @@ export default function Profile({user}) {
                 <p>No Post yet </p>
               </div>
             ) : (
-              <div>
-                {posts.map(post => (
-                  <Card>
-                    <CardContent>
-                      <img src={post.thumbnail} alt='thumbnail' />
-                      <p>{post.title}</p>
-                      <p>{post.created_at}</p>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className='profile-posts-list'>
+                <div className='scroll'>
+                  {posts.map(post => (
+                    <aside className='aside-spacing' key={`profile-post-${post.post_id}`}>
+                      <PostCard
+                        post={post}
+                      />
+                    </aside>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -118,9 +117,9 @@ export default function Profile({user}) {
               </div>
             ) : (
               <div className='profile-tools-list'>
-                <div className='scroll' >
+                <div className='scroll'>
                   {tools.map(tool => (
-                    <aside className='aside-tool'>
+                    <aside className='aside-spacing'>
                       <ToolsCard
                         key={`profile-tool-key${tool.tool_id}`}
                         tool={tool}
