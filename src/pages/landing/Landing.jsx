@@ -1,15 +1,10 @@
 import './landing.css';
-import Auth from '../../components/auth/Auth';
 import {useState} from 'react';
 import CatCarousel from '../../components/categories-carousel/CatCarousel';
 // import ToolsCard from '../../components/tools/ToolsCard';
-import {Slide} from '@mui/material';
 import { Card } from '@mui/joy';
 
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArtistsGraphic from '../../assets/artistsgraphic.jpg';
-import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 import Tools from '../../components/tools/Tools';
 import Posts from '../../components/posts/Posts';
 
@@ -48,7 +43,7 @@ export default function Landing({setModal}) {
       </header>
       <br />
       <Posts />
-      <Tools />
+      {/* <Tools /> */}
     </div>
   );
 }
