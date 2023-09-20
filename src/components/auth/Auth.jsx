@@ -19,7 +19,8 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
   const [passwordError, setPasswordError] = useState('');
   const [dob, setDob] = useState(null);
 
-  console.log(dob)//works but recieved data is annoying 
+  //console.log(dob)//works but recieved data is annoying 
+  //default=Date.now()
 
   const [user, setUser] = useState({
     email: '',
@@ -132,13 +133,13 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
           <aside className='modal-nav'>
             <button
               className={!tab ? 'modal-nav-btn' : 'modal-nav-btn selected'}
-              onClick={(event) => {event.preventDefault(), setTab(true)}}
+              onClick={() => {setTab(true)}}
             >
               Sign Up
             </button>
             <button
               className={tab ? 'modal-nav-btn' : 'modal-nav-btn selected'}
-              onClick={(event) => {event.preventDefault(), setTab(false)}}
+              onClick={() => {setTab(false)}}
             >
               Log-in
             </button>
@@ -211,6 +212,7 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   //needs to be a valid email address either containing an @ or using a library that checks for validity
                 />
                 <DatePicker
+                //needs styling
                 size='small'
                 style={{width: '340px'}}
                 disableFuture={true}
@@ -220,14 +222,7 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                 formatDensity='spacious'
                 value={dob}
                 onChange={(newValue) => setDob(newValue)} />
-                {/* <TextField
-                  variant='standard'
-                  label='DOB'
-                  style={{width: '340px'}}
-                  name='dob'
-                  onChange={handleSignupText}
-                  //apply way for date to be entered mui has 
-                /> */}
+                
                 <TextField
                   required
                   variant='standard'
