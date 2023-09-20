@@ -16,7 +16,7 @@ export default function NavBar({
   setModal,
 }) {
   const [searchText, setSearchText] = useState('');
-  const [signedUp, setSignedUp] = useState(false);
+  // const [signedUp, setSignedUp] = useState(false);
   const [tab, setTab] = useState(false);
   function handleSearchInput(event) {
     setSearchText(event.target.value);
@@ -28,16 +28,16 @@ export default function NavBar({
           {' '}
           <img src={craftopiaLogo} className='nav-logo' />{' '}
         </Link>
-        <Link className='explore-link' to='/'>
+        {/* <Link className='explore-link' to='/posts' >
           {' '}
           Explore{' '}
-        </Link>
+        </Link> */}
       </div>
       <div className='nav-right-container'>
-        <div>
+        {/* <div>
           <button className='search-btn'>
             {' '}
-            <img src={searchIcon} className='search-icon' />{' '}
+            <img src={searchIcon} className='search-icon' />
           </button>
           <Input
             type='text'
@@ -45,10 +45,23 @@ export default function NavBar({
             value={searchText}
             onChange={handleSearchInput}
             size='xsmall'
-            sx={{width: '140px'}}
-            className='search-input'
-          />
-        </div>
+            sx={{width: '190px', marginBottom: '-4px'}}
+            inputProps={{
+              style: {
+                fontFamily: 'Roboto',
+                fontSize: '17px',
+                marginBottom: '-2px',
+              },
+            }} */}
+            {/* // '&::placeholder': { */}
+            {/* //   fontFamily: 'Roboto',
+            //   fontSize: '12px',
+              
+              
+            // }}}
+        //     className='search-input'
+        //   />
+        // </div> */}
         {!user && (
           <aside className='auth-btns'>
             <button
@@ -91,6 +104,7 @@ export default function NavBar({
           </div>
         )}
         <Auth
+          user={user}
           modal={modal}
           tab={tab}
           setTab={setTab}

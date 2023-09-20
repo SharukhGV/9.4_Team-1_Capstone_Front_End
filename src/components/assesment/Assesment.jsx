@@ -12,6 +12,7 @@ import "./assesment.css";
 import { useState } from "react";
 import axios from "axios";
 export default function Assesment(props) {
+
   const assesmentModalStyle = {
     position: "absolute",
     top: "50%",
@@ -91,9 +92,9 @@ export default function Assesment(props) {
                 exploring?{" "}
               </p>
               <FormControl>
-                <FormLabel id="demo-radio-buttons-group-label">
-                  Gender
-                </FormLabel>
+                {/* <FormLabel id="demo-radio-buttons-group-label">
+                  
+                </FormLabel> */}
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
                   // value={updatedUser.learning_interest}
@@ -151,16 +152,15 @@ export default function Assesment(props) {
                 Which virtual arts hobbies do you have good experience in?{" "}
               </p>
               <FormControl>
-                <FormLabel id="demo-radio-buttons-group-label">
+                {/* <FormLabel id="demo-radio-buttons-group-label">
                   Gender
-                </FormLabel>
+                </FormLabel> */}
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
                   // value={updatedUser.current_skillset}
                   name="current_skillset"
                   onChange={(e)=>handleRadioChange(e)}
                   id="current_skillset"
-
                 >
                   <FormControlLabel
                     value="painting"

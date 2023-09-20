@@ -1,22 +1,37 @@
+import axios from 'axios';
+import './auth.css';
+import dayjs from 'dayjs';
 import {useState} from 'react';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import {useNavigate} from 'react-router';
 import {useCookies} from 'react-cookie';
-import axios from 'axios';
-import {Box, Modal, TextField} from '@mui/material';
-import './auth.css';
+import users from '../../../dummyData/users';
+import {Box, TextField, FormControl} from '@mui/material';
+import { Modal, ModalDialog } from '@mui/joy';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true; ??
 
 export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies();
-  const [loginError, setLoginError] = useState();
-  const [signupError, setSignupError] = useState();
+  const [dob, setDob] = useState(null);
+  const [signupError, setSignupError] = useState({
+    email:'',
+    password:''
+  })
+  const [loginError, setLoginError] = useState({
+    email:'',
+    password:''
+  })
+
+
+
   const [user, setUser] = useState({
     email: '',
     password: '',
-    persist: false,
+    persist: '',
   });
+
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
@@ -27,26 +42,38 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
     city_state: '',
   });
 
-  const handleLoginText = e => {
+  const handleLoginText = (event) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
+    if (event.target.key === 'Enter') {
+      handleLogin();
+    }
   };
-  const handleSignupText = e => {
+  //you can turn this into less code
+  const handleSignupText = (event) => {
     setNewUser({
       ...newUser,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
+    if (event.target.key === 'Enter') {
+      handleSignup();
+    }
   };
 
   function handleSignup(event) {
     event.preventDefault();
     if (newUser.password !== newUser.confirm_password) {
       setSignupError({
-        password: 'passwords do not match',
-        confirm_password: 'passwords do not match',
-      });
+        password:'Passwords must match'
+      })
+      setTimeout(()=>{
+        setSignupError({
+          email:'',
+          password:''
+        })
+      }, 5000)
     } else {
       axios
         .post(`${API}/auth/signup`, newUser)
@@ -54,89 +81,115 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
           setCookie('token', res.data.token);
           handleSignIn(res.data.user);
           setModal(false);
-          navigate('/home');
-          //console.log(res.data.message)
+          navigate(`/home`);
         })
-        .catch(err => {
-          setSignupError(err);
+        .catch(error => {
+          setSignupError({
+            email:error.response.data.error
+          })
+          setTimeout(()=>{
+            setSignupError({
+              email:'',
+              password:''
+            })
+          }, 5000)
         });
     }
   }
-  function handleLogin(e) {
-    e.preventDefault();
+
+  function handleLogin(event) {//itinerary
+    event.preventDefault();
     axios
       .post(`${API}/auth/login`, user)
       .then(res => {
         setCookie('token', res.data.token);
         handleSignIn(res.data.user);
         setModal(false);
-        navigate('/home');
-        //console.log(res.data.message)
+        navigate(`/home`);
       })
-      .catch(err => {
-        // console.log(err)
-        setLoginError(err);
+      .catch(error => {
+        if(error.response.data.error.includes('register')){
+          setLoginError({
+            email:error.response.data.error
+          })
+        }else{
+          setLoginError({
+            password:error.response.data.error
+          })
+        }
+        setTimeout(()=>{
+          setLoginError({
+            email:'',
+            password:''
+          })
+        }, 5000)
+
       });
   }
 
-  const styleAuth = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    overflow: 'scroll',
-    transform: 'translate(-50%, -50%)',
-    width: 370,
-    height: 'fitContent',
+  const authStyle = {
+    width: 470,
+    height: 'fitcontent',
     bgcolor: '#f8f8f8',
-    border: '1px solid #f8f8f8',
-    boxShadow: 14,
+    boxShadow: 17,
     p: 2,
-    display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-  };
+  }
 
   return (
     <div className='auth'>
       <Modal open={modal} onClose={() => setModal(false)}>
-        <Box sx={styleAuth} className='login-box'>
+        <ModalDialog variant="soft" sx={authStyle} >
+          <Box >
           <aside className='modal-nav'>
             <button
               className={!tab ? 'modal-nav-btn' : 'modal-nav-btn selected'}
-              onClick={() => setTab(true)}
+              onClick={() => {setTab(true)}}
             >
               Sign Up
             </button>
             <button
               className={tab ? 'modal-nav-btn' : 'modal-nav-btn selected'}
-              onClick={() => setTab(false)}
+              onClick={() => {setTab(false)}}
             >
               Log-in
             </button>
           </aside>
+          {/* <br /> */}
           <button onClick={() => setModal(false)} className='cancel-btn'>
             {' '}
             &times;{' '}
           </button>
+          {/* <br /> */}
+          <div className='auth-sect' >
           {!tab ? (
-            <div>
-              <br />
+            <div className='login-sect'>
+              <div className='login-branding'>
+                <h3> Welcome Back </h3>
+              </div>
               <form className='login-form' onSubmit={handleLogin}>
                 <TextField
+                  required
                   label='Email'
                   variant='standard'
-                  sx={{width: '300px'}}
+                  sx={{width: '340px'}}
                   name='email'
                   className='input'
                   onChange={handleLoginText}
+                  error={Boolean(loginError.email)}
+                  helperText={loginError.email}
                 />
                 <TextField
+                  required
                   label='Password'
                   variant='standard'
                   type='password'
                   name='password'
                   onChange={handleLoginText}
-                  sx={{width: '300px'}}
+                  sx={{width: '340px'}}
+                  error={Boolean(loginError.password)}
+                  helperText={loginError.password}
+                  //apply eyeball
                 />
                 <button type='submit' className='login-btn'>
                   {' '}
@@ -145,69 +198,97 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
               </form>
             </div>
           ) : (
-            <div>
-              <br />
+            <div className='signup-sect'>
               <div className='signup-branding'>
-                <h3> Sign Up </h3>
+                <h3> Join Craftopia </h3>
                 <p> & explore your creative potantial without limits! </p>
               </div>
               <form onSubmit={handleSignup} className='signup-form'>
                 <TextField
+                  required
                   variant='standard'
                   label='Name'
-                  style={{width: '300px'}}
+                  style={{width: '340px'}}
+                  onChange={handleSignupText}
                 />
                 <TextField
+                  required
                   variant='standard'
                   label='Email'
-                  style={{width: '300px'}}
+                  style={{width: '340px'}}
                   name='email'
                   onChange={handleSignupText}
+                  error={Boolean(signupError.email)}
+                  helperText={signupError.email}
+                  //needs to be a valid email address either containing an @ or using a library that checks for validity
                 />
-                <TextField
+                <DatePicker
+                //needs styling
+                size='small'
+                style={{width: '340px'}}
+                disableFuture={true}
+                shrink={true}
+                label='DOB'
+                format='MM/DD/YYYY'
+                formatDensity='spacious'
+                value={dob}
+                onChange={(newValue) => setDob(newValue)} />
+                {/* <TextField
                   variant='standard'
                   label='DOB'
-                  style={{width: '300px'}}
+                  style={{width: '340px'}}
                   name='dob'
                   onChange={handleSignupText}
-                />
+                  //apply way for date to be entered mui has 
+                /> */}
                 <TextField
+                  required
                   variant='standard'
                   label='Username'
-                  style={{width: '300px'}}
+                  style={{width: '340px'}}
                   name='username'
                   onChange={handleSignupText}
+                  //is uniqueness of name being checked on backend ? 
                 />
                 <TextField
                   variant='standard'
                   label='City, State'
-                  style={{width: '300px'}}
+                  style={{width: '340px'}}
                   name='city_state'
                   onChange={handleSignupText}
+                  //format input 
                 />
                 <TextField
+                  required
                   variant='standard'
                   type='password'
                   label='Password'
-                  style={{width: '300px'}}
+                  style={{width: '340px'}}
                   name='password'
                   onChange={handleSignupText}
+                  error={Boolean(signupError.password)}
+                  helperText={signupError.password}
                 />
                 <TextField
+                  required
                   variant='standard'
                   label='Confirm Password'
                   type='password'
-                  style={{width: '300px'}}
+                  style={{width: '340px'}}
                   name='confirm_password'
                   onChange={handleSignupText}
+                  error={Boolean(signupError.password)}
+                  helperText={signupError.password}
                 />
                 <button type='submit' className='signup-btn'>
-                  {/* onClick={() => setSignedUp(true)} */} Sign Up{' '}
+                  Sign Up{' '}
                 </button>
               </form>
             </div>
           )}
+        </div>
         </Box>
+        </ModalDialog>
       </Modal>
     </div>
   );

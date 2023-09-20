@@ -1,0 +1,17 @@
+main h4 {
+    font-family: 'Bellota', cursive;
+    color: #800080;
+    font-size: 22px;
+}
+
+main p {
+    font-family: 'Lato';
+    font-size: 17px;
+    color: #3c415c;
+}
+
+.content-sect {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 7px;
+}

@@ -1,25 +1,17 @@
-// import { useParams } from "react-router";
-// //make preciew page editable
-
-// export default function Post({ post, file }) {
-//     const { postId } = useParams();
-
-//     return (
-//         <>
-//         post here {post.tile}
-//         </>
-//     )
-// }
 import {useLocation} from 'react-router';
 
 export default function Post() {
-  const location = useLocation();
-  const postData = location.state.post;
-  const postFile = location.state.file;
+
+  const { state } = useLocation();
 
   return (
     <>
-      <h1> {postData.title} </h1>
+      <h3> {state.title} </h3>
+      <p> {state.category} </p>
+      <div>
+        {/* <img {state.file} /> */}
+        {state.body}
+      </div>
     </>
   );
 }

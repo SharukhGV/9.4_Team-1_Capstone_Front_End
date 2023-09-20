@@ -1,7 +1,9 @@
 import {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {Card, CardContent, Button} from '@mui/material';
+import {Card, CardContent, Button, CardActionArea} from '@mui/material';
+import PostCard from '../../components/posts/PostCard';
+import ToolsCard from '../../components/tools/ToolsCard';
 import profile_pic from '../../assets/blank_profile.jpeg';
 import CancelIcon from '@mui/icons-material/Cancel';
 import './profile.css';
@@ -12,26 +14,22 @@ export default function Profile({user}) {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [tools, setTools] = useState([]);
-
-  const handleDelete = e => {
-    axios.delete(`${API}/tools`);
-  };
   useEffect(() => {
-    console.log(user);
-    const getPosts = () => {
-      axios.get(`${API}/posts/${user.user_id}`).then(res => console.log(res));
-      // setPosts(data)
-    };
-
-    const getTools = () => {
-      axios.get(`${API}/tools/${user.user_id}`).then(res => {
-        console.log(res);
-        setTools(res.data);
-      });
-    };
     getPosts();
     getTools();
   }, []);
+
+  const getPosts = () => {
+    axios.get(`${API}/posts/${user.user_id}`).then(res => {
+      setPosts(res.data);
+    });
+  };
+
+  const getTools = () => {
+    axios.get(`${API}/tools/${user.user_id}`).then(res => {
+      setTools(res.data);
+    });
+  };
   return (
     <div>
       <Card
@@ -48,7 +46,7 @@ export default function Profile({user}) {
             <img
               className='profile-img'
               src={user.profile_pic}
-              // src={`felizj171-profile-pic`}
+              // src={`https://craftopia-media-bucket.s3.us-east-2.amazonaws.com/felizj171-profile-pic`}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
             <aside className='profile-desc'>
@@ -71,62 +69,71 @@ export default function Profile({user}) {
       </Card>
       <div className='users-posts-and-tools'>
         <Card className='profile-posts'>
-          <CardContent>
+          <CardContent sx={{marginBottom: '10%'}}>
+            <h2 className='profile-subtitle'>Posts</h2>
+
             {posts.length < 1 ? (
               <div>
                 <p>No Post yet </p>
               </div>
             ) : (
-              <div>
-                {posts.map(post => (
-                  <Card>
-                    <CardContent>
-                      <img src={post.thumbnail} alt='thumbnail' />
-                      <p>{post.title}</p>
-                      <p>{post.created_at}</p>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className='profile-posts-list'>
+                <div className='scroll'>
+                  {posts.map(post => (
+                    <aside className='aside-spacing' key={`profile-post-${post.post_id}`}>
+                      <PostCard
+                        post={post}
+                      />
+                    </aside>
+                  ))}
+                </div>
               </div>
             )}
-            <Button
-              onClick={() => navigate(`/${user.username}/post/new`)}
-              variant='contained'
-              color='primary'
+
+            <CardActionArea
+              sx={{
+                width: '10%',
+                position: 'absolute',
+                bottom: '5%',
+                right: '5%',
+              }}
             >
-              New
-            </Button>
+              <Button
+                onClick={() => navigate(`/${user.username}/post/new`)}
+                variant='contained'
+                color='primary'
+              >
+                New
+              </Button>
+            </CardActionArea>
           </CardContent>
         </Card>
         <Card className='profile-tools'>
-          <CardContent>
+          <CardContent sx={{marginBottom: '10%'}}>
+            <h2 className='profile-subtitle'>Listings</h2>
             {tools.length < 1 ? (
               <div>
                 <p>No Tools yet </p>
               </div>
             ) : (
-              <div>
-                {tools.map(tool => (
-                  <Card
-                    key={`tool-${tool.tool_id}`}
-                    sx={{width: '15vw', height: '20vw'}}
-                  >
-                    <CardContent>
-                      <img src={tool.thumbnail} alt='thumbnail' />
-                      <p>{tool.title}</p>
-                      <p>{tool.created_at}</p>
-                      <Button
-                        variant='contained'
-                        color='error'
-                        onClick={handleDelete}
-                      >
-                        <CancelIcon />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className='profile-tools-list'>
+                <div className='scroll'>
+                  {tools.map(tool => (
+                    <aside className='aside-spacing'>
+                      <ToolsCard
+                        key={`profile-tool-key${tool.tool_id}`}
+                        tool={tool}
+                        reloadTools={getTools}
+                      />
+                    </aside>
+                  ))}
+                </div>
               </div>
             )}
+          </CardContent>
+          <CardActionArea
+            sx={{width: '10%', position: 'absolute', bottom: '5%', right: '5%'}}
+          >
             <Button
               onClick={() => navigate(`/${user.username}/tools/new`)}
               variant='contained'
@@ -134,7 +141,7 @@ export default function Profile({user}) {
             >
               New
             </Button>
-          </CardContent>
+          </CardActionArea>
         </Card>
       </div>
     </div>
