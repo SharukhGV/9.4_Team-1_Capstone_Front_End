@@ -22,6 +22,7 @@ function ToolsNewForm({user}) {
   const [images, setImages] = useState([]);
   const [tool, setTool] = useState({
     user_id: user.user_id,
+    created_by:user.username,
     name: '',
     condition: '',
     price: 0,
@@ -48,7 +49,6 @@ function ToolsNewForm({user}) {
       newForm.append(`file-${i}`, image.data);
     });
     for (const key in newTool) {
-      console.log(key)
       newForm.append(key, newTool[key]);
     }
    
@@ -76,7 +76,6 @@ function ToolsNewForm({user}) {
     const updatedImages = [...images];
     updatedImages.splice(i, 1);
     setImages(updatedImages);
-    console.log(images)
   };
   const handleTextChange = event => {
     if (event.target.id === 'price' || event.target.id === 'stock_quantity') {
@@ -91,7 +90,6 @@ function ToolsNewForm({user}) {
       ...tool,
       condition: e.target.value,
     });
-    console.log(e.target.value);
   };
   const handleSubmit = event => {
     event.preventDefault();
