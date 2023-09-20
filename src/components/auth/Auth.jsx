@@ -62,6 +62,12 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
     }
   };
 
+  const handleDob =(newValue)=>{
+    setNewUser({
+      ...newUser,
+      dob:`${newValue.$M + 1}/${newValue.$D}/${newValue.$y}`
+    })
+  }
   function handleSignup(event) {
     event.preventDefault();
     if (newUser.password !== newUser.confirm_password) {
@@ -232,15 +238,8 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                 format='MM/DD/YYYY'
                 formatDensity='spacious'
                 value={dob}
-                onChange={(newValue) => setDob(newValue)} />
-                {/* <TextField
-                  variant='standard'
-                  label='DOB'
-                  style={{width: '340px'}}
-                  name='dob'
-                  onChange={handleSignupText}
-                  //apply way for date to be entered mui has 
-                /> */}
+                onChange={(newValue)=>handleDob(newValue)} />
+                
                 <TextField
                   required
                   variant='standard'

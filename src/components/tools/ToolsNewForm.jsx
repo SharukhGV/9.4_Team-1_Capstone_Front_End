@@ -52,15 +52,15 @@ function ToolsNewForm({user}) {
       newForm.append(key, newTool[key]);
     }
    
-    // axios
-    //   .post(`${API}/tools`, newForm, {
-    //     headers: {'Content-Type': 'multipart/form-data'},
-    //   })
-    //   .then(response => {
-    //     navigate(-1)
-    //     console.log(response.data);
-    //   })
-    //   .catch(e => console.error('catch', e));
+    axios
+      .post(`${API}/tools`, newForm, {
+        headers: {'Content-Type': 'multipart/form-data'},
+      })
+      .then(response => {
+        navigate(-1)
+        console.log(response.data);
+      })
+      .catch(e => console.error('catch', e));
   };
   function handleImages(event) {
     setImages([
@@ -77,11 +77,12 @@ function ToolsNewForm({user}) {
     updatedImages.splice(i, 1);
     setImages(updatedImages);
   };
+  
   const handleTextChange = event => {
-    if (event.target.id === 'price' || event.target.id === 'stock_quantity') {
-      setTool({...tool, [event.target.id]: Number(event.target.value)});
+    if (event.target.name === 'price' || event.target.name === 'stock') {
+      setTool({...tool, [event.target.name]: Number(event.target.value)});
     } else {
-      setTool({...tool, [event.target.id]: event.target.value});
+      setTool({...tool, [event.target.name]: event.target.value});
     }
   };
 
