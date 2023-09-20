@@ -1,10 +1,8 @@
 import PostsCard from './PostCard';
 
-import {useState} from 'react';
-import {useEffect} from 'react';
+import {useState, useEffect } from 'react';
 import axios from 'axios';
 import './Posts.css';
-import Carousel from 'react-material-ui-carousel';
 import {Card, CardCover, CardContent, CardOverflow, Divider, AspectRatio, Typography} from '@mui/joy';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -21,7 +19,6 @@ function Posts() {
     axios.get(`${API}/posts`)
     .then((response) => {
         setposts(response.data);
-        //console.log(response.data); //succesfull
     })
     .catch(error => console.error('catch', error))
     .finally(() => {
@@ -66,19 +63,19 @@ function Posts() {
   //   updateVisiblePosts();
   // } 
 
-  function prevSlide() {
-    setCurrentPost(prevPost =>
-      prevPost === 0 ? posts.length - 1 : prevPost - 1
-    );
-    updateVisiblePosts();
-  } 
+  // function prevSlide() {
+  //   setCurrentPost(prevPost =>
+  //     prevPost === 0 ? posts.length - 1 : prevPost - 1
+  //   );
+  //   updateVisiblePosts();
+  // } 
 
-  function nextSlide() {
-    setCurrentPost(prevPost =>
-      prevPost === posts.length - 1 ? 0 : prevPost + 1
-    );
-    updateVisiblePosts();
-  } 
+  // function nextSlide() {
+  //   setCurrentPost(prevPost =>
+  //     prevPost === posts.length - 1 ? 0 : prevPost + 1
+  //   );
+  //   updateVisiblePosts();
+  // } 
 
   //console.log(posts)
   //theres also post.category

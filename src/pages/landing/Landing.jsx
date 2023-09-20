@@ -43,7 +43,7 @@ export default function Landing({setModal}) {
       </header>
       <br />
       <Posts />
-      {/* <Tools /> */}
+      <Tools />
     </div>
   );
 }
