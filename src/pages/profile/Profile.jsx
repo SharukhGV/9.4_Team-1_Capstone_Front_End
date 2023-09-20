@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {Card, CardContent, Button} from '@mui/material';
+import {Card, CardContent, Button, CardActionArea} from '@mui/material';
 import ToolsCard from '../../components/tools/ToolsCard';
 import profile_pic from '../../assets/blank_profile.jpeg';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -13,27 +13,24 @@ export default function Profile({user}) {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [tools, setTools] = useState([]);
-
-  const handleDelete = e => {
-    console.log(e.target.name)
-    // axios.delete(`${API}/tools`);
-  };
+  const [updatePost, setUpdatePost] = useState(false)
+  const [updateTool, setUpdateTool] = useState(false)
   useEffect(() => {
-    console.log(user);
-    const getPosts = () => {
-      axios.get(`${API}/posts/${user.user_id}`).then(res => console.log(res));
-      // setPosts(data)
-    };
-
-    const getTools = () => {
-      axios.get(`${API}/tools/${user.user_id}`).then(res => {
-        console.log(res);
-        setTools(res.data);
-      });
-    };
-    getPosts();
     getTools();
-  }, []);
+  }, [updateTool]);
+  useEffect(()=>{
+    getPosts()
+  },[updatePost])
+  const getPosts = () => {
+    axios.get(`${API}/posts/${user.user_id}`).then(res => console.log(res));
+    // setPosts(data)
+  };
+
+  const getTools = () => {
+    axios.get(`${API}/tools/${user.user_id}`).then(res => {
+      setTools(res.data);
+    });
+  };
   return (
     <div>
       <Card
@@ -73,7 +70,9 @@ export default function Profile({user}) {
       </Card>
       <div className='users-posts-and-tools'>
         <Card className='profile-posts'>
-          <CardContent>
+          <CardContent sx={{marginBottom: '10%'}}>
+            <h2 className='profile-subtitle'>Posts</h2>
+
             {posts.length < 1 ? (
               <div>
                 <p>No Post yet </p>
@@ -91,43 +90,51 @@ export default function Profile({user}) {
                 ))}
               </div>
             )}
-            <Button
-              onClick={() => navigate(`/${user.username}/post/new`)}
-              variant='contained'
-              color='primary'
+
+            <CardActionArea
+              sx={{
+                width: '10%',
+                position: 'absolute',
+                bottom: '5%',
+                right: '5%',
+              }}
             >
-              New
-            </Button>
+              <Button
+                onClick={() => navigate(`/${user.username}/post/new`)}
+                variant='contained'
+                color='primary'
+              >
+                New
+              </Button>
+            </CardActionArea>
           </CardContent>
         </Card>
         <Card className='profile-tools'>
-          <CardContent>
+          <CardContent sx={{marginBottom: '10%'}}>
+            <h2 className='profile-subtitle'>Listings</h2>
             {tools.length < 1 ? (
               <div>
                 <p>No Tools yet </p>
               </div>
             ) : (
-              <div>
-                {tools.map(tool => (
-                  <ToolsCard
-                    key={`profile-tool-key${tool.tool_id}`}
-                    tool={tool}
-                  />
-                  // <Card
-                  //   key={`tool-${tool.tool_id}`}
-                  //   sx={{width: '15vw', height: '20vw'}}
-                  // >
-                  //   <CardContent>
-                  //     <img src={tool.thumbnail} alt='thumbnail' />
-                  //     <p>{tool.title}</p>
-                  //     <p>{tool.created_at}</p>
-                    
-                  //       <CancelIcon  name={tool.tool_id} onClick={handleDelete}/>
-                  //   </CardContent>
-                  // </Card>
-                ))}
+              <div className='profile-tools-list'>
+                <div className='scroll' >
+                  {tools.map(tool => (
+                    <aside className='aside-tool'>
+                      <ToolsCard
+                        key={`profile-tool-key${tool.tool_id}`}
+                        tool={tool}
+                        reloadTools={getTools}
+                      />
+                    </aside>
+                  ))}
+                </div>
               </div>
             )}
+          </CardContent>
+          <CardActionArea
+            sx={{width: '10%', position: 'absolute', bottom: '5%', right: '5%'}}
+          >
             <Button
               onClick={() => navigate(`/${user.username}/tools/new`)}
               variant='contained'
@@ -135,7 +142,7 @@ export default function Profile({user}) {
             >
               New
             </Button>
-          </CardContent>
+          </CardActionArea>
         </Card>
       </div>
     </div>

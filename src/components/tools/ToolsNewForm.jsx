@@ -48,17 +48,19 @@ function ToolsNewForm({user}) {
       newForm.append(`file-${i}`, image.data);
     });
     for (const key in newTool) {
+      console.log(key)
       newForm.append(key, newTool[key]);
     }
-    axios
-      .post(`${API}/tools`, newForm, {
-        headers: {'Content-Type': 'multipart/form-data'},
-      })
-      .then(response => {
-        navigate(-1)
-        console.log(response.data);
-      })
-      .catch(e => console.error('catch', e));
+   
+    // axios
+    //   .post(`${API}/tools`, newForm, {
+    //     headers: {'Content-Type': 'multipart/form-data'},
+    //   })
+    //   .then(response => {
+    //     navigate(-1)
+    //     console.log(response.data);
+    //   })
+    //   .catch(e => console.error('catch', e));
   };
   function handleImages(event) {
     setImages([

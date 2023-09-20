@@ -29,12 +29,41 @@
   margin-bottom: 5%;
   justify-content: space-evenly;
 }
-
+.profile-subtitle{
+  margin-top: 0;
+  text-decoration: underline;
+}
 .profile-posts {
   width: 50%;
   margin-right: 2.5%;
+  position: relative;
 }
 .profile-tools {
   width: 50%;
   margin-left: 2.5%;
+  position: relative;
+}
+.profile-tools-list{
+  position: relative;
+  overflow: scroll;
+  z-index:1;
+  margin:0;
+  padding:0;
+  padding-bottom: 10px;
+  width: 100%;
+}
+.aside-tool{
+  margin-right:10px;
+  margin-bottom: 10px;
+}
+.scroll{
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0;
+  font-size: 0;
+  min-width:fit-content;
+  display: flex;
+  /* width:140%; */
+  justify-content: space-evenly;
+
 }
