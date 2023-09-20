@@ -14,12 +14,17 @@ const API = import.meta.env.VITE_REACT_APP_API_URL;
 export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies();
-  const [authError, setAuthError] = useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
   const [dob, setDob] = useState(null);
+  const [signupError, setSignupError] = useState({
+    email:'',
+    password:''
+  })
+  const [loginError, setLoginError] = useState({
+    email:'',
+    password:''
+  })
 
-  console.log(dob)//works but recieved data is annoying 
+
 
   const [user, setUser] = useState({
     email: '',
@@ -38,12 +43,10 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
   });
 
   const handleLoginText = (event) => {
-    ///event.preventDefault();
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
-
     if (event.target.key === 'Enter') {
       handleLogin();
     }
@@ -54,7 +57,6 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
       ...newUser,
       [event.target.name]: event.target.value,
     });
-
     if (event.target.key === 'Enter') {
       handleSignup();
     }
@@ -63,12 +65,15 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
   function handleSignup(event) {
     event.preventDefault();
     if (newUser.password !== newUser.confirm_password) {
-      setAuthError(true)
-      setPasswordError('passwords do not match')
-      //setSignupError({
-      //   password: 'passwords do not match',
-      //   confirm_password: 'passwords do not match',
-      // });
+      setSignupError({
+        password:'Passwords must match'
+      })
+      setTimeout(()=>{
+        setSignupError({
+          email:'',
+          password:''
+        })
+      }, 5000)
     } else {
       axios
         .post(`${API}/auth/signup`, newUser)
@@ -77,27 +82,23 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
           handleSignIn(res.data.user);
           setModal(false);
           navigate(`/home`);
-          // navigate(`/home/:${user.username}`);
-          //console.log(res.data.message)
         })
         .catch(error => {
-          console.log(error);
-          //setSignupError(err);
+          setSignupError({
+            email:error.response.data.error
+          })
+          setTimeout(()=>{
+            setSignupError({
+              email:'',
+              password:''
+            })
+          }, 5000)
         });
     }
   }
 
   function handleLogin(event) {//itinerary
     event.preventDefault();
-
-    const existingUser = users.find((aUser) => aUser.email.toLowerCase() === user.email.toLowerCase());
-
-    if (!existingUser) {
-      setAuthError(true);
-      setEmailError('Oops, not a registered user yet');
-      return;
-    } 
-
     axios
       .post(`${API}/auth/login`, user)
       .then(res => {
@@ -105,13 +106,24 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
         handleSignIn(res.data.user);
         setModal(false);
         navigate(`/home`);
-        //navigate(`/home/:${user.username}`); 
-        //console.log(res.data.message)
       })
       .catch(error => {
-        console.log(error);
-        setAuthError(true);
-        setPasswordError('Wrong password.');
+        if(error.response.data.error.includes('register')){
+          setLoginError({
+            email:error.response.data.error
+          })
+        }else{
+          setLoginError({
+            password:error.response.data.error
+          })
+        }
+        setTimeout(()=>{
+          setLoginError({
+            email:'',
+            password:''
+          })
+        }, 5000)
+
       });
   }
 
@@ -158,27 +170,25 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
               <form className='login-form' onSubmit={handleLogin}>
                 <TextField
                   required
-                  value={user.email}
                   label='Email'
                   variant='standard'
                   sx={{width: '340px'}}
                   name='email'
                   className='input'
                   onChange={handleLoginText}
-                  error={authError}
-                  helperText={authError ? emailError : ''}
+                  error={Boolean(loginError.email)}
+                  helperText={loginError.email}
                 />
                 <TextField
                   required
-                  value={user.password}
                   label='Password'
                   variant='standard'
                   type='password'
                   name='password'
                   onChange={handleLoginText}
                   sx={{width: '340px'}}
-                  error={authError}
-                  helperText={authError ? passwordError : ''}
+                  error={Boolean(loginError.password)}
+                  helperText={loginError.password}
                   //apply eyeball
                 />
                 <button type='submit' className='login-btn'>
@@ -208,6 +218,8 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   style={{width: '340px'}}
                   name='email'
                   onChange={handleSignupText}
+                  error={Boolean(signupError.email)}
+                  helperText={signupError.email}
                   //needs to be a valid email address either containing an @ or using a library that checks for validity
                 />
                 <DatePicker
@@ -220,14 +232,6 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                 formatDensity='spacious'
                 value={dob}
                 onChange={(newValue) => setDob(newValue)} />
-                {/* <TextField
-                  variant='standard'
-                  label='DOB'
-                  style={{width: '340px'}}
-                  name='dob'
-                  onChange={handleSignupText}
-                  //apply way for date to be entered mui has 
-                /> */}
                 <TextField
                   required
                   variant='standard'
@@ -253,8 +257,8 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   style={{width: '340px'}}
                   name='password'
                   onChange={handleSignupText}
-                  error={authError}
-                  helperText={authError ? passwordError : ''}
+                  error={Boolean(signupError.password)}
+                  helperText={signupError.password}
                 />
                 <TextField
                   required
@@ -264,8 +268,8 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
                   style={{width: '340px'}}
                   name='confirm_password'
                   onChange={handleSignupText}
-                  error={authError}
-                  helperText={authError ? passwordError : ''}
+                  error={Boolean(signupError.password)}
+                  helperText={signupError.password}
                 />
                 <button type='submit' className='signup-btn'>
                   Sign Up{' '}

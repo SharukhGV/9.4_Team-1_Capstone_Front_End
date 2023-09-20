@@ -18,6 +18,7 @@ export default function NewPost({user}) {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [post, setPost] = useState({
+    created_by:user.username,
     title: '',
     category: '',
     body: '',
@@ -41,7 +42,6 @@ export default function NewPost({user}) {
         headers: {'Content-Type': 'multipart/form-data'},
       })
       .then(res => {
-        console.log(res.data);
         navigate(`/${user.username}/post/${res.data.createdPost.post_id}`, { state: { title: post.title, category: post.category, body: post.body, file: file }});
       })
       .catch(error => console.log(error));
