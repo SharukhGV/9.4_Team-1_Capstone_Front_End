@@ -97,7 +97,7 @@ export default function NewPost({ user }) {
     formData.append('category', post.category);
     formData.append('body', post.body);
     formData.append('user_id', post.user_id);
-
+    formData.append('created_by', post.created_by);
     axios
       .post(`${API}/posts`, formData, {
         headers: {'Content-Type': 'multipart/form-data'},
