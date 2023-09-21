@@ -104,7 +104,7 @@ export default function NewPost({ user }) {
       })
       .then(res => {
         console.log(res.data);
-        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`, { state: { title: post.title, category: post.category, body: post.body, file: file }});
+        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`, { state: { title: post.title, category: post.category, body: post.body,  }});
       })
       .catch(error => console.log(error));
   };
@@ -207,15 +207,21 @@ export default function NewPost({ user }) {
       <div className='preview-modal'>
         <Modal open={openPreview} onClose={() => setOpenPreview(false)}>
           <ModalDialog layout='fullscreen' >
+            {/* <div className='top-btns'> */}
+            <button className='back-btn' onClick={() => setOpenPreview(false)} > Back to editing </button>
+            <button className='x' onClick={() => setOpenPreview(false)} > &times; </button>
+            {/* </div> */}
+            <br />
             <div className='content-preview'>
               <Typography> {post.title} </Typography>
-          
             <div>
             <p> {post.category} </p>
+            <br />
             <img src={selectedFile ? URL.createObjectURL(selectedFile) : null} />
             <p> {post.body} </p>
             </div>
             </div>
+            <button className='post-btn' onClick={sendToServer}> Post </button>
           </ModalDialog>
         </Modal>
       </div>
