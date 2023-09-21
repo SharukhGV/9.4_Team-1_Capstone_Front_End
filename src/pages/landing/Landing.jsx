@@ -1,6 +1,6 @@
 import './landing.css';
 import {useState} from 'react';
-import CatCarousel from '../../components/categories-carousel/CatCarousel';
+import CatCarousel from '../../components/carousels/CatCarousel';
 // import ToolsCard from '../../components/tools/ToolsCard';
 import { Card } from '@mui/joy';
 

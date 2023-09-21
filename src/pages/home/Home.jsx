@@ -10,7 +10,7 @@ import Tools from '../../components/tools/Tools';
 import axios from 'axios';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
-import CatCarousel from '../../components/categories-carousel/CatCarousel';
+import CatCarousel from '../../components/carousels/CatCarousel';
 import cameraImg from '../../assets/cameraImg.png';
 import artistsGraphic from '../../assets/artistsgraphic.jpg';
 import Assesment from '../../components/assesment/Assesment';

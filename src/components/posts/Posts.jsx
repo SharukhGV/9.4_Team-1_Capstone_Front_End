@@ -1,11 +1,9 @@
-import PostsCard from './PostCard';
-
 import {useState, useEffect } from 'react';
 import axios from 'axios';
 import './Posts.css';
-import {Card, CardCover, CardContent, CardOverflow, Divider, AspectRatio, Typography} from '@mui/joy';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import PostsCarousel from '../carousels/postsCarousel';
 
 function Posts() {
   const API = import.meta.env.VITE_REACT_APP_API_URL;
@@ -17,7 +15,6 @@ function Posts() {
     const getPosts = () => {
     axios.get(`${API}/posts`)
     .then((response) => {
-      //console.log(response.data);
       const allPosts = response.data;
       const theVisiblePosts = [
         allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
@@ -46,27 +43,25 @@ function Posts() {
     );
   } 
 
+// can make the category a state and keep changing it i guess
+
   return (
     <>
-    <h4> Top User Posts </h4>
+    <h3> Top Categories </h3>
+    <br />
+    <h4> Painting </h4>
     <div className='slider-container'>
       <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
       { 
-        visiblePosts.map((post, i) => (
-          <Card component='li' variant='solid' key={`post-${i}`} sx={{ height: 119 }}  >
-            <CardOverflow>
-              <AspectRatio ratio='2'>
-              <img loading='lazy' />
-              </AspectRatio>
-            <CardContent>
-              <Typography> {post?.title} </Typography>
-              <Typography> This is post description </Typography>
-              {/* <p> {post?.title || 'Loading...'} </p> */}
-              {/* <p> post description? try typography comp </p> */}
-            </CardContent>
-            </CardOverflow>
-          </Card>
-        ))
+        visiblePosts.map((post, i) => { 
+          if (post.category === 'Paint') {
+          return (
+            <>
+            <PostsCarousel post={post} i={i} />
+            </>
+          )
+          }
+        })
       }
        <button className='arrow' onClick={nextSlide} >
         {' '}
