@@ -26,14 +26,13 @@ function Posts() {
         allPosts[(currentPost + 2) % allPosts.length],
         allPosts[(currentPost + 3) % allPosts.length],
       ];
-      //console.log(theVisiblePosts)
       setVisiblePosts(theVisiblePosts);
       setposts(response.data);
     })
     .catch(error => console.error('catch', error))
   }
   getPosts();
-}, []);
+}, [currentPost, API]);
 
   function prevSlide() {
     setCurrentPost(prevPost =>
