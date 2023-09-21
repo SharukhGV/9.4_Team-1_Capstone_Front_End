@@ -39,49 +39,8 @@ export default function NewPost({ user }) {
     const newSelectedFiles = [...files];
     setSelectedFile(event.target.files[0])
     newSelectedFiles.push(event.target.files[0]);
-    setFiles(newSelectedFiles); 
-    
-    //addPlaceHolder();
+    setFiles(newSelectedFiles);  
   }
-
-  // function prevSlide() {
-  //   setCurrentPlaceholder(prevImg =>
-  //     prevImg === 0 ? placeholders.length - 1 : prevImg - 1
-  //   );
-  // };
-
-  // function nextSlide() {
-  //   setCurrentPlaceholder(prevImg =>
-  //     prevImg === placeholders.length - 1 ? 0 : prevImg + 1
-  //   );
-  // } 
-
-  // const addPlaceHolder = () => {
-  //   if (files.length < placeholders.length) {
-  //     setFiles([...files, null]);
-  //   }
-  // }
-
-  // const removePlaceholder = (index) => {
-  //   const newFiles = [...files];
-  //   newFiles.splice(index, 1);
-  //   setFiles(newFiles);
-  // }
-
-  // function handleFileSelection(event, index) {
-  //   const newSelectedFiles = [...files];
-  //   newSelectedFiles[index] = event.target.files[0];
-  //   setFiles(newSelectedFiles);
-  //   addPlaceHolder();
-  // }
-
-  //apply lazyloading to images & everything possible
-
-  // const visibleImgs = [
-  //   placeholders[currentPlaceholder],
-  //   placeholders[(currentPlaceholder + 1) % placeholders.length],
-  //   //placeholders[(currentPlaceholder + 2) % placeholders.length],
-  // ];
 
   const sendToServer = async event => {
     event.preventDefault(); 
@@ -90,9 +49,7 @@ export default function NewPost({ user }) {
       if (file) {
         formData.append(`file-${index}`, file);
       }
-    })//must be sent as array
-    //does this work for the backend ?
-    // formData.append('files', files); 
+    })
     formData.append('title', post.title);
     formData.append('category', post.category);
     formData.append('body', post.body);
@@ -108,8 +65,6 @@ export default function NewPost({ user }) {
       })
       .catch(error => console.log(error));
   };
-
-  //console.log(post);
 
   const VisuallyHiddenInput = styled('input')`
     clip: rect(0 0 0 0);
@@ -140,12 +95,10 @@ export default function NewPost({ user }) {
             <VisuallyHiddenInput type='file' onChange={handleFileSelection} />
             <Card component='li'>
               <CardCover>
-                {//maybe the issue is that it should be looking fo rlength ? 
+                {
                 selectedFile ? (
                   <div>
                     <img src={URL.createObjectURL(selectedFile)} className='img' />
-                    {/* <img src={URL.createObjectURL(files[currentPlaceholder])} loading='lazy' /> */}
-                    {/* <button onClick={() => removePlaceholder(currentPlaceholder)}> Remove </button> */}
                   </div>
                 ) : (
                   <img src={placeholderImg} loading='lazy' className='img' />
@@ -155,11 +108,6 @@ export default function NewPost({ user }) {
             </Card>
           </Button>
         </div>
-        {/* <button className='arrow'
-        //  onClick={nextSlide}
-         >
-          <KeyboardArrowDownIcon fontSize='large' />
-        </button> */}
       <div>
       <Textarea
         className='textarea'
@@ -191,12 +139,9 @@ export default function NewPost({ user }) {
         </FormControl>
         <div className='bottomRight-actionBtns'>
           <button className='preview-btn' onClick={() => setOpenPreview(true)}
-          // onClick={() => navigate(`/:username/post/preview`,
-          // { state: { title: post.title, category: post.category, body: post.body }})}
           >
             {' '}
             Preview{' '}
-            {/* onclick modal pop up */}
           </button>
           <button className='post-btn' onClick={sendToServer} >
             {' '}

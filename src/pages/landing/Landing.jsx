@@ -123,6 +123,10 @@ export default function Landing({setModal}) {
           }
         })
         }
+        <button className='arrow' onClick={nextSlide} >
+        {' '}
+        <ArrowForwardIosIcon />{' '}
+        </button>
         </div>
       </div>
       <div className='top-category-3'>
@@ -141,6 +145,10 @@ export default function Landing({setModal}) {
           }
         })
         }
+        <button className='arrow' onClick={nextSlide} >
+        {' '}
+        <ArrowForwardIosIcon />{' '}
+        </button>
         </div>
       </div>
       </main>
