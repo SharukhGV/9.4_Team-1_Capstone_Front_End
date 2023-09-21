@@ -17,7 +17,7 @@ import placeholderImg from '../../assets/placeholder-img.jpeg';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-import { Textarea, Card, Button, CardCover, CardContent, Modal, Sheet, ModalDialog } from '@mui/joy';
+import { Textarea, Card, Button, CardCover, CardContent, Modal, Sheet, ModalDialog, Typography } from '@mui/joy';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -135,26 +135,20 @@ export default function NewPost({ user }) {
       />
       {/* <br /> */}
       <div className='content-sect'>
-      <div className='img-slider-container'>
-        {/* <button
-        //  onClick={prevSlide}
-          className='arrow'>
-          <KeyboardArrowUpIcon fontSize='large' />
-        </button> */}
         <div>
-          <Button component='label' variant='contained' href='#file-upload'>
+          <Button component='label' variant='contained' href='#file-upload' accept='image/*'>
             <VisuallyHiddenInput type='file' onChange={handleFileSelection} />
             <Card component='li'>
               <CardCover>
                 {//maybe the issue is that it should be looking fo rlength ? 
                 selectedFile ? (
                   <div>
-                    <img src={URL.createObjectURL(selectedFile)} />
+                    <img src={URL.createObjectURL(selectedFile)} className='img' />
                     {/* <img src={URL.createObjectURL(files[currentPlaceholder])} loading='lazy' /> */}
                     {/* <button onClick={() => removePlaceholder(currentPlaceholder)}> Remove </button> */}
                   </div>
                 ) : (
-                  <img src={placeholderImg} loading='lazy' />
+                  <img src={placeholderImg} loading='lazy' className='img' />
                 )}
               </CardCover>
               
@@ -166,7 +160,6 @@ export default function NewPost({ user }) {
          >
           <KeyboardArrowDownIcon fontSize='large' />
         </button> */}
-      </div>
       <div>
       <Textarea
         className='textarea'
@@ -214,12 +207,14 @@ export default function NewPost({ user }) {
       <div className='preview-modal'>
         <Modal open={openPreview} onClose={() => setOpenPreview(false)}>
           <ModalDialog layout='fullscreen' >
-            {/* <button onClick={setOpenPreview(false)}> &times; </button> */}
-            {/* <h3> {post.title} </h3> */}
+            <div className='content-preview'>
+              <Typography> {post.title} </Typography>
+          
             <div>
-            {/* <p> {post.category} </p>
-            <img src={selectedFile} />
-            <p> {post.body} </p> */}
+            <p> {post.category} </p>
+            <img src={selectedFile ? URL.createObjectURL(selectedFile) : null} />
+            <p> {post.body} </p>
+            </div>
             </div>
           </ModalDialog>
         </Modal>

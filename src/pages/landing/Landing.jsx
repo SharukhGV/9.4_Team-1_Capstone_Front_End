@@ -6,11 +6,9 @@ import PostsCarousel from '../../components/carousels/postsCarousel';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-// import ToolsCard from '../../components/tools/ToolsCard';
 import { Card } from '@mui/joy';
 
 import ArtistsGraphic from '../../assets/artistsgraphic.jpg';
-import Tools from '../../components/tools/Tools';
 import Posts from '../../components/posts/Posts';
 
 export default function Landing({setModal}) {
