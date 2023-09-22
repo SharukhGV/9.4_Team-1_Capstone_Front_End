@@ -45,7 +45,7 @@ export default function Profile({user}) {
           <div className='profile-card'>
             <img
               className='profile-img'
-              src={user.profile_pic}
+              src={user.profile_pic?user.profile_pic:profile_pic}
               // src={`https://craftopia-media-bucket.s3.us-east-2.amazonaws.com/felizj171-profile-pic`}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
@@ -56,16 +56,16 @@ export default function Profile({user}) {
               <p>{user.aboutme}</p>
             </aside>
           </div>
-          {user.username === username && (
-            <Button
-              onClick={() => navigate(`/${username}/profile/edit`)}
-              variant='contained'
-              color='warning'
-            >
-              Edit
-            </Button>
-          )}
         </CardContent>
+        {user.username === username && (
+          <Button
+            onClick={() => navigate(`/${username}/profile/edit`)}
+            variant='contained'
+            color='warning'
+          >
+            Edit
+          </Button>
+        )}
       </Card>
       <div className='users-posts-and-tools'>
         <Card className='profile-posts'>
@@ -80,10 +80,11 @@ export default function Profile({user}) {
               <div className='profile-posts-list'>
                 <div className='scroll'>
                   {posts.map(post => (
-                    <aside className='aside-spacing' key={`profile-post-${post.post_id}`}>
-                      <PostCard
-                        post={post}
-                      />
+                    <aside
+                      className='aside-spacing'
+                      key={`profile-post-${post.post_id}`}
+                    >
+                      <PostCard post={post} />
                     </aside>
                   ))}
                 </div>

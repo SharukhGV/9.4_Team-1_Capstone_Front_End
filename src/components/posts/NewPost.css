@@ -1,17 +1,55 @@
-main h4 {
-    font-family: 'Bellota', cursive;
+main{
+    width:85%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+main h1 {
+    font-family: 'Bellota';
     color: #800080;
     font-size: 22px;
 }
 
-main p {
-    font-family: 'Lato';
+main h3 {
+    font-family: 'Bellota';
     font-size: 17px;
     color: #3c415c;
 }
 
 .content-sect {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 7px;
+position: relative;
+}
+.post-title{
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+}
+.post-body{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display:flex;
+    flex-direction: row;
+}
+.img-slider-container{
+    /* border:solid #800080 1px;
+    padding:1%; */
+    width:20%;
+    /* max-height: 40vh; */
+    /* overflow: scroll; */
+}
+
+.add-svg{
+    width:60%;
+    height:auto;
+    margin-top:10%;
+    color: #800080 ;
+}
+.caption{
+    margin-top:0;
+}
+.bottomRight-actionBtns{
+   
 }
