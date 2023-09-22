@@ -11,7 +11,12 @@ main p {
 }
 
 .content-sect {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+    /* display: flex;
+    flex-direction: row; */
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
     gap: 7px;
 }
+
+
+
