@@ -16,6 +16,13 @@
   justify-content: space-between;
   margin-bottom: 5%;
 }
+.category{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5%;
+}
+
 .images {
   display: flex;
   flex-wrap: wrap;
