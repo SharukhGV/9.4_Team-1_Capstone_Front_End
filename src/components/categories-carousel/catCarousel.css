@@ -15,12 +15,6 @@
   color: #1a237e;
 }
 
-.imgDiv {
-  position: relative;
-  text-align: center;
-  flex: 1;
-}
-
 .categoryImg {
   position: relative;
   /* width: 100%; */

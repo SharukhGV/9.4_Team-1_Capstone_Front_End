@@ -1,0 +1,17 @@
+.slider-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 19px;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+h4 {
+  font-family: 'Roboto';
+  color: #1a237e;
+  font-weight: lighter;
+  font-size: large;
+}
