@@ -182,7 +182,7 @@ export default function NewPost({user}) {
           </div>
         </div>
       </div>
-      <div className=''>
+      <div className='post-buttons'>
         <button className='preview-btn' onClick={() => setOpenPreview(true)}>
           {' '}
           Preview
