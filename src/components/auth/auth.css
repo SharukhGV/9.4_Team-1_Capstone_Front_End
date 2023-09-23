@@ -28,6 +28,7 @@
   padding-bottom: 5px;
 
 }
+.login-btn:hover,
 .signup-btn:hover{
   /* background: linear-gradient(to bottom, #7ca0e7, #1a237e); */
 background-color: #0b0080de;
