@@ -16,7 +16,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import placeholderImg from '../../assets/placeholder-img.jpeg';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
+import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 import { Textarea, Card, Button, CardCover, CardContent, Modal, Sheet, ModalDialog, Typography } from '@mui/joy';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
@@ -152,6 +152,7 @@ export default function NewPost({ user }) {
       <div className='preview-modal'>
         <Modal open={openPreview} onClose={() => setOpenPreview(false)}>
           <ModalDialog layout='fullscreen' >
+            <img className='logo' src={craftopiaLogo} />
             {/* <div className='top-btns'> */}
             <button className='back-btn' onClick={() => setOpenPreview(false)} > Back to editing </button>
             <button className='x' onClick={() => setOpenPreview(false)} > &times; </button>
@@ -162,7 +163,7 @@ export default function NewPost({ user }) {
             <div>
             <p> {post.category} </p>
             <br />
-            <img src={selectedFile ? URL.createObjectURL(selectedFile) : null} />
+            {/* <img src={selectedFile ? URL.createObjectURL(selectedFile) : null} /> */}
             <p> {post.body} </p>
             </div>
             </div>

@@ -28,40 +28,16 @@ export default function NavBar({
           {' '}
           <img src={craftopiaLogo} className='nav-logo' />{' '}
         </Link>
-        {/* <Link className='explore-link' to='/posts' >
+        <Link className='about-link' to='/about' >
           {' '}
-          Explore{' '}
-        </Link> */}
+          About{' '}
+        </Link>
       </div>
       <div className='nav-right-container'>
-        {/* <div>
-          <button className='search-btn'>
-            {' '}
-            <img src={searchIcon} className='search-icon' />
-          </button>
-          <Input
-            type='text'
-            placeholder='Search...'
-            value={searchText}
-            onChange={handleSearchInput}
-            size='xsmall'
-            sx={{width: '190px', marginBottom: '-4px'}}
-            inputProps={{
-              style: {
-                fontFamily: 'Roboto',
-                fontSize: '17px',
-                marginBottom: '-2px',
-              },
-            }} */}
-            {/* // '&::placeholder': { */}
-            {/* //   fontFamily: 'Roboto',
-            //   fontSize: '12px',
-              
-              
-            // }}}
-        //     className='search-input'
-        //   />
-        // </div> */}
+        <div>
+          <button className='search-btn'> <img src={searchIcon} className='search-icon' /> </button>
+          <Input type='text' placeholder='Search...' value={searchText} onChange={handleSearchInput} size='xsmall' sx={{width: '190px', marginBottom: '-4px'}} inputProps={{ style: { fontSize: '17px', marginBottom: '-2px' }}} />
+        </div>
         {!user && (
           <aside className='auth-btns'>
             <button

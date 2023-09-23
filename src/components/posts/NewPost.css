@@ -18,5 +18,10 @@ main p {
     gap: 7px;
 }
 
+.logo {
+    border-radius: 50%;
+    width: 79px;
+    margin: 7px;
+}
 
 

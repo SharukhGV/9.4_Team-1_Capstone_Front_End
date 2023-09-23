@@ -16,7 +16,7 @@ import ToolsDetails from './components/tools/ToolsDetails';
 import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import PostPreview from './components/posts/PostPreview';
-import Explore from './pages/explore/Explore'
+import About from './pages/about/About';
 
 import './App.css';
 
@@ -35,6 +35,7 @@ function App() {
   const [user, setUser] = useState(undefined);
   const [cookies, removeCookie] = useCookies();
   const [error, setError] = useState();
+  const [userInterests, setUserInterests] = useState()
 
   useEffect(() => {
     checkToken();
@@ -88,6 +89,7 @@ function App() {
             path='/'
             element={<Landing modal={modal} setModal={setModal} />}
           />
+          <Route path='/about' element={<About />} />
           <Route path='/home' element={<Home user={user} />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
