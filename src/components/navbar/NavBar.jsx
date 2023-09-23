@@ -3,8 +3,9 @@ import {Link} from 'react-router-dom';
 import './navbar.css';
 import BasicPopover from '../../assets/mui/popover/popover';
 import {Input} from '@mui/material';
-
-import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
+import craftopiaLogo from '../../assets/craftLogo.png';
+import craftopiaLogo2 from '../../assets/craftLogo2.png';
+import craftEmpty from '../../assets/craftLogoempty.png';
 import searchIcon from '../../assets/search.png';
 import Auth from '../../components/auth/Auth';
 
@@ -26,7 +27,7 @@ export default function NavBar({
       <div className='top-left'>
         <Link to='/home'>
           {' '}
-          <img src={craftopiaLogo} className='nav-logo' />{' '}
+          <img style={{maxWidth:"100px",maxHeight:"100px"}} src={craftopiaLogo2} className='nav-logo' />{' '}
         </Link>
         {/* <Link className='explore-link' to='/posts' >
           {' '}
