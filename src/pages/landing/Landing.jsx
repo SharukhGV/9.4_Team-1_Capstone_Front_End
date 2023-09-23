@@ -5,7 +5,7 @@ import CatCarousel from '../../components/carousels/CatCarousel';
 import PostsCarousel from '../../components/carousels/postsCarousel';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import{v4 as uuid} from 'uuid'
 import { Card } from '@mui/joy';
 
 import ArtistsGraphic from '../../assets/artistsgraphic.jpg';
@@ -94,9 +94,7 @@ export default function Landing({setModal}) {
           //console.log(post)
           if (post.category === 'Paint') {
           return (
-            <>
-            <PostsCarousel post={post} i={i} />
-            </>
+            <PostsCarousel post={post} key={uuid} />
           )
           }
         })

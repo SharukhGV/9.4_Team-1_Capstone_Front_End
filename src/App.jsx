@@ -139,7 +139,7 @@ function App() {
 
             <Route
               path='/:username/tools/:tools_id'
-              element={<ToolsUserDetails user={user} />}
+              element={<ToolsDetails user={user} />}
             />
 
             <Route

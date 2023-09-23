@@ -1,10 +1,9 @@
 import {Card, CardCover, CardContent, CardOverflow, Divider, AspectRatio, Typography} from '@mui/joy';
 
-export default function PostsCarousel({post,i}) {
+export default function PostsCarousel({post}) {
 
     return (
-        <>
-        <Card component='li' variant='solid' key={`post-${i}`} sx={{ height: 119 }}  >
+        <Card component='li' variant='solid' sx={{ height: 119 }}  >
             <CardOverflow>
               <AspectRatio ratio='2'>
               <img loading='lazy' />
@@ -17,6 +16,5 @@ export default function PostsCarousel({post,i}) {
                 </CardContent>
             </CardOverflow>
         </Card>
-        </>
     )
 }
