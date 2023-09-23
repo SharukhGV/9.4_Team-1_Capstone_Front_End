@@ -25,15 +25,15 @@ import {
   Modal,
   Sheet,
   ModalDialog,
+  Typography,
 } from '@mui/joy';
-import Add from '../../assets/add.svg';
-import './newPost.css';
+
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function NewPost({user}) {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
-  const [openPreview, setOpenPreview] = useState(false)
+  const [openPreview, setOpenPreview] = useState(false);
   const [post, setPost] = useState({
     created_by: user.username,
     title: '',
@@ -78,7 +78,7 @@ export default function NewPost({user}) {
             title: post.title,
             category: post.category,
             body: post.body,
-            file: file,
+            file: files,
           },
         });
       })
@@ -140,20 +140,24 @@ export default function NewPost({user}) {
           <Textarea
             className='textarea'
             minRows={11}
-            sx={{width: '80%', marginRight: '5%', textAlign:'left'}}
+            sx={{width: '80%', marginRight: '5%', textAlign: 'left'}}
             placeholder='Share your creative know-how...'
             onChange={event => setPost({...post, body: event.target.value})}
           />
           <div className='img-slider-container'>
             <h5>Add Images</h5>
-            {files.map((img,i)=>(
+            {files.map((img, i) => (
               <aside key={`post-image-upload-preview${i}`}>
-                <img src={img.preview} alt={`fig-${i}`} style={{width:'100%', height:'auto'}}/>
-                <p className='caption'><em>figure - {i}</em></p>
+                <img
+                  src={img.preview}
+                  alt={`fig-${i}`}
+                  style={{width: '100%', height: 'auto'}}
+                />
+                <p className='caption'>
+                  <em>figure - {i}</em>
+                </p>
               </aside>
-            ))
-
-            }
+            ))}
             <Card
               sx={{
                 width: '50%',
@@ -202,6 +206,11 @@ export default function NewPost({user}) {
             <img src={selectedFile} />
             <p> {post.body} </p> */}
             </div>
+
+            <button className='post-btn' onClick={sendToServer}>
+              {' '}
+              Post{' '}
+            </button>
           </ModalDialog>
         </Modal>
       </div>

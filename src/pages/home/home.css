@@ -17,12 +17,12 @@
   font-size: larger;
 }
 
-.home-header {
-  /* display: flex;
+/* .home-header {
+  display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center; */
-}
+  text-align: center;
+} */
 
 .assesment-p {
   font-family: 'Open Sans';
@@ -45,10 +45,21 @@
   background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   border-radius: 7px;
-  height: 27px;
+  height: 47px;
   width: 104px;
   border-style: none;
   font-family: 'Open Sans';
+}
+.take-assesment-btn:hover {
+  background: linear-gradient(to bottom, #7fdf70, #66cc6b);
+  color: white;
+  border-radius: 7px;
+  height: 47px;
+  width: 104px;
+  border-style: none;
+  font-family: 'Open Sans';
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
 }
 
 .post-ctas {
@@ -93,11 +104,23 @@
   background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   border-radius: 7px;
-  height: 27px;
+  height: 47px;
   width: 104px;
   border-style: none;
   font-family: 'Open Sans';
   align-self: center;
+}
+
+.cta-btn:hover {
+  background: linear-gradient(to bottom, #b8ecaf, #62cd68);
+  color: white;
+  border-radius: 7px;
+  height: 47px;
+  width: 104px;
+  border-style: none;
+  font-family: 'Open Sans';
+  align-self: center;
+  cursor: pointer;
 }
 
 .close-modal {

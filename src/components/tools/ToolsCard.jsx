@@ -1,6 +1,5 @@
 import * as React from 'react';
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
 import {Button, CardActionArea, CardActions} from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -8,8 +7,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import './toolsCard.css';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
-export default function ToolsCard({tool, reloadTools}) {
-  const {username} = useParams();
+export default function ToolsCard({toolId,user, userId, tool, reloadTools}) {
+  // const navigate = useNavigate();
   const handleDelete = () => {
     console.log(tool.tool_id);
     axios
@@ -57,7 +56,7 @@ export default function ToolsCard({tool, reloadTools}) {
         </CardContent>
       </CardActionArea>
 
-      {tool.created_by === username ? (
+      {tool.created_by === user.username ? (
         <CardActions>
           {/* sx={{position:'relative', zIndex:2}} */}
           <Button size='small' color='primary'>

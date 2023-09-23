@@ -22,6 +22,7 @@ import PostPreview from './components/posts/PostPreview';
 import Explore from './pages/explore/Explore';
 
 import './App.css';
+import ToolsUsers from './components/tools/ToolsUsers';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -103,10 +104,7 @@ function App() {
             element={<Landing modal={modal} setModal={setModal} />}
           />
           <Route path='/home' element={<Home user={user} />} />
-          <Route path='/post/:id' element={<Post />} />
-          {/* create public profile view for outside viewers */}
-          <Route path='/tools' element={<ToolsDetails />} />
-          <Route path='/tools/:id' element={<ToolsUserDetails />} />
+
           <Route element={<ProtectedRoute user={user} />}>
             {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path='/:username/post/:id' element={<Post user={user} />} />
@@ -131,8 +129,8 @@ function App() {
               element={<ProfileEdit user={user} refreshUser={checkToken} />}
             />
             <Route
-              path='/:username/tools/'
-              element={<ToolsDetails user={user} />}
+              path='/:username/tools'
+              element={<ToolsUsers user={user} />}
             />
             <Route
               path='/:username/tools/new'
@@ -140,15 +138,20 @@ function App() {
             />
 
             <Route
-              path='/:username//tools/:id'
+              path='/:username/tools/:tools_id'
               element={<ToolsUserDetails user={user} />}
             />
 
             <Route
-              path='/:username/tools/:id/edit'
+              path='/:username/tools/:tools_id/edit'
               element={<ToolsEditForm user={user} />}
             />
-          </Route>
+          </Route>          
+          
+          <Route path='/post/:id' element={<Post />} />
+          {/* create public profile view for outside viewers */}
+          {/* <Route path='/tools' element={<Tools />} />
+          <Route path='/tools/:tools_id' element={<ToolsUserDetails />} /> */}
         </Routes>
       </main>
       <Footer />
