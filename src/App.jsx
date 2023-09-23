@@ -3,7 +3,10 @@ import {Routes, Route, Navigate, Outlet} from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import axios from 'axios';
 
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 import NavBar from './components/navbar/NavBar';
+import Cart from './components/cart/Cart';
 import Landing from './pages/landing/Landing';
 import Footer from './components/footer/Footer';
 import Home from './pages/home/Home';
@@ -16,7 +19,7 @@ import ToolsDetails from './components/tools/ToolsDetails';
 import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import PostPreview from './components/posts/PostPreview';
-import Explore from './pages/explore/Explore'
+import Explore from './pages/explore/Explore';
 
 import './App.css';
 
@@ -35,10 +38,17 @@ function App() {
   const [user, setUser] = useState(undefined);
   const [cookies, removeCookie] = useCookies();
   const [error, setError] = useState();
+  const [cartView, setCartView] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     checkToken();
   }, []);
+
+  const addToCart = tool => {
+    setCartItems([...cartItems, tool]);
+  };
+  const removeItem = () => {};
 
   const handleSignIn = authUser => {
     setUser(authUser);
@@ -50,25 +60,25 @@ function App() {
     removeCookie('token');
   };
   function checkToken() {
-    if(cookies.token){
-    axios
-      .post(
-        `${API}/auth/token`,
-        {cookie: cookies.token},
-        {
-          withCredentials: true,
-        }
-      )
-      .then(res => {
-        handleSignIn(res.data.user);
-      })
-      .catch(err => {
-        // console.log(err);
-        setError(err);
-        setTimeout(() => {
-          setError();
-        }, 3000);
-      });
+    if (cookies.token !== undefined) {
+      axios
+        .post(
+          `${API}/auth/token`,
+          {cookie: cookies.token},
+          {
+            withCredentials: true,
+          }
+        )
+        .then(res => {
+          handleSignIn(res.data.user);
+        })
+        .catch(err => {
+          // console.log(err);
+          setError(err);
+          setTimeout(() => {
+            setError();
+          }, 3000);
+        });
     }
   }
   return (
@@ -82,6 +92,10 @@ function App() {
         tab={tab}
         setTab={setTab}
       />
+      <aside className='aside-cart'>
+        <ShoppingCartIcon className='shopping-cart'  onClick={() => setCartView(!cartView)} />
+        {cartView && <Cart items={cartItems} removeItem={removeItem} />}
+      </aside>
       <main>
         <Routes>
           <Route
@@ -94,7 +108,7 @@ function App() {
           <Route path='/tools' element={<ToolsDetails />} />
           <Route path='/tools/:id' element={<ToolsUserDetails />} />
           <Route element={<ProtectedRoute user={user} />}>
-          {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
+            {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path='/:username/post/:id' element={<Post user={user} />} />
             <Route
               path='/:username/post/new'

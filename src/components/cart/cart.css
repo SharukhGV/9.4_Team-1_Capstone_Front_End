@@ -1,0 +1,15 @@
+.cart{
+    position:absolute;
+    width:100%;
+    padding:5%;
+    border:solid grey 2px;
+    z-index: 10;
+    right:40%;
+    background-color: #f8f8f8;
+}
+.cart-total{
+    float:right;
+    margin-bottom: 0;
+    margin-top:0;
+    font-weight: bold;
+}
