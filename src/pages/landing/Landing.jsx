@@ -130,13 +130,14 @@ export default function Landing({setModal}) {
         </div>
       </div>
       <div className='top-category-3'>
-        <h4 className='main-h4'> Sketching </h4>
+        <h4 className='main-h4'> Knitting </h4>
         <div className='posts-slider-container'>
         <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
         { 
         visiblePosts.map((post, i) => { 
           //console.log(post)
-          if (post.category === 'Sketch') {
+          if (post.category === 'Knitting') {
+            
           return (
             <>
             <PostsCarousel post={post} i={i} />

@@ -35,7 +35,8 @@ function App() {
   const [user, setUser] = useState(undefined);
   const [cookies, removeCookie] = useCookies();
   const [error, setError] = useState();
-  const [userInterests, setUserInterests] = useState()
+  const [userHobbyInterest, setUserHobbyInterest] = useState(''); 
+  const [userCurrentHobby, setUserCurrentHobby] = useState(''); 
 
   useEffect(() => {
     checkToken();
@@ -90,7 +91,7 @@ function App() {
             element={<Landing modal={modal} setModal={setModal} />}
           />
           <Route path='/about' element={<About />} />
-          <Route path='/home' element={<Home user={user} />} />
+          <Route path='/home' element={<Home user={user} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />
@@ -112,7 +113,7 @@ function App() {
             />
             <Route
               path='/:username/profile'
-              element={<Profile user={user} />}
+              element={<Profile user={user} userCurrentHobby={userCurrentHobby} userHobbyInterest={userHobbyInterest} />}
             />
             <Route
               path='/:username/profile/edit'

@@ -10,7 +10,7 @@ export default function PostsCarousel({post,i}) {
               <img loading='lazy' />
               </AspectRatio>
                 <CardContent>
-                <Typography> {post?.title} </Typography>
+                <Typography> {post.title} </Typography>
                 <Typography> This is post description </Typography>
               {/* <p> {post?.title || 'Loading...'} </p> */}
               {/* <p> post description? try typography comp </p> */}
