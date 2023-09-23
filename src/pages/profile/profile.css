@@ -76,3 +76,14 @@
   justify-content: space-evenly;
 
 }
+
+.button {
+  background-color: rgb(43, 58, 226);
+  width: 50px;
+  height:25px;
+  padding-top: 12px;
+  color: aliceblue;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: auto;
+}

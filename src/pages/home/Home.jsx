@@ -176,13 +176,13 @@ export default function Home({user}) {
               {' '}
               Take our quick assesment for a better curated homepage{' '}
             </p>
-            <button
+            <Button
               className='take-assesment-btn'
               onClick={() => setAssesmentModalOpen(true)}
             >
               {' '}
               Take Assesment{' '}
-            </button>
+            </Button>
             <Assesment
               assesmentModalOpen={assesmentModalOpen}
               setAssesmentModalOpen={setAssesmentModalOpen}
@@ -211,14 +211,14 @@ export default function Home({user}) {
                   {' '}
                   No matter your level, you can inspire and empower fellow creatives. Post tutorials, guides, and classes. {' '}
                 </p>
-                <button
+                <Button
                   className='cta-btn'
                   onClick={() => navigate(`/${user.username}/post/new`)}
                   //used to :username
                 >
                   {' '}
                   Make a Post{' '}
-                </button>
+                </Button>
               </Card>
             </div>
             <div className='post-cta'>
@@ -232,13 +232,13 @@ export default function Home({user}) {
                   Give new life to neglected supplies. Exchange for fresh
                   inspiration. Trade and discover possibilities.{' '}
                 </p>
-                <button
+                <Button
                   className='cta-btn'
                   onClick={() => navigate(`/${user.username}/tools/new`)}
                 >
                   {' '}
                   Publish an Item{' '}
-                </button>
+                </Button>
               </Card>
             </div>
           </div>
@@ -256,15 +256,15 @@ export default function Home({user}) {
           {' '}
           Meet, trade, connect with other creatives in your city{' '}
         </p>
-        <button className='arrow'>
+        <Button className='arrow'>
           {' '}
           <ArrowBackIosIcon />{' '}
-        </button>
+        </Button>
         {/* user info from dummy accounts here */}
-        <button className='arrow'>
+        <Button className='arrow'>
           {' '}
           <ArrowForwardIosIcon />{' '}
-        </button>
+        </Button>
       </div>
       </main>
     </div>
