@@ -18,6 +18,8 @@ import NewPost from './components/posts/NewPost';
 import PostPreview from './components/posts/PostPreview';
 import About from './pages/about/About';
 
+import ArtistsGraphic from './assets/artistsgraphic.jpg';
+
 import './App.css';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
@@ -37,6 +39,29 @@ function App() {
   const [error, setError] = useState();
   const [userHobbyInterest, setUserHobbyInterest] = useState(''); 
   const [userCurrentHobby, setUserCurrentHobby] = useState(''); 
+  const [visiblePosts, setVisiblePosts] = useState([]);
+  const [posts, setposts] = useState([]);
+  const [currentPost, setCurrentPost] = useState(0);
+
+  useEffect(() => {
+    const getPosts = () => {
+    axios.get(`${API}/posts`)
+    .then((response) => {
+      const allPosts = response.data;
+      const theVisiblePosts = [
+        allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
+        allPosts[currentPost],
+        allPosts[(currentPost + 1) % allPosts.length],
+        allPosts[(currentPost + 2) % allPosts.length],
+        allPosts[(currentPost + 3) % allPosts.length],
+      ];
+      setVisiblePosts(theVisiblePosts);
+      setposts(response.data);
+    })
+    .catch(error => console.error('catch', error))
+  }
+  getPosts();
+}, [currentPost, API]);
 
   useEffect(() => {
     checkToken();
@@ -88,10 +113,10 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<Landing modal={modal} setModal={setModal} />}
+            element={<Landing modal={modal} setModal={setModal} posts={posts} visiblePosts={visiblePosts} setCurrentPost={setCurrentPost} ArtistsGraphic={ArtistsGraphic} />}
           />
           <Route path='/about' element={<About />} />
-          <Route path='/home' element={<Home user={user} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} />} />
+          <Route path='/home' element={<Home user={user} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />

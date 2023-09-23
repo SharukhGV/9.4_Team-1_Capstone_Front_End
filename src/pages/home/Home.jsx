@@ -12,7 +12,6 @@ const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 import CatCarousel from '../../components/carousels/CatCarousel';
 import cameraImg from '../../assets/cameraImg.png';
-import artistsGraphic from '../../assets/artistsgraphic.jpg';
 import Assesment from '../../components/assesment/Assesment';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -31,7 +30,7 @@ import { Paper } from '@mui/material';
 import {Card, Button} from '@mui/joy';
 //import {styled} from '@mui/system';
 
-export default function Home({user, userHobbyInterest, setUserHobbyInterest, userCurrentHobby, setUserCurrentHobby}) {
+export default function Home({user, userHobbyInterest, setUserHobbyInterest, userCurrentHobby, setUserCurrentHobby, ArtistsGraphic}) {
   const navigate = useNavigate();
 //   const [postCtaCategory, setPostCtaCategory] = useState('');
 //   const [itemModalOpen, setItemModalOpen] = useState(false);
@@ -48,7 +47,7 @@ export default function Home({user, userHobbyInterest, setUserHobbyInterest, use
     <div>
       <br />
       <div className='home-header' >
-        <img src={artistsGraphic} className='artistsGraphic' />
+        <img src={ArtistsGraphic} className='artistsGraphic' />
         </div>
         <h2 className='header-h2'>
           {' '}

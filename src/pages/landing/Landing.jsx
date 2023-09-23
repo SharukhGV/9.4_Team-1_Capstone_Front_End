@@ -8,34 +8,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import { Card } from '@mui/joy';
 
-import ArtistsGraphic from '../../assets/artistsgraphic.jpg';
-import Posts from '../../components/posts/Posts';
-
-export default function Landing({setModal}) {
-  const API = import.meta.env.VITE_REACT_APP_API_URL;
-  const [posts, setposts] = useState([]);
-  const [currentPost, setCurrentPost] = useState(0);
-  const [visiblePosts, setVisiblePosts] = useState([]);
-
-  useEffect(() => {
-    const getPosts = () => {
-    axios.get(`${API}/posts`)
-    .then((response) => {
-      const allPosts = response.data;
-      const theVisiblePosts = [
-        allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
-        allPosts[currentPost],
-        allPosts[(currentPost + 1) % allPosts.length],
-        allPosts[(currentPost + 2) % allPosts.length],
-        allPosts[(currentPost + 3) % allPosts.length],
-      ];
-      setVisiblePosts(theVisiblePosts);
-      setposts(response.data);
-    })
-    .catch(error => console.error('catch', error))
-  }
-  getPosts();
-}, [currentPost, API]);
+export default function Landing({setModal, setCurrentPost, posts, visiblePosts, ArtistsGraphic}) {
 
   function prevSlide() {
     setCurrentPost(prevPost =>
