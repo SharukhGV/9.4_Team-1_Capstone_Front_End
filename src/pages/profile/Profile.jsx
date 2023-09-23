@@ -111,7 +111,6 @@ export default function Profile({ user }) {
             </CardActionArea>
           </CardContent>
         </Card>
-      </div>
       <Card className="profile-tools">
         <CardContent sx={{ marginBottom: "10%" }}>
           <h2 className="profile-subtitle">Listings</h2>
@@ -150,7 +149,7 @@ export default function Profile({ user }) {
             New
           </div>
 
-          <div
+          {/* <div
             className="button"
             role="button"
             onClick={() => navigate(`/${username}/tools`)}
@@ -158,9 +157,10 @@ export default function Profile({ user }) {
             color="primary"
           >
             All Tools
-          </div>
+          </div> */}
         </CardActionArea>
-      </Card>
+      </Card>      </div>
+
     </div>
   );
 }

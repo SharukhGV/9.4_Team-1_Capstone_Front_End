@@ -72,6 +72,8 @@
   letter-spacing: 0.5px;
   padding-top: 5px;
   padding-bottom: 10px;
+  cursor: pointer;
+
 }
 
 .arrow {

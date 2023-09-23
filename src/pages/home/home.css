@@ -120,6 +120,7 @@
   border-style: none;
   font-family: 'Open Sans';
   align-self: center;
+  cursor: pointer;
 }
 
 .close-modal {
