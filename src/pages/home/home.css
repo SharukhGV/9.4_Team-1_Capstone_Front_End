@@ -104,7 +104,18 @@
   background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   border-radius: 7px;
-  height: 27px;
+  height: 47px;
+  width: 104px;
+  border-style: none;
+  font-family: 'Open Sans';
+  align-self: center;
+}
+
+.cta-btn:hover {
+  background: linear-gradient(to bottom, #b8ecaf, #62cd68);
+  color: white;
+  border-radius: 7px;
+  height: 47px;
   width: 104px;
   border-style: none;
   font-family: 'Open Sans';
