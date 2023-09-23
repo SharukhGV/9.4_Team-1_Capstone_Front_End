@@ -43,6 +43,10 @@ nav {
   opacity: 1;
 }
 
+.nav-logo:hover {
+  cursor: pointer;
+}
+
 .explore-link {
   display: grid;
   text-decoration: none;
@@ -60,6 +64,19 @@ nav {
 
 .auth-btns {
   gap: 17px;
+}
+
+.logout-btn:hover {
+  cursor: pointer;
+  color: green;
+}
+
+.login-btn:hover {
+  cursor: pointer;
+}
+
+.signup-btn {
+  cursor: pointer;
 }
 
 .search-input::placeholder {

@@ -44,6 +44,10 @@ background-color: #0b0080de;
   padding-bottom: 5px;
 }
 
+.login-btn:hover, .signup-btn:hover {
+  background: linear-gradient(to bottom, #9cd393, #388e3c);
+}
+
 .logout-btn {
   /* background: linear-gradient(to bottom, #7ca0e7, #1a237e); */
   background-color: #800080d5;
@@ -116,6 +120,8 @@ form button {
   display: flex;
   flex-direction: row;
 }
+
+
 
 .signup-branding {
   display: flex;
