@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {Routes, Route, Navigate, Outlet, useNavigate} from 'react-router-dom';
+import {Routes, Route, Navigate, Outlet, useNavigate, Link} from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import axios from 'axios';
 
@@ -200,14 +200,14 @@ function App() {
               <div className='auth-btns'>
                 {/* > */}
                 <Link to={`${user.username}/profile`}>
-                  <button className='logout-btn'>Profile</button>
+                  <button className='login-btn'>Profile</button>
                   {/* <BasicPopover
                 className='login-btn'
                 buttonText='Profile'
                 popoverContent='Profile options will go here'
               /> */}
                 </Link>
-                <button className='logout-btn' onClick={handleLogout}>
+                <button className='login-btn' onClick={handleLogout}>
                   Logout
                 </button>
               </div>

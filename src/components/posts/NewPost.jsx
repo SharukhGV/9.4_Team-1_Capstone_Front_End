@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {useState} from 'react';
 import {useNavigate} from 'react-router';
+import Add from '../../assets/add.svg'
 import {
   TextField,
   Select,
@@ -27,6 +28,7 @@ import {
   ModalDialog,
   Typography,
 } from '@mui/joy';
+import './newPost.css'
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
