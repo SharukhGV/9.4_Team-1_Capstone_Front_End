@@ -28,7 +28,7 @@ import {
   ModalDialog,
   Typography,
 } from '@mui/joy';
-import './newPost.css'
+import './NewPost.css'
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
