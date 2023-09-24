@@ -2,7 +2,7 @@ import './landing.css';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import CatCarousel from '../../components/carousels/CatCarousel';
-import PostsCarousel from '../../components/carousels/postsCarousel';
+import PostCard from '../../components/posts/PostCard';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; //change to app.jsx
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
@@ -56,7 +56,7 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
           if (post.category === 'Paint') {
           return (
             <>
-            <PostsCarousel post={post} i={i} />
+            <PostCard post={post} i={i} />
             </>
           )
           }
@@ -78,7 +78,7 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
           if (post.category === 'Sculpt') {
           return (
             <>
-            <PostsCarousel post={post} i={i} />
+            <PostCard post={post} i={i} />
             </>
           )
           }
@@ -101,7 +101,7 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
             
           return (
             <>
-            <PostsCarousel post={post} i={i} />
+            <PostCard post={post} i={i} />
             </>
           )
           }
