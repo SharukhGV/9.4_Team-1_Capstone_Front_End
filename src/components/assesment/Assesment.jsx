@@ -11,7 +11,8 @@ import {
 import "./assesment.css";
 import { useState } from "react";
 import axios from "axios";
-export default function Assesment(props) {
+
+export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, user, setAssesmentModalOpen, setAssesmentCompleted, assesmentModalOpen}) {
 
   const assesmentModalStyle = {
     position: "absolute",
@@ -27,35 +28,22 @@ export default function Assesment(props) {
   };
   const API = import.meta.env.VITE_REACT_APP_API_URL;
 
-  const [updatedUser, setUpdatedUser] = useState(props.user); // Initialize with the default selected value
-
-  const handleRadioChange = (event) => {
-    // console.log(event.target.name)
-    // console.log(updatedUser)
-
-    setUpdatedUser({
-      ...updatedUser,
-      [event.target.name]: event.target.value
-    }); // Update the selected value when the radio button changes
-  };
-
+  const [updatedUser, setUpdatedUser] = useState(user); // Initialize with the default selected value
+  //send user interests to backend 
 
   function handleAssesmentBtns(event) {
     event.preventDefault();
 
-    props.setAssesmentModalOpen(false);
+    setAssesmentModalOpen(false);
 
     if (event.target.value === "later-btn") {
-      props.setAssesmentCompleted(false);
-    } else {
-
-
-
+      setAssesmentCompleted(false);
+    } else if (event.target.value === 'done-btn') {
+      setAssesmentCompleted(true);
       axios
       .put(`${API}/auth/${props.user.user_id}`,updatedUser)
       .then((response) => {
         console.log(response.data.updatedAccount);
-
       })
       .catch((e) => console.error(e));
       // console.log(updatedUser.learning_interest);
@@ -68,12 +56,12 @@ export default function Assesment(props) {
   return (
     <>
       <Modal
-        open={props.assesmentModalOpen}
-        onClose={() => props.setAssesmentModalOpen(false)}
+        open={assesmentModalOpen}
+        onClose={() => setAssesmentModalOpen(false)}
       >
         <Box sx={assesmentModalStyle}>
           <button
-            onClick={() => props.setAssesmentModalOpen(false)}
+            onClick={() => setAssesmentModalOpen(false)}
             className="x-btn"
           >
             {" "}
@@ -88,119 +76,108 @@ export default function Assesment(props) {
             <div>
               <p>
                 {" "}
-                Which virtual arts hobbies are you interested in learning /
+                Which virtual arts hobby are you interested in learning /
                 exploring?{" "}
               </p>
               <FormControl>
-                {/* <FormLabel id="demo-radio-buttons-group-label">
-                  
-                </FormLabel> */}
                 <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  // value={updatedUser.learning_interest}
                   name="learning_interest"
-                  onChange={(e)=>handleRadioChange(e)}
+                  onChange={(event)=> setUserHobbyInterest(event.target.value)}
                   id="learning_interest"
                 >
                   <FormControlLabel
                     value="painting"
                     control={<Radio />}
-                    label="painting"
+                    label="Painting"
                   />
                   <FormControlLabel
                     value="drawing"
                     control={<Radio />}
-                    label="drawing"
+                    label="Drawing"
                   />
                   <FormControlLabel
                     value="photography"
                     control={<Radio />}
-                    label="photography"
+                    label="Photography"
                   />
                   <FormControlLabel
                     value="pottery"
                     control={<Radio />}
-                    label="pottery"
+                    label="Pottery"
                   />
                   <FormControlLabel
                     value="sculpture"
                     control={<Radio />}
-                    label="sculpture"
+                    label="Sculpting"
                   />
                   <FormControlLabel
                     value="printmaking"
                     control={<Radio />}
-                    label="printmaking"
+                    label="Printmaking"
                   />
                   <FormControlLabel
-                    value="fashion"
+                    value="fashion-design"
                     control={<Radio />}
-                    label="fashion"
+                    label="Fashion Design"
                   />
                   <FormControlLabel
                     value="graffiti"
                     control={<Radio />}
-                    label="graffiti"
+                    label="Graffiti"
                   />
                 </RadioGroup>
               </FormControl>
             </div>
-            {/* <br /> */}
             <div>
               <p>
                 {" "}
-                Which virtual arts hobbies do you have good experience in?{" "}
+                Which virtual arts hobby do you have good experience in?{" "}
               </p>
               <FormControl>
-                {/* <FormLabel id="demo-radio-buttons-group-label">
-                  Gender
-                </FormLabel> */}
                 <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  // value={updatedUser.current_skillset}
-                  name="current_skillset"
-                  onChange={(e)=>handleRadioChange(e)}
-                  id="current_skillset"
+                  name="current_hobby"
+                  onChange={(event) => setUserCurrentHobby(event.target.value)}
+                  id="current_hobby"
                 >
                   <FormControlLabel
                     value="painting"
                     control={<Radio />}
-                    label="painting"
+                    label="Painting"
                   />
                   <FormControlLabel
                     value="drawing"
                     control={<Radio />}
-                    label="drawing"
+                    label="Drawing"
                   />
                   <FormControlLabel
                     value="photography"
                     control={<Radio />}
-                    label="photography"
+                    label="Photography"
                   />
                   <FormControlLabel
                     value="pottery"
                     control={<Radio />}
-                    label="pottery"
+                    label="Pottery"
                   />
                   <FormControlLabel
                     value="sculpture"
                     control={<Radio />}
-                    label="sculpture"
+                    label="Sculpture"
                   />
                   <FormControlLabel
                     value="printmaking"
                     control={<Radio />}
-                    label="printmaking"
+                    label="Printmaking"
                   />
                   <FormControlLabel
-                    value="fashion"
+                    value="fashion-design"
                     control={<Radio />}
-                    label="fashion"
+                    label="Fashion Design"
                   />
                   <FormControlLabel
                     value="graffiti"
                     control={<Radio />}
-                    label="graffiti"
+                    label="Graffiti"
                   />
                 </RadioGroup>
               </FormControl>
