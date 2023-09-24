@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import CartItem from './CartItem'
 import './cart.css';
 export default function Cart({items}) {
   const [total, setTotal] = useState(0);
@@ -12,8 +13,10 @@ export default function Cart({items}) {
       {items.length > 0 ? (
         items.map(item => {
           price += item.price;
-          setTotal(price);
-          return <aside>{console.log(item)}</aside>;
+          // setTotal(price);
+          return <aside>
+            <CartItem tool={item}/>
+            </aside>;
         })
       ) : (
         <aside>
@@ -22,7 +25,7 @@ export default function Cart({items}) {
         </aside>
       )}
       <hr></hr>
-      <p className='cart-total'>Total:{total}</p>
+      <p className='cart-total'>Total:{price}</p>
     </div>
   );
 }

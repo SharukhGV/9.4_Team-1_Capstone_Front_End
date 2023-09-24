@@ -270,7 +270,6 @@ export default function Home({user}) {
           {' '}
           <ArrowForwardIosIcon />{' '}
         </Button>
-      </div>
         {/* <button className='arrow'>
           {' '}
           <ArrowForwardIosIcon />{' '}

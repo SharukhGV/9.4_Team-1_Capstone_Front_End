@@ -66,7 +66,7 @@ export default function Assesment(props) {
   }
 
   return (
-    <>
+    
       <Modal
         open={props.assesmentModalOpen}
         onClose={() => props.setAssesmentModalOpen(false)}
@@ -227,6 +227,5 @@ export default function Assesment(props) {
           </div>
         </Box>
       </Modal>
-    </>
   );
 }

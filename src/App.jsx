@@ -44,11 +44,25 @@ function App() {
 
   useEffect(() => {
     checkToken();
+    getCart();
   }, []);
+
+  useEffect(() => {
+    if (cartItems) {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
+
+  const getCart = () => {
+    if (localStorage.getItem('cart')) {
+      setCartItems(JSON.parse(localStorage.getItem('cart')));
+    }
+  };
 
   const addToCart = tool => {
     setCartItems([...cartItems, tool]);
   };
+
   const removeItem = () => {};
 
   const handleSignIn = authUser => {
@@ -94,7 +108,10 @@ function App() {
         setTab={setTab}
       />
       <aside className='aside-cart'>
-        <ShoppingCartIcon className='shopping-cart'  onClick={() => setCartView(!cartView)} />
+        <ShoppingCartIcon
+          className='shopping-cart'
+          onClick={() => setCartView(!cartView)}
+        />
         {cartView && <Cart items={cartItems} removeItem={removeItem} />}
       </aside>
       <main>
@@ -139,15 +156,15 @@ function App() {
 
             <Route
               path='/:username/tools/:tools_id'
-              element={<ToolsDetails user={user} />}
+              element={<ToolsDetails addToCart={addToCart} />}
             />
 
             <Route
               path='/:username/tools/:tools_id/edit'
               element={<ToolsEditForm user={user} />}
             />
-          </Route>          
-          
+          </Route>
+
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           {/* <Route path='/tools' element={<Tools />} />

@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {Card, CardContent, Button, CardActionArea} from '@mui/material';
+import {Card, CardContent, Button, CardActionArea, CardActions} from '@mui/material';
 import PostCard from '../../components/posts/PostCard';
 import ToolsCard from '../../components/tools/ToolsCard';
 import profile_pic from '../../assets/blank_profile.jpeg';
@@ -29,7 +29,7 @@ export default function Profile({user}) {
   };
 
   const getTools = () => {
-    axios.get(`${API}/tools/${user.user_id}`).then(res => {
+    axios.get(`${API}/tools/all/${user.user_id}`).then(res => {
       setTools(res.data);
     });
   };
@@ -69,15 +69,6 @@ export default function Profile({user}) {
             </Button>
           )}
         </CardContent>
-        {user.username === username && (
-          <Button
-            onClick={() => navigate(`/${username}/profile/edit`)}
-            variant='contained'
-            color='warning'
-          >
-            Edit
-          </Button>
-        )}
       </Card>
       <div className='users-posts-and-tools'>
         <Card className='profile-posts'>
@@ -100,7 +91,7 @@ export default function Profile({user}) {
               </div>
             )}
 
-            <CardActionArea
+            <CardActions
               sx={{
                 width: '10%',
                 position: 'absolute',
@@ -108,7 +99,7 @@ export default function Profile({user}) {
                 right: '5%',
               }}
             >
-              <div
+              <Button
                 className='button'
                 role='button'
                 onClick={() => navigate(`/${username}/post/new`)}
@@ -116,8 +107,8 @@ export default function Profile({user}) {
                 color='primary'
               >
                 New
-              </div>
-            </CardActionArea>
+              </Button>
+            </CardActions>
           </CardContent>
         </Card>
         <Card className='profile-tools'>
@@ -145,10 +136,10 @@ export default function Profile({user}) {
               </div>
             )}
           </CardContent>
-          <CardActionArea
+          <CardActions
             sx={{width: '10%', position: 'absolute', bottom: '5%', right: '5%'}}
           >
-            <div
+            <Button
               className='button'
               role='button'
               onClick={() => navigate(`/${username}/tools/new`)}
@@ -156,7 +147,7 @@ export default function Profile({user}) {
               color='primary'
             >
               New
-            </div>
+            </Button>
 
             {/* <div
             className="button"
@@ -167,7 +158,7 @@ export default function Profile({user}) {
           >
             All Tools
           </div> */}
-          </CardActionArea>
+          </CardActions>
         </Card>{' '}
       </div>
     </div>
