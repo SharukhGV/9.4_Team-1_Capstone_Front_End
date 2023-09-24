@@ -41,6 +41,16 @@ function App() {
   const [userHobbyInterest, setUserHobbyInterest] = useState(''); 
   const [userCurrentHobby, setUserCurrentHobby] = useState(''); 
   const [visiblePosts, setVisiblePosts] = useState([]);
+  const [postsCategorized, setPostsCategorized] = useState({
+    'Paint': [],
+    'Sketch': [],
+    'Photography': [],
+    'Pottery': [],
+    'Sculpt': [],
+    'Printmaking': [],
+    'Fashion Design': [],
+    'Graffiti': [],
+  }); 
   const [posts, setposts] = useState([]);
   const [currentPost, setCurrentPost] = useState(0);
 
@@ -49,6 +59,14 @@ function App() {
     axios.get(`${API}/posts`)
     .then((response) => {
       const allPosts = response.data;
+      for (let category in postsCategorized) {
+        
+        postsFilter(allPosts, category);
+        console.log(category);
+        
+
+      }
+    
       const theVisiblePosts = [
         allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
         allPosts[currentPost],
@@ -62,7 +80,27 @@ function App() {
     .catch(error => console.error('catch', error))
   }
   getPosts();
-}, [currentPost, API]);
+}, [currentPost]);
+
+function postsFilter(posts, category) {
+  //posts.filter((post) => post.category === category)
+
+  setPostsCategorized({
+    ...postsCategorized,
+    [ category ]: posts.filter((post) => post.category.toLowerCase() == category.toLowerCase())
+  })
+}
+
+console.log(posts);
+
+
+
+useEffect(() => {
+  //console.log(visiblePosts)
+  console.log(postsCategorized);
+}, [postsCategorized])
+//console.log(posts)
+//console.log(visiblePosts)
 
   useEffect(() => {
     checkToken();
@@ -130,7 +168,7 @@ function App() {
             element={<Landing modal={modal} setModal={setModal} posts={posts} visiblePosts={visiblePosts} setCurrentPost={setCurrentPost} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />}
           />
           <Route path='/about' element={<About />} />
-          <Route path='/home' element={<Home user={user} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />} />
+          <Route path='/home' element={<Home user={user} visiblePosts={visiblePosts} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />
