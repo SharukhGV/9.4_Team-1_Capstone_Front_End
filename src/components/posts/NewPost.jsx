@@ -152,7 +152,7 @@ export default function NewPost({ user }) {
       <div className='preview-modal'>
         <Modal open={openPreview} onClose={() => setOpenPreview(false)}>
           <ModalDialog layout='fullscreen' >
-            <img className='logo' src={craftopiaLogo} />
+            {/* <img className='logo' src={craftopiaLogo} /> */}
             {/* <div className='top-btns'> */}
             <button className='back-btn' onClick={() => setOpenPreview(false)} > Back to editing </button>
             <button className='x' onClick={() => setOpenPreview(false)} > &times; </button>
@@ -163,7 +163,7 @@ export default function NewPost({ user }) {
             <div>
             <p> {post.category} </p>
             <br />
-            {/* <img src={selectedFile ? URL.createObjectURL(selectedFile) : null} /> */}
+            <img src={selectedFile ? URL.createObjectURL(selectedFile) : null} />
             <p> {post.body} </p>
             </div>
             </div>
