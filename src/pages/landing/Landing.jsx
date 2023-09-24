@@ -2,52 +2,13 @@ import './landing.css';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import CatCarousel from '../../components/carousels/CatCarousel';
-import PostsCarousel from '../../components/carousels/postsCarousel';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import PostCard from '../../components/posts/PostCard';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; //change to app.jsx
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import{v4 as uuid} from 'uuid'
 import { Card } from '@mui/joy';
 
-import ArtistsGraphic from '../../assets/artistsgraphic.jpg';
-import Posts from '../../components/posts/Posts';
-
-export default function Landing({setModal}) {
-  const API = import.meta.env.VITE_REACT_APP_API_URL;
-  const [posts, setposts] = useState([]);
-  const [currentPost, setCurrentPost] = useState(0);
-  const [visiblePosts, setVisiblePosts] = useState([]);
-
-  useEffect(() => {
-    const getPosts = () => {
-    axios.get(`${API}/posts`)
-    .then((response) => {
-      const allPosts = response.data;
-      const theVisiblePosts = [
-        allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
-        allPosts[currentPost],
-        allPosts[(currentPost + 1) % allPosts.length],
-        allPosts[(currentPost + 2) % allPosts.length],
-        allPosts[(currentPost + 3) % allPosts.length],
-      ];
-      setVisiblePosts(theVisiblePosts);
-      setposts(response.data);
-    })
-    .catch(error => console.error('catch', error))
-  }
-  getPosts();
-}, [currentPost, API]);
-
-  function prevSlide() {
-    setCurrentPost(prevPost =>
-      prevPost === 0 ? posts.length - 1 : prevPost - 1
-    );
-  } 
-
-  function nextSlide() {
-    setCurrentPost(prevPost =>
-      prevPost === posts.length - 1 ? 0 : prevPost + 1
-    );
-  } 
+export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSlide, prevSlide}) {
 
   return (
     <div>
@@ -94,7 +55,7 @@ export default function Landing({setModal}) {
           //console.log(post)
           if (post.category === 'Paint') {
           return (
-            <PostsCarousel post={post} key={uuid} />
+            <PostCard post={post} key={uuid} />
           )
           }
         })
@@ -115,7 +76,7 @@ export default function Landing({setModal}) {
           if (post.category === 'Sculpt') {
           return (
             <>
-            <PostsCarousel post={post} i={i} />
+            <PostCard post={post} i={i} />
             </>
           )
           }
@@ -128,16 +89,17 @@ export default function Landing({setModal}) {
         </div>
       </div>
       <div className='top-category-3'>
-        <h4 className='main-h4'> Sketching </h4>
+        <h4 className='main-h4'> Knitting </h4>
         <div className='posts-slider-container'>
         <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
         { 
         visiblePosts.map((post, i) => { 
           //console.log(post)
-          if (post.category === 'Sketch') {
+          if (post.category === 'Knitting') {
+            
           return (
             <>
-            <PostsCarousel post={post} i={i} />
+            <PostCard post={post} i={i} />
             </>
           )
           }

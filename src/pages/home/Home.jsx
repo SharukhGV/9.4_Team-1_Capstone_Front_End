@@ -12,7 +12,6 @@ const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 import CatCarousel from '../../components/carousels/CatCarousel';
 import cameraImg from '../../assets/cameraImg.png';
-import artistsGraphic from '../../assets/artistsgraphic.jpg';
 import Assesment from '../../components/assesment/Assesment';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -31,22 +30,7 @@ import { Paper } from '@mui/material';
 import {Card, Button} from '@mui/joy';
 //import {styled} from '@mui/system';
 
-// const diagonalMask = {
-//   position: 'relative',
-//   overflow: 'hidden', '&::before': {
-//     content: '""',
-//     position: 'absolute',
-//     top: '0',
-//     right: '0',
-//     width: '40%',
-//     height: '100%',
-//     backgroundColor: 'white',
-//     transform: 'skew(-20deg) translateX(100%)',
-//     transformOrigin: 'top left',
-//   },
-// };
-
-export default function Home({user}) {
+export default function Home({user, userHobbyInterest, setUserHobbyInterest, userCurrentHobby, setUserCurrentHobby, ArtistsGraphic, visiblePosts, nextSlide, prevSlide}) {
   const navigate = useNavigate();
 //   const [postCtaCategory, setPostCtaCategory] = useState('');
 //   const [itemModalOpen, setItemModalOpen] = useState(false);
@@ -59,111 +43,11 @@ export default function Home({user}) {
     body: '',
   }); 
 
-//   function handleFileSelection(event) {
-//     setFile(event.target.files[0]);
-//   }
-
-  function resetForm() {
-    setFile(null);
-    setPost({
-      title: '',
-      tags: '',
-      body: '',
-    });
-  } //necessary ?
-
-  // const displayImg = () => {
-  //     if (file) {
-  //         setFile([...file, file]);
-  //         setFile(null);
-  //     }
-  // }
-
-//   const stylePostModel = {
-//     position: 'absolute',
-//     top: '50%',
-//     left: '50%',
-//     transform: 'translate(-50%, -50%)',
-//     width: '70%',
-//     height: 240,
-//     bgcolor: '#f8f8f8',
-//     boxShadow: 14,
-//     p: 4,
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//   };
-
-//   const VisuallyHiddenInput = styled('input')`
-//     clip: rect(0 0 0 0);
-//     clip-path: inset(50%);
-//     height: 1px;
-//     overflow: hidden;
-//     position: absolute;
-//     bottom: 0;
-//     left: 0;
-//     white-space: nowrap;
-//     width: 1px;
-//   `;
-
-//STACK
-
   return (
     <div>
       <br />
       <div className='home-header' >
-        <img src={artistsGraphic} className='artistsGraphic' />
-        {/* <div className='post-cta-sect'>
-        <h3> Connect & Exchange: Share Knowledge or Supplies </h3>
-        <div className='content-container'>
-          <div className='post-ctas'>
-            <div className='post-cta'>
-              <Card
-                className='overlay-card'
-                sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}
-              >
-                <h4> Share Your Expertise </h4>
-                <p className='post-cta-p'>
-                  {' '}
-                  No matter your level, share insights. Post tutorials, guides,
-                  and classes. Inspire and empower fellow creatives.{' '}
-                </p>
-                <button
-                  className='cta-btn'
-                  onClick={() => navigate(`/${user.username}/post/new`)}
-                  //used to :username
-                >
-                  {' '}
-                  Make a Post{' '}
-                </button>
-              </Card>
-            </div>
-            <div className='post-cta'>
-              <Card
-                className='overlay-card'
-                sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}
-              >
-                <h4> Trade Your Treasures </h4>
-                <p className='post-cta-p'>
-                  {' '}
-                  Give new life to neglected supplies. Exchange for fresh
-                  inspiration. Trade and discover possibilities.{' '}
-                </p>
-                <button
-                  className='cta-btn'
-                  onClick={() => navigate(`/${user.username}/tools/new`)}
-                >
-                  {' '}
-                  Publish an Item{' '}
-                </button>
-              </Card>
-            </div>
-          </div>
-          <br />
-        </div>
-        <br />
-      </div> */}
-     
+        <img src={ArtistsGraphic} className='artistsGraphic' />
         </div>
         <h2 className='header-h2'>
           {' '}
@@ -172,31 +56,30 @@ export default function Home({user}) {
         {/* <br /> */}
         {/* <br /> */}
         <div>
-        {!assesmentCompleted && (
-          <div className='assesment-sect'>
-            <h4 className='home-h4'> Let's Get Personal </h4>
-            <p className='assesment-p'>
-              {' '}
-              Take our quick assesment for a better curated homepage{' '}
-            </p>
-            <Button
-              className='take-assesment-btn'
-              onClick={() => setAssesmentModalOpen(true)}
-            >
-              {' '}
-              Take Assesment{' '}
-            </Button>
-            <Assesment
-              assesmentModalOpen={assesmentModalOpen}
-              setAssesmentModalOpen={setAssesmentModalOpen}
-              assesmentCompleted={assesmentCompleted}
-              setAssesmentCompleted={setAssesmentCompleted}
-              user={user}
-            />
-          </div>
-        )}
+          {
+            assesmentCompleted === false ? (
+              <div className='assesment-sect'>
+                <h4 className='home-h4'> Let's Get Personal </h4>
+                <p className='assesment-p'> {' '} Take our quick assesment for a better curated homepage{' '} </p>
+                <button className='take-assesment-btn' onClick={() => setAssesmentModalOpen(true)}> {' '} Take Assesment {' '} </button>
+                <Assesment
+                assesmentModalOpen={assesmentModalOpen}
+                setAssesmentModalOpen={setAssesmentModalOpen}
+                assesmentCompleted={assesmentCompleted}
+                setAssesmentCompleted={setAssesmentCompleted}
+                user={user}
+                userHobbyInterest={userHobbyInterest}
+                setUserHobbyInterest={setUserHobbyInterest} 
+                userCurrentHobby={userCurrentHobby}
+                setUserCurrentHobby={setUserCurrentHobby}
+                />
+              </div>
+            ) : (
+              <>
+              </>
+            )
+          }
         </div>
-      
       <br />
       <div className='div' />
       <main>
@@ -266,10 +149,10 @@ export default function Home({user}) {
           <ArrowBackIosIcon />{' '}
         </Button>
         {/* user info from dummy accounts here */}
-        <Button className='arrow'>
+        {/* <Button className='arrow'>
           {' '}
           <ArrowForwardIosIcon />{' '}
-        </Button>
+        </Button> */}
         {/* <button className='arrow'>
           {' '}
           <ArrowForwardIosIcon />{' '}

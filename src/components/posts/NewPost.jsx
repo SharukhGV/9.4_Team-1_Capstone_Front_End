@@ -15,7 +15,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import placeholderImg from '../../assets/placeholder-img.jpeg';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
+import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 import {
   Textarea,
   Card,
@@ -199,9 +199,20 @@ export default function NewPost({user}) {
       <div className='preview-modal'>
         <Modal open={openPreview} onClose={() => setOpenPreview(false)}>
           <ModalDialog layout='fullscreen'>
-            {/* <button onClick={setOpenPreview(false)}> &times; </button> */}
-            {/* <h3> {post.title} </h3> */}
-            <div>
+            {/* <img className='logo' src={craftopiaLogo} /> */}
+            {/* <div className='top-btns'> */}
+            <button className='back-btn' onClick={() => setOpenPreview(false)}>
+              {' '}
+              Back to editing{' '}
+            </button>
+            <button className='x' onClick={() => setOpenPreview(false)}>
+              {' '}
+              &times;{' '}
+            </button>
+            {/* </div> */}
+            <br />
+            <div className='content-preview'>
+              <Typography> {post.title} </Typography>
               {/* <p> {post.category} </p>
             <img src={selectedFile} />
             <p> {post.body} </p> */}

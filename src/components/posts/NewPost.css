@@ -64,5 +64,10 @@ main h3 {
   font-family: 'Lato';
 }
 
+.logo {
+    border-radius: 50%;
+    width: 79px;
+    margin: 7px;
+}
 
 

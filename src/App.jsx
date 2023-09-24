@@ -20,6 +20,9 @@ import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import PostPreview from './components/posts/PostPreview';
 import Explore from './pages/explore/Explore';
+import About from './pages/about/About';
+
+import ArtistsGraphic from './assets/artistsgraphic.jpg';
 
 import './App.css';
 import ToolsUsers from './components/tools/ToolsUsers';
@@ -41,6 +44,32 @@ function App() {
   const [error, setError] = useState();
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [userHobbyInterest, setUserHobbyInterest] = useState('');
+  const [userCurrentHobby, setUserCurrentHobby] = useState('');
+  const [visiblePosts, setVisiblePosts] = useState([]);
+  const [posts, setposts] = useState([]);
+  const [currentPost, setCurrentPost] = useState(0);
+
+  useEffect(() => {
+    const getPosts = () => {
+      axios
+        .get(`${API}/posts`)
+        .then(response => {
+          const allPosts = response.data;
+          const theVisiblePosts = [
+            allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
+            allPosts[currentPost],
+            allPosts[(currentPost + 1) % allPosts.length],
+            allPosts[(currentPost + 2) % allPosts.length],
+            allPosts[(currentPost + 3) % allPosts.length],
+          ];
+          setVisiblePosts(theVisiblePosts);
+          setposts(response.data);
+        })
+        .catch(error => console.error('catch', error));
+    };
+    getPosts();
+  }, [currentPost, API]);
 
   useEffect(() => {
     checkToken();
@@ -96,6 +125,19 @@ function App() {
         });
     }
   }
+
+  function prevSlide() {
+    setCurrentPost(prevPost =>
+      prevPost === 0 ? posts.length - 1 : prevPost - 1
+    );
+  }
+
+  function nextSlide() {
+    setCurrentPost(prevPost =>
+      prevPost === posts.length - 1 ? 0 : prevPost + 1
+    );
+  }
+
   return (
     <div className='App'>
       <NavBar
@@ -118,10 +160,39 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<Landing modal={modal} setModal={setModal} />}
+            element={
+              <Landing
+                modal={modal}
+                setModal={setModal}
+                posts={posts}
+                visiblePosts={visiblePosts}
+                setCurrentPost={setCurrentPost}
+                ArtistsGraphic={ArtistsGraphic}
+                prevSlide={prevSlide}
+                nextSlide={nextSlide}
+              />
+            }
           />
-          <Route path='/home' element={<Home user={user} />} />
-
+          <Route path='/about' element={<About />} />
+          <Route
+            path='/home'
+            element={
+              <Home
+                user={user}
+                userHobbyInterest={userHobbyInterest}
+                setUserHobbyInterest={setUserHobbyInterest}
+                setUserCurrentHobby={setUserCurrentHobby}
+                userCurrentHobby={userCurrentHobby}
+                ArtistsGraphic={ArtistsGraphic}
+                prevSlide={prevSlide}
+                nextSlide={nextSlide}
+              />
+            }
+          />
+          <Route path='/post/:id' element={<Post />} />
+          {/* create public profile view for outside viewers */}
+          <Route path='/tools' element={<ToolsDetails />} />
+          <Route path='/tools/:id' element={<ToolsUserDetails />} />
           <Route element={<ProtectedRoute user={user} />}>
             {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path='/:username/post/:id' element={<Post user={user} />} />
@@ -139,7 +210,13 @@ function App() {
             />
             <Route
               path='/:username/profile'
-              element={<Profile user={user} />}
+              element={
+                <Profile
+                  user={user}
+                  userCurrentHobby={userCurrentHobby}
+                  userHobbyInterest={userHobbyInterest}
+                />
+              }
             />
             <Route
               path='/:username/profile/edit'
