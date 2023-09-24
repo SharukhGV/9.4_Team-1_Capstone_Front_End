@@ -30,7 +30,7 @@ import { Paper } from '@mui/material';
 import {Card, Button} from '@mui/joy';
 //import {styled} from '@mui/system';
 
-export default function Home({user, userHobbyInterest, setUserHobbyInterest, userCurrentHobby, setUserCurrentHobby, ArtistsGraphic}) {
+export default function Home({user, userHobbyInterest, setUserHobbyInterest, userCurrentHobby, setUserCurrentHobby, ArtistsGraphic, visiblePosts, nextSlide, prevSlide}) {
   const navigate = useNavigate();
 //   const [postCtaCategory, setPostCtaCategory] = useState('');
 //   const [itemModalOpen, setItemModalOpen] = useState(false);

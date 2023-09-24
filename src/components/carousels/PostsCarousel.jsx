@@ -1,4 +1,5 @@
 import {Card, CardCover, CardContent, CardOverflow, Divider, AspectRatio, Typography} from '@mui/joy';
+//import PostCard
 
 export default function PostsCarousel({post,i}) {
 

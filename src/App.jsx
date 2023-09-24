@@ -98,6 +98,19 @@ function App() {
       });
     }
   }
+
+  function prevSlide() {
+    setCurrentPost(prevPost =>
+      prevPost === 0 ? posts.length - 1 : prevPost - 1
+    );
+  } 
+
+  function nextSlide() {
+    setCurrentPost(prevPost =>
+      prevPost === posts.length - 1 ? 0 : prevPost + 1
+    );
+  } 
+
   return (
     <div className='App'>
       <NavBar
@@ -113,10 +126,10 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<Landing modal={modal} setModal={setModal} posts={posts} visiblePosts={visiblePosts} setCurrentPost={setCurrentPost} ArtistsGraphic={ArtistsGraphic} />}
+            element={<Landing modal={modal} setModal={setModal} posts={posts} visiblePosts={visiblePosts} setCurrentPost={setCurrentPost} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />}
           />
           <Route path='/about' element={<About />} />
-          <Route path='/home' element={<Home user={user} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} />} />
+          <Route path='/home' element={<Home user={user} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />

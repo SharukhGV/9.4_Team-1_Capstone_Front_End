@@ -3,24 +3,12 @@ import axios from 'axios';
 import {useState, useEffect} from 'react';
 import CatCarousel from '../../components/carousels/CatCarousel';
 import PostsCarousel from '../../components/carousels/postsCarousel';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; //change to app.jsx
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import { Card } from '@mui/joy';
 
-export default function Landing({setModal, setCurrentPost, posts, visiblePosts, ArtistsGraphic}) {
-
-  function prevSlide() {
-    setCurrentPost(prevPost =>
-      prevPost === 0 ? posts.length - 1 : prevPost - 1
-    );
-  } 
-
-  function nextSlide() {
-    setCurrentPost(prevPost =>
-      prevPost === posts.length - 1 ? 0 : prevPost + 1
-    );
-  } 
+export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSlide, prevSlide}) {
 
   return (
     <div>
