@@ -1,4 +1,3 @@
-import './home.css';
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router';
 // import Container from '@mui/material';
@@ -18,18 +17,19 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Paper } from '@mui/material';
 // import {
-//   Box,
-//   Modal,
-//   TextField,
-//   Select,
-//   FormControl,
-//   InputLabel,
-//   MenuItem,
-//   Input,
-// } from '@mui/material';
-import {Card, Button} from '@mui/joy';
-//import {styled} from '@mui/system';
-
+  //   Box,
+  //   Modal,
+  //   TextField,
+  //   Select,
+  //   FormControl,
+  //   InputLabel,
+  //   MenuItem,
+  //   Input,
+  // } from '@mui/material';
+  import {Card, Button} from '@mui/joy';
+  //import {styled} from '@mui/system';
+  import './home.css';
+  
 export default function Home({user, userHobbyInterest, setUserHobbyInterest, userCurrentHobby, setUserCurrentHobby, ArtistsGraphic, visiblePosts, nextSlide, prevSlide}) {
   const navigate = useNavigate();
 //   const [postCtaCategory, setPostCtaCategory] = useState('');
@@ -44,7 +44,7 @@ export default function Home({user, userHobbyInterest, setUserHobbyInterest, use
   }); 
 
   return (
-    <div>
+    <div className='home-page'>
       <br />
       <div className='home-header' >
         <img src={ArtistsGraphic} className='artistsGraphic' />

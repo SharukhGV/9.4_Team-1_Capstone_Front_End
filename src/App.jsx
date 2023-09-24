@@ -154,7 +154,7 @@ function App() {
           className='shopping-cart'
           onClick={() => setCartView(!cartView)}
         />
-        {cartView && <Cart items={cartItems} removeItem={removeItem} />}
+        {cartView && <Cart items={cartItems} removeItem={removeItem} handleClose={()=>setCartView(false)}/>}
       </aside>
       <main>
         <Routes>

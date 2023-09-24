@@ -1,12 +1,27 @@
-import {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import CartItem from './CartItem'
+import {useState, useEffect, useRef} from 'react';
+import {Link} from 'react-router-dom';
+import {v4 as uuid} from 'uuid'
+import CartItem from './CartItem';
 import './cart.css';
-export default function Cart({items}) {
+export default function Cart({items, handleClose}) {
   const [total, setTotal] = useState(0);
   let price = 0;
+
+  const ref = useRef();
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (!ref.current.contains(event.target)) {
+        handleClose();
+      }
+    };
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  });
+
   return (
-    <div className='cart'>
+    <div className='cart' ref={ref}>
       <h3 style={{margin: 0}}>Your Cart</h3>
       <hr></hr>
 
@@ -14,9 +29,11 @@ export default function Cart({items}) {
         items.map(item => {
           price += item.price;
           // setTotal(price);
-          return <aside>
-            <CartItem tool={item}/>
-            </aside>;
+          return (
+            <aside key={uuid()}>
+              <CartItem tool={item} />
+            </aside>
+          );
         })
       ) : (
         <aside>
@@ -25,6 +42,7 @@ export default function Cart({items}) {
         </aside>
       )}
       <hr></hr>
+      <button>Checkout</button>
       <p className='cart-total'>Total:{price}</p>
     </div>
   );
