@@ -1,12 +1,3 @@
-/* * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  position: sticky ;
-  top: 0;
-  left: 0;
-  width: 100%;
-} */
 
 .top-left {
   display: flex;
@@ -21,9 +12,9 @@ nav {
   align-items: center;
   /* align-items: center;
   padding: 30px 10%; */
-  width:80%;
+  width: 80%;
   margin-left: auto;
-  margin-right:auto;
+  margin-right: auto;
 }
 
 .search-icon {
@@ -66,7 +57,7 @@ nav {
 }
 
 .auth-btns {
-  gap: 17px;
+  gap: 1px;
 }
 
 .logout-btn:hover {
@@ -91,36 +82,44 @@ nav {
   padding-left: 34px;
 }
 
-.top-left, .nav-right-container {
+.top-left,
+.nav-right-container {
   align-items: center;
 }
 
-.logout-btn{
-background-color: #800080;
+.logout-btn {
+  background-color: #800080;
   padding-top: 5px;
-  padding-bottom:5px;
+  padding-bottom: 5px;
 }
 
-.logout-btn :hover{
+.logout-btn :hover {
   background-color: #14cc8c;
 }
 
-.nav-logo{
-max-width: 100px;
-max-height: 100px;
-
+.nav-logo {
+  max-width: 100px;
+  max-height: 100px;
 }
 
-.nav-logo:hover{
+.nav-logo:hover {
   max-width: 0px;
   max-height: 0px;
-  opacity:70%;
-  
-  }
+  opacity: 70%;
+}
 
-  .nav-logo2:hover{
-    max-width: 100px;
-    max-height: 100px;
-    opacity: 100%;
-    
-    }
+.nav-logo2:hover {
+  max-width: 100px;
+  max-height: 100px;
+  opacity: 100%;
+}
+
+.title{
+  font-family: 'Bellota';
+  font-size: xxx-large;
+  /* color:#800080; */
+  color:#7851a9;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  text-decoration: u;
+}

@@ -11,8 +11,7 @@ import { Card } from '@mui/joy';
 export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSlide, prevSlide}) {
 
   return (
-    <div>
-      <header>
+    <div className='landing'>
         <div className='header-branding'>
           {/* <Card sx={{ width: '87%' }} > */}
           <div className='landing-action'>
@@ -41,7 +40,6 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
         <br />
         <CatCarousel />
         <br />
-      </header>
       <br />
       <main>
       <h3> Top Categories </h3>
