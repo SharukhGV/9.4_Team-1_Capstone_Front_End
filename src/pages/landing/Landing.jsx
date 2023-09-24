@@ -5,7 +5,7 @@ import CatCarousel from '../../components/carousels/CatCarousel';
 import PostCard from '../../components/posts/PostCard';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; //change to app.jsx
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import{v4 as uuid} from 'uuid'
 import { Card } from '@mui/joy';
 
 export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSlide, prevSlide}) {
@@ -55,9 +55,7 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
           //console.log(post)
           if (post.category === 'Paint') {
           return (
-            <>
-            <PostCard post={post} i={i} />
-            </>
+            <PostCard post={post} key={uuid} />
           )
           }
         })

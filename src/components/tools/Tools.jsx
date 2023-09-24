@@ -53,7 +53,7 @@ function Tools({user}) {
       <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
       {
         visibleTools.map((tool, i) => (
-          <Card component='li' variant='solid' >
+          <Card component='li' variant='solid'  >
             <CardOverflow>
               <AspectRatio>
                 <img />
