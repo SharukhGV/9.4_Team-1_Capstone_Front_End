@@ -97,14 +97,14 @@ export default function Home({user, userHobbyInterest, setUserHobbyInterest, use
                   {' '}
                   No matter your level, you can inspire and empower fellow creatives. Post tutorials, guides, and classes. {' '}
                 </p>
-                <button
+                <Button
                   className='cta-btn'
                   onClick={() => navigate(`/${user.username}/post/new`)}
                   //used to :username
                 >
                   {' '}
                   Make a Post{' '}
-                </button>
+                </Button>
               </Card>
             </div>
             <div className='post-cta'>
@@ -118,13 +118,13 @@ export default function Home({user, userHobbyInterest, setUserHobbyInterest, use
                   Give new life to neglected supplies. Exchange for fresh
                   inspiration. Trade and discover possibilities.{' '}
                 </p>
-                <button
+                <Button
                   className='cta-btn'
                   onClick={() => navigate(`/${user.username}/tools/new`)}
                 >
                   {' '}
                   Publish an Item{' '}
-                </button>
+                </Button>
               </Card>
             </div>
           </div>
@@ -144,11 +144,15 @@ export default function Home({user, userHobbyInterest, setUserHobbyInterest, use
           {' '}
           Meet, trade, connect with other creatives in your city{' '}
         </p>
-        <button className='arrow'>
+        <Button className='arrow'>
           {' '}
           <ArrowBackIosIcon />{' '}
-        </button>
+        </Button>
         {/* user info from dummy accounts here */}
+        {/* <Button className='arrow'>
+          {' '}
+          <ArrowForwardIosIcon />{' '}
+        </Button> */}
         {/* <button className='arrow'>
           {' '}
           <ArrowForwardIosIcon />{' '}
