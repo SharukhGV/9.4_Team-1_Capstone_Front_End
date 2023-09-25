@@ -48,29 +48,47 @@ function App() {
   const [userHobbyInterest, setUserHobbyInterest] = useState('');
   const [userCurrentHobby, setUserCurrentHobby] = useState('');
   const [visiblePosts, setVisiblePosts] = useState([]);
+  const [postsCategorized, setPostsCategorized] = useState({
+    'Paint': [],
+    'Sketch': [],
+    'Photography': [],
+    'Pottery': [],
+    'Sculpt': [],
+    'Printmaking': [],
+    'Graffiti': [],
+    'Fashion Design': [],
+  }); 
   const [posts, setposts] = useState([]);
   const [currentPost, setCurrentPost] = useState(0);
 
   useEffect(() => {
     const getPosts = () => {
-      axios
-        .get(`${API}/posts`)
-        .then(response => {
-          const allPosts = response.data;
-          const theVisiblePosts = [
-            allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
-            allPosts[currentPost],
-            allPosts[(currentPost + 1) % allPosts.length],
-            allPosts[(currentPost + 2) % allPosts.length],
-            allPosts[(currentPost + 3) % allPosts.length],
-          ];
-          setVisiblePosts(theVisiblePosts);
-          setposts(response.data);
-        })
-        .catch(error => console.error('catch', error));
-    };
-    getPosts();
-  }, [currentPost, API]);
+
+    axios.get(`${API}/posts`)
+    .then((response) => {
+      const allPosts = response.data;
+      let updatedFilteredPost={}
+      for (let category in postsCategorized) {
+        const filteredPosts = allPosts.filter((post) => post.category.toLowerCase() == category.toLowerCase())
+        updatedFilteredPost[category]=filteredPosts
+      }
+       console.log('updatedFiltered:',updatedFilteredPost)
+      setPostsCategorized(updatedFilteredPost)
+    
+      const theVisiblePosts = [
+        allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
+        allPosts[currentPost],
+        allPosts[(currentPost + 1) % allPosts.length],
+        allPosts[(currentPost + 2) % allPosts.length],
+        allPosts[(currentPost + 3) % allPosts.length],
+      ];
+      setVisiblePosts(theVisiblePosts);
+      setposts(response.data);
+    })
+    .catch(error => console.error('catch', error))
+  }
+  getPosts();
+}, [currentPost]);
 
   useEffect(() => {
     checkToken();
@@ -233,21 +251,7 @@ function App() {
             }
           />
           <Route path='/about' element={<About />} />
-          <Route
-            path='/home'
-            element={
-              <Home
-                user={user}
-                userHobbyInterest={userHobbyInterest}
-                setUserHobbyInterest={setUserHobbyInterest}
-                setUserCurrentHobby={setUserCurrentHobby}
-                userCurrentHobby={userCurrentHobby}
-                ArtistsGraphic={ArtistsGraphic}
-                prevSlide={prevSlide}
-                nextSlide={nextSlide}
-              />
-            }
-          />
+          <Route path='/home' element={<Home user={user} visiblePosts={visiblePosts} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />

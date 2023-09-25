@@ -1,11 +1,10 @@
 import {Card, CardCover, CardContent, CardOverflow, Divider, AspectRatio, Typography} from '@mui/joy';
 // import "./postsCard.css";
 
-export default function PostCard({post,i}) {
+export default function PostCard({post}) {
 
     return (
-        <>
-        <Card component='li' variant='solid' key={`post-${i}`} sx={{ height: 119 }}  >
+        <Card component='li' variant='solid' sx={{ height: 119, minWidth: '11vw', maxWidth: '11vw' }}  >
             <CardOverflow>
               <AspectRatio ratio='2'>
               <img loading='lazy' />
@@ -18,6 +17,5 @@ export default function PostCard({post,i}) {
                 </CardContent>
             </CardOverflow>
         </Card>
-        </>
     )
 }

@@ -51,7 +51,7 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
       { 
         visiblePosts.map((post, i) => { 
           //console.log(post)
-          if (post.category === 'Paint') {
+          if (post.category === 'Sketch') {
           return (
             <PostCard post={post} key={uuid} />
           )
@@ -71,7 +71,7 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
         { 
         visiblePosts.map((post, i) => { 
           //console.log(post)
-          if (post.category === 'Sculpt') {
+          if (post.category === 'Graffiti') {
           return (
             <>
             <PostCard post={post} i={i} />
@@ -87,14 +87,13 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
         </div>
       </div>
       <div className='top-category-3'>
-        <h4 className='main-h4'> Knitting </h4>
+        <h4 className='main-h4'> Fashion Design </h4>
         <div className='posts-slider-container'>
         <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
         { 
         visiblePosts.map((post, i) => { 
           //console.log(post)
-          if (post.category === 'Knitting') {
-            
+          if (post.category === 'Fashion Design') {
           return (
             <>
             <PostCard post={post} i={i} />
