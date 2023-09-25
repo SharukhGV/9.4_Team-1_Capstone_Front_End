@@ -11,6 +11,7 @@ import {
 import "./assesment.css";
 import { useState } from "react";
 import axios from "axios";
+import { Form } from "react-router-dom";
 
 export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, user, setAssesmentModalOpen, setAssesmentCompleted, assesmentModalOpen}) {
 
@@ -125,6 +126,11 @@ export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, us
                     control={<Radio />}
                     label="Graffiti"
                   />
+                  <FormControlLabel
+                    value='filmmaking'
+                    control={<Radio />}
+                    label='Filmmaking'
+                  />
                 </RadioGroup>
               </FormControl>
             </div>
@@ -178,6 +184,11 @@ export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, us
                     value="graffiti"
                     control={<Radio />}
                     label="Graffiti"
+                  />
+                  <FormControlLabel
+                    value='filmmaking'
+                    control={<Radio />}
+                    label='Filmmaking'
                   />
                 </RadioGroup>
               </FormControl>

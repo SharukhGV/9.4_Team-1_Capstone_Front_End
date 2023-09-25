@@ -65,7 +65,6 @@ export default function CatCarousel() {
           sx={{height: 40, width: '100%'}}
           key={`image-${i}`}
         >
-          {/* <div className='imgDiv' key={img.name}> */}
           <CardCover>
             <img
               src={img.imageUrl}
