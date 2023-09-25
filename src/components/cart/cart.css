@@ -1,10 +1,10 @@
 .cart{
     position:absolute;
-    width:100%;
-    padding:5%;
+    width:20%;
+    padding:1%;
     border:solid grey 2px;
     z-index: 10;
-    right:40%;
+    right:10%;
     background-color: #f8f8f8;
 }
 .cart-total{

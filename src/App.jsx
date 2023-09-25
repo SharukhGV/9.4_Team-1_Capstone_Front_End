@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {Routes, Route, Navigate, Outlet} from 'react-router-dom';
+import {Routes, Route, Navigate, Outlet, useNavigate, Link} from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import axios from 'axios';
 
@@ -37,6 +37,7 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 };
 
 function App() {
+  const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [tab, setTab] = useState(false);
   const [user, setUser] = useState(undefined);
@@ -140,22 +141,80 @@ function App() {
 
   return (
     <div className='App'>
-      <NavBar
-        user={user}
-        handleLogout={handleLogout}
-        handleSignIn={handleSignIn}
-        modal={modal}
-        setModal={setModal}
-        tab={tab}
-        setTab={setTab}
-      />
-      <aside className='aside-cart'>
-        <ShoppingCartIcon
-          className='shopping-cart'
-          onClick={() => setCartView(!cartView)}
+      <header>
+        <NavBar
+          user={user}
+          handleLogout={handleLogout}
+          handleSignIn={handleSignIn}
+          modal={modal}
+          setModal={setModal}
+          tab={tab}
+          setTab={setTab}
         />
-        {cartView && <Cart items={cartItems} removeItem={removeItem} handleClose={()=>setCartView(false)}/>}
-      </aside>
+        <div className='navbar'>
+          <aside>
+            <button onClick={() => navigate('/about')} className='signup-btn'>
+              {' '}
+              About{' '}
+            </button>
+          </aside>
+          <div className='cart-auth-buttons'>
+            <aside className='aside-cart'>
+              <ShoppingCartIcon
+                className='shopping-cart'
+                onClick={() => setCartView(!cartView)}
+              />
+              {cartView && (
+                <Cart
+                  items={cartItems}
+                  removeItem={removeItem}
+                  handleClose={() => setCartView(false)}
+                />
+              )}
+            </aside>
+            {!user && (
+              <aside className='auth-btns'>
+                <button
+                  onClick={() => {
+                    setModal(true);
+                    setTab(false);
+                  }}
+                  className='login-btn'
+                >
+                  {' '}
+                  Login{' '}
+                </button>
+                <button
+                  className='signup-btn'
+                  onClick={() => {
+                    setModal(true);
+                    setTab(true);
+                  }}
+                >
+                  {' '}
+                  Sign Up{' '}
+                </button>
+              </aside>
+            )}
+            {user && (
+              <div className='auth-btns'>
+                {/* > */}
+                <Link to={`${user.username}/profile`}>
+                  <button className='login-btn'>Profile</button>
+                  {/* <BasicPopover
+                className='login-btn'
+                buttonText='Profile'
+                popoverContent='Profile options will go here'
+              /> */}
+                </Link>
+                <button className='login-btn' onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
       <main>
         <Routes>
           <Route
