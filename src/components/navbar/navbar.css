@@ -91,6 +91,7 @@ nav {
   background-color: #800080;
   padding-top: 5px;
   padding-bottom: 5px;
+  border-radius: 7px;
 }
 
 .logout-btn :hover {

@@ -19,7 +19,6 @@ import ToolsDetails from './components/tools/ToolsDetails';
 import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import PostPreview from './components/posts/PostPreview';
-import Explore from './pages/explore/Explore';
 import About from './pages/about/About';
 
 import ArtistsGraphic from './assets/artistsgraphic.jpg';
@@ -47,7 +46,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [userHobbyInterest, setUserHobbyInterest] = useState('');
   const [userCurrentHobby, setUserCurrentHobby] = useState('');
-  const [visiblePosts, setVisiblePosts] = useState([]);
+  const [posts, setposts] = useState([]);
   const [postsCategorized, setPostsCategorized] = useState({
     'Paint': [],
     'Sketch': [],
@@ -57,9 +56,8 @@ function App() {
     'Printmaking': [],
     'Graffiti': [],
     'Fashion Design': [],
+    'Filmmaking': [],
   }); 
-  const [posts, setposts] = useState([]);
-  const [currentPost, setCurrentPost] = useState(0);
 
   useEffect(() => {
     const getPosts = () => {
@@ -67,28 +65,18 @@ function App() {
     axios.get(`${API}/posts`)
     .then((response) => {
       const allPosts = response.data;
-      let updatedFilteredPost={}
+      let updatedFilteredPosts={}
       for (let category in postsCategorized) {
         const filteredPosts = allPosts.filter((post) => post.category.toLowerCase() == category.toLowerCase())
-        updatedFilteredPost[category]=filteredPosts
+        updatedFilteredPosts[category]=filteredPosts
       }
-       console.log('updatedFiltered:',updatedFilteredPost)
-      setPostsCategorized(updatedFilteredPost)
-    
-      const theVisiblePosts = [
-        allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
-        allPosts[currentPost],
-        allPosts[(currentPost + 1) % allPosts.length],
-        allPosts[(currentPost + 2) % allPosts.length],
-        allPosts[(currentPost + 3) % allPosts.length],
-      ];
-      setVisiblePosts(theVisiblePosts);
+      setPostsCategorized(updatedFilteredPosts)
       setposts(response.data);
     })
     .catch(error => console.error('catch', error))
   }
   getPosts();
-}, [currentPost]);
+}, []); 
 
   useEffect(() => {
     checkToken();
@@ -122,6 +110,7 @@ function App() {
     axios.post(`${API}/auth/logout`);
     removeCookie('token');
   };
+
   function checkToken() {
     if (cookies.token !== undefined) {
       axios
@@ -136,25 +125,12 @@ function App() {
           handleSignIn(res.data.user);
         })
         .catch(err => {
-          // console.log(err);
           setError(err);
           setTimeout(() => {
             setError();
           }, 3000);
         });
     }
-  }
-
-  function prevSlide() {
-    setCurrentPost(prevPost =>
-      prevPost === 0 ? posts.length - 1 : prevPost - 1
-    );
-  }
-
-  function nextSlide() {
-    setCurrentPost(prevPost =>
-      prevPost === posts.length - 1 ? 0 : prevPost + 1
-    );
   }
 
   return (
@@ -242,16 +218,20 @@ function App() {
                 modal={modal}
                 setModal={setModal}
                 posts={posts}
-                visiblePosts={visiblePosts}
-                setCurrentPost={setCurrentPost}
                 ArtistsGraphic={ArtistsGraphic}
-                prevSlide={prevSlide}
-                nextSlide={nextSlide}
+                postsCategorized={postsCategorized}
               />
             }
           />
           <Route path='/about' element={<About />} />
-          <Route path='/home' element={<Home user={user} visiblePosts={visiblePosts} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />} />
+          <Route path='/home' element={<Home user={user}                          
+                                        postsCategorized={postsCategorized} 
+                                        userHobbyInterest={userHobbyInterest} 
+                                        setUserHobbyInterest={setUserHobbyInterest} 
+                                        setUserCurrentHobby={setUserCurrentHobby} 
+                                        userCurrentHobby={userCurrentHobby} 
+                                        ArtistsGraphic={ArtistsGraphic} 
+                                        />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />
@@ -304,7 +284,6 @@ function App() {
               element={<ToolsEditForm user={user} />}
             />
           </Route>
-
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           {/* <Route path='/tools' element={<Tools />} />
