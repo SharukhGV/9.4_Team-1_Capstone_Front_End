@@ -19,6 +19,7 @@ header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  /* background: radial-gradient(#9878bfd5 20%, #7851a9d5 60%) ; */
 }
 
 .cart-auth-buttons{

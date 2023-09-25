@@ -19,48 +19,45 @@ export default function NavBar({
     setSearchText(event.target.value);
   }
   return (
-      <nav>
-        <div className='top-left'>
-          <Link to='/home'>
-            {' '}
-            <img
-              style={{maxWidth: '100px', maxHeight: '100px'}}
-              src={craftopiaLogo2}
-              className='nav-logo'
-            />{' '}
-          </Link>
-          {/* <Link className='about-link' to='/about'>
+    <nav>
+      <div className='top-left'>
+        <Link to='/home'>
+          {' '}
+          <img
+            style={{maxWidth: '100px', maxHeight: '100px'}}
+            src={craftopiaLogo2}
+            className='nav-logo'
+          />{' '}
+        </Link>
+        {/* <Link className='about-link' to='/about'>
             {' '}
             About{' '}
           </Link> */}
-        </div>
-        <h1 className='title'>Craftopia</h1>
-        <div className='nav-right-container'>
-          <div>
-            <Input
-              type='text'
-              placeholder='Search...'
-              value={searchText}
-              onChange={handleSearchInput}
-              size='xsmall'
-              sx={{width: '190px', marginBottom: '-4px'}}
-              inputProps={{style: {fontSize: '17px', marginBottom: '-2px'}}}
-            />
-            <button className='search-btn'>
-              {' '}
-              <img src={searchIcon} className='search-icon' />{' '}
-            </button>
-          </div>
-          <Auth
-            user={user}
-            modal={modal}
-            tab={tab}
-            setTab={setTab}
-            setModal={setModal}
-            handleLogout={handleLogout}
-            handleSignIn={handleSignIn}
+      </div>
+      <h1 className='title'>Craftopia</h1>
+      <div className='nav-right-container'>
+        <div>
+          {/* <img src={searchIcon} className='search-icon' /> */}
+          <Input
+            type='text'
+            placeholder='Search...'
+            value={searchText}
+            onChange={handleSearchInput}
+            size='xsmall'
+            sx={{width: '190px', marginBottom: '-4px'}}
+            inputProps={{style: {fontSize: '17px', marginBottom: '-2px'}}}
           />
         </div>
-      </nav>
+        <Auth
+          user={user}
+          modal={modal}
+          tab={tab}
+          setTab={setTab}
+          setModal={setModal}
+          handleLogout={handleLogout}
+          handleSignIn={handleSignIn}
+        />
+      </div>
+    </nav>
   );
 }

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {v4 as uuid} from 'uuid'
 import CartItem from './CartItem';
 import './cart.css';
-export default function Cart({items, handleClose}) {
+export default function Cart({items, handleClose, removeItem}) {
   const [total, setTotal] = useState(0);
   let price = 0;
 
@@ -26,12 +26,12 @@ export default function Cart({items, handleClose}) {
       <hr></hr>
 
       {items.length > 0 ? (
-        items.map(item => {
+        items.map((item,i) => {
           price += item.price;
           // setTotal(price);
           return (
             <aside key={uuid()}>
-              <CartItem tool={item} />
+              <CartItem tool={item} index={i} removeItem={removeItem}/>
             </aside>
           );
         })
