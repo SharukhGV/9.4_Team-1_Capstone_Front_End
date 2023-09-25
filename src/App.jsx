@@ -45,46 +45,47 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 
 function App() {
   const navigate = useNavigate();
+  const [cookies, removeCookie] = useCookies();
+
   const [modal, setModal] = useState(false);
   const [tab, setTab] = useState(false);
   const [user, setUser] = useState(undefined);
-  const [cookies, removeCookie] = useCookies();
   const [error, setError] = useState();
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [userHobbyInterest, setUserHobbyInterest] = useState('');
-  const [userCurrentHobby, setUserCurrentHobby] = useState('');
-  const [posts, setposts] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [postsCategorized, setPostsCategorized] = useState({
-    'Paint': [],
-    'Sketch': [],
-    'Photography': [],
-    'Pottery': [],
-    'Sculpt': [],
-    'Printmaking': [],
-    'Graffiti': [],
+    Paint: [],
+    Sketch: [],
+    Photography: [],
+    Pottery: [],
+    Sculpt: [],
+    Printmaking: [],
+    Graffiti: [],
     'Fashion Design': [],
-    'Filmmaking': [],
-  }); 
+    Filmmaking: [],
+  });
 
   useEffect(() => {
     const getPosts = () => {
-
-    axios.get(`${API}/posts`)
-    .then((response) => {
-      const allPosts = response.data;
-      let updatedFilteredPosts={}
-      for (let category in postsCategorized) {
-        const filteredPosts = allPosts.filter((post) => post.category.toLowerCase() == category.toLowerCase())
-        updatedFilteredPosts[category]=filteredPosts
-      }
-      setPostsCategorized(updatedFilteredPosts)
-      setposts(response.data);
-    })
-    .catch(error => console.error('catch', error))
-  }
-  getPosts();
-}, []); 
+      axios
+        .get(`${API}/posts`)
+        .then(response => {
+          const allPosts = response.data;
+          let updatedFilteredPosts = {};
+          for (let category in postsCategorized) {
+            const filteredPosts = allPosts.filter(
+              post => post.category.toLowerCase() == category.toLowerCase()
+            );
+            updatedFilteredPosts[category] = filteredPosts;
+          }
+          setPostsCategorized(updatedFilteredPosts);
+          setPosts(response.data);
+        })
+        .catch(error => console.error('catch', error));
+    };
+    getPosts();
+  }, []);
 
   useEffect(() => {
     checkToken();
@@ -107,10 +108,10 @@ function App() {
     setCartItems([...cartItems, tool]);
   };
 
-  const removeItem = (i) => {
-    const updatedCart = [...cartItems]
-    updatedCart.splice(i,1)
-    setCartItems(updatedCart)
+  const removeItem = i => {
+    const updatedCart = [...cartItems];
+    updatedCart.splice(i, 1);
+    setCartItems(updatedCart);
   };
 
   const handleSignIn = authUser => {
@@ -166,7 +167,11 @@ function App() {
           </aside>
           <div className='cart-auth-buttons'>
             <aside className='aside-cart'>
-              <Badge badgeContent={cartItems.length} color='error' onClick={() => setCartView(!cartView)}>
+              <Badge
+                badgeContent={cartItems.length}
+                color='error'
+                onClick={() => setCartView(!cartView)}
+              >
                 <ShoppingCartIcon
                   className='shopping-cart'
                   onClick={() => setCartView(!cartView)}
@@ -238,14 +243,17 @@ function App() {
             }
           />
           <Route path='/about' element={<About />} />
-          <Route path='/home' element={<Home user={user}                          
-                                        postsCategorized={postsCategorized} 
-                                        userHobbyInterest={userHobbyInterest} 
-                                        setUserHobbyInterest={setUserHobbyInterest} 
-                                        setUserCurrentHobby={setUserCurrentHobby} 
-                                        userCurrentHobby={userCurrentHobby} 
-                                        ArtistsGraphic={ArtistsGraphic} 
-                                        />} />
+          <Route
+            path='/home'
+            element={
+              <Home
+                user={user}
+                postsCategorized={postsCategorized}
+                ArtistsGraphic={ArtistsGraphic}
+                updateUser={handleSignIn}
+              />
+            }
+          />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />
@@ -270,8 +278,6 @@ function App() {
               element={
                 <Profile
                   user={user}
-                  userCurrentHobby={userCurrentHobby}
-                  userHobbyInterest={userHobbyInterest}
                 />
               }
             />
