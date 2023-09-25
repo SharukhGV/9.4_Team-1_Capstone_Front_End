@@ -47,17 +47,18 @@ function App() {
   const [userHobbyInterest, setUserHobbyInterest] = useState('');
   const [userCurrentHobby, setUserCurrentHobby] = useState('');
   const [posts, setposts] = useState([]);
+  const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
     'Paint': [],
     'Sketch': [],
     'Photography': [],
-    'Pottery': [],
+    //'Pottery': [], //these are empty must be edited on backedn 
     'Sculpt': [],
-    'Printmaking': [],
+    //'Printmaking': [],
     'Graffiti': [],
     'Fashion Design': [],
     'Filmmaking': [],
-  }); 
+  }); //backend categories to be edited 
 
   useEffect(() => {
     const getPosts = () => {
@@ -67,11 +68,39 @@ function App() {
       const allPosts = response.data;
       let updatedFilteredPosts={}
       for (let category in postsCategorized) {
-        const filteredPosts = allPosts.filter((post) => post.category.toLowerCase() == category.toLowerCase())
-        updatedFilteredPosts[category]=filteredPosts
+        const filteredPosts = allPosts.filter((post) => post.category.toLowerCase() == category.toLowerCase());
+        updatedFilteredPosts[category]=filteredPosts;
       }
-      setPostsCategorized(updatedFilteredPosts)
       setposts(response.data);
+      setPostsCategorized(updatedFilteredPosts);
+
+      function confirmFilteredData() {
+        for (let category in postsCategorized) {
+          if (category.length > 1) {
+            setDataLoader(false);
+          }
+          else if (category.length < 1) {
+            setDataLoader(true);
+          }
+        }
+      }
+
+      if (dataLoader === true) {
+        confirmFilteredData();
+      }
+
+      //all need is an if statement here 
+
+      //to keep calling itself until loading is false
+
+      // for (let category in postsCategorized) {
+      //   if (category.length > 1) {
+      //     setDataLoader(false);
+      //   }
+      //   else if (category.length < 1) {
+      //     setDataLoader(false);
+      //   }
+      // } 
     })
     .catch(error => console.error('catch', error))
   }
@@ -230,7 +259,8 @@ function App() {
                                         setUserHobbyInterest={setUserHobbyInterest} 
                                         setUserCurrentHobby={setUserCurrentHobby} 
                                         userCurrentHobby={userCurrentHobby} 
-                                        ArtistsGraphic={ArtistsGraphic} 
+                                        ArtistsGraphic={ArtistsGraphic}
+                                        dataLoader={dataLoader} 
                                         />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
