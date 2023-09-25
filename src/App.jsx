@@ -67,14 +67,13 @@ function App() {
     axios.get(`${API}/posts`)
     .then((response) => {
       const allPosts = response.data;
-      let updatedFilteredPost={}
+      let updatedFilteredPosts={}
       for (let category in postsCategorized) {
         const filteredPosts = allPosts.filter((post) => post.category.toLowerCase() == category.toLowerCase())
-        updatedFilteredPost[category]=filteredPosts
+        updatedFilteredPosts[category]=filteredPosts
       }
-       console.log('updatedFiltered:',updatedFilteredPost)
-      setPostsCategorized(updatedFilteredPost)
-    
+       //console.log(postsCategorized)
+      setPostsCategorized(updatedFilteredPosts)
       const theVisiblePosts = [
         allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
         allPosts[currentPost],
@@ -247,11 +246,12 @@ function App() {
                 ArtistsGraphic={ArtistsGraphic}
                 prevSlide={prevSlide}
                 nextSlide={nextSlide}
+                postsCategorized={postsCategorized}
               />
             }
           />
           <Route path='/about' element={<About />} />
-          <Route path='/home' element={<Home user={user} visiblePosts={visiblePosts} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />} />
+          <Route path='/home' element={<Home user={user} visiblePosts={visiblePosts} postsCategorized={postsCategorized} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />

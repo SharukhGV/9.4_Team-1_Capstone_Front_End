@@ -8,7 +8,14 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import{v4 as uuid} from 'uuid'
 import { Card } from '@mui/joy';
 
-export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSlide, prevSlide}) {
+export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSlide, prevSlide, postsCategorized}) {
+  useEffect(() => {
+    for (let category in postsCategorized) {
+      const posts = postsCategorized[category]
+      console.log(posts)
+      //console.log(post)
+    }
+  }, [])
 
   return (
     <div className='landing'>
