@@ -1,5 +1,12 @@
 import {useState, useEffect} from 'react';
-import {Routes, Route, Navigate, Outlet, useNavigate, Link} from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+  useNavigate,
+  Link,
+} from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import axios from 'axios';
 
@@ -26,6 +33,7 @@ import ArtistsGraphic from './assets/artistsgraphic.jpg';
 
 import './App.css';
 import ToolsUsers from './components/tools/ToolsUsers';
+import {Badge} from '@mui/material';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -93,7 +101,11 @@ function App() {
     setCartItems([...cartItems, tool]);
   };
 
-  const removeItem = () => {};
+  const removeItem = (i) => {
+    const updatedCart = [...cartItems]
+    updatedCart.splice(i,1)
+    setCartItems(updatedCart)
+  };
 
   const handleSignIn = authUser => {
     setUser(authUser);
@@ -160,10 +172,12 @@ function App() {
           </aside>
           <div className='cart-auth-buttons'>
             <aside className='aside-cart'>
-              <ShoppingCartIcon
-                className='shopping-cart'
-                onClick={() => setCartView(!cartView)}
-              />
+              <Badge badgeContent={cartItems.length} color='error' onClick={() => setCartView(!cartView)}>
+                <ShoppingCartIcon
+                  className='shopping-cart'
+                  onClick={() => setCartView(!cartView)}
+                />
+              </Badge>
               {cartView && (
                 <Cart
                   items={cartItems}
