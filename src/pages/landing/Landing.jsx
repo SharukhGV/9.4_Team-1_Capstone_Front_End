@@ -1,21 +1,27 @@
 import './landing.css';
-import axios from 'axios';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import CatCarousel from '../../components/carousels/CatCarousel';
 import PostCard from '../../components/posts/PostCard';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; //change to app.jsx
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import{v4 as uuid} from 'uuid'
 import { Card } from '@mui/joy';
 
-export default function Landing({setModal, visiblePosts, setCurrentCategory, ArtistsGraphic, nextSlide, prevSlide, postsCategorized}) {
-  // useEffect(() => {
-  //   for (let category in postsCategorized) {
-  //     const posts = postsCategorized[category]
-  //     //console.log(posts)
-  //     //console.log(post)
-  //   }
-  // }, [])
+export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
+  const [currentFilmmakingPost, setCurrentFilmmakingPost] = useState(0);
+  const [currentPaintPost, setCurrentPaintPost] = useState(0);
+  const [currentPhotographyPost, setCurrentPhotographyPost] = useState(0);
+  let visibleFilmmakingPosts = []; 
+  let visiblePhotographyPosts = [];
+  let visiblePaintPosts = [];
+
+  for (let i = 0; i < 5; i++) {
+    const filmmakingIndex = (currentFilmmakingPost + i) % postsCategorized.Filmmaking.length;
+    const photographyIndex = (currentPhotographyPost + i) % postsCategorized.Photography.length;
+    const paintIndex = (currentPaintPost + i) % postsCategorized.Paint.length;
+    visibleFilmmakingPosts.push(postsCategorized.Filmmaking[filmmakingIndex]);
+    visiblePhotographyPosts.push(postsCategorized.Photography[photographyIndex]);
+    visiblePaintPosts.push(postsCategorized.Paint[paintIndex]);  
+  }
 
   return (
     <div className='landing'>
@@ -54,14 +60,15 @@ export default function Landing({setModal, visiblePosts, setCurrentCategory, Art
       <div className='top-category-1'>
       <h4 className='main-h4'> Photography </h4>
       <div className='posts-slider-container'>
-      <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
-      { postsCategorized.Photography.map((post, i) => {
-        return (
-          <PostCard post={post} />
-        )
-      })
+      <button className='arrow' onClick={() => setCurrentPhotographyPost(prevPost => prevPost === 0 ? postsCategorized.Photography.length - 1 : prevPost - 1)}>{' '} <ArrowBackIosIcon />{' '} </button>
+      {
+        visiblePhotographyPosts.map((post) => {
+          return (
+            <PostCard post={post} />
+          )
+        })
       }
-       <button className='arrow' onClick={nextSlide} >
+       <button className='arrow' onClick={() => setCurrentPhotographyPost(prevPost => prevPost === postsCategorized.Photography.length - 1 ? 0 : prevPost + 1)}>
         {' '}
         <ArrowForwardIosIcon />{' '}
       </button>
@@ -70,39 +77,38 @@ export default function Landing({setModal, visiblePosts, setCurrentCategory, Art
       <div className='top-category-2'>
         <h4 className='main-h4'> Painting </h4>
         <div className='posts-slider-container'>
-        <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
+        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === 0 ? postsCategorized.Paint.length - 1 : prevPost - 1)}>{' '} <ArrowBackIosIcon />{' '} </button>
         {
-          postsCategorized.Paint.map((post, i) => {
+          visiblePaintPosts.map((post) => {
             return (
               <PostCard post={post} />
             )
           })
         }
-        <button className='arrow' onClick={nextSlide} >
+        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === postsCategorized.Paint.length - 1 ? 0 : prevPost + 1)}>
         {' '}
         <ArrowForwardIosIcon />{' '}
         </button>
         </div>
       </div>
       <div className='top-category-3'>
-        <h4 className='main-h4'> Fashion Design </h4>
+        <h4 className='main-h4'> Filmmaking </h4>
         <div className='posts-slider-container'>
-        <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
+        <button className='arrow' onClick={() => setCurrentFilmmakingPost(prevPost => prevPost === 0 ? postsCategorized.Filmmaking.length - 1 : prevPost - 1)}>{' '} <ArrowBackIosIcon />{' '} </button>
         {
-        postsCategorized.Sculpt.map((post, i) => {
-          return (
-            <PostCard post={post} />
-          )
-        }) 
+          visibleFilmmakingPosts.map((post) => {
+            return (
+              <PostCard post={post} />
+            )
+          })
         }
-        <button className='arrow' onClick={nextSlide} >
+        <button className='arrow' onClick={() => setCurrentFilmmakingPost(prevPost => prevPost === postsCategorized.Filmmaking.length - 1 ? 0 : prevPost + 1)}>
         {' '}
         <ArrowForwardIosIcon />{' '}
         </button>
         </div>
       </div>
       </main>
-      {/* <Tools /> */}
     </div>
   );
 }

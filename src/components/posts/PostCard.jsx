@@ -4,9 +4,10 @@ import {Card, CardCover, CardContent, CardOverflow, Divider, AspectRatio, Typogr
 import './PostCard.css';
 
 export default function PostCard({post}) {
-  const createdAt = new Date(post.created_at);
+  //console.log(post)
+  //const createdAt = new Date(post.created_at);
 
-  const formattedDate = `${createdAt.toLocaleDateString()}`;
+  //const formattedDate = `${createdAt.toLocaleDateString()}`;
 
     return (
         <Card component='li' variant='solid' sx={{ height: 119, minWidth: '11vw', maxWidth: '11vw', backgroundColor: '#f8f8f8' }}  >
@@ -17,9 +18,9 @@ export default function PostCard({post}) {
             </CardOverflow>
                 <CardContent >
                 <div className='card-content-info'>
-                <Typography level='title-sm' sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}> {post.title} </Typography>
-                <p className='post-category'> {post.category} </p>
-                <p className='created-by'>By: {post.created_by}</p>
+                <Typography level='title-sm' sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}> {post?.title} </Typography>
+                <p className='post-category'> {post?.category} </p>
+                <p className='created-by'>By: {post?.created_by}</p>
                 </div>
                 </CardContent>
         </Card>
