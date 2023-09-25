@@ -48,8 +48,8 @@ function App() {
     'Pottery': [],
     'Sculpt': [],
     'Printmaking': [],
-    'Fashion Design': [],
     'Graffiti': [],
+    'Fashion Design': [],
   }); 
   const [posts, setposts] = useState([]);
   const [currentPost, setCurrentPost] = useState(0);
@@ -59,13 +59,13 @@ function App() {
     axios.get(`${API}/posts`)
     .then((response) => {
       const allPosts = response.data;
+      let updatedFilteredPost={}
       for (let category in postsCategorized) {
-        
-        postsFilter(allPosts, category);
-        console.log(category);
-        
-
+        const filteredPosts = allPosts.filter((post) => post.category.toLowerCase() == category.toLowerCase())
+        updatedFilteredPost[category]=filteredPosts
       }
+       console.log('updatedFiltered:',updatedFilteredPost)
+      setPostsCategorized(updatedFilteredPost)
     
       const theVisiblePosts = [
         allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
@@ -81,26 +81,6 @@ function App() {
   }
   getPosts();
 }, [currentPost]);
-
-function postsFilter(posts, category) {
-  //posts.filter((post) => post.category === category)
-
-  setPostsCategorized({
-    ...postsCategorized,
-    [ category ]: posts.filter((post) => post.category.toLowerCase() == category.toLowerCase())
-  })
-}
-
-console.log(posts);
-
-
-
-useEffect(() => {
-  //console.log(visiblePosts)
-  console.log(postsCategorized);
-}, [postsCategorized])
-//console.log(posts)
-//console.log(visiblePosts)
 
   useEffect(() => {
     checkToken();
