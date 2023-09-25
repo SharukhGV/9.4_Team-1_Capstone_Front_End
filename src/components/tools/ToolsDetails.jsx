@@ -1,63 +1,66 @@
-// import {useState} from 'react';
-// import {useEffect} from 'react';
-// import axios from 'axios';
-// import ToolsUserDetails from './ToolsUserDetails';
-import { Link } from "react-router-dom";
+import {useState, useEffect} from 'react';
+import axios from 'axios';
+import {Link, useParams} from 'react-router-dom';
+import noImage from '../../assets/placeholder-img.jpeg';
 
-function ToolsDetails({inKEY,name, user, condition}) {
-  const API = import.meta.env.VITE_REACT_APP_API_URL;
-//   const [tools, setTools] = useState([]);
+import './toolsDetails.css'
+const API = import.meta.env.VITE_REACT_APP_API_URL;
 
-//   const getTools = () => {
-//     axios.get(`${API}/tools/${user.user_id}`).then(res => {
-//       setTools(res.data);
-//     });
-//   };
-
-//   useEffect(() => {
-//     getTools()
-//   }, []);
-//   const {id} = useParams();
-
-//   // console.log(tools)
+function ToolsDetails({addToCart}) {
+  const {username, tools_id} = useParams();
+  const [tool, setTool] = useState({
+    tool:'',
+    media:[]
+  });
+  useEffect(() => {
+    axios
+      .get(`${API}/tools/one/${tools_id}`)
+      .then(res => {
+        console.log(res.data)
+        setTool({
+          tool: res.data.tool,
+          media: res.data.media,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
   return (
-<tbody>
-    <tr><td>{index+=1}</td>
-    <td><Link to={`/${user.username}/tools/${inKEY}`}>{name}</Link></td>
-    <td>{condition}</td>
-    </tr>
-    </tbody>
-  )
-//     <table className='thedreamtable'>
-//       <thead>
-//         <tr>
-//           <th>Tool Number</th>
-//           <th>Tool Name</th>
-//           <th>Description</th>
-//         </tr>
-//       </thead>
-//       {tools.map((individualTool, index) => {
-//         return (
-//           <ToolsUserDetails
-//             key={`tool-${individualTool.tool_id}`}
-//             inKEY={individualTool.tool_id}
-//             name={individualTool.name_tools}
-//             description={individualTool.description}
-//             price={individualTool.price}
-//             quantity={individualTool.stock_quantity}
-//             condition={individualTool.item_condition}
-//             thumbnail={individualTool.thumbnail}
-//             userid={individualTool.user_id}
-//             index={index}
-//             user={user.user_id}
-//             username={user.username}
-//           />
-//         );
-//       })}
-//     </table>
-
-
-
+    <div className='tool-details'>
+      <aside>
+        {tool.media.length > 0 ? (
+          <div>
+            <div className='main-image-div'>
+              <img className='selected-img' src={noImage} />
+            </div>
+            {tool.media.map(img => (
+              <img src={img.file_url} />
+            ))}
+          </div>
+        ) : (
+          <div className='main-image-div'>
+            <img className='selected-img' src={noImage} />
+          </div>
+        )}
+      </aside>
+      {tool.tool && (
+        <aside className='tool-info'>
+          <h1>{tool.tool.name}</h1>
+          <h5>Posted by: {tool.tool.created_by}</h5>
+          <h3>${tool.tool.price}</h3>
+          <aside className='tools-action-buttons'>
+            <button>Buy it Now</button>
+            <button onClick={()=>addToCart(tool.tool)}>Add to Cart</button>
+          </aside>
+        </aside>
+      )}
+      <div className='tool-description'>
+        <h2>Description</h2>
+        <p>{tool.tool.description}</p>
+      </div>
+    </div>
+  );
 }
 
 export default ToolsDetails;

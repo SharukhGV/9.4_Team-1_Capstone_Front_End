@@ -1,9 +1,12 @@
 import {useState, useEffect} from 'react';
-import {Routes, Route, Navigate, Outlet} from 'react-router-dom';
+import {Routes, Route, Navigate, Outlet, useNavigate, Link} from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import axios from 'axios';
 
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 import NavBar from './components/navbar/NavBar';
+import Cart from './components/cart/Cart';
 import Landing from './pages/landing/Landing';
 import Footer from './components/footer/Footer';
 import Home from './pages/home/Home';
@@ -16,6 +19,7 @@ import ToolsDetails from './components/tools/ToolsDetails';
 import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import PostPreview from './components/posts/PostPreview';
+import Explore from './pages/explore/Explore';
 import About from './pages/about/About';
 
 import ArtistsGraphic from './assets/artistsgraphic.jpg';
@@ -33,13 +37,16 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 };
 
 function App() {
+  const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [tab, setTab] = useState(false);
   const [user, setUser] = useState(undefined);
   const [cookies, removeCookie] = useCookies();
   const [error, setError] = useState();
-  const [userHobbyInterest, setUserHobbyInterest] = useState(''); 
-  const [userCurrentHobby, setUserCurrentHobby] = useState(''); 
+  const [cartView, setCartView] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  const [userHobbyInterest, setUserHobbyInterest] = useState('');
+  const [userCurrentHobby, setUserCurrentHobby] = useState('');
   const [visiblePosts, setVisiblePosts] = useState([]);
   const [postsCategorized, setPostsCategorized] = useState({
     'Paint': [],
@@ -56,6 +63,7 @@ function App() {
 
   useEffect(() => {
     const getPosts = () => {
+
     axios.get(`${API}/posts`)
     .then((response) => {
       const allPosts = response.data;
@@ -84,7 +92,26 @@ function App() {
 
   useEffect(() => {
     checkToken();
+    getCart();
   }, []);
+
+  useEffect(() => {
+    if (cartItems) {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
+
+  const getCart = () => {
+    if (localStorage.getItem('cart')) {
+      setCartItems(JSON.parse(localStorage.getItem('cart')));
+    }
+  };
+
+  const addToCart = tool => {
+    setCartItems([...cartItems, tool]);
+  };
+
+  const removeItem = () => {};
 
   const handleSignIn = authUser => {
     setUser(authUser);
@@ -96,25 +123,25 @@ function App() {
     removeCookie('token');
   };
   function checkToken() {
-    if(cookies.token){
-    axios
-      .post(
-        `${API}/auth/token`,
-        {cookie: cookies.token},
-        {
-          withCredentials: true,
-        }
-      )
-      .then(res => {
-        handleSignIn(res.data.user);
-      })
-      .catch(err => {
-        // console.log(err);
-        setError(err);
-        setTimeout(() => {
-          setError();
-        }, 3000);
-      });
+    if (cookies.token !== undefined) {
+      axios
+        .post(
+          `${API}/auth/token`,
+          {cookie: cookies.token},
+          {
+            withCredentials: true,
+          }
+        )
+        .then(res => {
+          handleSignIn(res.data.user);
+        })
+        .catch(err => {
+          // console.log(err);
+          setError(err);
+          setTimeout(() => {
+            setError();
+          }, 3000);
+        });
     }
   }
 
@@ -122,30 +149,106 @@ function App() {
     setCurrentPost(prevPost =>
       prevPost === 0 ? posts.length - 1 : prevPost - 1
     );
-  } 
+  }
 
   function nextSlide() {
     setCurrentPost(prevPost =>
       prevPost === posts.length - 1 ? 0 : prevPost + 1
     );
-  } 
+  }
 
   return (
     <div className='App'>
-      <NavBar
-        user={user}
-        handleLogout={handleLogout}
-        handleSignIn={handleSignIn}
-        modal={modal}
-        setModal={setModal}
-        tab={tab}
-        setTab={setTab}
-      />
+      <header>
+        <NavBar
+          user={user}
+          handleLogout={handleLogout}
+          handleSignIn={handleSignIn}
+          modal={modal}
+          setModal={setModal}
+          tab={tab}
+          setTab={setTab}
+        />
+        <div className='navbar'>
+          <aside>
+            <button onClick={() => navigate('/about')} className='signup-btn'>
+              {' '}
+              About{' '}
+            </button>
+          </aside>
+          <div className='cart-auth-buttons'>
+            <aside className='aside-cart'>
+              <ShoppingCartIcon
+                className='shopping-cart'
+                onClick={() => setCartView(!cartView)}
+              />
+              {cartView && (
+                <Cart
+                  items={cartItems}
+                  removeItem={removeItem}
+                  handleClose={() => setCartView(false)}
+                />
+              )}
+            </aside>
+            {!user && (
+              <aside className='auth-btns'>
+                <button
+                  onClick={() => {
+                    setModal(true);
+                    setTab(false);
+                  }}
+                  className='login-btn'
+                >
+                  {' '}
+                  Login{' '}
+                </button>
+                <button
+                  className='signup-btn'
+                  onClick={() => {
+                    setModal(true);
+                    setTab(true);
+                  }}
+                >
+                  {' '}
+                  Sign Up{' '}
+                </button>
+              </aside>
+            )}
+            {user && (
+              <div className='auth-btns'>
+                {/* > */}
+                <Link to={`${user.username}/profile`}>
+                  <button className='login-btn'>Profile</button>
+                  {/* <BasicPopover
+                className='login-btn'
+                buttonText='Profile'
+                popoverContent='Profile options will go here'
+              /> */}
+                </Link>
+                <button className='login-btn' onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
       <main>
         <Routes>
           <Route
             path='/'
-            element={<Landing modal={modal} setModal={setModal} posts={posts} visiblePosts={visiblePosts} setCurrentPost={setCurrentPost} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />}
+            element={
+              <Landing
+                modal={modal}
+                setModal={setModal}
+                posts={posts}
+                visiblePosts={visiblePosts}
+                setCurrentPost={setCurrentPost}
+                ArtistsGraphic={ArtistsGraphic}
+                prevSlide={prevSlide}
+                nextSlide={nextSlide}
+              />
+            }
           />
           <Route path='/about' element={<About />} />
           <Route path='/home' element={<Home user={user} visiblePosts={visiblePosts} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />} />
@@ -154,7 +257,7 @@ function App() {
           <Route path='/tools' element={<ToolsDetails />} />
           <Route path='/tools/:id' element={<ToolsUserDetails />} />
           <Route element={<ProtectedRoute user={user} />}>
-          {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
+            {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path='/:username/post/:id' element={<Post user={user} />} />
             <Route
               path='/:username/post/new'
@@ -170,7 +273,13 @@ function App() {
             />
             <Route
               path='/:username/profile'
-              element={<Profile user={user} userCurrentHobby={userCurrentHobby} userHobbyInterest={userHobbyInterest} />}
+              element={
+                <Profile
+                  user={user}
+                  userCurrentHobby={userCurrentHobby}
+                  userHobbyInterest={userHobbyInterest}
+                />
+              }
             />
             <Route
               path='/:username/profile/edit'
@@ -187,15 +296,15 @@ function App() {
 
             <Route
               path='/:username/tools/:tools_id'
-              element={<ToolsUserDetails user={user} />}
+              element={<ToolsDetails addToCart={addToCart} />}
             />
 
             <Route
               path='/:username/tools/:tools_id/edit'
               element={<ToolsEditForm user={user} />}
             />
-          </Route>          
-          
+          </Route>
+
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           {/* <Route path='/tools' element={<Tools />} />

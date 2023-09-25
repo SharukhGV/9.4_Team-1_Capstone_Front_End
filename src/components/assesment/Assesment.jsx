@@ -54,7 +54,7 @@ export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, us
   }
 
   return (
-    <>
+    
       <Modal
         open={assesmentModalOpen}
         onClose={() => setAssesmentModalOpen(false)}
@@ -204,6 +204,5 @@ export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, us
           </div>
         </Box>
       </Modal>
-    </>
   );
 }
