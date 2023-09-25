@@ -48,6 +48,9 @@ function App() {
   const [userHobbyInterest, setUserHobbyInterest] = useState('');
   const [userCurrentHobby, setUserCurrentHobby] = useState('');
   const [visiblePosts, setVisiblePosts] = useState([]);
+  const [posts, setposts] = useState([]);
+  const [currentPost, setCurrentPost] = useState(0);
+  const [currentCategory, setCurrentCategory] = useState('Photography');
   const [postsCategorized, setPostsCategorized] = useState({
     'Paint': [],
     'Sketch': [],
@@ -57,9 +60,9 @@ function App() {
     'Printmaking': [],
     'Graffiti': [],
     'Fashion Design': [],
+    'Filmmaking': [],
   }); 
-  const [posts, setposts] = useState([]);
-  const [currentPost, setCurrentPost] = useState(0);
+
 
   useEffect(() => {
     const getPosts = () => {
@@ -75,19 +78,22 @@ function App() {
        //console.log(postsCategorized)
       setPostsCategorized(updatedFilteredPosts)
       const theVisiblePosts = [
-        allPosts[(currentPost - 1 + allPosts.length) % allPosts.length],
-        allPosts[currentPost],
-        allPosts[(currentPost + 1) % allPosts.length],
-        allPosts[(currentPost + 2) % allPosts.length],
-        allPosts[(currentPost + 3) % allPosts.length],
+        postsCategorized[currentCategory][(currentPost - 1 + postsCategorized[currentCategory].length) % postsCategorized[currentCategory].length],
+        postsCategorized[currentCategory][currentPost],
+        postsCategorized[currentCategory][(currentPost + 1) % postsCategorized[currentCategory].length],
+        postsCategorized[currentCategory][(currentPost + 2) % postsCategorized[currentCategory].length],
+        postsCategorized[currentCategory][(currentPost + 3) % postsCategorized[currentCategory].length],
       ];
       setVisiblePosts(theVisiblePosts);
       setposts(response.data);
+      //console.log(postsCategorized);
     })
     .catch(error => console.error('catch', error))
   }
   getPosts();
 }, [currentPost]);
+
+
 
   useEffect(() => {
     checkToken();
@@ -247,11 +253,13 @@ function App() {
                 prevSlide={prevSlide}
                 nextSlide={nextSlide}
                 postsCategorized={postsCategorized}
+                currentCategory={currentCategory}
+                setCurrentCategory={setCurrentCategory}
               />
             }
           />
           <Route path='/about' element={<About />} />
-          <Route path='/home' element={<Home user={user} visiblePosts={visiblePosts} postsCategorized={postsCategorized} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />} />
+          <Route path='/home' element={<Home user={user} setCurrentCategory={setCurrentCategory} currentCategory={currentCategory} visiblePosts={visiblePosts} postsCategorized={postsCategorized} userHobbyInterest={userHobbyInterest} setUserHobbyInterest={setUserHobbyInterest} setUserCurrentHobby={setUserCurrentHobby} userCurrentHobby={userCurrentHobby} ArtistsGraphic={ArtistsGraphic} prevSlide={prevSlide} nextSlide={nextSlide} />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />

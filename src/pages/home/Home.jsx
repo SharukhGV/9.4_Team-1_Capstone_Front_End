@@ -51,14 +51,14 @@ export default function Home({user, userHobbyInterest, setUserHobbyInterest, use
       <br />
       <div className='home-header' >
         <img src={ArtistsGraphic} className='artistsGraphic' />
-        </div>
         <h2 className='header-h2'>
           {' '}
           Ignight Your Creativity, Equip Your Creativity{' '}
         </h2>
+        </div>
         {/* <br /> */}
         {/* <br /> */}
-        <div>
+        <div className='assesement-sect'>
           {
             assesmentCompleted === false ? (
               <div className='assesment-sect'>

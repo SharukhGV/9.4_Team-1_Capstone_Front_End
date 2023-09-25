@@ -8,14 +8,14 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import{v4 as uuid} from 'uuid'
 import { Card } from '@mui/joy';
 
-export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSlide, prevSlide, postsCategorized}) {
-  useEffect(() => {
-    for (let category in postsCategorized) {
-      const posts = postsCategorized[category]
-      console.log(posts)
-      //console.log(post)
-    }
-  }, [])
+export default function Landing({setModal, visiblePosts, setCurrentCategory, ArtistsGraphic, nextSlide, prevSlide, postsCategorized}) {
+  // useEffect(() => {
+  //   for (let category in postsCategorized) {
+  //     const posts = postsCategorized[category]
+  //     //console.log(posts)
+  //     //console.log(post)
+  //   }
+  // }, [])
 
   return (
     <div className='landing'>
@@ -49,21 +49,17 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
         <br />
       <br />
       <main>
-      <h3> Top Categories </h3>
+      <h3 className='top-categories-h3'> Top Categories </h3>
       <br />
       <div className='top-category-1'>
-      <h4 className='main-h4'> Painting </h4>
+      <h4 className='main-h4'> Photography </h4>
       <div className='posts-slider-container'>
       <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
-      { 
-        visiblePosts.map((post, i) => { 
-          //console.log(post)
-          if (post.category === 'Sketch') {
-          return (
-            <PostCard post={post} key={uuid} />
-          )
-          }
-        })
+      { postsCategorized.Photography.map((post, i) => {
+        return (
+          <PostCard post={post} />
+        )
+      })
       }
        <button className='arrow' onClick={nextSlide} >
         {' '}
@@ -72,20 +68,15 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
       </div>
       </div>
       <div className='top-category-2'>
-        <h4 className='main-h4'> Sculpting </h4>
+        <h4 className='main-h4'> Painting </h4>
         <div className='posts-slider-container'>
         <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
-        { 
-        visiblePosts.map((post, i) => { 
-          //console.log(post)
-          if (post.category === 'Graffiti') {
-          return (
-            <>
-            <PostCard post={post} i={i} />
-            </>
-          )
-          }
-        })
+        {
+          postsCategorized.Paint.map((post, i) => {
+            return (
+              <PostCard post={post} />
+            )
+          })
         }
         <button className='arrow' onClick={nextSlide} >
         {' '}
@@ -97,17 +88,12 @@ export default function Landing({setModal, visiblePosts, ArtistsGraphic, nextSli
         <h4 className='main-h4'> Fashion Design </h4>
         <div className='posts-slider-container'>
         <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
-        { 
-        visiblePosts.map((post, i) => { 
-          //console.log(post)
-          if (post.category === 'Fashion Design') {
+        {
+        postsCategorized.Sculpt.map((post, i) => {
           return (
-            <>
-            <PostCard post={post} i={i} />
-            </>
+            <PostCard post={post} />
           )
-          }
-        })
+        }) 
         }
         <button className='arrow' onClick={nextSlide} >
         {' '}

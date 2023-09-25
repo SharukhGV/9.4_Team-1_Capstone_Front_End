@@ -78,21 +78,18 @@ font-size: large;
   background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   border-radius: 7px;
-  height: 47px;
-  width: 97px;
+  height: 34px;
+  width: 107px;
   border-style: none;
   font-weight: bold;
   font-family: 'Lato';
-  letter-spacing: 0.5px;
-  padding-top: 5px;
-  padding-bottom: 10px;
+  /* letter-spacing: 0.5px; */
 }
+
 .join-btn:hover {
-  background: linear-gradient(to bottom, #73da61, #50c856);
+  /* background: linear-gradient(to bottom, #73da61, #50c856); */
   color: white;
   border-radius: 7px;
-  height: 47px;
-  width: 97px;
   border-style: none;
   font-weight: bold;
   font-family: 'Lato';
@@ -109,7 +106,7 @@ font-size: large;
 }
 
 .top-categories-h3 {
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   text-align: center;
   color: #800080;
@@ -118,5 +115,5 @@ font-size: large;
 .top-category-p {
   margin-left: 7%;
   color: #1a237e;
-  font-family: 'Lato';
+  font-family: 'Roboto', sans-serif;
 }
