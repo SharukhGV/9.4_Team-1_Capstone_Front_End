@@ -53,7 +53,10 @@ function App() {
   const [error, setError] = useState();
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [posts, setPosts] = useState([]);
+  // const [userHobbyInterest, setUserHobbyInterest] = useState('Filmmaking'); //added default for user home who havent filed out assesment 
+  // const [userCurrentHobby, setUserCurrentHobby] = useState('Photography');
+  const [posts, setposts] = useState([]);
+  const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
     Paint: [],
     Sketch: [],
@@ -64,28 +67,43 @@ function App() {
     Graffiti: [],
     'Fashion Design': [],
     Filmmaking: [],
-  });
+  }); 
 
   useEffect(() => {
     const getPosts = () => {
-      axios
-        .get(`${API}/posts`)
-        .then(response => {
-          const allPosts = response.data;
-          let updatedFilteredPosts = {};
-          for (let category in postsCategorized) {
-            const filteredPosts = allPosts.filter(
-              post => post.category.toLowerCase() == category.toLowerCase()
-            );
-            updatedFilteredPosts[category] = filteredPosts;
+
+    axios.get(`${API}/posts`)
+    .then((response) => {
+      const allPosts = response.data;
+      let updatedFilteredPosts={}
+      for (let category in postsCategorized) {
+        const filteredPosts = allPosts.filter((post) => post.category.toLowerCase() == category.toLowerCase());
+        updatedFilteredPosts[category]=filteredPosts;
+      }
+      setposts(response.data);
+      setPostsCategorized(updatedFilteredPosts);
+
+      function confirmFilteredData() {
+        for (let category in postsCategorized) {
+          if (category.length > 1) {
+            setDataLoader(false);
           }
-          setPostsCategorized(updatedFilteredPosts);
-          setPosts(response.data);
-        })
-        .catch(error => console.error('catch', error));
-    };
-    getPosts();
-  }, []);
+          else if (category.length < 1) {
+            setDataLoader(true);
+          }
+        }
+      }
+
+      if (dataLoader === true) {
+        confirmFilteredData();
+      }
+
+ 
+    })
+    .catch(error => console.error('catch', error))
+  }
+  getPosts();
+}, []); 
 
   useEffect(() => {
     checkToken();
@@ -243,17 +261,16 @@ function App() {
             }
           />
           <Route path='/about' element={<About />} />
-          <Route
-            path='/home'
-            element={
-              <Home
-                user={user}
-                postsCategorized={postsCategorized}
-                ArtistsGraphic={ArtistsGraphic}
-                updateUser={handleSignIn}
-              />
-            }
-          />
+          <Route path='/home' element={<Home user={user}                          
+                                        postsCategorized={postsCategorized} 
+                                        // userHobbyInterest={userHobbyInterest} 
+                                        // setUserHobbyInterest={setUserHobbyInterest} 
+                                        // setUserCurrentHobby={setUserCurrentHobby} 
+                                        // userCurrentHobby={userCurrentHobby} 
+                                        ArtistsGraphic={ArtistsGraphic}
+                                        dataLoader={dataLoader} 
+                                        updateUser={handleSignIn}
+                                        />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />
