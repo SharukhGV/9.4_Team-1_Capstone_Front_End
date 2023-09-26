@@ -1,5 +1,12 @@
 import {useState, useEffect} from 'react';
-import {Routes, Route, Navigate, Outlet, useNavigate, Link} from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+  useNavigate,
+  Link,
+} from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import axios from 'axios';
 
@@ -25,6 +32,7 @@ import ArtistsGraphic from './assets/artistsgraphic.jpg';
 
 import './App.css';
 import ToolsUsers from './components/tools/ToolsUsers';
+import {Badge} from '@mui/material';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -37,28 +45,29 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 
 function App() {
   const navigate = useNavigate();
+  const [cookies, removeCookie] = useCookies();
+
   const [modal, setModal] = useState(false);
   const [tab, setTab] = useState(false);
   const [user, setUser] = useState(undefined);
-  const [cookies, removeCookie] = useCookies();
   const [error, setError] = useState();
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [userHobbyInterest, setUserHobbyInterest] = useState('Filmmaking'); //added default for user home who havent filed out assesment 
-  const [userCurrentHobby, setUserCurrentHobby] = useState('Photography');
+  // const [userHobbyInterest, setUserHobbyInterest] = useState('Filmmaking'); //added default for user home who havent filed out assesment 
+  // const [userCurrentHobby, setUserCurrentHobby] = useState('Photography');
   const [posts, setposts] = useState([]);
   const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
-    'Paint': [],
-    'Sketch': [],
-    'Photography': [],
-    //'Pottery': [], //these are empty must be edited on backedn 
-    'Sculpt': [],
-    //'Printmaking': [],
-    'Graffiti': [],
+    Paint: [],
+    Sketch: [],
+    Photography: [],
+    Pottery: [],
+    Sculpt: [],
+    Printmaking: [],
+    Graffiti: [],
     'Fashion Design': [],
-    'Filmmaking': [],
-  }); //backend categories to be edited 
+    Filmmaking: [],
+  }); 
 
   useEffect(() => {
     const getPosts = () => {
@@ -89,18 +98,7 @@ function App() {
         confirmFilteredData();
       }
 
-      //all need is an if statement here 
-
-      //to keep calling itself until loading is false
-
-      // for (let category in postsCategorized) {
-      //   if (category.length > 1) {
-      //     setDataLoader(false);
-      //   }
-      //   else if (category.length < 1) {
-      //     setDataLoader(false);
-      //   }
-      // } 
+ 
     })
     .catch(error => console.error('catch', error))
   }
@@ -128,7 +126,11 @@ function App() {
     setCartItems([...cartItems, tool]);
   };
 
-  const removeItem = () => {};
+  const removeItem = i => {
+    const updatedCart = [...cartItems];
+    updatedCart.splice(i, 1);
+    setCartItems(updatedCart);
+  };
 
   const handleSignIn = authUser => {
     setUser(authUser);
@@ -183,10 +185,16 @@ function App() {
           </aside>
           <div className='cart-auth-buttons'>
             <aside className='aside-cart'>
-              <ShoppingCartIcon
-                className='shopping-cart'
+              <Badge
+                badgeContent={cartItems.length}
+                color='error'
                 onClick={() => setCartView(!cartView)}
-              />
+              >
+                <ShoppingCartIcon
+                  className='shopping-cart'
+                  onClick={() => setCartView(!cartView)}
+                />
+              </Badge>
               {cartView && (
                 <Cart
                   items={cartItems}
@@ -255,12 +263,13 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/home' element={<Home user={user}                          
                                         postsCategorized={postsCategorized} 
-                                        userHobbyInterest={userHobbyInterest} 
-                                        setUserHobbyInterest={setUserHobbyInterest} 
-                                        setUserCurrentHobby={setUserCurrentHobby} 
-                                        userCurrentHobby={userCurrentHobby} 
+                                        // userHobbyInterest={userHobbyInterest} 
+                                        // setUserHobbyInterest={setUserHobbyInterest} 
+                                        // setUserCurrentHobby={setUserCurrentHobby} 
+                                        // userCurrentHobby={userCurrentHobby} 
                                         ArtistsGraphic={ArtistsGraphic}
                                         dataLoader={dataLoader} 
+                                        updateUser={handleSignIn}
                                         />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
@@ -286,8 +295,6 @@ function App() {
               element={
                 <Profile
                   user={user}
-                  userCurrentHobby={userCurrentHobby}
-                  userHobbyInterest={userHobbyInterest}
                 />
               }
             />

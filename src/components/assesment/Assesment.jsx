@@ -1,58 +1,51 @@
+import {useState} from 'react';
+import axios from 'axios';
+
 import {
   Modal,
   Box,
   RadioGroup,
   Radio,
-  FormLabel,
   FormControlLabel,
   FormControl,
-  Checkbox,
-} from "@mui/material";
-import "./assesment.css";
-import { useState } from "react";
-import axios from "axios";
+} from '@mui/material';
+import './assesment.css';
 
-export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, user, setAssesmentModalOpen, setAssesmentCompleted, assesmentModalOpen}) {
-
+export default function Assesment({
+  user,
+  setAssesmentModalOpen,
+  assesmentModalOpen,
+  updateUser,
+}) {
   const assesmentModalStyle = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "77%",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '77%',
     height: 490,
-    bgcolor: "#f8f8f8",
-    border: "1px solid #D1C4E9", //change this
+    bgcolor: '#f8f8f8',
+    border: '1px solid #D1C4E9', //change this
     boxShadow: 14,
     p: 4,
   };
   const API = import.meta.env.VITE_REACT_APP_API_URL;
 
   const [updatedUser, setUpdatedUser] = useState(user); // Initialize with the default selected value
-  //send user interests to backend 
+
+  const handleRadioSelect = e => {
+    setUpdatedUser({
+      ...updatedUser,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   function handleAssesmentBtns(event) {
     event.preventDefault();
-
-    setAssesmentModalOpen(false);
-
-    if (event.target.value === "later-btn") {
-      setAssesmentCompleted(false);
-    } else if (event.target.value === 'done-btn') {
-      setAssesmentCompleted(true);
-      axios
-      .put(`${API}/auth/${props.user.user_id}`,updatedUser)
-      .then((response) => {
-        console.log(response.data.updatedAccount);
-      })
-      .catch((e) => console.error(e));
-      // console.log(updatedUser.learning_interest);
-      // console.log(updatedUser.current_skillset);
-
-      // props.setAssesmentCompleted(true);
-    }
+    axios.put(`${API}/auth/${updatedUser.user_id}`, updatedUser).then(res => {
+      updateUser(res.data.updatedAccount);
+    });
   }
-
   return (
       <Modal
         open={assesmentModalOpen}
@@ -81,7 +74,8 @@ export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, us
               <FormControl>
                 <RadioGroup
                   name="learning_interest"
-                  onChange={(event)=> setUserHobbyInterest(event.target.value)}
+                  // onChange={(event)=> setUserHobbyInterest(event.target.value)}
+                  onChange={handleRadioSelect}
                   id="learning_interest"
                 >
                   <FormControlLabel
@@ -145,7 +139,8 @@ export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, us
               <FormControl>
                 <RadioGroup
                   name="current_hobby"
-                  onChange={(event) => setUserCurrentHobby(event.target.value)}
+                  //onChange={(event) => setUserCurrentHobby(event.target.value)}
+                  onChange={handleRadioSelect}
                   id="current_hobby"
                 >
                   <FormControlLabel
