@@ -44,8 +44,8 @@ function App() {
   const [error, setError] = useState();
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [userHobbyInterest, setUserHobbyInterest] = useState('');
-  const [userCurrentHobby, setUserCurrentHobby] = useState('');
+  const [userHobbyInterest, setUserHobbyInterest] = useState('Filmmaking'); //added default for user home who havent filed out assesment 
+  const [userCurrentHobby, setUserCurrentHobby] = useState('Photography');
   const [posts, setposts] = useState([]);
   const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({

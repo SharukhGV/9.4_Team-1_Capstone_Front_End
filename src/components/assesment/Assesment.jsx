@@ -129,6 +129,11 @@ export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, us
                     control={<Radio />}
                     label='Filmmaking'
                   />
+                  <FormControlLabel
+                    value='unsure'
+                    control={<Radio />}
+                    label='Unsure'
+                   />
                 </RadioGroup>
               </FormControl>
             </div>
@@ -188,6 +193,10 @@ export default function Assesment({setUserHobbyInterest, setUserCurrentHobby, us
                     control={<Radio />}
                     label='Filmmaking'
                   />
+                  <FormControlLabel
+                   value='beginner'
+                   control={<Radio />}
+                   label='Beginner / None' />
                 </RadioGroup>
               </FormControl>
             </div>

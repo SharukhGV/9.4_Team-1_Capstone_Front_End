@@ -37,10 +37,6 @@ export default function Home({user, userHobbyInterest, dataLoader, setUserHobbyI
   let visibleInterestPosts = [];
   let visibleCurrentHobbyPosts = [];
 
-  setUserCurrentHobby('Paint');
-  setUserHobbyInterest('Photography'); //testing , apply contional to show when set and to show defaults when not
-  //userHobbyInterest ? or apply a default value
-
   if (dataLoader === false) {
     for (let i = 0; i < 5; i++) {
       const currentHobbyIndex = (currentHobbyPost + i) % postsCategorized[userCurrentHobby].length;
@@ -145,8 +141,9 @@ export default function Home({user, userHobbyInterest, dataLoader, setUserHobbyI
       <div />
       <br />
       <div className='curated-posts-sect'>
+        {/* <h2>  </h2> */}
         <div className='user-current-hobby-posts'>
-          {/* <h4> state with user determined current hobby </h4> */}
+          <h4> {userCurrentHobby} </h4>
           <div className='posts-slider-container'>
             <button className='arrow' onClick={() => setCurrentHobbyPost(prevPost => prevPost === 0 ? postsCategorized[userCurrentHobby].length - 1 : prevPost - 1)}> <ArrowBackIosIcon /> </button>
           {
@@ -161,7 +158,7 @@ export default function Home({user, userHobbyInterest, dataLoader, setUserHobbyI
         </div>
         <br />
         <div className='user-interest-posts'>
-          {/* <h4> state w user determined interest</h4> */}
+          <h4> {userCurrentHobby} </h4>
           <div className='posts-slider-container'>
           <button className='arrow' onClick={() => setCurrentInterestPost(prevPost => prevPost === 0 ? postsCategorized[userHobbyInterest].length - 1 : prevPost - 1)}> <ArrowBackIosIcon /> </button>
           {
