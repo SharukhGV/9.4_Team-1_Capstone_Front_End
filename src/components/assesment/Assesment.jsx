@@ -79,52 +79,52 @@ export default function Assesment({
                   id="learning_interest"
                 >
                   <FormControlLabel
-                    value="painting"
+                    value="Painting"
                     control={<Radio />}
                     label="Painting"
                   />
                   <FormControlLabel
-                    value="drawing"
+                    value="Drawing"
                     control={<Radio />}
                     label="Drawing"
                   />
                   <FormControlLabel
-                    value="photography"
+                    value="Photography"
                     control={<Radio />}
                     label="Photography"
                   />
                   <FormControlLabel
-                    value="pottery"
+                    value="Pottery"
                     control={<Radio />}
                     label="Pottery"
                   />
                   <FormControlLabel
-                    value="sculpture"
+                    value="Sculpture"
                     control={<Radio />}
                     label="Sculpting"
                   />
                   <FormControlLabel
-                    value="printmaking"
+                    value="Printmaking"
                     control={<Radio />}
                     label="Printmaking"
                   />
                   <FormControlLabel
-                    value="fashion-design"
+                    value="Fashion Design"
                     control={<Radio />}
                     label="Fashion Design"
                   />
                   <FormControlLabel
-                    value="graffiti"
+                    value="Graffiti"
                     control={<Radio />}
                     label="Graffiti"
                   />
                   <FormControlLabel
-                    value='filmmaking'
+                    value='Filmmaking'
                     control={<Radio />}
                     label='Filmmaking'
                   />
                   <FormControlLabel
-                    value='unsure'
+                    value='Unsure'
                     control={<Radio />}
                     label='Unsure'
                    />
@@ -144,52 +144,52 @@ export default function Assesment({
                   id="current_hobby"
                 >
                   <FormControlLabel
-                    value="painting"
+                    value="Painting"
                     control={<Radio />}
                     label="Painting"
                   />
                   <FormControlLabel
-                    value="drawing"
+                    value="Drawing"
                     control={<Radio />}
                     label="Drawing"
                   />
                   <FormControlLabel
-                    value="photography"
+                    value="Photography"
                     control={<Radio />}
                     label="Photography"
                   />
                   <FormControlLabel
-                    value="pottery"
+                    value="Pottery"
                     control={<Radio />}
                     label="Pottery"
                   />
                   <FormControlLabel
-                    value="sculpture"
+                    value="Sculpture"
                     control={<Radio />}
                     label="Sculpture"
                   />
                   <FormControlLabel
-                    value="printmaking"
+                    value="Printmaking"
                     control={<Radio />}
                     label="Printmaking"
                   />
                   <FormControlLabel
-                    value="fashion-design"
+                    value="Fashion Design"
                     control={<Radio />}
                     label="Fashion Design"
                   />
                   <FormControlLabel
-                    value="graffiti"
+                    value="Graffiti"
                     control={<Radio />}
                     label="Graffiti"
                   />
                   <FormControlLabel
-                    value='filmmaking'
+                    value='Filmmaking'
                     control={<Radio />}
                     label='Filmmaking'
                   />
                   <FormControlLabel
-                   value='beginner'
+                   value='Beginner'
                    control={<Radio />}
                    label='Beginner / None' />
                 </RadioGroup>
