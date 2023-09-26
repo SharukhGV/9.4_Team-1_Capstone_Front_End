@@ -7,6 +7,10 @@ import {
   Button,
   TextareaAutosize,
   TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import profile_pic from '../../assets/blank_profile.jpeg';
 import './profile.css';
@@ -36,28 +40,32 @@ export default function ProfileEdit({user, refreshUser}) {
       .then(res => {
         refreshUser();
         navigate(`/${user.username}/profile`);
-        console.log(res.data.message);
       })
       .catch(err => console.log(err));
   };
   const cancelChanges = () => {
-    // setConfirm(true)
     navigate(-1);
   };
   const handleUpdatedUser = e => {
-    console.log(updatedUser);
     setUpdatedUser({
       ...updatedUser,
       [e.target.name]: e.target.value,
     });
   };
   const handleFileInput = e => {
-    console.log(e.target.files[0]);
     setFile({
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
     });
   };
+
+  const handleSelectChange = e => {
+    setUpdatedUser({
+      ...updatedUser,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div>
       <Card
@@ -87,7 +95,64 @@ export default function ProfileEdit({user, refreshUser}) {
             </aside>
             <aside className='profile-desc-edit'>
               <h1>{user.username}</h1>
-              <TextField
+              <aside className='select-inputs'>
+                <FormControl fullWidth sx={{marginRight:'5px'}}>
+                  <InputLabel id='learning-interest-label'>
+                    Learning Interest
+                  </InputLabel>
+                  <Select
+                    labelId='learning-interest-label'
+                    id='learning-interest-select'
+                    name='learning_interest'
+                    value={updatedUser.learning_interest}
+                    label='Learning Interest'
+                    onChange={handleSelectChange}
+                  >
+                    <MenuItem value='Unsure'>Unsure</MenuItem>
+                    <MenuItem value='Painting'>Painting</MenuItem>
+                    <MenuItem value='Drawing'>Drawing</MenuItem>
+                    <MenuItem value='Photography'>Photography</MenuItem>
+                    <MenuItem value='Ceramics'>Ceramics</MenuItem>
+                    <MenuItem value='Sculpting'>Sculpting</MenuItem>
+                    <MenuItem value='Printmaking'>Printmaking</MenuItem>
+                    <MenuItem value='Graffiti'>Graffiti</MenuItem>
+                    <MenuItem value='Fashion Design'>Fashion Design</MenuItem>
+                    <MenuItem value='Filmmaking'>Filmmaking</MenuItem>
+                    <MenuItem value='Digital Artistry'>
+                      Digital Artistry
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+
+                <FormControl fullWidth sx={{marginLeft:'5px'}}>
+                  <InputLabel id='current-skillset-label'>
+                    Current Skillset
+                  </InputLabel>
+                  <Select
+                    labelId='current-skillset-label'
+                    id='current-skillset-select'
+                    name='current_skillset'
+                    value={updatedUser.current_skillset}
+                    label='Current Skillset'
+                    onChange={handleSelectChange}
+                  >
+                    <MenuItem value='Beginner'>Beginner</MenuItem>
+                    <MenuItem value='Painting'>Painting</MenuItem>
+                    <MenuItem value='Drawing'>Drawing</MenuItem>
+                    <MenuItem value='Photography'>Photography</MenuItem>
+                    <MenuItem value='Ceramics'>Ceramics</MenuItem>
+                    <MenuItem value='Sculpting'>Sculpting</MenuItem>
+                    <MenuItem value='Printmaking'>Printmaking</MenuItem>
+                    <MenuItem value='Graffiti'>Graffiti</MenuItem>
+                    <MenuItem value='Fashion Design'>Fashion Design</MenuItem>
+                    <MenuItem value='Filmmaking'>Filmmaking</MenuItem>
+                    <MenuItem value='Digital Artistry'>
+                      Digital Artistry
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </aside>
+              {/* <TextField
                 name='current_skillset'
                 label='Current Skillset'
                 value={updatedUser.current_skillset}
@@ -101,7 +166,7 @@ export default function ProfileEdit({user, refreshUser}) {
                 value={updatedUser.learning_interest}
                 sx={{marginBottom: 4}}
                 onChange={handleUpdatedUser}
-              />
+              /> */}
               <TextField
                 name='city_state'
                 label='City State'
