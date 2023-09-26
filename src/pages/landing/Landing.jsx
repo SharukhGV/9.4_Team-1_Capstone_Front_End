@@ -19,10 +19,10 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized, dat
   for (let i = 0; i < 5; i++) {
     const filmmakingIndex = (currentFilmmakingPost + i) % postsCategorized.Filmmaking.length;
     const photographyIndex = (currentPhotographyPost + i) % postsCategorized.Photography.length;
-    const paintIndex = (currentPaintPost + i) % postsCategorized.Paint.length;
+    const paintIndex = (currentPaintPost + i) % postsCategorized.Painting.length;
     visibleFilmmakingPosts.push(postsCategorized.Filmmaking[filmmakingIndex]);
     visiblePhotographyPosts.push(postsCategorized.Photography[photographyIndex]);
-    visiblePaintPosts.push(postsCategorized.Paint[paintIndex]);  
+    visiblePaintPosts.push(postsCategorized.Painting[paintIndex]);  
   }
 
   return (

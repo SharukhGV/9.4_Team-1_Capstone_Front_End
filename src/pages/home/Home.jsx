@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router';
 import {v4 as uuid} from 'uuid';
 import CatCarousel from '../../components/carousels/CatCarousel';
@@ -9,6 +9,8 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Card, Button} from '@mui/joy';
 import './home.css';
+import axios from 'axios';
+const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function Home({
   user,
@@ -39,8 +41,15 @@ export default function Home({
       );
     }
   }
-  // console.log(postsCategorized[user.current_skillset])
-  // console.log(user.current_skillset)
+
+  useEffect(() => {
+    axios.get(`${API}/tools`)
+    .then(response => {
+      const theData = response.data;
+      console.log(response.data)
+    })
+  }, [])
+
   return (
     <div className='home-page'>
       <br />

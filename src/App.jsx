@@ -46,7 +46,6 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 function App() {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies();
-
   const [modal, setModal] = useState(false);
   const [tab, setTab] = useState(false);
   const [user, setUser] = useState(undefined);
@@ -56,16 +55,16 @@ function App() {
   const [posts, setposts] = useState([]);
   const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
-    Paint: [],
-    Sketch: [],
+    Painting: [],
+    Drawing: [],
     Photography: [],
-    Pottery: [], //change to ceramics
-    Sculpt: [],
+    Ceramics: [], 
+    Sculpting: [],
     Printmaking: [],
     Graffiti: [],
     'Fashion Design': [],
     Filmmaking: [],
-    'Digital Art': [],
+    'Digital Artistry': [],
   });
 
   useEffect(() => {

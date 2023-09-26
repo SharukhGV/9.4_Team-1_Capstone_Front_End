@@ -87,3 +87,9 @@
   padding-right: 15px;
   margin: auto;
 }
+
+.edit-btn {
+  border: none;
+  background-color: transparent;
+  color: #1a237e;
+}
