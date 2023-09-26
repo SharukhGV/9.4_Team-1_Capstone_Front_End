@@ -1,31 +1,31 @@
-import {useEffect, useState} from 'react'
-import {useParams, useNavigate} from 'react-router-dom'
-import axios from 'axios'
+import {useEffect, useState} from 'react';
+import {useParams, useNavigate} from 'react-router-dom';
+import axios from 'axios';
 import {
   Card,
   CardContent,
   Button,
   TextareaAutosize,
   TextField,
-} from '@mui/material'
-import profile_pic from '../../assets/blank_profile.jpeg'
-import './profile.css'
-const API = import.meta.env.VITE_REACT_APP_API_URL
+} from '@mui/material';
+import profile_pic from '../../assets/blank_profile.jpeg';
+import './profile.css';
+const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function ProfileEdit({user, refreshUser}) {
-  const {username} = useParams()
-  const navigate = useNavigate()
-  const [updatedUser, setUpdatedUser] = useState(user)
+  const {username} = useParams();
+  const navigate = useNavigate();
+  const [updatedUser, setUpdatedUser] = useState(user);
   const [file, setFile] = useState({
     preview: '',
     data: '',
-  })
+  });
 
   const saveChanges = () => {
-    const newForm = new FormData()
-    newForm.append('profile-pic', file.data)
+    const newForm = new FormData();
+    newForm.append('profile-pic', file.data);
     for (const key in updatedUser) {
-      newForm.append(key, updatedUser[key])
+      newForm.append(key, updatedUser[key]);
     }
     axios
       .put(`${API}/auth/${user.user_id}`, newForm, {
@@ -34,30 +34,30 @@ export default function ProfileEdit({user, refreshUser}) {
         },
       })
       .then(res => {
-        refreshUser()
-        navigate(`/${user.username}/profile`)
-        console.log(res.data.message)
+        refreshUser();
+        navigate(`/${user.username}/profile`);
+        console.log(res.data.message);
       })
-      .catch(err => console.log(err))
-  }
+      .catch(err => console.log(err));
+  };
   const cancelChanges = () => {
     // setConfirm(true)
-    navigate(-1)
-  }
+    navigate(-1);
+  };
   const handleUpdatedUser = e => {
-    console.log(updatedUser)
+    console.log(updatedUser);
     setUpdatedUser({
       ...updatedUser,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
   const handleFileInput = e => {
-    console.log(e.target.files[0])
+    console.log(e.target.files[0]);
     setFile({
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
-    })
-  }
+    });
+  };
   return (
     <div>
       <Card
@@ -176,5 +176,5 @@ export default function ProfileEdit({user, refreshUser}) {
         </Card>
       </div> */}
     </div>
-  )
+  );
 }

@@ -1,68 +1,28 @@
+import {Card, CardCover, CardContent, CardOverflow, Divider, AspectRatio, Typography} from '@mui/joy';
+//import { Typography } from '@mui/material';
 // import "./postsCard.css";
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
-// key={individualpost.id} name={individualpost.name_posts} description={individualpost.description} price={individualpost.price} quantity={individualpost.stock_quantity} condition={individualpost.item_condition} thumbnail={individualpost.thumbnail} userid={individualpost.user_id} index={index}
-function PostsCard({
-  createdTime,
-  thumbnail,
-  body,
-  tags,
-  title,
-  edited,
-  index,
-  inKEY,
-}) {
-  return (
-    <span key={inKEY}>
-      <Card sx={{ maxWidth: 250 }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image={thumbnail} //add in img from data
-            alt="item thumbnail" //add in name from data
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              <strong>Title:</strong>
-              {title}
-            </Typography>
+import './PostCard.css';
 
-            <Typography>
-              <strong>created@:</strong>
-              {createdTime}
-            </Typography>
+export default function PostCard({post}) {
+  //console.log(post)
+  //const createdAt = new Date(post.created_at);
 
-            <Typography>
-              {edited}?<span> </span> :{" "}
-              <span>
-                <strong>edited:</strong>
-                {edited}
-              </span>
-            </Typography>
+  //const formattedDate = `${createdAt.toLocaleDateString()}`;
 
-            <Typography variant="body2" color="text.secondary">
-              <strong>tags:</strong>
-              {tags}
-            </Typography>
-
-            <Typography variant="body2" color="text.secondary">
-              <strong>Body:</strong>
-              {body}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Add to Cart
-          </Button>
-        </CardActions>
-      </Card>
-    </span>
-  );
+    return (
+        <Card component='li' variant='solid' sx={{ height: 119, minWidth: '11vw', maxWidth: '11vw', backgroundColor: '#f8f8f8' }}  >
+            <CardOverflow sx={{ height: '88px' }}>
+              <AspectRatio ratio='2'>
+              <img loading='lazy' />
+              </AspectRatio>
+            </CardOverflow>
+                <CardContent >
+                <div className='card-content-info'>
+                <Typography level='title-sm' sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}> {post?.title} </Typography>
+                <p className='post-category'> {post?.category} </p>
+                <p className='created-by'>By: {post?.created_by}</p>
+                </div>
+                </CardContent>
+        </Card>
+    )
 }
-export default PostsCard;

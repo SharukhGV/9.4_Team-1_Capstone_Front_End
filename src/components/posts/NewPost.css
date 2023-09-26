@@ -1,0 +1,74 @@
+main {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main h1 {
+  font-family: 'Bellota';
+  color: #800080;
+  font-size: 22px;
+}
+
+main h3 {
+  font-family: 'Bellota';
+  font-size: 17px;
+  color: #3c415c;
+}
+
+.content-sect {
+  position: relative;
+}
+.post-title {
+  margin-bottom: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+}
+.post-body {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: flex;
+  flex-direction: row;
+}
+.img-slider-container {
+  /* border:solid #800080 1px;
+    padding:1%; */
+  width: 20%;
+  /* max-height: 40vh; */
+  /* overflow: scroll; */
+}
+
+.add-svg {
+  width: 60%;
+  height: auto;
+  margin-top: 10%;
+  margin-left: 20%;
+  color: #800080;
+}
+.caption {
+  margin-top: 0;
+}
+.post-buttons {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 85%;
+}
+.post-buttons button {
+  margin: 0 5px;
+  color: white;
+  border-radius: 7px;
+  height: 24px;
+  border: none;
+  font-family: 'Lato';
+}
+
+.logo {
+    border-radius: 50%;
+    width: 79px;
+    margin: 7px;
+}
+
+

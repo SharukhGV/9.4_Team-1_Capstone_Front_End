@@ -1,30 +1,31 @@
-import './landing.css'
-import Auth from '../../components/auth/Auth'
-import {useState} from 'react'
-import CatCarousel from '../../components/categories-carousel/CatCarousel'
-// import ToolsCard from '../../components/tools/ToolsCard';
-import {Slide} from '@mui/material'
+import {useState} from 'react';
+import {v4 as uuid} from 'uuid'
+import { Card } from '@mui/joy';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; 
+import CatCarousel from '../../components/carousels/CatCarousel';
+import PostCard from '../../components/posts/PostCard';
+import './landing.css';
 
-//docs for cards: https://mui.com/joy-ui/react-card/
-import Card from '@mui/joy/Card'
-import CardContent from '@mui/joy/CardContent'
-import CardOverflow from '@mui/joy/CardOverflow'
-import {Typography} from '@mui/material'
-import {Button} from '@mui/joy'
+export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
+  const [currentFilmmakingPost, setCurrentFilmmakingPost] = useState(0);
+  const [currentPaintPost, setCurrentPaintPost] = useState(0);
+  const [currentPhotographyPost, setCurrentPhotographyPost] = useState(0);
+  let visibleFilmmakingPosts = []; 
+  let visiblePhotographyPosts = [];
+  let visiblePaintPosts = [];
 
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ArtistsGraphic from '../../assets/artistsgraphic.jpg'
-import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg'
-import Tools from '../../components/tools/Tools'
-import Posts from '../../components/posts/Posts'
-
-export default function Landing({user, modal, setModal}) {
-  //const [joinOpen, setJoinOpen] = useState(false);
+  for (let i = 0; i < 5; i++) {
+    const filmmakingIndex = (currentFilmmakingPost + i) % postsCategorized.Filmmaking.length;
+    const photographyIndex = (currentPhotographyPost + i) % postsCategorized.Photography.length;
+    const paintIndex = (currentPaintPost + i) % postsCategorized.Paint.length;
+    visibleFilmmakingPosts.push(postsCategorized.Filmmaking[filmmakingIndex]);
+    visiblePhotographyPosts.push(postsCategorized.Photography[photographyIndex]);
+    visiblePaintPosts.push(postsCategorized.Paint[paintIndex]);  
+  }
 
   return (
-    <div>
-      <header>
+    <div className='landing'>
         <div className='header-branding'>
           {/* <Card sx={{ width: '87%' }} > */}
           <div className='landing-action'>
@@ -37,22 +38,78 @@ export default function Landing({user, modal, setModal}) {
                 </h4>
                 <button className='join-btn' onClick={() => setModal(true)}>
                   {' '}
-                  Join The Fun{' '}
+                  Join Craftopia{' '}
                 </button>
-                <Auth modal={modal} setModal={setModal} />
               </div>
             </Card>
             <div>
               <img src={ArtistsGraphic} className='artists-graphic' />
             </div>
           </div>
+          <br />
+          {/* <br />
+          <div className='div'> </div>
+          <br /> */}
         </div>
         <br />
+        <CatCarousel />
         <br />
-      </header>
       <br />
-      <Posts/>
-      <Tools/>
+      <main>
+      <h3 className='top-categories-h3'> Top Categories </h3>
+      <br />
+      <div className='top-category-1'>
+      <h4 className='main-h4'> Photography </h4>
+      <div className='posts-slider-container'>
+      <button className='arrow' onClick={() => setCurrentPhotographyPost(prevPost => prevPost === 0 ? postsCategorized.Photography.length - 1 : prevPost - 1)}>{' '} <ArrowBackIosIcon />{' '} </button>
+      {
+        visiblePhotographyPosts.map((post) => {
+          return (
+            <PostCard post={post} key={uuid()}/>
+          )
+        })
+      }
+       <button className='arrow' onClick={() => setCurrentPhotographyPost(prevPost => prevPost === postsCategorized.Photography.length - 1 ? 0 : prevPost + 1)}>
+        {' '}
+        <ArrowForwardIosIcon />{' '}
+      </button>
+      </div>
+      </div>
+      <div className='top-category-2'>
+        <h4 className='main-h4'> Painting </h4>
+        <div className='posts-slider-container'>
+        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === 0 ? postsCategorized.Paint.length - 1 : prevPost - 1)}>{' '} <ArrowBackIosIcon />{' '} </button>
+        {
+          visiblePaintPosts.map((post) => {
+            return (
+              <PostCard post={post} key={uuid()} />
+            )
+          })
+        }
+        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === postsCategorized.Paint.length - 1 ? 0 : prevPost + 1)}>
+        {' '}
+        <ArrowForwardIosIcon />{' '}
+        </button>
+        </div>
+      </div>
+      <div className='top-category-3'>
+        <h4 className='main-h4'> Filmmaking </h4>
+        <div className='posts-slider-container'>
+        <button className='arrow' onClick={() => setCurrentFilmmakingPost(prevPost => prevPost === 0 ? postsCategorized.Filmmaking.length - 1 : prevPost - 1)}>{' '} <ArrowBackIosIcon />{' '} </button>
+        {
+          visibleFilmmakingPosts.map((post) => {
+            return (
+              <PostCard post={post} key={uuid()} />
+            )
+          })
+        }
+        <button className='arrow' onClick={() => setCurrentFilmmakingPost(prevPost => prevPost === postsCategorized.Filmmaking.length - 1 ? 0 : prevPost + 1)}>
+        {' '}
+        <ArrowForwardIosIcon />{' '}
+        </button>
+        </div>
+      </div>
+      </main>
     </div>
-  )
+  );
 }

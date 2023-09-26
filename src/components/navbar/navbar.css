@@ -1,68 +1,126 @@
-/* * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  position: sticky ;
-  top: 0;
-  left: 0;
-  width: 100%;
-} */
+
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
 
 nav {
   /* display: flex; */
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
   /* align-items: center;
   padding: 30px 10%; */
-}
-
-/* .nav-func {
-  display: flex;
-} */
-
-.div {
-  margin: 0 auto;
-  border-bottom: solid 1px #3278B2;
-  width: 90%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .search-icon {
   width: 14px;
-  margin: 0;
 }
 
 .search-btn {
   border: none;
   background-color: transparent;
-  margin: 0;
+  padding: 8px;
   position: absolute;
 }
 
-.nav-logo {
-  /* display: flex; */
-  /* align-items: flex-start; */
-  border-radius: 50%;
-  width: 74px;
-  /* margin: 7px; */
+/*  */
+.nav-logo:hover {
+  /* border-radius: 50%;
+  width: 79px;
+  margin: 7px; */
+  background-image: url('../../assets/craftLogo2.png');
+  opacity: 1;
 }
 
-.explore-link {
+.nav-logo:hover {
+  cursor: pointer;
+}
+
+.about-link {
   display: grid;
   text-decoration: none;
   color: #800080;
+  float: inline-start;
+  margin-bottom: -17px;
 }
 
 .nav-right-container {
   display: flex;
   align-items: flex-end;
   float: right;
-  /* justify-content: flex-end; */
-  /* display: flexbox;
-  flex-direction: row; */
-  /* align-items: flex-end; */
+  gap: 17px;
 }
 
+.auth-btns {
+  gap: 1px;
+}
 
+.logout-btn:hover {
+  cursor: pointer;
+  color: green;
+}
 
+.login-btn:hover {
+  cursor: pointer;
+}
 
+.signup-btn {
+  cursor: pointer;
+}
+
+.search-input::placeholder {
+  font: 'Roboto';
+}
+
+::-webkit-input-placeholder {
+  text-align: left;
+  padding-left: 34px;
+}
+
+.top-left,
+.nav-right-container {
+  align-items: center;
+}
+
+.logout-btn {
+  background-color: #800080;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 7px;
+}
+
+.logout-btn :hover {
+  background-color: #14cc8c;
+}
+
+.nav-logo {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.nav-logo:hover {
+  max-width: 0px;
+  max-height: 0px;
+  opacity: 70%;
+}
+
+.nav-logo2:hover {
+  max-width: 100px;
+  max-height: 100px;
+  opacity: 100%;
+}
+
+.title{
+  font-family: 'Bellota';
+  font-size: xxx-large;
+  /* color:#800080; */
+  color:#7851a9;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  text-decoration: u;
+}

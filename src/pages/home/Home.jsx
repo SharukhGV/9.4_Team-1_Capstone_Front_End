@@ -1,247 +1,214 @@
-import './home.css';
-import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router';
-import axios from "axios";
-const API = import.meta.env.VITE_REACT_APP_API_URL;
-
-import CatCarousel from "../../components/categories-carousel/CatCarousel";
-import cameraImg from '../../assets/cameraImg.png';
-import artistsGraphic from '../../assets/artistsgraphic.jpg';
-import Assesment from "../../components/assesment/Assesment";
-//import Post from '../../components/posts/Post';
+import {useState} from 'react';
+import {useNavigate} from 'react-router';
+import {v4 as uuid} from 'uuid';
+import CatCarousel from '../../components/carousels/CatCarousel';
+import Assesment from '../../components/assesment/Assesment';
+import PostCard from '../../components/posts/PostCard';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Box, Modal, TextField, Select, FormControl, InputLabel, MenuItem, Input } from '@mui/material';
-import { Textarea, Card, Button } from "@mui/joy";
-import { styled } from "@mui/system";
+import {Paper} from '@mui/material';
+import {Card, Button} from '@mui/joy';
+import './home.css';
 
-export default function Home() {
-    //const navigate = useNavigate();
-    const [postCtaCategory, setPostCtaCategory] = useState('');
-    const [postModalOpen, setPostModalOpen] = useState(false);
-    const [itemModalOpen, setItemModalOpen] = useState(false);
-    const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
-    const [assesmentCompleted, setAssesmentCompleted] = useState(false); 
-    const [file, setFile] = useState(null);
-    const [post, setPost] = useState({
-        title: '',
-        tags: '',
-        body: '',
-    })
+export default function Home({
+  user,
+  dataLoader,
+  ArtistsGraphic,
+  postsCategorized,
+}) {
+  const navigate = useNavigate();
+  const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
+  const [assesmentCompleted, setAssesmentCompleted] = useState(false);
+  const [currentInterestPost, setCurrentInterestPost] = useState(0);
+  const [currentHobbyPost, setCurrentHobbyPost] = useState(0);
+  let visibleInterestPosts = [];
+  let visibleCurrentHobbyPosts = [];
 
-    function handleFileSelection(event) {
-        setFile(event.target.files[0]);
+  if (!dataLoader) {
+    for (let i = 0; i < 5; i++) {
+      const currentHobbyIndex =
+        (currentHobbyPost + i) % postsCategorized[user.current_skillset].length;
+      const currentInterestIndex =
+        (currentInterestPost + i) % postsCategorized[user.learning_interest].length;
+      visibleCurrentHobbyPosts.push(
+        postsCategorized[user.current_skillset][currentHobbyIndex]
+      );
+      visibleInterestPosts.push(
+        postsCategorized[user.learning_interest][currentInterestIndex]
+      );
     }
-
-    const sendToServer = async event => {
-        //event.preventDefault();
-
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('title', post.title);
-        formData.append('tags', post.tags);
-        formData.append('body', post.body);
-
-        axios.post(`${API}/posts`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
-        .then(res => console.log(res.data))
-        .catch(error => console.log(error))
-    }
-
-    function previewPost() {
-        //const id = 7; //random number
-        sendToServer();
-        //resetForm();
-
-        //navigate(`post/${id}`);
-    }
-
-    function resetForm() {
-        setFile(null);
-        setPost({
-            title: '',
-            tags: '',
-            body: ''
-        });
-    }
-
-    const displayImg = () => {
-        if (file) {
-            setFile([...file, file]);
-            setFile(null);
-        }
-    }
- 
-    const stylePostModel = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '70%',
-        height: 240,
-        bgcolor: '#f8f8f8',
-        boxShadow: 14,
-        p: 4,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    }
-
-    const VisuallyHiddenInput = styled('input')`
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    white-space: nowrap;
-    width: 1px;
-    `;
-
-    return (
-        <div>
-            <br />
-            <div className="home-header">
-                <h2 className="header-h2"> Ignight Your Creativity, Equip Your Creativity </h2>
-                <br />
-                <CatCarousel />
-                <br />
-                {
-                    !assesmentCompleted && (
-                        <div className="assesment-sect"> 
-                        <h4 className="home-h4"> Let's Get Personal </h4>
-                        <p className="assesment-p"> Take our quick assesment for a better curated homepage </p>
-                        {/* <br /> */}
-                        <button className="take-assesment-btn" onClick={() => setAssesmentModalOpen(true)}> Take Assesment </button>
-                        <Assesment assesmentModalOpen={assesmentModalOpen} setAssesmentModalOpen={setAssesmentModalOpen} assesmentCompleted={assesmentCompleted} setAssesmentCompleted={setAssesmentCompleted} />
-                        </div> 
-                    )
-                }
+  }
+  console.log(postsCategorized[user.current_skillset])
+  console.log(user.current_skillset)
+  return (
+    <div className='home-page'>
+      <br />
+      <div className='home-header'>
+        <img src={ArtistsGraphic} className='artistsGraphic' />
+        <h2 className='header-h2'>
+          {' '}
+          Ignight Your Creativity, Equip Your Creativity{' '}
+        </h2>
+      </div>
+      <div className='assesement-sect'>
+        {!user.learning_interest || !user.current_skillset ? (
+          <div className='assesment-sect'>
+            <h4 className='home-h4'> Let's Get Personal </h4>
+            <p className='assesment-p'>
+              {' '}
+              Take our quick assesment for a better curated homepage{' '}
+            </p>
+            <button
+              className='take-assesment-btn'
+              onClick={() => setAssesmentModalOpen(true)}
+            >
+              {' '}
+              Take Assesment{' '}
+            </button>
+            <Assesment
+              assesmentModalOpen={assesmentModalOpen}
+              setAssesmentModalOpen={setAssesmentModalOpen}
+              updateUser={updateUser}
+              user={user}
+            />
+          </div>
+        ) : null}
+      </div>
+      <br />
+      <div className='div' />
+      <main>
+        <div className='post-cta-sect'>
+          <h3> Connect & Exchange: Share Knowledge or Supplies </h3>
+          <div className='content-container'>
+            <div className='post-ctas'>
+              <div className='post-cta'>
+                <Card
+                  className='overlay-card'
+                  sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}
+                >
+                  <h4> Share Your Expertise </h4>
+                  <p className='post-cta-p'>
+                    {' '}
+                    No matter your level, you can inspire and empower fellow
+                    creatives. Post tutorials, guides, and classes.{' '}
+                  </p>
+                  <Button
+                    className='cta-btn'
+                    onClick={() => navigate(`/${user.username}/post/new`)}
+                    //used to :username
+                  >
+                    {' '}
+                    Make a Post{' '}
+                  </Button>
+                </Card>
+              </div>
+              <div className='post-cta'>
+                <Card
+                  className='overlay-card'
+                  sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}
+                >
+                  <h4> Trade Your Treasures </h4>
+                  <p className='post-cta-p'>
+                    {' '}
+                    Give new life to neglected supplies. Exchange for fresh
+                    inspiration. Trade and discover possibilities.{' '}
+                  </p>
+                  <Button
+                    className='cta-btn'
+                    onClick={() => navigate(`/${user.username}/tools/new`)}
+                  >
+                    {' '}
+                    Publish an Item{' '}
+                  </Button>
+                </Card>
+              </div>
             </div>
             <br />
-            <div className="div" />          
-            <div className="post-cta-sect">
-                <h3> Connect & Exchange: Share Knowledge or Supplies </h3>
-                <div className="content-container">
-                <img src={artistsGraphic} className="artistsGraphic"/>
-                <div className="post-ctas">
-                <div className="post-cta">
-                    <Card className='overlay-card' sx={{ backgroundColor: 'rgba(209, 196, 233, 0.75)'}} >
-                        <h4> Share Your Expertise </h4>
-                        <p className="post-cta-p"> No matter your level, share insights. Post tutorials, guides, and classes. Inspire and empower fellow creatives. </p>
-                        <button className="cta-btn" onClick={() => setPostModalOpen(true)} > Make a Post </button>
-                        <Modal open={postModalOpen} onClose={() => setPostModalOpen(false)} >
-                            <Box sx={stylePostModel}>
-                                <button className="close-modal" onClick={() => setPostModalOpen(false)}> &times; </button>
-                                <Textarea minRows={9} sx={{ width: '100%' }} placeholder="Share your creative know-how..." onChange={(event) => setPost({ ...post, body: event.target.value })} 
-                                startDecorator={
-                                <div>
-                                    <div className="upperLeft-txtSect">
-                                    <Button component='label' variant="contained" href="#file-upload" startDecorator={<img src={cameraImg} width='30px' />} size="small" sx={{ backgroundColor: 'white' }} >
-                                        <VisuallyHiddenInput multiple type='file' name='file' onChange={handleFileSelection} />
-                                        {/* if issue check mui usage or wrap around form*/}
-                                    </Button>
-                                   
-                                    {/* <button onClick={sendToServer}> send to server test btn </button> */}
-                                    <Input placeholder="Title" focused onChange={(event) => setPost({ ...post, title: event.target.value })} />
-                                    </div>
-                                    {/* <div>
-                                        {file.map((iFile, index) => (
-                                            <img key={index} src={iFile} alt={`File ${index}`} style={{ width: '30px' }} />
-                                        ))}
-                                    </div> */}
-                                    <div className="bottomLeft-txtSect">
-                                    <FormControl variant="standard" sx={{ minWidth: 170 }}>
-                                    <InputLabel sx={{ fontFamily: 'Lato'}}> Category </InputLabel>
-                                    <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)} >
-                                        <MenuItem value='Photography'> Photography </MenuItem>
-                                        <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
-                                        <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
-                                        <MenuItem value='Ceramics'> Ceramics </MenuItem>
-                                        <MenuItem value='Drawing'> Drawing </MenuItem>
-                                        <MenuItem value='Sculpture'> Sculpture </MenuItem>
-                                        <MenuItem value='Printmaking'> Printmaking </MenuItem>
-                                        <MenuItem value='Painting'> Painting </MenuItem>
-                                        <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
-                                        <MenuItem value='Graffiti'> Graffiti </MenuItem>
-                                    </Select>
-                                    </FormControl>
-                                    <TextField variant="standard" label='Tags' className="txt-tags" onChange={(event) => setPost({ ...post, tags: event.target.value })} />
-                                    </div>
-                                    <div className="bottomRight-actionBtns">
-                                    <button className="preview-btn" onClick={previewPost}> Preview </button>
-                                    <button className="post-btn" onClick={sendToServer}> Post </button>
-                                    </div>
-                                </div>
-                                } >                 
-                                </Textarea>
-                            </Box>
-                        </Modal>
-                    </Card>
-                </div>
-                <div className="post-cta">
-                    <Card className='overlay-card' sx={{ backgroundColor: 'rgba(209, 196, 233, 0.75)'}} >
-                        <h4> Trade Your Treasures </h4>
-                        <p className="post-cta-p"> Give new life to neglected supplies. Exchange for fresh inspiration. Trade and discover possibilities. </p>
-                        <button className="cta-btn" onClick={() => setItemModalOpen(true)}> Publish an Item </button>
-                        <Modal open={itemModalOpen} onClose={() => setItemModalOpen(false)}>
-                            <Box sx={stylePostModel}>
-                                <button onClick={() => setItemModalOpen(false)}> &times; </button> 
-                                <Input placeholder='Name' />
-                                <FormControl variant="standard" sx={{ m: 1, width: 300 }}>
-                                    <InputLabel sx={{ fontFamily: 'Lato', marginLeft: '7px' }}> Item Category </InputLabel>
-                                    <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)} >
-                                        <MenuItem value='Photography'> Photography </MenuItem>
-                                        <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
-                                        <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
-                                        <MenuItem value='Ceramics'> Ceramics </MenuItem>
-                                        <MenuItem value='Drawing'> Drawing </MenuItem>
-                                        <MenuItem value='Sculpture'> Sculpture </MenuItem>
-                                        <MenuItem value='Printmaking'> Printmaking </MenuItem>
-                                        <MenuItem value='Painting'> Painting </MenuItem>
-                                        <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
-                                        <MenuItem value='Graffiti'> Graffiti </MenuItem>
-                                    </Select>
-                                    </FormControl>
-                                    <FormControl variant="standard" sx={{ m: 1, width: 340 }}>
-                                    <InputLabel sx={{ fontFamily: 'Lato', marginLeft: '7px' }}> Willing to trade for items in these categories:  </InputLabel>
-                                    <Select value={postCtaCategory} onChange={(event) => setPostCtaCategory(event.target.value)} >
-                                        <MenuItem value='Photography'> Photography </MenuItem>
-                                        <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
-                                        <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
-                                        <MenuItem value='Ceramics'> Ceramics </MenuItem>
-                                        <MenuItem value='Drawing'> Drawing </MenuItem>
-                                        <MenuItem value='Sculpture'> Sculpture </MenuItem>
-                                        <MenuItem value='Printmaking'> Printmaking </MenuItem>
-                                        <MenuItem value='Painting'> Painting </MenuItem>
-                                        <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
-                                        <MenuItem value='Graffiti'> Graffiti </MenuItem>
-                                    </Select>
-                                    </FormControl>
-                                    <Button component='label' startDecorator={<img src={cameraImg} width='30px' />} size="small" sx={{ backgroundColor: 'white' }}>
-                                        <VisuallyHiddenInput type='file' />
-                                    </Button>
-                            </Box>
-                        </Modal>
-                    </Card>
-                </div>
-                </div>
-                </div>
-            </div>
-            <br />
-            <div>
-                {/* categories generated by user interest here */}
-            </div>
-            <div>
-               <p className="user-connect-p"> Meet, trade, connect with other creatives in your city </p> 
-               <button className="arrow"> <ArrowBackIosIcon /> </button>
-               {/* user info from dummy accounts here */}
-               <button className="arrow"> <ArrowForwardIosIcon /> </button>
-            </div>
+          </div>
+          <br />
         </div>
-    )
+        <div className='div' />
+        <br />
+        <CatCarousel />
+        <div />
+        <br />
+        <div className='curated-posts-sect'>
+          {/* <h2>  </h2> */}
+          <div className='user-current-hobby-posts'>
+            <h4> {user.current_skillset} </h4>
+            <div className='posts-slider-container'>
+              <button
+                className='arrow'
+                onClick={() =>
+                  setCurrentHobbyPost(prevPost =>
+                    prevPost === 0
+                      ? postsCategorized[user.current_skillset].length - 1
+                      : prevPost - 1
+                  )
+                }
+              >
+                {' '}
+                <ArrowBackIosIcon />{' '}
+              </button>
+              {visibleCurrentHobbyPosts.map((post, ) => {
+                return <PostCard post={post} key={uuid()}/>;
+              })}
+              <button
+                className='arrow'
+                onClick={() =>
+                  setCurrentHobbyPost(prevPost =>
+                    prevPost === postsCategorized[user.current_skillset].length - 1
+                      ? 0
+                      : prevPost + 1
+                  )
+                }
+              >
+                {' '}
+                <ArrowForwardIosIcon />{' '}
+              </button>
+            </div>
+          </div>
+          <br />
+          <div className='user-interest-posts'>
+            <h4> {user.current_skillset} </h4>
+            <div className='posts-slider-container'>
+              <button
+                className='arrow'
+                onClick={() =>
+                  setCurrentInterestPost(prevPost =>
+                    prevPost === 0
+                      ? postsCategorized[user.learning_interest].length - 1
+                      : prevPost - 1
+                  )
+                }
+              >
+                {' '}
+                <ArrowBackIosIcon />{' '}
+              </button>
+              {visibleInterestPosts.map((post) => {
+                return <PostCard post={post} key={uuid()} />;
+              })}
+              <button
+                className='arrow'
+                onClick={() =>
+                  setCurrentInterestPost(prevPost =>
+                    prevPost === postsCategorized[user.learning_interest].length - 1
+                      ? 0
+                      : prevPost + 1
+                  )
+                }
+              >
+                {' '}
+                <ArrowForwardIosIcon />{' '}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          {/* categories generated by user interest here  as well as user current hobby*/}
+        </div>
+      </main>
+    </div>
+  );
 }
-
-//first lets make the posts and that way we can add the file to the serve once the post is made?
-
