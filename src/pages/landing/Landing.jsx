@@ -1,10 +1,11 @@
-import './landing.css';
 import {useState} from 'react';
+import {v4 as uuid} from 'uuid'
+import { Card } from '@mui/joy';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; 
 import CatCarousel from '../../components/carousels/CatCarousel';
 import PostCard from '../../components/posts/PostCard';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Card } from '@mui/joy';
+import './landing.css';
 
 export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
   const [currentFilmmakingPost, setCurrentFilmmakingPost] = useState(0);
@@ -64,7 +65,7 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
       {
         visiblePhotographyPosts.map((post) => {
           return (
-            <PostCard post={post} />
+            <PostCard post={post} key={uuid()}/>
           )
         })
       }
@@ -81,7 +82,7 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
         {
           visiblePaintPosts.map((post) => {
             return (
-              <PostCard post={post} />
+              <PostCard post={post} key={uuid()} />
             )
           })
         }
@@ -98,7 +99,7 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
         {
           visibleFilmmakingPosts.map((post) => {
             return (
-              <PostCard post={post} />
+              <PostCard post={post} key={uuid()} />
             )
           })
         }

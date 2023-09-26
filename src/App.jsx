@@ -53,7 +53,7 @@ function App() {
   const [error, setError] = useState();
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  // const [userHobbyInterest, setUserHobbyInterest] = useState('Filmmaking'); //added default for user home who havent filed out assesment 
+  // const [userHobbyInterest, setUserHobbyInterest] = useState('Filmmaking'); //added default for user home who havent filed out assesment
   // const [userCurrentHobby, setUserCurrentHobby] = useState('Photography');
   const [posts, setposts] = useState([]);
   const [dataLoader, setDataLoader] = useState(true);
@@ -67,43 +67,42 @@ function App() {
     Graffiti: [],
     'Fashion Design': [],
     Filmmaking: [],
-  }); 
+  });
 
   useEffect(() => {
     const getPosts = () => {
-
-    axios.get(`${API}/posts`)
-    .then((response) => {
-      const allPosts = response.data;
-      let updatedFilteredPosts={}
-      for (let category in postsCategorized) {
-        const filteredPosts = allPosts.filter((post) => post.category.toLowerCase() == category.toLowerCase());
-        updatedFilteredPosts[category]=filteredPosts;
-      }
-      setposts(response.data);
-      setPostsCategorized(updatedFilteredPosts);
-
-      function confirmFilteredData() {
-        for (let category in postsCategorized) {
-          if (category.length > 1) {
-            setDataLoader(false);
+      axios
+        .get(`${API}/posts`)
+        .then(response => {
+          const allPosts = response.data;
+          let updatedFilteredPosts = {};
+          for (let category in postsCategorized) {
+            const filteredPosts = allPosts.filter(
+              post => post.category.toLowerCase() == category.toLowerCase()
+            );
+            updatedFilteredPosts[category] = filteredPosts;
           }
-          else if (category.length < 1) {
-            setDataLoader(true);
+          setposts(response.data);
+          setPostsCategorized(updatedFilteredPosts);
+
+          function confirmFilteredData() {
+            for (let category in postsCategorized) {
+              if (category.length > 1) {
+                setDataLoader(false);
+              } else if (category.length < 1) {
+                setDataLoader(true);
+              }
+            }
           }
-        }
-      }
 
-      if (dataLoader === true) {
-        confirmFilteredData();
-      }
-
- 
-    })
-    .catch(error => console.error('catch', error))
-  }
-  getPosts();
-}, []); 
+          if (dataLoader === true) {
+            confirmFilteredData();
+          }
+        })
+        .catch(error => console.error('catch', error));
+    };
+    getPosts();
+  }, []);
 
   useEffect(() => {
     checkToken();
@@ -141,7 +140,6 @@ function App() {
     axios.post(`${API}/auth/logout`);
     removeCookie('token');
   };
-
   function checkToken() {
     if (cookies.token !== undefined) {
       axios
@@ -261,16 +259,6 @@ function App() {
             }
           />
           <Route path='/about' element={<About />} />
-          <Route path='/home' element={<Home user={user}                          
-                                        postsCategorized={postsCategorized} 
-                                        // userHobbyInterest={userHobbyInterest} 
-                                        // setUserHobbyInterest={setUserHobbyInterest} 
-                                        // setUserCurrentHobby={setUserCurrentHobby} 
-                                        // userCurrentHobby={userCurrentHobby} 
-                                        ArtistsGraphic={ArtistsGraphic}
-                                        dataLoader={dataLoader} 
-                                        updateUser={handleSignIn}
-                                        />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />
@@ -278,6 +266,16 @@ function App() {
           <Route element={<ProtectedRoute user={user} />}>
             {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path='/:username/post/:id' element={<Post user={user} />} />
+          <Route
+            path='/home'
+            element={
+              <Home
+                user={user}
+                postsCategorized={postsCategorized}
+                ArtistsGraphic={ArtistsGraphic}
+                dataLoader={dataLoader}
+                updateUser={handleSignIn}
+              />}/>
             <Route
               path='/:username/post/new'
               element={<NewPost user={user} />}
@@ -292,11 +290,7 @@ function App() {
             />
             <Route
               path='/:username/profile'
-              element={
-                <Profile
-                  user={user}
-                />
-              }
+              element={<Profile user={user} />}
             />
             <Route
               path='/:username/profile/edit'
