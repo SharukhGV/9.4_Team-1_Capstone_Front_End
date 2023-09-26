@@ -53,20 +53,19 @@ function App() {
   const [error, setError] = useState();
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  // const [userHobbyInterest, setUserHobbyInterest] = useState('Filmmaking'); //added default for user home who havent filed out assesment
-  // const [userCurrentHobby, setUserCurrentHobby] = useState('Photography');
   const [posts, setposts] = useState([]);
   const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
     Paint: [],
     Sketch: [],
     Photography: [],
-    Pottery: [],
+    Pottery: [], //change to ceramics
     Sculpt: [],
     Printmaking: [],
     Graffiti: [],
     'Fashion Design': [],
     Filmmaking: [],
+    'Digital Art': [],
   });
 
   useEffect(() => {
@@ -94,7 +93,6 @@ function App() {
               }
             }
           }
-
           if (dataLoader === true) {
             confirmFilteredData();
           }
@@ -140,6 +138,7 @@ function App() {
     axios.post(`${API}/auth/logout`);
     removeCookie('token');
   };
+  
   function checkToken() {
     if (cookies.token !== undefined) {
       axios
@@ -255,6 +254,7 @@ function App() {
                 posts={posts}
                 ArtistsGraphic={ArtistsGraphic}
                 postsCategorized={postsCategorized}
+                dataLoader={dataLoader}
               />
             }
           />

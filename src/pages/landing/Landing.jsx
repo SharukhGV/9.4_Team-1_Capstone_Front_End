@@ -7,10 +7,11 @@ import CatCarousel from '../../components/carousels/CatCarousel';
 import PostCard from '../../components/posts/PostCard';
 import './landing.css';
 
-export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
+export default function Landing({setModal, ArtistsGraphic, postsCategorized, dataLoader}) {
   const [currentFilmmakingPost, setCurrentFilmmakingPost] = useState(0);
   const [currentPaintPost, setCurrentPaintPost] = useState(0);
   const [currentPhotographyPost, setCurrentPhotographyPost] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState('');
   let visibleFilmmakingPosts = []; 
   let visiblePhotographyPosts = [];
   let visiblePaintPosts = [];
@@ -52,10 +53,27 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
           <br /> */}
         </div>
         <br />
-        <CatCarousel />
+        <CatCarousel setSelectedCategory={setSelectedCategory} />
         <br />
-      <br />
+      {/* <br /> */}
       <main>
+        <div className='selected-cat-sect'>
+        {selectedCategory ? (<h3> {selectedCategory} </h3>) : null}
+        <br />
+        <div className='selected-posts'>
+        {
+          selectedCategory && !dataLoader && selectedCategory.length > 1 ? //
+          postsCategorized[selectedCategory].map((post, i) => {
+            return (
+              <PostCard post={post} />
+            )
+          }) : null 
+        }
+        </div>
+        </div>
+        <div className='div' />
+        {/* <br /> */}
+      <div className='top-categories-sect'>
       <h3 className='top-categories-h3'> Top Categories </h3>
       <br />
       <div className='top-category-1'>
@@ -108,6 +126,7 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
         <ArrowForwardIosIcon />{' '}
         </button>
         </div>
+      </div>
       </div>
       </main>
     </div>
