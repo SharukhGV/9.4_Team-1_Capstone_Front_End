@@ -34,14 +34,11 @@ function ToolsNewForm({ user }) {
 
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
-    // clipPath: 'inset(50%)',
     height: 1,
     overflow: "hidden",
     position: "absolute",
     bottom: 0,
     left: 0,
-    // whiteSpace: 'nowrap',
-    // width: 1,
   });
 
   const addTool = (newTool) => {
@@ -59,7 +56,6 @@ function ToolsNewForm({ user }) {
       })
       .then((response) => {
         navigate(-1);
-        console.log(response.data);
       })
       .catch((e) => console.error("catch", e));
   };
@@ -130,8 +126,6 @@ function ToolsNewForm({ user }) {
           <InputLabel id="category-label">Category</InputLabel>
           <Select
             labelId="category-label"
-            // sx={{}}
-            // label='Condition'
             onChange={handleSelectCat}
             name="category"
             id="category"
@@ -155,8 +149,6 @@ function ToolsNewForm({ user }) {
             <InputLabel id="condition-label">Condition</InputLabel>
             <Select
               labelId="condition-label"
-              // sx={{}}
-              // label='Condition'
               onChange={handleSelect}
               name="condition"
               id="condition"

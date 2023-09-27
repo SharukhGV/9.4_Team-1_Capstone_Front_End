@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import {Button, CardActionArea, CardActions} from '@mui/material';
 import Card from '@mui/material/Card';
@@ -10,19 +10,21 @@ import './toolsCard.css';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 export default function ToolsCard({tool, reloadTools}) {
   const navigate = useNavigate();
-  const {username} = useParams()
+  const {username} = useParams();
   const handleDelete = () => {
     axios
       .delete(`${API}/tools/${tool.tool_id}`)
       .then(res => {
         reloadTools();
-        console.log(res);
       })
       .catch(err => console.log(err));
   };
   return (
     <Card sx={{maxWidth: '15vw', minWidth: '15vw'}}>
-      <CardActionArea sx={{maxHeight: '20vw'}} onClick={()=>navigate(`/${username}/tools/${tool.tool_id}`)}>
+      <CardActionArea
+        sx={{maxHeight: '20vw'}}
+        onClick={() => navigate(`/${username}/tools/${tool.tool_id}`)}
+      >
         <CardMedia
           component='img'
           height='140'
@@ -31,7 +33,6 @@ export default function ToolsCard({tool, reloadTools}) {
         />
         <CardContent>
           <Typography gutterBottom variant='h6' component='h6'>
-            {/* <strong>Name:</strong> */}
             {tool.name}
           </Typography>
 
@@ -59,7 +60,6 @@ export default function ToolsCard({tool, reloadTools}) {
 
       {tool.created_by === username ? (
         <CardActions>
-          {/* sx={{position:'relative', zIndex:2}} */}
           <Button size='small' color='primary'>
             Add to Cart
           </Button>

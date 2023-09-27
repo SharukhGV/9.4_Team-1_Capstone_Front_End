@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router';
 import {v4 as uuid} from 'uuid';
+import axios from 'axios';
+
 import CatCarousel from '../../components/carousels/CatCarousel';
 import Assesment from '../../components/assesment/Assesment';
 import PostCard from '../../components/posts/PostCard';
@@ -9,7 +11,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Card, Button} from '@mui/joy';
 import './home.css';
-import axios from 'axios';
+
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function Home({
@@ -20,7 +22,6 @@ export default function Home({
 }) {
   const navigate = useNavigate();
   const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
-  const [assesmentCompleted, setAssesmentCompleted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentInterestPost, setCurrentInterestPost] = useState(0);
   const [currentHobbyPost, setCurrentHobbyPost] = useState(0);
@@ -32,7 +33,8 @@ export default function Home({
       const currentHobbyIndex =
         (currentHobbyPost + i) % postsCategorized[user.current_skillset].length;
       const currentInterestIndex =
-        (currentInterestPost + i) % postsCategorized[user.learning_interest].length;
+        (currentInterestPost + i) %
+        postsCategorized[user.learning_interest].length;
       visibleCurrentHobbyPosts.push(
         postsCategorized[user.current_skillset][currentHobbyIndex]
       );
@@ -43,12 +45,10 @@ export default function Home({
   }
 
   useEffect(() => {
-    axios.get(`${API}/tools`)
-    .then(response => {
+    axios.get(`${API}/tools`).then(response => {
       const theData = response.data;
-      console.log(response.data)
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <div className='home-page'>
@@ -105,7 +105,6 @@ export default function Home({
                   <Button
                     className='cta-btn'
                     onClick={() => navigate(`/${user.username}/post/new`)}
-                    //used to :username
                   >
                     {' '}
                     Make a Post{' '}
@@ -141,18 +140,15 @@ export default function Home({
         <br />
         <CatCarousel setSelectedCategory={setSelectedCategory} />
         <div className='selected-cat-sect'>
-        {selectedCategory ? (<h3> {selectedCategory} </h3>) : null}
-        <br />
-        <div className='selected-posts'>
-        {
-          selectedCategory && !dataLoader && selectedCategory.length > 1 ? //
-          postsCategorized[selectedCategory].map((post, i) => {
-            return (
-              <PostCard post={post} />
-            )
-          }) : null 
-        }
-        </div>
+          {selectedCategory ? <h3> {selectedCategory} </h3> : null}
+          <br />
+          <div className='selected-posts'>
+            {selectedCategory && !dataLoader && selectedCategory.length > 1 //
+              ? postsCategorized[selectedCategory].map((post, i) => {
+                  return <PostCard post={post} />;
+                })
+              : null}
+          </div>
         </div>
         <div />
         <br />
@@ -174,14 +170,15 @@ export default function Home({
                 {' '}
                 <ArrowBackIosIcon />{' '}
               </button>
-              {visibleCurrentHobbyPosts.map((post, ) => {
-                return <PostCard post={post} key={uuid()}/>;
+              {visibleCurrentHobbyPosts.map(post => {
+                return <PostCard post={post} key={uuid()} />;
               })}
               <button
                 className='arrow'
                 onClick={() =>
                   setCurrentHobbyPost(prevPost =>
-                    prevPost === postsCategorized[user.current_skillset].length - 1
+                    prevPost ===
+                    postsCategorized[user.current_skillset].length - 1
                       ? 0
                       : prevPost + 1
                   )
@@ -209,14 +206,15 @@ export default function Home({
                 {' '}
                 <ArrowBackIosIcon />{' '}
               </button>
-              {visibleInterestPosts.map((post) => {
+              {visibleInterestPosts.map(post => {
                 return <PostCard post={post} key={uuid()} />;
               })}
               <button
                 className='arrow'
                 onClick={() =>
                   setCurrentInterestPost(prevPost =>
-                    prevPost === postsCategorized[user.learning_interest].length - 1
+                    prevPost ===
+                    postsCategorized[user.learning_interest].length - 1
                       ? 0
                       : prevPost + 1
                   )
@@ -227,9 +225,6 @@ export default function Home({
               </button>
             </div>
           </div>
-        </div>
-        <div>
-          {/* categories generated by user interest here  as well as user current hobby*/}
         </div>
       </main>
     </div>
