@@ -53,6 +53,7 @@ function App() {
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [posts, setposts] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
     Painting: [],
@@ -171,9 +172,31 @@ function App() {
           setModal={setModal}
           tab={tab}
           setTab={setTab}
+          posts={posts}
+          dataLoader={dataLoader}
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
         />
+        <div>
+          {/* <Box>
+        {
+            searchResults.length > 0 ? (
+              <div>
+                {
+                  searchResults.map((result) => (
+                    <div>
+                      {result.name}
+                    </div>
+                  ))
+                }
+              </div>
+            ) : (null)
+          }
+          </Box> */}
+        </div>
         <div className='navbar'>
           <aside>
+            {/* <Link to='/about' className='about-link'> About </Link> */}
             <button onClick={() => navigate('/about')} className='signup-btn'>
               {' '}
               About{' '}

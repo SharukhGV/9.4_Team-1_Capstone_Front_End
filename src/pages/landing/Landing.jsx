@@ -57,8 +57,8 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized, dat
         <br />
       {/* <br /> */}
       <main>
-        <div className='selected-cat-sect'>
-        {selectedCategory ? (<h3> {selectedCategory} </h3>) : null}
+        <div className='top-categories-sect'>
+        {selectedCategory ? (<h3 className='top-categories-h3'> {selectedCategory} </h3>) : null}
         <br />
         <div className='selected-posts'>
         {
@@ -67,11 +67,14 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized, dat
             return (
               <PostCard post={post} />
             )
-          }) : null 
+          }) 
+          : null 
         }
         </div>
+        <br />
+        {selectedCategory ? (<> <br /> <div className='div' /> <br /> </>) : null}
         </div>
-        <div className='div' />
+        {/* <div className='div' /> */}
         {/* <br /> */}
       <div className='top-categories-sect'>
       <h3 className='top-categories-h3'> Top Categories </h3>
