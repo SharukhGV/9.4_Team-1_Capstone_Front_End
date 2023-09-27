@@ -127,7 +127,7 @@ export default function Landing({
                 onClick={() =>
                   setCurrentPaintPost(prevPost =>
                     prevPost === 0
-                      ? postsCategorized.Paint.length - 1
+                      ? postsCategorized.Painting.length - 1
                       : prevPost - 1
                   )
                 }
@@ -142,7 +142,7 @@ export default function Landing({
                 className='arrow'
                 onClick={() =>
                   setCurrentPaintPost(prevPost =>
-                    prevPost === postsCategorized.Paint.length - 1
+                    prevPost === postsCategorized.Painting.length - 1
                       ? 0
                       : prevPost + 1
                   )
