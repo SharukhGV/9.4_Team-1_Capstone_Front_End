@@ -11,6 +11,7 @@ export default function CartItem({tool, removeItem, index}) {
         src={tool.thumbnail ? tool.thumbnail : Empty}
         alt='tool thumbnail'
         className='cart-item-thumbnail'
+        loading='lazy'
       />
       <aside className='cart-item-details'>
         <p>{tool.name}</p>

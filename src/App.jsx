@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, lazy} from 'react';
 import {
   Routes,
   Route,
@@ -9,28 +9,26 @@ import {
 } from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import axios from 'axios';
-
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-import NavBar from './components/navbar/NavBar';
-import Cart from './components/cart/Cart';
+const NavBar = lazy(() => import('./components/navbar/NavBar'));
+const Cart = lazy(() => import('./components/cart/Cart'));
+const Footer = lazy(() => import('./components/footer/Footer'));
+const Home = lazy(() => import('./pages/home/Home'));
+const Profile = lazy(() => import('./pages/profile/Profile'));
+const ProfileEdit = lazy(() => import('./pages/profile/ProfileEdit'));
+const Post = lazy(() => import('./components/posts/Post'));
+const ToolsEditForm = lazy(() => import('./components/tools/ToolsEditForm'));
+const ToolsNewForm = lazy(() => import('./components/tools/ToolsNewForm'));
+const ToolsDetails = lazy(() => import('./components/tools/ToolsDetails'));
+const NewPost = lazy(() => import('./components/posts/NewPost'));
+const About = lazy(() => import('./pages/about/About'));
+const ToolsUsers = lazy(() => import('./components/tools/ToolsUsers'));
 import Landing from './pages/landing/Landing';
-import Footer from './components/footer/Footer';
-import Home from './pages/home/Home';
-import Profile from './pages/profile/Profile';
-import ProfileEdit from './pages/profile/ProfileEdit';
-import Post from './components/posts/Post';
-import ToolsEditForm from './components/tools/ToolsEditForm';
-import ToolsNewForm from './components/tools/ToolsNewForm';
-import ToolsDetails from './components/tools/ToolsDetails';
-import ToolsUserDetails from './components/tools/ToolsUserDetails';
-import NewPost from './components/posts/NewPost';
-import About from './pages/about/About';
 
 import ArtistsGraphic from './assets/artistsgraphic.jpg';
 
 import './App.css';
-import ToolsUsers from './components/tools/ToolsUsers';
 import {Badge} from '@mui/material';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;

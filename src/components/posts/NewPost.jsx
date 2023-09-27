@@ -153,6 +153,7 @@ export default function NewPost({user}) {
                   src={img.preview}
                   alt={`fig-${i}`}
                   style={{width: '100%', height: 'auto'}}
+                  loading='lazy'
                 />
                 <p className='caption'>
                   <em>figure - {i}</em>
@@ -177,6 +178,7 @@ export default function NewPost({user}) {
                   src={Add}
                   className='add-svg'
                   alt='click to add an image'
+                  loading='lazy'
                 />
                 <VisuallyHiddenInput
                   type='file'

@@ -37,7 +37,7 @@ export default function CatCarousel({ setSelectedCategory }) {
     setCurrentImg(prevImg =>
       prevImg === 0 ? artsImgs.length - 1 : prevImg - 1
     );
-  } 
+  } //set inline
 
   function nextSlide() {
     setCurrentImg(prevImg =>

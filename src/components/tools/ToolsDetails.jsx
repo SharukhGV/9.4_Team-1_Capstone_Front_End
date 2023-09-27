@@ -8,7 +8,7 @@ import './toolsDetails.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 function ToolsDetails({addToCart}) {
-  const { state } = useLocation(); //apply || state to each data needed ?
+  const { state } = useLocation(); 
   const {username, tools_id} = useParams();
   const [tool, setTool] = useState({
     tool:'',
@@ -34,15 +34,15 @@ function ToolsDetails({addToCart}) {
         {tool.media.length > 0 ? (
           <div>
             <div className='main-image-div'>
-              <img className='selected-img' src={noImage} />
+              <img className='selected-img' src={noImage} loading='lazy' />
             </div>
             {tool.media.map(img => (
-              <img src={img.file_url} />
+              <img src={img.file_url} loading='lazy' />
             ))}
           </div>
         ) : (
           <div className='main-image-div'>
-            <img className='selected-img' src={noImage} />
+            <img className='selected-img' src={noImage} loading='lazy' />
           </div>
         )}
       </aside>

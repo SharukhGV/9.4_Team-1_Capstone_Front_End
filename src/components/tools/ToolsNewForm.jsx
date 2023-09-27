@@ -199,7 +199,7 @@ function ToolsNewForm({ user }) {
             {images.map((image, i) => (
               <div className="uploaded-images" key={`${image.data.name}-${i}`}>
                 <aside className="image-box">
-                  <img className="img" src={image.preview} alt="preview" />
+                  <img className="img" src={image.preview} alt="preview" loading="lazy" />
                 </aside>
                 <Button
                   variant="contained"

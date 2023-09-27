@@ -2,7 +2,6 @@ import ToolsCard from './ToolsCard';
 import {useState} from 'react';
 import {useEffect} from 'react';
 import axios from 'axios';
-import Carousel from 'react-material-ui-carousel';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Card, CardCover, CardContent, CardOverflow, Divider, AspectRatio, Typography} from '@mui/joy';
@@ -56,7 +55,7 @@ function Tools({user}) {
           <Card component='li' variant='solid'  >
             <CardOverflow>
               <AspectRatio>
-                <img />
+                <img loading='lazy' />
               </AspectRatio>
               <CardContent>
                 <p> {tool?.title || 'Loading...'}  </p>

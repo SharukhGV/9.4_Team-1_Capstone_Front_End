@@ -1,10 +1,10 @@
-import {useEffect, useState} from 'react';
+import {lazy, useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { CardContent, Button, CardActionArea, CardActions, Divider} from '@mui/material';
 import { Card } from '@mui/joy';
-import PostCard from '../../components/posts/PostCard';
-import ToolsCard from '../../components/tools/ToolsCard';
+const PostCard = lazy(() => import('../../components/posts/PostCard'));
+const ToolsCard = lazy(() => import('../../components/tools/ToolsCard'));
 import profile_pic from '../../assets/blank_profile.jpeg';
 import CancelIcon from '@mui/icons-material/Cancel';
 import './profile.css';
@@ -53,6 +53,7 @@ export default function Profile({user}) {
           <div className='profile-card'>
             <img
               className='profile-img'
+              loading='lazy'
               src={profile_pic}
               //src={user.profile_pic ? user.profile_pic : profile_pic}
               // src={`https://craftopia-media-bucket.s3.us-east-2.amazonaws.com/felizj171-profile-pic`}

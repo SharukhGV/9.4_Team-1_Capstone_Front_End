@@ -1,11 +1,11 @@
-import {useState} from 'react';
+import {useState, lazy} from 'react';
 import {v4 as uuid} from 'uuid'
 import { Card } from '@mui/joy';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; 
-import CatCarousel from '../../components/carousels/CatCarousel';
-import PostCard from '../../components/posts/PostCard';
-import { Navigate, useNavigate } from 'react-router';
+const CatCarousel = lazy(() => import('../../components/carousels/CatCarousel'));
+const PostCard = lazy(() => import('../../components/posts/PostCard'));
+import { useNavigate } from 'react-router';
 import './landing.css';
 
 export default function Landing({setModal, ArtistsGraphic, postsCategorized, dataLoader}) {
@@ -46,7 +46,7 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized, dat
               </div>
             </Card>
             <div>
-              <img src={ArtistsGraphic} className='artists-graphic' />
+              <img src={ArtistsGraphic} className='artists-graphic' loading='lazy' />
             </div>
           </div>
           <br />

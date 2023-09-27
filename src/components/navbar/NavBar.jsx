@@ -1,10 +1,10 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, lazy} from 'react';
 import {Link} from 'react-router-dom';
 import './navbar.css';
 import {Input, Box, Dialog, DialogContent } from '@mui/material';
 import craftopiaLogo2 from '../../assets/craftLogo2.png';
 //import CraftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
-import Auth from '../../components/auth/Auth';
+const Auth = lazy(() => import('../../components/auth/Auth'));
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function NavBar({
@@ -43,6 +43,7 @@ export default function NavBar({
             style={{maxWidth: '100px', maxHeight: '100px'}}
             src={craftopiaLogo2}
             className='nav-logo'
+            loading='lazy'
           />{' '}
         </Link>
       </div>

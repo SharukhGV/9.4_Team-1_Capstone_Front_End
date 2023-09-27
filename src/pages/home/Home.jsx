@@ -1,10 +1,10 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, lazy} from 'react';
 import {useNavigate} from 'react-router';
 import {v4 as uuid} from 'uuid';
-import CatCarousel from '../../components/carousels/CatCarousel';
-import Assesment from '../../components/assesment/Assesment';
-import PostCard from '../../components/posts/PostCard';
-import ToolsCard from '../../components/tools/ToolsCard';
+const CatCarousel = lazy(() => import('../../components/carousels/CatCarousel'));
+const Assesment = lazy(() => import('../../components/assesment/Assesment'));
+const PostCard = lazy(() => import('../../components/posts/PostCard'));
+const ToolsCard = lazy(() => import('../../components/tools/ToolsCard'));
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -57,7 +57,7 @@ export default function Home({
     <div className='home-page'>
       <br />
       <div className='home-header'>
-        <img src={ArtistsGraphic} className='artistsGraphic' />
+        <img src={ArtistsGraphic} className='artistsGraphic' loading='lazy' />
         <h2 className='header-h2'>
           {' '}
           Ignight Your Creativity, Equip Your Creativity{' '}

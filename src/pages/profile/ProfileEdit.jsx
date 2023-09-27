@@ -82,6 +82,7 @@ export default function ProfileEdit({user, refreshUser}) {
             <aside className='img-update'>
               <img
                 className='profile-img'
+                loading='lazy'
                 src={
                   file.preview
                     ? file.preview
