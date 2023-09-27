@@ -157,7 +157,7 @@ export default function Home({
                       created_at: post.created_at,
                       created_by: post.created_by,
                       //file: files,
-                    },
+                    }
                   })}>
                   <PostCard post={post} />
                   </div>
