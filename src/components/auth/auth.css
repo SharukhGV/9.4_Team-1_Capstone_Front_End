@@ -14,25 +14,49 @@
 
 .login-btn,
 .signup-btn {
-  background: linear-gradient(to bottom, #7ca0e7, #1a237e);
+  background: linear-gradient(to bottom, #8e338e, #7851a9);
+  background-color: #800080d5;
+  border: none;
+
+  color: white;
+  font-weight: bold;
+  width: 94px;
+  height: 100%;
+  font-family: 'Open Sans';
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.login-btn:hover,
+.signup-btn:hover {
+  background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   width: 94px;
   height: 100%;
   border-color: #7ca0e7;
-  border-radius: 4px;
   font-family: 'Open Sans';
-  border-style: none;
-  margin-top: 17px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .logout-btn {
-  background: linear-gradient(to bottom, #7ca0e7, #1a237e);
+  background-color: #800080d5;
   color: white;
   width: 94px;
   border-color: #7ca0e7;
   border-radius: 4px;
   font-family: 'Open Sans';
   border-style: none;
+}
+
+.logout-btn:hover {
+  background-color: #0b0080de;
+  color: white;
+  width: 94px;
+  border-color: #7ca0e7;
+  border-radius: 4px;
+  font-family: 'Open Sans';
+  border-style: none;
+  cursor: pointer;
 }
 
 form button {
@@ -62,12 +86,10 @@ form button {
   width: 50%;
   font-size: medium;
   background-color: #f8f8f8;
-
 }
 
 .modal-nav-btn:hover {
   cursor: pointer;
-  /* border-bottom: solid 1px #388E3C; */
   background-color: #1a237e;
   color: white;
   border-radius: 4px;
@@ -75,7 +97,7 @@ form button {
 
 .selected {
   background-color: #f8f8f8;
-  border-bottom: solid 1px #3278B2;
+  border-bottom: solid 1px #3278b2;
 }
 
 .auth-btns {
@@ -88,7 +110,8 @@ form button {
   flex-flow: column;
 }
 
-.signup-branding h3, .login-branding h3 {
+.signup-branding h3,
+.login-branding h3 {
   font-family: 'Lato';
   display: flex;
   color: #800080;
@@ -102,8 +125,7 @@ form button {
   color: #1a237e;
 }
 
-.signup-sect, .login-sect {
+.signup-sect,
+.login-sect {
   margin-top: 9px;
 }
-
-

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -7,6 +7,10 @@ import {
   Button,
   TextareaAutosize,
   TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import profile_pic from '../../assets/blank_profile.jpeg';
 import './profile.css';
@@ -36,28 +40,32 @@ export default function ProfileEdit({user, refreshUser}) {
       .then(res => {
         refreshUser();
         navigate(`/${user.username}/profile`);
-        console.log(res.data.message);
       })
       .catch(err => console.log(err));
   };
   const cancelChanges = () => {
-    // setConfirm(true)
     navigate(-1);
   };
   const handleUpdatedUser = e => {
-    console.log(updatedUser);
     setUpdatedUser({
       ...updatedUser,
       [e.target.name]: e.target.value,
     });
   };
   const handleFileInput = e => {
-    console.log(e.target.files[0]);
     setFile({
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
     });
   };
+
+  const handleSelectChange = e => {
+    setUpdatedUser({
+      ...updatedUser,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div>
       <Card
@@ -87,21 +95,64 @@ export default function ProfileEdit({user, refreshUser}) {
             </aside>
             <aside className='profile-desc-edit'>
               <h1>{user.username}</h1>
-              <TextField
-                name='current_skillset'
-                label='Current Skillset'
-                value={updatedUser.current_skillset}
-                sx={{marginBottom: 4}}
-                onChange={handleUpdatedUser}
-              />
+              <aside className='select-inputs'>
+                <FormControl fullWidth sx={{marginRight: '5px'}}>
+                  <InputLabel id='learning-interest-label'>
+                    Learning Interest
+                  </InputLabel>
+                  <Select
+                    labelId='learning-interest-label'
+                    id='learning-interest-select'
+                    name='learning_interest'
+                    value={updatedUser.learning_interest}
+                    label='Learning Interest'
+                    onChange={handleSelectChange}
+                  >
+                    <MenuItem value='Unsure'>Unsure</MenuItem>
+                    <MenuItem value='Painting'>Painting</MenuItem>
+                    <MenuItem value='Drawing'>Drawing</MenuItem>
+                    <MenuItem value='Photography'>Photography</MenuItem>
+                    <MenuItem value='Ceramics'>Ceramics</MenuItem>
+                    <MenuItem value='Sculpting'>Sculpting</MenuItem>
+                    <MenuItem value='Printmaking'>Printmaking</MenuItem>
+                    <MenuItem value='Graffiti'>Graffiti</MenuItem>
+                    <MenuItem value='Fashion Design'>Fashion Design</MenuItem>
+                    <MenuItem value='Filmmaking'>Filmmaking</MenuItem>
+                    <MenuItem value='Digital Artistry'>
+                      Digital Artistry
+                    </MenuItem>
+                  </Select>
+                </FormControl>
 
-              <TextField
-                name='learning_interest'
-                label='Learning Interest'
-                value={updatedUser.learning_interest}
-                sx={{marginBottom: 4}}
-                onChange={handleUpdatedUser}
-              />
+                <FormControl fullWidth sx={{marginLeft: '5px'}}>
+                  <InputLabel id='current-skillset-label'>
+                    Current Skillset
+                  </InputLabel>
+                  <Select
+                    labelId='current-skillset-label'
+                    id='current-skillset-select'
+                    name='current_skillset'
+                    value={updatedUser.current_skillset}
+                    label='Current Skillset'
+                    onChange={handleSelectChange}
+                  >
+                    <MenuItem value='Beginner'>Beginner</MenuItem>
+                    <MenuItem value='Painting'>Painting</MenuItem>
+                    <MenuItem value='Drawing'>Drawing</MenuItem>
+                    <MenuItem value='Photography'>Photography</MenuItem>
+                    <MenuItem value='Ceramics'>Ceramics</MenuItem>
+                    <MenuItem value='Sculpting'>Sculpting</MenuItem>
+                    <MenuItem value='Printmaking'>Printmaking</MenuItem>
+                    <MenuItem value='Graffiti'>Graffiti</MenuItem>
+                    <MenuItem value='Fashion Design'>Fashion Design</MenuItem>
+                    <MenuItem value='Filmmaking'>Filmmaking</MenuItem>
+                    <MenuItem value='Digital Artistry'>
+                      Digital Artistry
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </aside>
+
               <TextField
                 name='city_state'
                 label='City State'
@@ -116,7 +167,6 @@ export default function ProfileEdit({user, refreshUser}) {
                 sx={{width: '100%'}}
                 onChange={handleUpdatedUser}
               />
-              {/* <p>{user.aboutme}</p> */}
             </aside>
           </div>
           {user.username === username && (
@@ -131,50 +181,6 @@ export default function ProfileEdit({user, refreshUser}) {
           )}
         </CardContent>
       </Card>
-      {/* <div>
-        <Card className='profile-posts'>
-          <CardContent>
-            {posts.length < 1 ? (
-              <div>
-                <p>No Post yet </p>
-              </div>
-            ) : (
-              <div>
-                {posts.map(post => (
-                  <Card>
-                    <CardContent>
-                      <img src={post.thumbnail} alt='thumbnail' />
-                      <p>{post.title}</p>
-                      <p>{post.created_at}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-        <Card className='profile-tools'>
-          <CardContent>
-            {tools.length < 1 ? (
-              <div>
-                <p>No Tools yet </p>
-              </div>
-            ) : (
-              <div>
-                {tools.map(tool => (
-                  <Card>
-                    <CardContent>
-                      <img src={tool.thumbnail} alt='thumbnail' />
-                      <p>{tool.title}</p>
-                      <p>{tool.created_at}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div> */}
     </div>
   );
 }

@@ -17,7 +17,7 @@ import digitalArtImg from '../../assets/categoryImg/digitalArtImg.jpg';
 import sculptureImg from '../../assets/categoryImg/sculptureImg.jpg';
 import printmakingImg from '../../assets/categoryImg/printmakingImg.jpg';
 
-export default function CatCarousel() {
+export default function CatCarousel({setSelectedCategory}) {
   const [currentImg, setCurrentImg] = useState(0);
 
   const artsImgs = [
@@ -26,24 +26,24 @@ export default function CatCarousel() {
     {name: 'Painting', imageUrl: paintingImg},
     {name: 'Graffiti', imageUrl: graffitiImg},
     {name: 'Filmmaking', imageUrl: filmmakingImg},
-    {name: 'Fashion Design', imageUrl: fashionDesignImg}, 
+    {name: 'Fashion Design', imageUrl: fashionDesignImg},
     {name: 'Drawing', imageUrl: drawingImg},
     {name: 'Digital Artistry', imageUrl: digitalArtImg},
     {name: 'Sculpting', imageUrl: sculptureImg},
-    {name: 'Printmaking', imageUrl: printmakingImg}, 
+    {name: 'Printmaking', imageUrl: printmakingImg},
   ];
 
   function prevSlide() {
     setCurrentImg(prevImg =>
       prevImg === 0 ? artsImgs.length - 1 : prevImg - 1
     );
-  } 
+  }
 
   function nextSlide() {
     setCurrentImg(prevImg =>
       prevImg === artsImgs.length - 1 ? 0 : prevImg + 1
     );
-  } 
+  }
 
   const visibleImgs = [
     artsImgs[(currentImg - 1 + artsImgs.length) % artsImgs.length],
@@ -63,9 +63,9 @@ export default function CatCarousel() {
         <Card
           component='li'
           sx={{height: 40, width: '100%'}}
-          key={`image-${i}`}
+          value={img.name}
+          onClick={() => setSelectedCategory(img.name)}
         >
-          {/* <div className='imgDiv' key={img.name}> */}
           <CardCover>
             <img
               src={img.imageUrl}

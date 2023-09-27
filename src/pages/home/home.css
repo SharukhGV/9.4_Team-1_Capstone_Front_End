@@ -1,3 +1,8 @@
+.home-page {
+  font-family: 'Lato';
+  margin-left: auto;
+  margin-right: auto;
+}
 .div {
   margin: 0 auto;
   border-bottom: solid 1px #3278b2;
@@ -5,7 +10,6 @@
 }
 
 .header-h2 {
-  /* position: absolute; */
   font-size: x-large;
 }
 
@@ -15,13 +19,6 @@
   font-weight: 400;
   margin-bottom: 0px;
   font-size: larger;
-}
-
-.home-header {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center; */
 }
 
 .assesment-p {
@@ -45,10 +42,15 @@
   background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   border-radius: 7px;
-  height: 27px;
-  width: 104px;
+  height: 34px;
+  width: 107px;
   border-style: none;
   font-family: 'Open Sans';
+}
+
+.take-assesment-btn:hover {
+  color: white;
+  border-style: none;
 }
 
 .post-ctas {
@@ -56,7 +58,6 @@
   flex-direction: row;
   gap: 20px;
   justify-content: center;
-  /* position: absolute; */
   bottom: 142px;
 }
 
@@ -93,11 +94,20 @@
   background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   border-radius: 7px;
-  height: 27px;
-  width: 104px;
+  height: 34px;
+  width: 107px;
   border-style: none;
   font-family: 'Open Sans';
   align-self: center;
+}
+
+.cta-btn:hover {
+  background: linear-gradient(to bottom, #b8ecaf, #62cd68);
+  color: white;
+  border-style: none;
+  font-family: 'Open Sans';
+  align-self: center;
+  cursor: pointer;
 }
 
 .close-modal {
@@ -118,21 +128,13 @@
 }
 
 .overlay-card {
-  /* position: absolute; */
   z-index: 2;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .content-container {
-  /* position: relative; */
   margin: 0 auto;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* justify-items: center; */
-  /* justify-tracks: center; */
-  /* align-content: center; */
-  /* align-tracks: center; */
 }
 
 .upperLeft-txtSect {
@@ -179,7 +181,6 @@
   border: none;
   font-family: 'Lato';
   font-size: 14px;
-  /* min-width: 37px; */
   width: 61px;
   margin-bottom: 7px;
 }
@@ -200,5 +201,12 @@
   background-color: #1a237e;
   z-index: 1;
   margin: 0;
-  /* position: absolute; */
+}
+
+.home-header {
+  text-align: center;
+}
+
+.assesement-sect {
+  text-align: center;
 }

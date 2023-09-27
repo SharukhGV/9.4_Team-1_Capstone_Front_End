@@ -1,11 +1,9 @@
-import ToolsCard from './ToolsCard';
 import {useState} from 'react';
 import {useEffect} from 'react';
 import axios from 'axios';
-import Carousel from 'react-material-ui-carousel';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {Card, CardCover, CardContent, CardOverflow, Divider, AspectRatio, Typography} from '@mui/joy';
+import {Card, CardContent, CardOverflow, AspectRatio} from '@mui/joy';
 
 function Tools({user}) {
   const API = import.meta.env.VITE_REACT_APP_API_URL;
@@ -44,16 +42,14 @@ function Tools({user}) {
     );
     updateVisibleTool();
   } 
-
-  // console.log(tools)
   return (
     <> 
     <br />
     <div className='slider-container'>
       <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
       {
-        visibleTools.map((tool, i) => (
-          <Card component='li' variant='solid' >
+        visibleTools.map((tool) => (
+          <Card component='li' variant='solid'  >
             <CardOverflow>
               <AspectRatio>
                 <img />

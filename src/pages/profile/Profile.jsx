@@ -1,12 +1,15 @@
 import {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
+import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
-import {Card, CardContent, Button, CardActionArea} from '@mui/material';
+import {CardContent, Button, CardActions, Divider} from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
+import {Card} from '@mui/joy';
 import PostCard from '../../components/posts/PostCard';
 import ToolsCard from '../../components/tools/ToolsCard';
 import profile_pic from '../../assets/blank_profile.jpeg';
-import CancelIcon from '@mui/icons-material/Cancel';
 import './profile.css';
+
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function Profile({user}) {
@@ -26,10 +29,11 @@ export default function Profile({user}) {
   };
 
   const getTools = () => {
-    axios.get(`${API}/tools/${user.user_id}`).then(res => {
+    axios.get(`${API}/tools/all/${user.user_id}`).then(res => {
       setTools(res.data);
     });
   };
+
   return (
     <div>
       <Card
@@ -45,30 +49,27 @@ export default function Profile({user}) {
           <div className='profile-card'>
             <img
               className='profile-img'
-              src={user.profile_pic}
-              // src={`https://craftopia-media-bucket.s3.us-east-2.amazonaws.com/felizj171-profile-pic`}
+              src={profile_pic}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
             <aside className='profile-desc'>
               <h1>{user.username}</h1>
-
               <h3>{user.city_state}</h3>
               <p>{user.aboutme}</p>
             </aside>
           </div>
           {user.username === username && (
-            <Button
+            <button
+              className='edit-btn'
               onClick={() => navigate(`/${username}/profile/edit`)}
-              variant='contained'
-              color='warning'
             >
-              Edit
-            </Button>
+              <SettingsIcon />
+            </button>
           )}
         </CardContent>
       </Card>
       <div className='users-posts-and-tools'>
-        <Card className='profile-posts'>
+        <Card className='profile-posts' variant='outlined'>
           <CardContent sx={{marginBottom: '10%'}}>
             <h2 className='profile-subtitle'>Posts</h2>
 
@@ -80,17 +81,15 @@ export default function Profile({user}) {
               <div className='profile-posts-list'>
                 <div className='scroll'>
                   {posts.map(post => (
-                    <aside className='aside-spacing' key={`profile-post-${post.post_id}`}>
-                      <PostCard
-                        post={post}
-                      />
+                    <aside key={uuidv4()} className='aside-spacing'>
+                      <PostCard post={post} />
                     </aside>
                   ))}
                 </div>
               </div>
             )}
 
-            <CardActionArea
+            <CardActions
               sx={{
                 width: '10%',
                 position: 'absolute',
@@ -99,16 +98,19 @@ export default function Profile({user}) {
               }}
             >
               <Button
-                onClick={() => navigate(`/${user.username}/post/new`)}
+                className='button'
+                role='button'
+                onClick={() => navigate(`/${username}/post/new`)}
                 variant='contained'
                 color='primary'
               >
                 New
               </Button>
-            </CardActionArea>
+            </CardActions>
           </CardContent>
         </Card>
-        <Card className='profile-tools'>
+        <Divider orientation='vertical' flexItem />
+        <Card className='profile-tools' variant='outlined'>
           <CardContent sx={{marginBottom: '10%'}}>
             <h2 className='profile-subtitle'>Listings</h2>
             {tools.length < 1 ? (
@@ -119,11 +121,13 @@ export default function Profile({user}) {
               <div className='profile-tools-list'>
                 <div className='scroll'>
                   {tools.map(tool => (
-                    <aside className='aside-spacing'>
+                    <aside key={uuidv4()} className='aside-spacing'>
                       <ToolsCard
-                        key={`profile-tool-key${tool.tool_id}`}
                         tool={tool}
                         reloadTools={getTools}
+                        userId={user.user_id}
+                        user={user}
+                        toolId={tool.tool_id}
                       />
                     </aside>
                   ))}
@@ -131,18 +135,20 @@ export default function Profile({user}) {
               </div>
             )}
           </CardContent>
-          <CardActionArea
+          <CardActions
             sx={{width: '10%', position: 'absolute', bottom: '5%', right: '5%'}}
           >
             <Button
-              onClick={() => navigate(`/${user.username}/tools/new`)}
+              className='button'
+              role='button'
+              onClick={() => navigate(`/${username}/tools/new`)}
               variant='contained'
               color='primary'
             >
               New
             </Button>
-          </CardActionArea>
-        </Card>
+          </CardActions>
+        </Card>{' '}
       </div>
     </div>
   );

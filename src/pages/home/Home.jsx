@@ -1,178 +1,67 @@
-import './home.css';
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router';
-// import Container from '@mui/material';
-// import CardContent from '@mui/material';
-
-import Posts from '../../components/posts/Posts';
-import Tools from '../../components/tools/Tools';
-
+import {v4 as uuid} from 'uuid';
 import axios from 'axios';
-const API = import.meta.env.VITE_REACT_APP_API_URL;
 
-import CatCarousel from '../../components/categories-carousel/CatCarousel';
-import cameraImg from '../../assets/cameraImg.png';
-import artistsGraphic from '../../assets/artistsgraphic.jpg';
+import CatCarousel from '../../components/carousels/CatCarousel';
 import Assesment from '../../components/assesment/Assesment';
+import PostCard from '../../components/posts/PostCard';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Paper } from '@mui/material';
-// import {
-//   Box,
-//   Modal,
-//   TextField,
-//   Select,
-//   FormControl,
-//   InputLabel,
-//   MenuItem,
-//   Input,
-// } from '@mui/material';
 import {Card, Button} from '@mui/joy';
-//import {styled} from '@mui/system';
+import './home.css';
 
-// const diagonalMask = {
-//   position: 'relative',
-//   overflow: 'hidden', '&::before': {
-//     content: '""',
-//     position: 'absolute',
-//     top: '0',
-//     right: '0',
-//     width: '40%',
-//     height: '100%',
-//     backgroundColor: 'white',
-//     transform: 'skew(-20deg) translateX(100%)',
-//     transformOrigin: 'top left',
-//   },
-// };
+const API = import.meta.env.VITE_REACT_APP_API_URL;
 
-export default function Home({user}) {
+export default function Home({
+  user,
+  dataLoader,
+  ArtistsGraphic,
+  postsCategorized,
+}) {
   const navigate = useNavigate();
-//   const [postCtaCategory, setPostCtaCategory] = useState('');
-//   const [itemModalOpen, setItemModalOpen] = useState(false);
   const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
-  const [assesmentCompleted, setAssesmentCompleted] = useState(false);
-  const [file, setFile] = useState(null);
-  const [post, setPost] = useState({
-    title: '',
-    tags: '',
-    body: '',
-  }); 
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [currentInterestPost, setCurrentInterestPost] = useState(0);
+  const [currentHobbyPost, setCurrentHobbyPost] = useState(0);
+  let visibleInterestPosts = [];
+  let visibleCurrentHobbyPosts = [];
 
-//   function handleFileSelection(event) {
-//     setFile(event.target.files[0]);
-//   }
+  if (!dataLoader) {
+    for (let i = 0; i < 5; i++) {
+      const currentHobbyIndex =
+        (currentHobbyPost + i) % postsCategorized[user.current_skillset].length;
+      const currentInterestIndex =
+        (currentInterestPost + i) %
+        postsCategorized[user.learning_interest].length;
+      visibleCurrentHobbyPosts.push(
+        postsCategorized[user.current_skillset][currentHobbyIndex]
+      );
+      visibleInterestPosts.push(
+        postsCategorized[user.learning_interest][currentInterestIndex]
+      );
+    }
+  }
 
-  function resetForm() {
-    setFile(null);
-    setPost({
-      title: '',
-      tags: '',
-      body: '',
+  useEffect(() => {
+    axios.get(`${API}/tools`).then(response => {
+      const theData = response.data;
     });
-  } //necessary ?
-
-  // const displayImg = () => {
-  //     if (file) {
-  //         setFile([...file, file]);
-  //         setFile(null);
-  //     }
-  // }
-
-//   const stylePostModel = {
-//     position: 'absolute',
-//     top: '50%',
-//     left: '50%',
-//     transform: 'translate(-50%, -50%)',
-//     width: '70%',
-//     height: 240,
-//     bgcolor: '#f8f8f8',
-//     boxShadow: 14,
-//     p: 4,
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//   };
-
-//   const VisuallyHiddenInput = styled('input')`
-//     clip: rect(0 0 0 0);
-//     clip-path: inset(50%);
-//     height: 1px;
-//     overflow: hidden;
-//     position: absolute;
-//     bottom: 0;
-//     left: 0;
-//     white-space: nowrap;
-//     width: 1px;
-//   `;
-
-//STACK
+  }, []);
 
   return (
-    <div>
+    <div className='home-page'>
       <br />
-      <div className='home-header' >
-        <img src={artistsGraphic} className='artistsGraphic' />
-        {/* <div className='post-cta-sect'>
-        <h3> Connect & Exchange: Share Knowledge or Supplies </h3>
-        <div className='content-container'>
-          <div className='post-ctas'>
-            <div className='post-cta'>
-              <Card
-                className='overlay-card'
-                sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}
-              >
-                <h4> Share Your Expertise </h4>
-                <p className='post-cta-p'>
-                  {' '}
-                  No matter your level, share insights. Post tutorials, guides,
-                  and classes. Inspire and empower fellow creatives.{' '}
-                </p>
-                <button
-                  className='cta-btn'
-                  onClick={() => navigate(`/${user.username}/post/new`)}
-                  //used to :username
-                >
-                  {' '}
-                  Make a Post{' '}
-                </button>
-              </Card>
-            </div>
-            <div className='post-cta'>
-              <Card
-                className='overlay-card'
-                sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}
-              >
-                <h4> Trade Your Treasures </h4>
-                <p className='post-cta-p'>
-                  {' '}
-                  Give new life to neglected supplies. Exchange for fresh
-                  inspiration. Trade and discover possibilities.{' '}
-                </p>
-                <button
-                  className='cta-btn'
-                  onClick={() => navigate(`/${user.username}/tools/new`)}
-                >
-                  {' '}
-                  Publish an Item{' '}
-                </button>
-              </Card>
-            </div>
-          </div>
-          <br />
-        </div>
-        <br />
-      </div> */}
-     
-        </div>
+      <div className='home-header'>
+        <img src={ArtistsGraphic} className='artistsGraphic' />
         <h2 className='header-h2'>
           {' '}
           Ignight Your Creativity, Equip Your Creativity{' '}
         </h2>
-        {/* <br /> */}
-        {/* <br /> */}
-        <div>
-        {!assesmentCompleted && (
+      </div>
+      <div className='assesement-sect'>
+        {!user.learning_interest || !user.current_skillset ? (
           <div className='assesment-sect'>
             <h4 className='home-h4'> Let's Get Personal </h4>
             <p className='assesment-p'>
@@ -189,91 +78,155 @@ export default function Home({user}) {
             <Assesment
               assesmentModalOpen={assesmentModalOpen}
               setAssesmentModalOpen={setAssesmentModalOpen}
-              assesmentCompleted={assesmentCompleted}
-              setAssesmentCompleted={setAssesmentCompleted}
+              updateUser={updateUser}
               user={user}
             />
           </div>
-        )}
-        </div>
-      
+        ) : null}
+      </div>
       <br />
       <div className='div' />
       <main>
-      <div className='post-cta-sect'>
-        <h3> Connect & Exchange: Share Knowledge or Supplies </h3>
-        <div className='content-container'>
-          <div className='post-ctas'>
-            <div className='post-cta'>
-              <Card
-                className='overlay-card'
-                sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}
-              >
-                <h4> Share Your Expertise </h4>
-                <p className='post-cta-p'>
-                  {' '}
-                  No matter your level, you can inspire and empower fellow creatives. Post tutorials, guides, and classes. {' '}
-                </p>
-                <button
-                  className='cta-btn'
-                  onClick={() => navigate(`/${user.username}/post/new`)}
-                  //used to :username
+        <div className='post-cta-sect'>
+          <h3> Connect & Exchange: Share Knowledge or Supplies </h3>
+          <div className='content-container'>
+            <div className='post-ctas'>
+              <div className='post-cta'>
+                <Card
+                  className='overlay-card'
+                  sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}
                 >
-                  {' '}
-                  Make a Post{' '}
-                </button>
-              </Card>
-            </div>
-            <div className='post-cta'>
-              <Card
-                className='overlay-card'
-                sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}
-              >
-                <h4> Trade Your Treasures </h4>
-                <p className='post-cta-p'>
-                  {' '}
-                  Give new life to neglected supplies. Exchange for fresh
-                  inspiration. Trade and discover possibilities.{' '}
-                </p>
-                <button
-                  className='cta-btn'
-                  onClick={() => navigate(`/${user.username}/tools/new`)}
+                  <h4> Share Your Expertise </h4>
+                  <p className='post-cta-p'>
+                    {' '}
+                    No matter your level, you can inspire and empower fellow
+                    creatives. Post tutorials, guides, and classes.{' '}
+                  </p>
+                  <Button
+                    className='cta-btn'
+                    onClick={() => navigate(`/${user.username}/post/new`)}
+                  >
+                    {' '}
+                    Make a Post{' '}
+                  </Button>
+                </Card>
+              </div>
+              <div className='post-cta'>
+                <Card
+                  className='overlay-card'
+                  sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}
                 >
-                  {' '}
-                  Publish an Item{' '}
-                </button>
-              </Card>
+                  <h4> Trade Your Treasures </h4>
+                  <p className='post-cta-p'>
+                    {' '}
+                    Give new life to neglected supplies. Exchange for fresh
+                    inspiration. Trade and discover possibilities.{' '}
+                  </p>
+                  <Button
+                    className='cta-btn'
+                    onClick={() => navigate(`/${user.username}/tools/new`)}
+                  >
+                    {' '}
+                    Publish an Item{' '}
+                  </Button>
+                </Card>
+              </div>
             </div>
+            <br />
           </div>
           <br />
         </div>
+        <div className='div' />
         <br />
-      </div>
-      <div className='div' />
-      <br />
-      
-      <CatCarousel />
-      <div />
-      <Posts />
-      <Tools />
-      <div>{/* categories generated by user interest here */}</div>
-      {/* <div>
-        <p className='user-connect-p'>
-          {' '}
-          Meet, trade, connect with other creatives in your city{' '}
-        </p>
-        <button className='arrow'>
-          {' '}
-          <ArrowBackIosIcon />{' '}
-        </button>
-        {/* user info from dummy accounts here */}
-        {/* <button className='arrow'>
-          {' '}
-          <ArrowForwardIosIcon />{' '}
-        </button>
-      </div> */}
+        <CatCarousel setSelectedCategory={setSelectedCategory} />
+        <div className='selected-cat-sect'>
+          {selectedCategory ? <h3> {selectedCategory} </h3> : null}
+          <br />
+          <div className='selected-posts'>
+            {selectedCategory && !dataLoader && selectedCategory.length > 1 //
+              ? postsCategorized[selectedCategory].map((post) => {
+                  return <PostCard post={post} />;
+                })
+              : null}
+          </div>
+        </div>
+        <div />
+        <br />
+        <div className='curated-posts-sect'>
+          <h2> Creativity Hub </h2>
+          <div className='user-current-hobby-posts'>
+            <h4> {user.current_skillset} </h4>
+            <div className='posts-slider-container'>
+              <button
+                className='arrow'
+                onClick={() =>
+                  setCurrentHobbyPost(prevPost =>
+                    prevPost === 0
+                      ? postsCategorized[user.current_skillset].length - 1
+                      : prevPost - 1
+                  )
+                }
+              >
+                {' '}
+                <ArrowBackIosIcon />{' '}
+              </button>
+              {visibleCurrentHobbyPosts.map(post => {
+                return <PostCard post={post} key={uuid()} />;
+              })}
+              <button
+                className='arrow'
+                onClick={() =>
+                  setCurrentHobbyPost(prevPost =>
+                    prevPost ===
+                    postsCategorized[user.current_skillset].length - 1
+                      ? 0
+                      : prevPost + 1
+                  )
+                }
+              >
+                {' '}
+                <ArrowForwardIosIcon />{' '}
+              </button>
+            </div>
+          </div>
+          <br />
+          <div className='user-interest-posts'>
+            <h4> {user.learning_interest} </h4>
+            <div className='posts-slider-container'>
+              <button
+                className='arrow'
+                onClick={() =>
+                  setCurrentInterestPost(prevPost =>
+                    prevPost === 0
+                      ? postsCategorized[user.learning_interest].length - 1
+                      : prevPost - 1
+                  )
+                }
+              >
+                {' '}
+                <ArrowBackIosIcon />{' '}
+              </button>
+              {visibleInterestPosts.map(post => {
+                return <PostCard post={post} key={uuid()} />;
+              })}
+              <button
+                className='arrow'
+                onClick={() =>
+                  setCurrentInterestPost(prevPost =>
+                    prevPost ===
+                    postsCategorized[user.learning_interest].length - 1
+                      ? 0
+                      : prevPost + 1
+                  )
+                }
+              >
+                {' '}
+                <ArrowForwardIosIcon />{' '}
+              </button>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   );
 }
-

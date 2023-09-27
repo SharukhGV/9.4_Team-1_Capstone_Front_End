@@ -1,0 +1,37 @@
+.tool-details {
+  display: grid;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  grid-template-columns: 2fr 5% 2fr;
+  grid-template-rows: 2;
+}
+
+.main-image-div {
+  grid-column-start: 1;
+  width: 100%;
+  height: auto;
+  border: solid black 1px;
+  display: flex;
+  align-items: top;
+  justify-content: left;
+}
+
+.selected-img {
+  width: 80%;
+  height: fit-content;
+  border-right: solid black 1px;
+}
+
+.tool-info {
+  padding: 5%;
+  grid-column-start: 3;
+  text-align: left;
+  border: solid black 1px;
+}
+
+.tool-description {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}

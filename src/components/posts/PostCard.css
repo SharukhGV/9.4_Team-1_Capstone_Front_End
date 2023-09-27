@@ -1,0 +1,21 @@
+.created-by {
+  margin: 0;
+  font-size: x-small;
+  color: #1a237e;
+}
+
+.created-on {
+  font-size: xx-small;
+  margin: 0;
+}
+
+.post-category {
+  display: flex;
+  margin: 0;
+  font-size: xx-small;
+  color: #1a237e;
+}
+
+.card-content-info {
+  height: 7px;
+}
