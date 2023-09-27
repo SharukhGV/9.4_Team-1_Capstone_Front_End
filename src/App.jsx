@@ -283,7 +283,8 @@ function App() {
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           <Route path='/tools' element={<ToolsDetails />} />
-          <Route path='/tools/:id' element={<ToolsUserDetails />} />
+          {/* <Route path='/tools/:id' element={<ToolsUserDetails />} /> */}
+          <Route path='/tools/:id' element={<ToolsDetails addToCart={addToCart} />} />
           <Route element={<ProtectedRoute user={user} />}>
             {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path='/:username/post/:id' element={<Post user={user} />} />

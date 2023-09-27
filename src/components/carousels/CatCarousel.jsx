@@ -62,7 +62,7 @@ export default function CatCarousel({ setSelectedCategory }) {
       {visibleImgs.map((img, i) => (
         <Card
           component='li'
-          sx={{height: 40, width: '100%'}}
+          sx={{height: 40, width: '100%', cursor: 'pointer'}}
           value={img.name}
           onClick={() => setSelectedCategory(img.name)}
         >

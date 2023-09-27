@@ -125,7 +125,6 @@ export default function NewPost({user}) {
               <MenuItem value=''> Category </MenuItem>
               <MenuItem value='Photography'> Photography </MenuItem>
               <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
-              <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
               <MenuItem value='Ceramics'> Ceramics </MenuItem>
               <MenuItem value='Drawing'> Drawing </MenuItem>
               <MenuItem value='Sculpture'> Sculpture </MenuItem>
@@ -133,6 +132,7 @@ export default function NewPost({user}) {
               <MenuItem value='Painting'> Painting </MenuItem>
               <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
               <MenuItem value='Graffiti'> Graffiti </MenuItem>
+              <MenuItem value='Digital Atistry'> Digital Artistry </MenuItem>
             </Select>
           </FormControl>
         </aside>
@@ -215,11 +215,18 @@ export default function NewPost({user}) {
             {/* </div> */}
             <br />
             <div className='content-preview'>
-              <Typography> {post.title} </Typography>
-              {/* 
+              <h3> {post.title} </h3>
               <p> {post.category} </p>
-            <img src={selectedFile} />
-            <p> {post.body} </p> */}
+            {/* <img src={URL.createObjectURL(selected)} /> */}
+            <p> {post.body} </p>
+            <div>
+              {/* {
+                files && files.length > 0 ? files.map(file => (
+                  <img src={URL.createObjectURL(file)} />
+                ) 
+                ) : null
+              } */}
+            </div>
             </div>
             <button className='preview-post-btn' onClick={sendToServer}>
               {' '}

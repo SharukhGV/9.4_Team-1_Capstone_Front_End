@@ -86,8 +86,14 @@ main h3 {
 }
 
 .preview-modal {
-  display: flex;
-  flex-direction: column;
+  /* align-items: center;
+  align-content: center;
+  align-tracks: center;
+  justify-content: center;
+  justify-items: center;
+  justify-tracks: center; */
+  /* display: flex;
+  flex-direction: column; */
   height: 100%;
 }
 

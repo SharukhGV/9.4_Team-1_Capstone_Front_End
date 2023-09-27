@@ -108,7 +108,6 @@ export default function Home({
                   <Button
                     className='cta-btn'
                     onClick={() => navigate(`/${user.username}/post/new`)}
-                    //used to :username
                   >
                     {' '}
                     Make a Post{' '}
@@ -149,7 +148,20 @@ export default function Home({
           <div className='selected-posts'>
             {selectedCategory && !dataLoader && selectedCategory.length > 1 //
               ? postsCategorized[selectedCategory].map((post) => {
-                  return <PostCard post={post} />;
+                  return (
+                  <div onClick={() => navigate(`/post/${post.post_id}`, {
+                    state: {
+                      title: post.title,
+                      category: post.category,
+                      body: post.body,
+                      created_at: post.created_at,
+                      created_by: post.created_by,
+                      //file: files,
+                    },
+                  })}>
+                  <PostCard post={post} />
+                  </div>
+                  )
                 })
               : null}
           </div>
@@ -175,7 +187,20 @@ export default function Home({
                 <ArrowBackIosIcon />{' '}
               </button>
               {visibleCurrentHobbyPosts.map(post => {
-                return <PostCard post={post} key={uuid()} />;
+                return (
+                <div onClick={() => navigate(`/post/${post.post_id}`, {
+                  state: {
+                    title: post.title,
+                    category: post.category,
+                    body: post.body,
+                    created_at: post.created_at,
+                    created_by: post.created_by,
+                    //file: files,
+                  },
+                })}>
+                <PostCard post={post} key={uuid()} />
+                </div>
+                )
               })}
               <button
                 className='arrow'
@@ -199,9 +224,13 @@ export default function Home({
               {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
             {
               tools && user.current_skillset ? tools.map((tool, i) => {
+                //console.log(tool);
                 if (tool.category === user.current_skillset) {
                   return (
+                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}})}
+                    >
                     <ToolsCard tool={tool} />
+                    </div>
                   )
                 }
               }) : null
@@ -228,7 +257,20 @@ export default function Home({
                 <ArrowBackIosIcon />{' '}
               </button>
               {visibleInterestPosts.map(post => {
-                return <PostCard post={post} key={uuid()} />;
+                return (
+                <div onClick={() => navigate(`/post/${post.post_id}`, {
+                  state: {
+                    title: post.title,
+                    category: post.category,
+                    body: post.body,
+                    created_at: post.created_at,
+                    created_by: post.created_by,
+                    //file: files,
+                  },
+                })}>
+                <PostCard post={post} key={uuid()} />
+                </div>
+                )
               })}
               <button
                 className='arrow'
@@ -253,8 +295,12 @@ export default function Home({
             {
               tools && user.learning_interest ? tools.map((tool, i) => {
                 if (tool.category === user.learning_interest) {
+                  //console.log(tool);
                   return (
+                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}})}
+                    >
                     <ToolsCard tool={tool} />
+                    </div>
                   )
                 }
               }) : null

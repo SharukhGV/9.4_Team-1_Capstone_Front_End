@@ -97,6 +97,7 @@ font-size: large;
   border: none;
   background-color: #f8f8f8;
   color: #1a237e;
+  cursor: pointer;
 }
 
 .top-categories-h3 {
@@ -127,4 +128,8 @@ font-size: large;
   justify-content: flex-start;
   align-items: center;
   gap: 17px;
+}
+
+.post-card {
+  cursor: pointer;
 }

@@ -5,9 +5,11 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; 
 import CatCarousel from '../../components/carousels/CatCarousel';
 import PostCard from '../../components/posts/PostCard';
+import { Navigate, useNavigate } from 'react-router';
 import './landing.css';
 
 export default function Landing({setModal, ArtistsGraphic, postsCategorized, dataLoader}) {
+  const navigate = useNavigate();
   const [currentFilmmakingPost, setCurrentFilmmakingPost] = useState(0);
   const [currentPaintPost, setCurrentPaintPost] = useState(0);
   const [currentPhotographyPost, setCurrentPhotographyPost] = useState(0);
@@ -64,8 +66,20 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized, dat
         {
           selectedCategory && !dataLoader && selectedCategory.length > 1 ? //
           postsCategorized[selectedCategory].map((post, i) => {
+            //console.log(post)
             return (
+              <div onClick={() => navigate(`/post/${post.post_id}`, {
+                state: {
+                  title: post.title,
+                  category: post.category,
+                  body: post.body,
+                  created_at: post.created_at,
+                  created_by: post.created_by,
+                  //file: files,
+                },
+              })}>
               <PostCard post={post} />
+              </div>
             )
           }) 
           : null 
@@ -86,7 +100,18 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized, dat
       {
         visiblePhotographyPosts.map((post) => {
           return (
+            <div onClick={() => navigate(`/post/${post.post_id}`, {
+              state: {
+                title: post.title,
+                category: post.category,
+                body: post.body,
+                created_at: post.created_at,
+                created_by: post.created_by,
+                //file: files,
+              },
+            })}>
             <PostCard post={post} key={uuid()}/>
+            </div>
           )
         })
       }
@@ -103,7 +128,18 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized, dat
         {
           visiblePaintPosts.map((post) => {
             return (
+              <div onClick={() => navigate(`/post/${post.post_id}`, {
+                state: {
+                  title: post.title,
+                  category: post.category,
+                  body: post.body,
+                  created_at: post.created_at,
+                  created_by: post.created_by,
+                  //file: files,
+                },
+              })}>
               <PostCard post={post} key={uuid()} />
+              </div>
             )
           })
         }
@@ -120,7 +156,18 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized, dat
         {
           visibleFilmmakingPosts.map((post) => {
             return (
+              <div onClick={() => navigate(`/post/${post.post_id}`, {
+                state: {
+                  title: post.title,
+                  category: post.category,
+                  body: post.body,
+                  created_at: post.created_at,
+                  created_by: post.created_by,
+                  //file: files,
+                },
+              })}>
               <PostCard post={post} key={uuid()} />
+              </div>
             )
           })
         }

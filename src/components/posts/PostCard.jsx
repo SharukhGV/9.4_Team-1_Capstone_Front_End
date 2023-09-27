@@ -8,7 +8,7 @@ export default function PostCard({post}) {
   //const formattedDate = `${createdAt.toLocaleDateString()}`;
 
     return (
-        <Card component='li' variant='solid' sx={{ height: 119, minWidth: '11vw', maxWidth: '11vw', backgroundColor: '#f8f8f8' }}  >
+        <Card component='li' variant='solid' sx={{ height: 119, minWidth: '11vw', maxWidth: '11vw', backgroundColor: '#f8f8f8', cursor: 'pointer' }}  >
             <CardOverflow sx={{ height: '88px' }}>
               <AspectRatio ratio='2'>
               <img loading='lazy' />

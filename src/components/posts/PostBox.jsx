@@ -1,5 +1,3 @@
-//POST BOX COMPONENT IS HERE
-
 import {useState} from 'react';
 
 export default function PostBox() {
