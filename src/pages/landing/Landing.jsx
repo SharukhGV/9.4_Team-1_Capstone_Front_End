@@ -96,7 +96,7 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized, dat
       <div className='top-category-2'>
         <h4 className='main-h4'> Painting </h4>
         <div className='posts-slider-container'>
-        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === 0 ? postsCategorized.Paint.length - 1 : prevPost - 1)}>{' '} <ArrowBackIosIcon />{' '} </button>
+        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === 0 ? postsCategorized.Painting.length - 1 : prevPost - 1)}>{' '} <ArrowBackIosIcon />{' '} </button>
         {
           visiblePaintPosts.map((post) => {
             return (
@@ -104,7 +104,7 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized, dat
             )
           })
         }
-        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === postsCategorized.Paint.length - 1 ? 0 : prevPost + 1)}>
+        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === postsCategorized.Painting.length - 1 ? 0 : prevPost + 1)}>
         {' '}
         <ArrowForwardIosIcon />{' '}
         </button>

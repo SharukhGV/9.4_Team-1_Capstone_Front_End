@@ -32,7 +32,8 @@ export default function Home({
       const currentHobbyIndex =
         (currentHobbyPost + i) % postsCategorized[user.current_skillset].length;
       const currentInterestIndex =
-        (currentInterestPost + i) % postsCategorized[user.learning_interest].length;
+        (currentInterestPost + i) %
+        postsCategorized[user.learning_interest].length;
       visibleCurrentHobbyPosts.push(
         postsCategorized[user.current_skillset][currentHobbyIndex]
       );
@@ -43,12 +44,11 @@ export default function Home({
   }
 
   useEffect(() => {
-    axios.get(`${API}/tools`)
-    .then(response => {
+    axios.get(`${API}/tools`).then(response => {
       const theData = response.data;
-      console.log(response.data)
-    })
-  }, [])
+      console.log(response.data);
+    });
+  }, []);
 
   return (
     <div className='home-page'>
@@ -141,18 +141,15 @@ export default function Home({
         <br />
         <CatCarousel setSelectedCategory={setSelectedCategory} />
         <div className='selected-cat-sect'>
-        {selectedCategory ? (<h3> {selectedCategory} </h3>) : null}
-        <br />
-        <div className='selected-posts'>
-        {
-          selectedCategory && !dataLoader && selectedCategory.length > 1 ? //
-          postsCategorized[selectedCategory].map((post, i) => {
-            return (
-              <PostCard post={post} />
-            )
-          }) : null 
-        }
-        </div>
+          {selectedCategory ? <h3> {selectedCategory} </h3> : null}
+          <br />
+          <div className='selected-posts'>
+            {selectedCategory && !dataLoader && selectedCategory.length > 1 //
+              ? postsCategorized[selectedCategory].map((post) => {
+                  return <PostCard post={post} />;
+                })
+              : null}
+          </div>
         </div>
         <div />
         <br />
@@ -174,14 +171,15 @@ export default function Home({
                 {' '}
                 <ArrowBackIosIcon />{' '}
               </button>
-              {visibleCurrentHobbyPosts.map((post, ) => {
-                return <PostCard post={post} key={uuid()}/>;
+              {visibleCurrentHobbyPosts.map(post => {
+                return <PostCard post={post} key={uuid()} />;
               })}
               <button
                 className='arrow'
                 onClick={() =>
                   setCurrentHobbyPost(prevPost =>
-                    prevPost === postsCategorized[user.current_skillset].length - 1
+                    prevPost ===
+                    postsCategorized[user.current_skillset].length - 1
                       ? 0
                       : prevPost + 1
                   )
@@ -209,14 +207,15 @@ export default function Home({
                 {' '}
                 <ArrowBackIosIcon />{' '}
               </button>
-              {visibleInterestPosts.map((post) => {
+              {visibleInterestPosts.map(post => {
                 return <PostCard post={post} key={uuid()} />;
               })}
               <button
                 className='arrow'
                 onClick={() =>
                   setCurrentInterestPost(prevPost =>
-                    prevPost === postsCategorized[user.learning_interest].length - 1
+                    prevPost ===
+                    postsCategorized[user.learning_interest].length - 1
                       ? 0
                       : prevPost + 1
                   )
