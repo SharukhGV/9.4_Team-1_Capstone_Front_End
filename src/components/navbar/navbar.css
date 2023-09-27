@@ -18,7 +18,9 @@ nav {
 }
 
 .search-icon {
-  width: 14px;
+  position: absolute;
+  margin-left: 5px;
+  margin-top: 4px;
 }
 
 .search-btn {
@@ -33,20 +35,17 @@ nav {
   /* border-radius: 50%;
   width: 79px;
   margin: 7px; */
-  background-image: url('../../assets/craftLogo2.png');
+  /* background-image: url('../../assets/craftLogo2.png'); */
   opacity: 1;
-}
-
-.nav-logo:hover {
   cursor: pointer;
 }
 
 .about-link {
-  display: grid;
+  /* display: grid; */
   text-decoration: none;
   color: #800080;
-  float: inline-start;
-  margin-bottom: -17px;
+  /* float: inline-start; */
+  /* margin-bottom: -17px; */
 }
 
 .nav-right-container {
@@ -101,6 +100,9 @@ nav {
 .nav-logo {
   max-width: 100px;
   max-height: 100px;
+  border-radius: 50%;
+  width: 79px;
+  margin: 7px;
 }
 
 .nav-logo:hover {
@@ -124,3 +126,27 @@ nav {
   margin-top: 5px;
   text-decoration: u;
 }
+
+.search-sect {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* .search-display-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  /* visibility: hidden; */
+/* } */ 
+
+/* .search-display-box.show {
+  visibility: visible;
+} */
