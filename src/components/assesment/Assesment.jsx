@@ -94,12 +94,12 @@ export default function Assesment({
                     label="Photography"
                   />
                   <FormControlLabel
-                    value="Pottery"
+                    value="Ceramics"
                     control={<Radio />}
-                    label="Pottery"
+                    label="Ceramics"
                   />
                   <FormControlLabel
-                    value="Sculpture"
+                    value="Sculpting"
                     control={<Radio />}
                     label="Sculpting"
                   />
@@ -122,6 +122,11 @@ export default function Assesment({
                     value='Filmmaking'
                     control={<Radio />}
                     label='Filmmaking'
+                  />
+                  <FormControlLabel
+                    value='Digital Artistry'
+                    control={<Radio />}
+                    label='Digital Artistry'
                   />
                   <FormControlLabel
                     value='Unsure'
@@ -189,9 +194,15 @@ export default function Assesment({
                     label='Filmmaking'
                   />
                   <FormControlLabel
+                    value='Digital Artistry'
+                    control={<Radio />}
+                    label='Digital Artistry'
+                  />
+                  <FormControlLabel
                    value='Beginner'
                    control={<Radio />}
-                   label='Beginner / None' />
+                   label='Beginner / None'
+                  />
                 </RadioGroup>
               </FormControl>
             </div>
