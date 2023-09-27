@@ -17,7 +17,7 @@ import digitalArtImg from '../../assets/categoryImg/digitalArtImg.jpg';
 import sculptureImg from '../../assets/categoryImg/sculptureImg.jpg';
 import printmakingImg from '../../assets/categoryImg/printmakingImg.jpg';
 
-export default function CatCarousel() {
+export default function CatCarousel({ setSelectedCategory }) {
   const [currentImg, setCurrentImg] = useState(0);
 
   const artsImgs = [
@@ -63,7 +63,8 @@ export default function CatCarousel() {
         <Card
           component='li'
           sx={{height: 40, width: '100%'}}
-          key={`image-${i}`}
+          value={img.name}
+          onClick={() => setSelectedCategory(img.name)}
         >
           <CardCover>
             <img

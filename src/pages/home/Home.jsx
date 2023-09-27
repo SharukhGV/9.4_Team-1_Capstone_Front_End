@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router';
 import {v4 as uuid} from 'uuid';
 import CatCarousel from '../../components/carousels/CatCarousel';
@@ -7,9 +7,10 @@ import PostCard from '../../components/posts/PostCard';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {Paper} from '@mui/material';
 import {Card, Button} from '@mui/joy';
 import './home.css';
+import axios from 'axios';
+const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function Home({
   user,
@@ -20,6 +21,7 @@ export default function Home({
   const navigate = useNavigate();
   const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
   const [assesmentCompleted, setAssesmentCompleted] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [currentInterestPost, setCurrentInterestPost] = useState(0);
   const [currentHobbyPost, setCurrentHobbyPost] = useState(0);
   let visibleInterestPosts = [];
@@ -39,8 +41,15 @@ export default function Home({
       );
     }
   }
-  console.log(postsCategorized[user.current_skillset])
-  console.log(user.current_skillset)
+
+  useEffect(() => {
+    axios.get(`${API}/tools`)
+    .then(response => {
+      const theData = response.data;
+      console.log(response.data)
+    })
+  }, [])
+
   return (
     <div className='home-page'>
       <br />
@@ -130,11 +139,25 @@ export default function Home({
         </div>
         <div className='div' />
         <br />
-        <CatCarousel />
+        <CatCarousel setSelectedCategory={setSelectedCategory} />
+        <div className='selected-cat-sect'>
+        {selectedCategory ? (<h3> {selectedCategory} </h3>) : null}
+        <br />
+        <div className='selected-posts'>
+        {
+          selectedCategory && !dataLoader && selectedCategory.length > 1 ? //
+          postsCategorized[selectedCategory].map((post, i) => {
+            return (
+              <PostCard post={post} />
+            )
+          }) : null 
+        }
+        </div>
+        </div>
         <div />
         <br />
         <div className='curated-posts-sect'>
-          {/* <h2>  </h2> */}
+          <h2> Creativity Hub </h2>
           <div className='user-current-hobby-posts'>
             <h4> {user.current_skillset} </h4>
             <div className='posts-slider-container'>
@@ -171,7 +194,7 @@ export default function Home({
           </div>
           <br />
           <div className='user-interest-posts'>
-            <h4> {user.current_skillset} </h4>
+            <h4> {user.learning_interest} </h4>
             <div className='posts-slider-container'>
               <button
                 className='arrow'

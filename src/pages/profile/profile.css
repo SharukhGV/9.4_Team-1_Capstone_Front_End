@@ -94,3 +94,9 @@
   width:100%;
   margin-bottom: 5%;
 }
+
+.edit-btn {
+  border: none;
+  background-color: transparent;
+  color: #1a237e;
+}
