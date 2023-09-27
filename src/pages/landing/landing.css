@@ -111,3 +111,20 @@ font-size: large;
   color: #1a237e;
   font-family: 'Roboto', sans-serif;
 }
+
+.selected-cat-sect {
+  justify-content: center;
+  justify-items: center;
+  justify-tracks: center;
+  align-items: center;
+  align-content: center;
+  align-tracks: center;
+}
+
+.selected-posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 17px;
+}

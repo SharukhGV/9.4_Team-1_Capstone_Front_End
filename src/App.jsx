@@ -46,27 +46,25 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 function App() {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies();
-
   const [modal, setModal] = useState(false);
   const [tab, setTab] = useState(false);
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState();
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  // const [userHobbyInterest, setUserHobbyInterest] = useState('Filmmaking'); //added default for user home who havent filed out assesment
-  // const [userCurrentHobby, setUserCurrentHobby] = useState('Photography');
   const [posts, setposts] = useState([]);
   const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
-    Paint: [],
-    Sketch: [],
+    Painting: [],
+    Drawing: [],
     Photography: [],
-    Pottery: [],
-    Sculpt: [],
+    Ceramics: [], 
+    Sculpting: [],
     Printmaking: [],
     Graffiti: [],
     'Fashion Design': [],
     Filmmaking: [],
+    'Digital Artistry': [],
   });
 
   useEffect(() => {
@@ -94,7 +92,6 @@ function App() {
               }
             }
           }
-
           if (dataLoader === true) {
             confirmFilteredData();
           }
@@ -140,6 +137,7 @@ function App() {
     axios.post(`${API}/auth/logout`);
     removeCookie('token');
   };
+  
   function checkToken() {
     if (cookies.token !== undefined) {
       axios
@@ -255,6 +253,7 @@ function App() {
                 posts={posts}
                 ArtistsGraphic={ArtistsGraphic}
                 postsCategorized={postsCategorized}
+                dataLoader={dataLoader}
               />
             }
           />
