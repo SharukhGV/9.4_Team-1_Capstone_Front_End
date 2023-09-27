@@ -3,7 +3,6 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router';
 import Add from '../../assets/add.svg'
 import {
-  TextField,
   Select,
   FormControl,
   InputLabel,
@@ -203,6 +202,7 @@ export default function NewPost({user}) {
           <ModalDialog layout='fullscreen'>
             {/* <img className='logo' src={craftopiaLogo} /> */}
             {/* <div className='top-btns'> */}
+            <div className='top-btns'>
             <button className='back-btn' onClick={() => setOpenPreview(false)}>
               {' '}
               Back to editing{' '}
@@ -211,16 +211,17 @@ export default function NewPost({user}) {
               {' '}
               &times;{' '}
             </button>
+            </div>
             {/* </div> */}
             <br />
             <div className='content-preview'>
               <Typography> {post.title} </Typography>
-              {/* <p> {post.category} </p>
+              {/* 
+              <p> {post.category} </p>
             <img src={selectedFile} />
             <p> {post.body} </p> */}
             </div>
-
-            <button className='post-btn' onClick={sendToServer}>
+            <button className='preview-post-btn' onClick={sendToServer}>
               {' '}
               Post{' '}
             </button>
@@ -231,41 +232,3 @@ export default function NewPost({user}) {
   );
 }
 
-// function prevSlide() {
-//   setCurrentPlaceholder(prevImg =>
-//     prevImg === 0 ? placeholders.length - 1 : prevImg - 1
-//   );
-// };
-
-// function nextSlide() {
-//   setCurrentPlaceholder(prevImg =>
-//     prevImg === placeholders.length - 1 ? 0 : prevImg + 1
-//   );
-// }
-
-// const addPlaceHolder = () => {
-//   if (files.length < placeholders.length) {
-//     setFiles([...files, null]);
-//   }
-// }
-
-// const removePlaceholder = (index) => {
-//   const newFiles = [...files];
-//   newFiles.splice(index, 1);
-//   setFiles(newFiles);
-// }
-
-// function handleFileSelection(event, index) {
-//   const newSelectedFiles = [...files];
-//   newSelectedFiles[index] = event.target.files[0];
-//   setFiles(newSelectedFiles);
-//   addPlaceHolder();
-// }
-
-//apply lazyloading to images & everything possible
-
-// const visibleImgs = [
-//   placeholders[currentPlaceholder],
-//   placeholders[(currentPlaceholder + 1) % placeholders.length],
-//   //placeholders[(currentPlaceholder + 2) % placeholders.length],
-// ];

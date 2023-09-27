@@ -25,7 +25,6 @@ import ToolsNewForm from './components/tools/ToolsNewForm';
 import ToolsDetails from './components/tools/ToolsDetails';
 import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
-import PostPreview from './components/posts/PostPreview';
 import About from './pages/about/About';
 
 import ArtistsGraphic from './assets/artistsgraphic.jpg';
@@ -301,10 +300,6 @@ function App() {
             <Route
               path='/:username/post/new'
               element={<NewPost user={user} />}
-            />
-            <Route
-              path='/:username/post/preview'
-              element={<PostPreview user={user} />}
             />
             <Route
               path='/:username/post/new'

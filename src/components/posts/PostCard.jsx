@@ -1,6 +1,4 @@
 import {Card, CardContent, CardOverflow, AspectRatio, Typography} from '@mui/joy';
-//import { Typography } from '@mui/material';
-// import "./postsCard.css";
 import './PostCard.css';
 
 export default function PostCard({post}) {

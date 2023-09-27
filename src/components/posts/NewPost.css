@@ -55,6 +55,9 @@ main h3 {
   margin-top: 5%;
   margin-bottom: 5%;
   margin-left: 85%;
+  margin-top: auto;
+  width: 100%;
+  display: flex;
 }
 .post-buttons button {
   margin: 0 5px;
@@ -69,6 +72,23 @@ main h3 {
     border-radius: 50%;
     width: 79px;
     margin: 7px;
+}
+
+.x {
+  float: inline-end;
+}
+
+.preview-post-btn {
+  margin-top: auto;
+  width: 77px;
+  margin-left: 620px;
+  justify-content: flex-end;
+}
+
+.preview-modal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 
