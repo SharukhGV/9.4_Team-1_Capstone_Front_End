@@ -14,47 +14,14 @@ export default function NavBar({
   modal,
   setModal,
   posts,
-  // searchResults,
-  // setSearchResults,
 }) {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  //const [postsAreThere, setPostsAreThere]
   const [tab, setTab] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
-
-  //console.log(posts)
-
-  //useEffect(() => { //make function then call it 
-    // if (!dataLoader) {
-    //   console.log(posts)
-    // // const searched = posts.filter((post) => {
-    // //   return (
-    // //     post.title.toLowerCase().includes(searchText.toLowerCase()) ||
-    // //     post.category.toLowerCase().includes(searchText.toLowerCase()) ||
-    // //     post.user_id.toLowerCase().incudes(searchText.toLowerCase()) ||
-    // //     post.post_id.toLowerCase().includes(searchText.toLowerCase()) ||
-    // //     post.created_by.toLowerCase().includes(searchText.toLowerCase())
-    // //   );
-    // // });
-    // // setSearchResults(searched);
-    // }
-
-    // posts.map((post, i) => {
-    //   if (post.title.includes(searchText) || post.category.includes(searchText) || post.user_id.includes(searchText) || post.post_id.includes(searchText) || post.created_by.includes(searchText)) {
-    //     setSearchResults()
-    //   }
-    // })
-
-  //}, []) //[searchText]
-
-  //console.log(posts)
 
   function handleSearchInput(event) {
     setSearchText(event.target.value); 
     
-    //if (posts.length > 1) {
-      //console.log(posts)
     const searched = posts.filter((post) => {
       return (
         post?.title.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -63,11 +30,9 @@ export default function NavBar({
       );
     });
     setSearchResults(searched);
-    //setDialogOpen(searched.length > 0);
-    //}
   }
 
-  console.log(searchResults)
+  //console.log(searchResults)
 
   return (
     <nav>
@@ -94,7 +59,7 @@ export default function NavBar({
             sx={{width: '190px', marginBottom: '-4px'}}
             inputProps={{style: {fontSize: '17px', marginBottom: '-2px'}}}
           />
-          {
+          {/* {
             searchResults.length > 0 ? (
               <div>
                 {
@@ -106,7 +71,7 @@ export default function NavBar({
                 }
               </div>
             ) : (null)
-          }
+          } */}
         </div>
         <Auth
           user={user}

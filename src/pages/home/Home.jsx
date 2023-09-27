@@ -4,6 +4,7 @@ import {v4 as uuid} from 'uuid';
 import CatCarousel from '../../components/carousels/CatCarousel';
 import Assesment from '../../components/assesment/Assesment';
 import PostCard from '../../components/posts/PostCard';
+import ToolsCard from '../../components/tools/ToolsCard';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -23,6 +24,7 @@ export default function Home({
   const [assesmentCompleted, setAssesmentCompleted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentInterestPost, setCurrentInterestPost] = useState(0);
+  const [tools, setTools] = useState();
   const [currentHobbyPost, setCurrentHobbyPost] = useState(0);
   let visibleInterestPosts = [];
   let visibleCurrentHobbyPosts = [];
@@ -45,10 +47,11 @@ export default function Home({
   useEffect(() => {
     axios.get(`${API}/tools`)
     .then(response => {
-      const theData = response.data;
-      console.log(response.data)
+      setTools(response.data);
     })
   }, [])
+
+  //console.log(tools);
 
   return (
     <div className='home-page'>
@@ -159,7 +162,7 @@ export default function Home({
         <div className='curated-posts-sect'>
           <h2> Creativity Hub </h2>
           <div className='user-current-hobby-posts'>
-            <h4> {user.current_skillset} </h4>
+            <h4 className='main-h4'> {user.current_skillset} </h4>
             <div className='posts-slider-container'>
               <button
                 className='arrow'
@@ -191,10 +194,27 @@ export default function Home({
                 <ArrowForwardIosIcon />{' '}
               </button>
             </div>
+            <br />
+            <div className='tools-sect'>
+              {/* <h5> Tools </h5> */}
+            <div className='posts-slider-container'>
+              {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
+            {
+              tools && user.current_skillset ? tools.map((tool, i) => {
+                if (tool.category === user.current_skillset) {
+                  return (
+                    <ToolsCard tool={tool} />
+                  )
+                }
+              }) : null
+            }
+              {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
+            </div>
+            </div>
           </div>
           <br />
           <div className='user-interest-posts'>
-            <h4> {user.learning_interest} </h4>
+            <h4 className='main-h4'> {user.learning_interest} </h4>
             <div className='posts-slider-container'>
               <button
                 className='arrow'
@@ -225,6 +245,23 @@ export default function Home({
                 {' '}
                 <ArrowForwardIosIcon />{' '}
               </button>
+            </div>
+            <br />
+            <div className='tools-sect'>
+              {/* <h5> Tools </h5> */}
+            <div className='posts-slider-container'>
+              {tools && user.learning_interest ? (tools.filter((tool) => tool.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
+            {
+              tools && user.learning_interest ? tools.map((tool, i) => {
+                if (tool.category === user.learning_interest) {
+                  return (
+                    <ToolsCard tool={tool} />
+                  )
+                }
+              }) : null
+            }
+              {tools && user.learning_interest ? (tools.filter((tool) => tool.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
+            </div>
             </div>
           </div>
         </div>
