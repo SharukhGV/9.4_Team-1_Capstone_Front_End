@@ -58,7 +58,7 @@ function App() {
     Painting: [],
     Drawing: [],
     Photography: [],
-    Ceramics: [], 
+    Ceramics: [],
     Sculpting: [],
     Printmaking: [],
     Graffiti: [],
@@ -137,7 +137,7 @@ function App() {
     axios.post(`${API}/auth/logout`);
     removeCookie('token');
   };
-  
+
   function checkToken() {
     if (cookies.token !== undefined) {
       axios
@@ -174,23 +174,6 @@ function App() {
           posts={posts}
           dataLoader={dataLoader}
         />
-        <div>
-          {/* <Box>
-        {
-            searchResults.length > 0 ? (
-              <div>
-                {
-                  searchResults.map((result) => (
-                    <div>
-                      {result.name}
-                    </div>
-                  ))
-                }
-              </div>
-            ) : (null)
-          }
-          </Box> */}
-        </div>
         <div className='navbar'>
           <aside>
             {/* <Link to='/about' className='about-link'> About </Link> */}
@@ -285,16 +268,18 @@ function App() {
           <Route element={<ProtectedRoute user={user} />}>
             {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path='/:username/post/:id' element={<Post user={user} />} />
-          <Route
-            path='/home'
-            element={
-              <Home
-                user={user}
-                postsCategorized={postsCategorized}
-                ArtistsGraphic={ArtistsGraphic}
-                dataLoader={dataLoader}
-                updateUser={handleSignIn}
-              />}/>
+            <Route
+              path='/home'
+              element={
+                <Home
+                  user={user}
+                  postsCategorized={postsCategorized}
+                  ArtistsGraphic={ArtistsGraphic}
+                  dataLoader={dataLoader}
+                  updateUser={handleSignIn}
+                />
+              }
+            />
             <Route
               path='/:username/post/new'
               element={<NewPost user={user} />}

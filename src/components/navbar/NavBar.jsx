@@ -26,7 +26,7 @@ export default function NavBar({
   useEffect(() => {
     const allPosts = [...posts];
     const filterSearch = allPosts.filter(
-      post => post.title.includes(search) || post.created_by.includes(search)
+      post => post.title.toLowerCase().includes(search) || post.created_by.toLowerCase().includes(search)
     );
     if (filterSearch.length === allPosts.length) {
       setSearchResults([]);
@@ -35,6 +35,11 @@ export default function NavBar({
     }
   }, [search]);
 
+  const handleSearch=(id)=>{
+    setSearch('')
+    setSearchResults([])
+    navigate(`/post/${id}`)
+  }
   return (
     <nav>
       <div className='top-left'>
@@ -69,7 +74,7 @@ export default function NavBar({
               {searchResults.map((res, i) => {
                 if (i < 3) {
                   return (
-                    <aside className='result-item' onClick={()=>navigate('/home')} key={uuid()}>
+                    <aside className='result-item' onClick={()=>handleSearch(res.post_id)} key={uuid()}>
                       <p>{res.title}</p>
                     </aside>
                   );
