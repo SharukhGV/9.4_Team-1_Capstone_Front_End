@@ -2,16 +2,15 @@
 .top-left {
   display: flex;
   align-items: center;
+  width:25%;
   gap: 17px;
 }
 
 nav {
-  /* display: flex; */
   display: flex;
   justify-content: space-between;
+  justify-self: center;
   align-items: center;
-  /* align-items: center;
-  padding: 30px 10%; */
   width: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -50,9 +49,11 @@ nav {
 
 .nav-right-container {
   display: flex;
-  align-items: flex-end;
   float: right;
+  width:25%;
   gap: 17px;
+  /* align-items: center; */
+
 }
 
 .auth-btns {
@@ -79,11 +80,6 @@ nav {
 ::-webkit-input-placeholder {
   text-align: left;
   padding-left: 34px;
-}
-
-.top-left,
-.nav-right-container {
-  align-items: center;
 }
 
 .logout-btn {
@@ -131,8 +127,35 @@ nav {
   display: flex;
   align-items: center;
   position: relative;
+  width:100%;
 }
 
+.search-results{
+  position: absolute;
+  top:100%;
+  background-color: #f8f8f8;
+  border-left:solid black 2px;
+  border-right:solid black 2px;
+  border-bottom:solid black 2px;
+  z-index:11;
+  text-align: center;
+}
+
+.result-item{
+  border-bottom: solid 1px #7851a9;
+  padding:5px;
+  white-space: nowrap;
+}
+.result-item:hover{
+  cursor: pointer;
+  background-color: #7851a9d5;
+  color:white;
+  /* font-weight: bold; */
+}
+
+.result-item p{
+  margin:5px;
+}
 /* .search-display-box {
   position: absolute;
   top: 100%;
