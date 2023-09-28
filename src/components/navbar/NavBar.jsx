@@ -2,7 +2,8 @@ import {useState, useRef, useEffect} from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
 import './navbar.css';
-import {Input, Popover, MenuItem, Badge, Avatar} from '@mui/material';
+import {Input, Popover, MenuItem, Badge} from '@mui/material';
+import { Avatar } from '@mui/joy';
 import Auth from '../../components/auth/Auth';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -188,7 +189,7 @@ export default function NavBar({
             )}
             {user && (
               <div className='auth-btns' onMouseEnter={handleAvatarPopover} onMouseLeave={() => setAvatarPopover(false)}>
-                <Avatar ref={avatarRef} />
+                <Avatar ref={avatarRef} variant='soft' />
                 <Popover open={avatarPopOver} anchorEl={avatarRef.current} onClose={() => setAvatarPopover(false)} anchorOrigin={{vertical: 'bottom',horizontal: 'left'}} transformOrigin={{vertical: 'top',horizontal: 'left'}}>
                   <MenuItem onClick={() => navigate(`${user.username}/profile`)}> Profile </MenuItem>
                   <MenuItem onClick={handleLogout}> LogOut </MenuItem>
