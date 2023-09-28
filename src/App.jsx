@@ -52,13 +52,13 @@ function App() {
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [posts, setposts] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState('');
   const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
     Painting: [],
     Drawing: [],
     Photography: [],
-    Ceramics: [], 
+    Ceramics: [],
     Sculpting: [],
     Printmaking: [],
     Graffiti: [],
@@ -137,7 +137,7 @@ function App() {
     axios.post(`${API}/auth/logout`);
     removeCookie('token');
   };
-  
+
   function checkToken() {
     if (cookies.token !== undefined) {
       axios
@@ -204,16 +204,18 @@ function App() {
           <Route element={<ProtectedRoute user={user} />}>
             {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path='/:username/post/:id' element={<Post user={user} />} />
-          <Route
-            path='/home'
-            element={
-              <Home
-                user={user}
-                postsCategorized={postsCategorized}
-                ArtistsGraphic={ArtistsGraphic}
-                dataLoader={dataLoader}
-                updateUser={handleSignIn}
-              />}/>
+            <Route
+              path='/home'
+              element={
+                <Home
+                  user={user}
+                  postsCategorized={postsCategorized}
+                  ArtistsGraphic={ArtistsGraphic}
+                  dataLoader={dataLoader}
+                  updateUser={handleSignIn}
+                />
+              }
+            />
             <Route
               path='/:username/post/new'
               element={<NewPost user={user} />}

@@ -1,5 +1,6 @@
 import {useState, useRef, useEffect} from 'react';
 import {Form, Link, useNavigate} from 'react-router-dom';
+import {v4 as uuid} from 'uuid';
 import './navbar.css';
 import {Input, Popover, Select, MenuItem, InputLabel, FormControl, Badge, Breadcrumbs} from '@mui/material';
 import craftopiaLogo2 from '../../assets/craftLogo2.png';
@@ -19,36 +20,34 @@ export default function NavBar({
   cartItems,
   cartView,
 }) {
-  const [searchText, setSearchText] = useState('');
+  const navigate = useNavigate()
+  const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [categoriesPopOpen, setCategoriesPopOpen] = useState(false);
   const [tab, setTab] = useState(false);
   const categoriesBtnRef = useRef(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [navCategory, setNavCategory] = useState('');
+  const handleTextChange = e => {
+    setSearch(e.target.value);
+  };
+  useEffect(() => {
+    const allPosts = [...posts];
+    const filterSearch = allPosts.filter(
+      post => post.title.toLowerCase().includes(search) || post.created_by.toLowerCase().includes(search)
+    );
+    if (filterSearch.length === allPosts.length) {
+      setSearchResults([]);
+    } else {
+      setSearchResults(filterSearch);
+    }
+  }, [search]);
 
-  function handleSearchInput(event) {
-    setSearchText(event.target.value);
-    
-    const searched = posts.filter((post) => {
-      return (
-        post?.title.toLowerCase().includes(searchText.toLowerCase()) ||
-        post?.category.toLowerCase().includes(searchText.toLowerCase()) ||
-        post?.created_by.toLowerCase().includes(searchText.toLowerCase())
-      );
-    });
-    setSearchResults(searched);
+  const handleSearch=(id)=>{
+    setSearch('')
+    setSearchResults([])
+    navigate(`/post/${id}`)
   }
-
-  function handleMenuItemNav(selectedCategory) {
-    setNavCategory(selectedCategory);
-    
-
-    navigate(`/posts`, {state: {category: selectedCategory}})
-  }
-
-  //console.log(searchResults)
-
   return (
     <nav>
       <div className='top-left'>
@@ -73,17 +72,24 @@ export default function NavBar({
           <Input
             type='text'
             placeholder='Search...'
-            value={searchText}
-            onChange={handleSearchInput}
+            value={search}
+            onChange={handleTextChange}
             size='xsmall'
-            sx={{width: '190px', marginBottom: '-4px'}}
+            sx={{width: '100%', marginBottom: '-4px'}}
             inputProps={{style: {fontSize: '17px', marginBottom: '-2px'}}}
           />
           {searchResults.length > 0 ? (
-            <div>
-              {searchResults.map(result => (
-                <div>{result.name}</div>
-              ))}
+            <div className='search-results'>
+              {searchResults.map((res, i) => {
+                if (i < 3) {
+                  return (
+                    <aside className='result-item' onClick={()=>handleSearch(res.post_id)} key={uuid()}>
+                      <p>{res.title}</p>
+                    </aside>
+                  );
+                }
+              })}
+              {searchResults.length - 3>=1?<p>{searchResults.length - 3} other results</p>:null}
             </div>
           ) : null}
         </div>
