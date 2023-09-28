@@ -46,7 +46,7 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 function App() {
   const [cookies, removeCookie] = useCookies();
   const [modal, setModal] = useState(false);
-  const [tab, setTab] = useState(false); //why is this here when its only used in auth ? 
+  const [tab, setTab] = useState(false); 
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState();
   const [cartView, setCartView] = useState(false);

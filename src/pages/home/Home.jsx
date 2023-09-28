@@ -27,6 +27,7 @@ export default function Home({
   const [currentInterestPost, setCurrentInterestPost] = useState(0);
   const [tools, setTools] = useState();
   const [currentHobbyPost, setCurrentHobbyPost] = useState(0);
+  const [tab, setTab] = useState(false);
   let visibleInterestPosts = [];
   let visibleCurrentHobbyPosts = [];
 
@@ -150,18 +151,7 @@ export default function Home({
             {selectedCategory && !dataLoader && selectedCategory.length > 1 //
               ? postsCategorized[selectedCategory].map((post) => {
                   return (
-                  <div onClick={() => navigate(`/post/${post.post_id}`
-                  // , {
-                  //   state: {
-                  //     title: post.title,
-                  //     category: post.category,
-                  //     body: post.body,
-                  //     created_at: post.created_at,
-                  //     created_by: post.created_by,
-                  //     //file: files,
-                  //   }
-                  // } 
-                  )
+                  <div onClick={() => navigate(`/post/${post.post_id}`)
                 }
                   >
                   <PostCard post={post} />
@@ -175,7 +165,14 @@ export default function Home({
         <br />
         <div className='curated-posts-sect'>
           <h2> Creativity Hub </h2>
-          <div className='user-current-hobby-posts'>
+          <aside>
+            <button className={tab ? 'view-tab' : 'view-tab selected'} onClick={() => setTab(false)}> Posts </button>
+            <button className={!tab ? 'view-tab' : 'view-tab selected'} onClick={() => setTab(true)}> Tools </button>
+          </aside>
+          {
+            !tab ? (
+            <>
+            <div className='user-current-hobby-posts'>
             <h4 className='main-h4'> {user.current_skillset} </h4>
             <div className='posts-slider-container'>
               <button
@@ -194,16 +191,6 @@ export default function Home({
               {visibleCurrentHobbyPosts.map(post => {
                 return (
                 <div onClick={() => navigate(`/post/${post.post_id}`
-                // , {
-                //   state: {
-                //     title: post.title,
-                //     category: post.category,
-                //     body: post.body,
-                //     created_at: post.created_at,
-                //     created_by: post.created_by,
-                //     //file: files,
-                //   },
-                // }
                 )}>
                 <PostCard post={post} key={uuid()} />
                 </div>
@@ -225,28 +212,7 @@ export default function Home({
               </button>
             </div>
             <br />
-            <div className='tools-sect'>
-              {/* <h5> Tools </h5> */}
-            <div className='posts-slider-container'>
-              {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
-            {
-              tools && user.current_skillset ? tools.map((tool, i) => {
-                //console.log(tool);
-                if (tool.category === user.current_skillset) {
-                  return (
-                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`//, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}}
-                    )
-                  }
-                    >
-                    <ToolsCard tool={tool} />
-                    </div>
-                  )
-                }
-              }) : null
-            }
-              {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
-            </div>
-            </div>
+
           </div>
           <br />
           <div className='user-interest-posts'>
@@ -268,16 +234,6 @@ export default function Home({
               {visibleInterestPosts.map(post => {
                 return (
                 <div onClick={() => navigate(`/post/${post.post_id}`
-                // , {
-                //   state: {
-                //     title: post.title,
-                //     category: post.category,
-                //     body: post.body,
-                //     created_at: post.created_at,
-                //     created_by: post.created_by,
-                //     //file: files,
-                //   },
-                // }
                 )}>
                 <PostCard post={post} key={uuid()} />
                 </div>
@@ -299,17 +255,42 @@ export default function Home({
               </button>
             </div>
             <br />
+    
+          </div>
+          </>
+          ) : (
+          <>   
+          <br />         
+          <div className='tools-sect'>
+          <h4 className='main-h4'> {user.current_skillset} </h4>
+            <div className='posts-slider-container'>
+              {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
+            {
+              tools && user.current_skillset ? tools.map((tool, i) => {
+                if (tool.category === user.current_skillset) {
+                  return (
+                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`)
+                  }
+                    >
+                    <ToolsCard tool={tool} />
+                    </div>
+                  )
+                }
+              }) : null
+            }
+              {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
+            </div>
+            </div>
+            <br />
             <div className='tools-sect'>
-              {/* <h5> Tools </h5> */}
+            <h4 className='main-h4'> {user.learning_interest} </h4>
             <div className='posts-slider-container'>
               {tools && user.learning_interest ? (tools.filter((tool) => tool.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
-            {
+            { 
               tools && user.learning_interest ? tools.map((tool, i) => {
                 if (tool.category === user.learning_interest) {
-                  //console.log(tool);
                   return (
-                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`//, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}}
-                    )}
+                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`)}
                     >
                     <ToolsCard tool={tool} />
                     </div>
@@ -319,8 +300,8 @@ export default function Home({
             }
               {tools && user.learning_interest ? (tools.filter((tool) => tool.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
             </div>
-            </div>
-          </div>
+            </div></>)
+          }
         </div>
       </main>
     </div>
