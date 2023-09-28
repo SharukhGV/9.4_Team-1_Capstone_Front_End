@@ -77,14 +77,16 @@ export default function NewPost({user}) {
         headers: {'Content-Type': 'multipart/form-data'},
       })
       .then(res => {
-        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`, {
-          state: {
-            title: post.title,
-            category: post.category,
-            body: post.body,
-            file: files,
-          },
-        });
+        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`
+        // , {
+        //   state: {
+        //     title: post.title,
+        //     category: post.category,
+        //     body: post.body,
+        //     file: files,
+        //   },
+        // }
+        );
       })
       .catch(error => console.log(error));
   };

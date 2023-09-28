@@ -5,6 +5,18 @@
   margin-top: 0;
 }
 
+.categories-nav-btn {
+  background: linear-gradient(to bottom, #8e338e, #7851a9);
+  background-color: #800080d5;
+  border: none;
+  color: white;
+  font-weight: bold;
+  width: 94px;
+  height: 100%;
+  font-family: 'Open Sans';
+  padding-top: 5px;
+  /* padding-bottom: 5px; */
+}
 /* .top-left {
   display: flex;
   align-items: center;

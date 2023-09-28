@@ -26,6 +26,7 @@ import ToolsDetails from './components/tools/ToolsDetails';
 import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import About from './pages/about/About';
+import Posts from './components/posts/Posts';
 
 import ArtistsGraphic from './assets/artistsgraphic.jpg';
 
@@ -43,10 +44,9 @@ const ProtectedRoute = ({user, redirectPath = '/'}) => {
 };
 
 function App() {
-  const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies();
   const [modal, setModal] = useState(false);
-  const [tab, setTab] = useState(false);
+  const [tab, setTab] = useState(false); //why is this here when its only used in auth ? 
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState();
   const [cartView, setCartView] = useState(false);
@@ -178,87 +178,6 @@ function App() {
           cartItems={cartItems}
           cartView={cartView}
         />
-        <div>
-          {/* <Box>
-        {
-            searchResults.length > 0 ? (
-              <div>
-                {
-                  searchResults.map((result) => (
-                    <div>
-                      {result.name}
-                    </div>
-                  ))
-                }
-              </div>
-            ) : (null)
-          }
-          </Box> */}
-        </div>
-        {/* <div className='navbar'>
-          <aside>
-            <button onClick={() => navigate('/about')} className='signup-btn'>
-              {' '}
-              About{' '}
-            </button>
-          </aside>
-          <div className='cart-auth-buttons'>
-            <aside className='aside-cart'>
-              <Badge
-                badgeContent={cartItems.length}
-                color='error'
-                onClick={() => setCartView(!cartView)}
-              >
-                <ShoppingCartIcon
-                  className='shopping-cart'
-                  onClick={() => setCartView(!cartView)}
-                />
-              </Badge>
-              {cartView && (
-                <Cart
-                  items={cartItems}
-                  removeItem={removeItem}
-                  handleClose={() => setCartView(false)}
-                />
-              )}
-            </aside>
-            {!user && (
-              <aside className='auth-btns'>
-                <button
-                  onClick={() => {
-                    setModal(true);
-                    setTab(false);
-                  }}
-                  className='login-btn'
-                >
-                  {' '}
-                  Login{' '}
-                </button>
-                <button
-                  className='signup-btn'
-                  onClick={() => {
-                    setModal(true);
-                    setTab(true);
-                  }}
-                >
-                  {' '}
-                  Sign Up{' '}
-                </button>
-              </aside>
-            )}
-            {user && (
-              <div className='auth-btns'>
-                {/* > */}
-                {/* <Link to={`${user.username}/profile`}>
-                  <button className='login-btn'>Profile</button>
-                </Link>
-                <button className='login-btn' onClick={handleLogout}>
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
-        </div> */} 
       </header>
       <main>
         <Routes>
@@ -276,6 +195,7 @@ function App() {
             }
           />
           <Route path='/about' element={<About />} />
+          <Route path='/posts' element={<Posts posts={posts} />}  />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           {/* <Route path='/tools' element={<ToolsDetails />} /> */}

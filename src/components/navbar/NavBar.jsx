@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {Form, Link} from 'react-router-dom';
+import {useState, useRef, useEffect} from 'react';
+import {Form, Link, useNavigate} from 'react-router-dom';
 import './navbar.css';
 import {Input, Popover, Select, MenuItem, InputLabel, FormControl, Badge, Breadcrumbs} from '@mui/material';
 import craftopiaLogo2 from '../../assets/craftLogo2.png';
@@ -23,6 +23,9 @@ export default function NavBar({
   const [searchResults, setSearchResults] = useState([]);
   const [categoriesPopOpen, setCategoriesPopOpen] = useState(false);
   const [tab, setTab] = useState(false);
+  const categoriesBtnRef = useRef(null);
+  const navigate = useNavigate();
+  const [navCategory, setNavCategory] = useState('');
 
   function handleSearchInput(event) {
     setSearchText(event.target.value);
@@ -35,6 +38,13 @@ export default function NavBar({
       );
     });
     setSearchResults(searched);
+  }
+
+  function handleMenuItemNav(selectedCategory) {
+    setNavCategory(selectedCategory);
+    
+
+    navigate(`/posts`, {state: {category: selectedCategory}})
   }
 
   //console.log(searchResults)
@@ -93,19 +103,19 @@ export default function NavBar({
               {' '}
               About{' '}
         </button>
-
-        <button className='signup-btn' onClick={() => setCategoriesPopOpen(true)}> Categories <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </button>
-        <Popover open={categoriesPopOpen} anchorEl={null} onClose={() => setCategoriesPopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}}>
-          <MenuItem> Photography </MenuItem>
-          <MenuItem> Ceramics </MenuItem>
-          <MenuItem> Painting </MenuItem>
-          <MenuItem> Graffiti </MenuItem>
-          <MenuItem> Printmaking </MenuItem>
-          <MenuItem> Filmmaking </MenuItem>
-          <MenuItem> Fashion Design </MenuItem>
-          <MenuItem> Drawing </MenuItem>
-          <MenuItem> Digital Artistry </MenuItem>
-          <MenuItem> Sculpting </MenuItem>
+        <button className='categories-nav-btn' ref={categoriesBtnRef} onClick={() => setCategoriesPopOpen(true)}> Categories <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </button>
+        <Popover open={categoriesPopOpen} anchorEl={categoriesBtnRef.current} onClose={() => setCategoriesPopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}}>
+          <MenuItem onClick={() => handleMenuItemNav('All')}> All Posts & Tools </MenuItem>
+          <MenuItem onClick={() => handleMenuItemNav('Photography')}> Photography </MenuItem>
+          <MenuItem onClick={() => handleMenuItemNav('Ceramics')}> Ceramics </MenuItem>
+          <MenuItem onClick={() => handleMenuItemNav('Painting')}> Painting </MenuItem>
+          <MenuItem onClick={() => handleMenuItemNav('Graffiti')}> Graffiti </MenuItem>
+          <MenuItem onClick={() => handleMenuItemNav('Printmaking')}> Printmaking </MenuItem>
+          <MenuItem onClick={() => handleMenuItemNav('Filmmaking')}> Filmmaking </MenuItem>
+          <MenuItem onClick={() => handleMenuItemNav('Fashion Design')}> Fashion Design </MenuItem>
+          <MenuItem onClick={() => handleMenuItemNav('Drawing')}> Drawing </MenuItem>
+          <MenuItem onClick={() => handleMenuItemNav('Digital Artistry')}> Digital Artistry </MenuItem>
+          <MenuItem onClick={() => handleMenuItemNav('Sculpting')}> Sculpting </MenuItem>
         </Popover>
           </aside>
           <div className='cart-auth-buttons'>
