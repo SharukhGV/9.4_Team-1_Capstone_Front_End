@@ -24,9 +24,10 @@ export default function NavBar({
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [categoriesPopOpen, setCategoriesPopOpen] = useState(false);
+  const [sharePopOpen, setSharePopOpen] = useState(false);
   const [tab, setTab] = useState(false);
   const categoriesBtnRef = useRef(null);
-  // const navigate = useNavigate();
+  const shareBtnRef = useRef(null);
   const [navCategory, setNavCategory] = useState('');
   const handleTextChange = e => {
     setSearch(e.target.value);
@@ -122,6 +123,11 @@ export default function NavBar({
           <MenuItem onClick={() => handleMenuItemNav('Drawing')}> Drawing </MenuItem>
           <MenuItem onClick={() => handleMenuItemNav('Digital Artistry')}> Digital Artistry </MenuItem>
           <MenuItem onClick={() => handleMenuItemNav('Sculpting')}> Sculpting </MenuItem>
+        </Popover>
+        <button className='share-nav-btn' ref={shareBtnRef} onClick={() => setSharePopOpen(true)}> Share <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </button>
+        <Popover open={sharePopOpen} anchorEl={shareBtnRef.current} onClose={() => setSharePopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}} >
+          <MenuItem onClick={() => navigate(`/${user.username}/post/new`)}> Make a post </MenuItem>
+          <MenuItem onClick={() => navigate(`/${user.username}/tools/new`)}> Make an item listing </MenuItem>
         </Popover>
           </aside>
           <div className='cart-auth-buttons'>

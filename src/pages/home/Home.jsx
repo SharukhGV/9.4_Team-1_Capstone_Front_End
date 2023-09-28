@@ -132,7 +132,7 @@ export default function Home({
                     onClick={() => navigate(`/${user.username}/tools/new`)}
                   >
                     {' '}
-                    Publish an Item{' '}
+                    Make an item listing{' '}
                   </Button>
                 </Card>
               </div>
