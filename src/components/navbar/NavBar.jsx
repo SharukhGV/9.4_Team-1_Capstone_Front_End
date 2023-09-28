@@ -24,6 +24,7 @@ export default function NavBar({
   const [searchResults, setSearchResults] = useState([]);
   const [categoriesPopOpen, setCategoriesPopOpen] = useState(false);
   const [sharePopOpen, setSharePopOpen] = useState(false);
+  const [navCategory, setNavCategory] = useState('');
   const [tab, setTab] = useState(false);
   const categoriesBtnRef = useRef(null);
   const avatarRef = useRef(null);
@@ -54,6 +55,11 @@ export default function NavBar({
   const handleAvatarPopover = (event) => {
     setAvatarPopover(true);
     setAvatarAnchorEl(event.currentTarget);
+  }
+
+  function handleMenuItemNav(selectedCategory) {
+    setNavCategory(selectedCategory);
+    navigate(`/posts`, {state: {category: selectedCategory}});
   }
   //console.log(user)
   return (
