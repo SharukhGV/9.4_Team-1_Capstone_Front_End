@@ -48,11 +48,7 @@ export default function PostBox() {
                     }
                   />
                 </div>
-                {/* <div>
-                                        {file.map((iFile, index) => (
-                                            <img key={index} src={iFile} alt={`File ${index}`} style={{ width: '30px' }} />
-                                        ))}
-                                    </div> */}
+
                 <div className='bottomLeft-txtSect'>
                   <FormControl variant='standard' sx={{minWidth: 170}}>
                     <InputLabel sx={{fontFamily: 'Lato'}}>

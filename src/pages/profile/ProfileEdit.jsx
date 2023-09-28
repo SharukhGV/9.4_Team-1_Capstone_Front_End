@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -97,7 +97,7 @@ export default function ProfileEdit({user, refreshUser}) {
             <aside className='profile-desc-edit'>
               <h1>{user.username}</h1>
               <aside className='select-inputs'>
-                <FormControl fullWidth sx={{marginRight:'5px'}}>
+                <FormControl fullWidth sx={{marginRight: '5px'}}>
                   <InputLabel id='learning-interest-label'>
                     Learning Interest
                   </InputLabel>
@@ -125,7 +125,7 @@ export default function ProfileEdit({user, refreshUser}) {
                   </Select>
                 </FormControl>
 
-                <FormControl fullWidth sx={{marginLeft:'5px'}}>
+                <FormControl fullWidth sx={{marginLeft: '5px'}}>
                   <InputLabel id='current-skillset-label'>
                     Current Skillset
                   </InputLabel>
@@ -153,21 +153,7 @@ export default function ProfileEdit({user, refreshUser}) {
                   </Select>
                 </FormControl>
               </aside>
-              {/* <TextField
-                name='current_skillset'
-                label='Current Skillset'
-                value={updatedUser.current_skillset}
-                sx={{marginBottom: 4}}
-                onChange={handleUpdatedUser}
-              />
 
-              <TextField
-                name='learning_interest'
-                label='Learning Interest'
-                value={updatedUser.learning_interest}
-                sx={{marginBottom: 4}}
-                onChange={handleUpdatedUser}
-              /> */}
               <TextField
                 name='city_state'
                 label='City State'
@@ -182,7 +168,6 @@ export default function ProfileEdit({user, refreshUser}) {
                 sx={{width: '100%'}}
                 onChange={handleUpdatedUser}
               />
-              {/* <p>{user.aboutme}</p> */}
             </aside>
           </div>
           {user.username === username && (
@@ -197,50 +182,6 @@ export default function ProfileEdit({user, refreshUser}) {
           )}
         </CardContent>
       </Card>
-      {/* <div>
-        <Card className='profile-posts'>
-          <CardContent>
-            {posts.length < 1 ? (
-              <div>
-                <p>No Post yet </p>
-              </div>
-            ) : (
-              <div>
-                {posts.map(post => (
-                  <Card>
-                    <CardContent>
-                      <img src={post.thumbnail} alt='thumbnail' />
-                      <p>{post.title}</p>
-                      <p>{post.created_at}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-        <Card className='profile-tools'>
-          <CardContent>
-            {tools.length < 1 ? (
-              <div>
-                <p>No Tools yet </p>
-              </div>
-            ) : (
-              <div>
-                {tools.map(tool => (
-                  <Card>
-                    <CardContent>
-                      <img src={tool.thumbnail} alt='thumbnail' />
-                      <p>{tool.title}</p>
-                      <p>{tool.created_at}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div> */}
     </div>
   );
 }

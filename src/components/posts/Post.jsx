@@ -15,7 +15,6 @@ export default function Post() {
       <h3> {state.title} </h3>
       <p> {state.category} </p>
       <div>
-        {/* <img {state.file} /> */}
         {state.body}
       </div>
     </>

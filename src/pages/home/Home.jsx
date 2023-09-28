@@ -1,16 +1,17 @@
 import {useState, useEffect, lazy} from 'react';
 import {useNavigate} from 'react-router';
 import {v4 as uuid} from 'uuid';
-const CatCarousel = lazy(() => import('../../components/carousels/CatCarousel'));
-const Assesment = lazy(() => import('../../components/assesment/Assesment'));
-const PostCard = lazy(() => import('../../components/posts/PostCard'));
-const ToolsCard = lazy(() => import('../../components/tools/ToolsCard'));
+import axios from 'axios';
+
+import CatCarousel from '../../components/carousels/CatCarousel';
+import Assesment from '../../components/assesment/Assesment';
+import PostCard from '../../components/posts/PostCard';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Card, Button} from '@mui/joy';
 import './home.css';
-import axios from 'axios';
+
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function Home({
@@ -21,7 +22,6 @@ export default function Home({
 }) {
   const navigate = useNavigate();
   const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
-  const [assesmentCompleted, setAssesmentCompleted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentInterestPost, setCurrentInterestPost] = useState(0);
   const [tools, setTools] = useState();
@@ -149,16 +149,20 @@ export default function Home({
             {selectedCategory && !dataLoader && selectedCategory.length > 1 //
               ? postsCategorized[selectedCategory].map((post) => {
                   return (
-                  <div onClick={() => navigate(`/post/${post.post_id}`, {
-                    state: {
-                      title: post.title,
-                      category: post.category,
-                      body: post.body,
-                      created_at: post.created_at,
-                      created_by: post.created_by,
-                      //file: files,
-                    }
-                  })}>
+                  <div onClick={() => navigate(`/post/${post.post_id}`
+                  // , {
+                  //   state: {
+                  //     title: post.title,
+                  //     category: post.category,
+                  //     body: post.body,
+                  //     created_at: post.created_at,
+                  //     created_by: post.created_by,
+                  //     //file: files,
+                  //   }
+                  // }
+                  )
+                }
+                  >
                   <PostCard post={post} />
                   </div>
                   )
@@ -188,16 +192,18 @@ export default function Home({
               </button>
               {visibleCurrentHobbyPosts.map(post => {
                 return (
-                <div onClick={() => navigate(`/post/${post.post_id}`, {
-                  state: {
-                    title: post.title,
-                    category: post.category,
-                    body: post.body,
-                    created_at: post.created_at,
-                    created_by: post.created_by,
-                    //file: files,
-                  },
-                })}>
+                <div onClick={() => navigate(`/post/${post.post_id}`
+                // , {
+                //   state: {
+                //     title: post.title,
+                //     category: post.category,
+                //     body: post.body,
+                //     created_at: post.created_at,
+                //     created_by: post.created_by,
+                //     //file: files,
+                //   },
+                // }
+                )}>
                 <PostCard post={post} key={uuid()} />
                 </div>
                 )
@@ -258,16 +264,18 @@ export default function Home({
               </button>
               {visibleInterestPosts.map(post => {
                 return (
-                <div onClick={() => navigate(`/post/${post.post_id}`, {
-                  state: {
-                    title: post.title,
-                    category: post.category,
-                    body: post.body,
-                    created_at: post.created_at,
-                    created_by: post.created_by,
-                    //file: files,
-                  },
-                })}>
+                <div onClick={() => navigate(`/post/${post.post_id}`
+                // , {
+                //   state: {
+                //     title: post.title,
+                //     category: post.category,
+                //     body: post.body,
+                //     created_at: post.created_at,
+                //     created_by: post.created_by,
+                //     //file: files,
+                //   },
+                // }
+                )}>
                 <PostCard post={post} key={uuid()} />
                 </div>
                 )
@@ -309,9 +317,6 @@ export default function Home({
             </div>
             </div>
           </div>
-        </div>
-        <div>
-          {/* categories generated by user interest here  as well as user current hobby*/}
         </div>
       </main>
     </div>

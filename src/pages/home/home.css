@@ -1,9 +1,7 @@
-.home-page{
-  /* text-align: center; */
+.home-page {
   font-family: 'Lato';
-  margin-left:auto;
+  margin-left: auto;
   margin-right: auto;
-
 }
 .div {
   margin: 0 auto;
@@ -12,7 +10,6 @@
 }
 
 .header-h2 {
-  /* position: absolute; */
   font-size: x-large;
 }
 
@@ -23,13 +20,6 @@
   margin-bottom: 0px;
   font-size: larger;
 }
-
-/* .home-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-} */
 
 .assesment-p {
   font-family: 'Open Sans';
@@ -59,13 +49,8 @@
 }
 
 .take-assesment-btn:hover {
-  /* background: linear-gradient(to bottom, #7fdf70, #66cc6b); */
   color: white;
-
   border-style: none;
-  /* font-family: 'Lato'; */
-  /* padding-top: 5px;
-  padding-bottom: 5px; */
 }
 
 .post-ctas {
@@ -73,7 +58,6 @@
   flex-direction: row;
   gap: 20px;
   justify-content: center;
-  /* position: absolute; */
   bottom: 142px;
 }
 
@@ -144,21 +128,13 @@
 }
 
 .overlay-card {
-  /* position: absolute; */
   z-index: 2;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .content-container {
-  /* position: relative; */
   margin: 0 auto;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* justify-items: center; */
-  /* justify-tracks: center; */
-  /* align-content: center; */
-  /* align-tracks: center; */
 }
 
 .upperLeft-txtSect {
@@ -205,7 +181,6 @@
   border: none;
   font-family: 'Lato';
   font-size: 14px;
-  /* min-width: 37px; */
   width: 61px;
   margin-bottom: 7px;
 }
@@ -226,7 +201,6 @@
   background-color: #1a237e;
   z-index: 1;
   margin: 0;
-  /* position: absolute; */
 }
 
 .home-header {

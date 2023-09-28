@@ -1,16 +1,14 @@
 import {lazy, useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
-import axios from 'axios';
-import { CardContent, Button, CardActionArea, CardActions, Divider} from '@mui/material';
-import { Card } from '@mui/joy';
-const PostCard = lazy(() => import('../../components/posts/PostCard'));
-const ToolsCard = lazy(() => import('../../components/tools/ToolsCard'));
-import profile_pic from '../../assets/blank_profile.jpeg';
-import CancelIcon from '@mui/icons-material/Cancel';
-import './profile.css';
-import ToolsUsers from '../../components/tools/ToolsUsers';
 import {v4 as uuidv4} from 'uuid';
+import axios from 'axios';
+import {CardContent, Button, CardActions, Divider} from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
+import {Card} from '@mui/joy';
+import PostCard from '../../components/posts/PostCard';
+import ToolsCard from '../../components/tools/ToolsCard';
+import profile_pic from '../../assets/blank_profile.jpeg';
+import './profile.css';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -36,8 +34,6 @@ export default function Profile({user}) {
     });
   };
 
-  //console.log(user);
-
   return (
     <div>
       <Card
@@ -55,8 +51,6 @@ export default function Profile({user}) {
               className='profile-img'
               loading='lazy'
               src={profile_pic}
-              //src={user.profile_pic ? user.profile_pic : profile_pic}
-              // src={`https://craftopia-media-bucket.s3.us-east-2.amazonaws.com/felizj171-profile-pic`}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
             <aside className='profile-desc'>
@@ -66,10 +60,9 @@ export default function Profile({user}) {
             </aside>
           </div>
           {user.username === username && (
-            <button className='edit-btn'
+            <button
+              className='edit-btn'
               onClick={() => navigate(`/${username}/profile/edit`)}
-              // variant='contained'
-              // color='warning'
             >
               <SettingsIcon />
             </button>
@@ -125,7 +118,7 @@ export default function Profile({user}) {
             </CardActions>
           </CardContent>
         </Card>
-        <Divider orientation="vertical" flexItem />
+        <Divider orientation='vertical' flexItem />
         <Card className='profile-tools' variant='outlined'>
           <CardContent sx={{marginBottom: '10%'}}>
             <h2 className='profile-subtitle'>Listings</h2>
@@ -163,16 +156,6 @@ export default function Profile({user}) {
             >
               New
             </Button>
-
-            {/* <div
-            className="button"
-            role="button"
-            onClick={() => navigate(`/${username}/tools`)}
-            variant="contained"
-            color="primary"
-          >
-            All Tools
-          </div> */}
           </CardActions>
         </Card>{' '}
       </div>

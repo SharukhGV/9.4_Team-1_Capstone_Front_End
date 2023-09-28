@@ -1,10 +1,9 @@
-import {useState, useEffect, lazy} from 'react';
+import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import './navbar.css';
-import {Input, Box, Dialog, DialogContent } from '@mui/material';
+import {Input} from '@mui/material';
 import craftopiaLogo2 from '../../assets/craftLogo2.png';
-//import CraftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
-const Auth = lazy(() => import('../../components/auth/Auth'));
+import Auth from '../../components/auth/Auth';
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function NavBar({
@@ -20,7 +19,7 @@ export default function NavBar({
   const [tab, setTab] = useState(false);
 
   function handleSearchInput(event) {
-    setSearchText(event.target.value); 
+    setSearchText(event.target.value);
     
     const searched = posts.filter((post) => {
       return (
@@ -50,7 +49,11 @@ export default function NavBar({
       <h1 className='title'>Craftopia</h1>
       <div className='nav-right-container'>
         <div className='search-sect'>
-          <SearchIcon className='search-icon' fontSize='small' sx={{ color: '#1a237e' }} />
+          <SearchIcon
+            className='search-icon'
+            fontSize='small'
+            sx={{color: '#1a237e'}}
+          />
           <Input
             type='text'
             placeholder='Search...'
@@ -60,19 +63,13 @@ export default function NavBar({
             sx={{width: '190px', marginBottom: '-4px'}}
             inputProps={{style: {fontSize: '17px', marginBottom: '-2px'}}}
           />
-          {/* {
-            searchResults.length > 0 ? (
-              <div>
-                {
-                  searchResults.map((result) => (
-                    <div>
-                      {result.name}
-                    </div>
-                  ))
-                }
-              </div>
-            ) : (null)
-          } */}
+          {searchResults.length > 0 ? (
+            <div>
+              {searchResults.map(result => (
+                <div>{result.name}</div>
+              ))}
+            </div>
+          ) : null}
         </div>
         <Auth
           user={user}
@@ -87,3 +84,4 @@ export default function NavBar({
     </nav>
   );
 }
+
