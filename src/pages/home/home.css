@@ -210,3 +210,14 @@
 .assesement-sect {
   text-align: center;
 }
+
+.selected-posts {
+  width: 99%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+.selected-cat-sect h3 {
+  text-align: center;
+}

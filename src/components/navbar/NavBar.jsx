@@ -1,9 +1,8 @@
 import {useState, useRef, useEffect} from 'react';
-import {Form, Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
 import './navbar.css';
-import {Input, Popover, Select, MenuItem, InputLabel, FormControl, Badge, Breadcrumbs} from '@mui/material';
-import craftopiaLogo2 from '../../assets/craftLogo2.png';
+import {Input, Popover, MenuItem, Badge, Avatar} from '@mui/material';
 import Auth from '../../components/auth/Auth';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -27,8 +26,10 @@ export default function NavBar({
   const [sharePopOpen, setSharePopOpen] = useState(false);
   const [tab, setTab] = useState(false);
   const categoriesBtnRef = useRef(null);
+  const avatarRef = useRef(null);
+  const [avatarPopOver, setAvatarPopover] = useState(false);
+  const [avatarAnchorEl, setAvatarAnchorEl] = useState(null);
   const shareBtnRef = useRef(null);
-  const [navCategory, setNavCategory] = useState('');
   const handleTextChange = e => {
     setSearch(e.target.value);
   };
@@ -49,6 +50,12 @@ export default function NavBar({
     setSearchResults([])
     navigate(`/post/${id}`)
   }
+
+  const handleAvatarPopover = (event) => {
+    setAvatarPopover(true);
+    setAvatarAnchorEl(event.currentTarget);
+  }
+  //console.log(user)
   return (
     <nav>
       <div className='top-left'>
@@ -62,7 +69,6 @@ export default function NavBar({
           />{' '}
         </Link>
       </div>
-      {/* <h1 className='title'>Craftopia</h1> */}
       <div className='nav-right-container'>
         <div className='search-sect'>
           <SearchIcon
@@ -175,19 +181,18 @@ export default function NavBar({
               </aside>
             )}
             {user && (
-              <div className='auth-btns'>
-                {/* > */}
-                <Link to={`${user.username}/profile`}>
+              <div className='auth-btns' onMouseEnter={handleAvatarPopover} onMouseLeave={() => setAvatarPopover(false)}>
+                <Avatar ref={avatarRef} />
+                <Popover open={avatarPopOver} anchorEl={avatarRef.current} onClose={() => setAvatarPopover(false)} anchorOrigin={{vertical: 'bottom',horizontal: 'left'}} transformOrigin={{vertical: 'top',horizontal: 'left'}}>
+                  <MenuItem onClick={() => navigate(`${user.username}/profile`)}> Profile </MenuItem>
+                  <MenuItem onClick={handleLogout}> LogOut </MenuItem>
+                </Popover>
+                {/* <Link to={`${user.username}/profile`}>
                   <button className='login-btn'>Profile</button>
-                  {/* <BasicPopover
-                className='login-btn'
-                buttonText='Profile'
-                popoverContent='Profile options will go here'
-              /> */}
                 </Link>
                 <button className='login-btn' onClick={handleLogout}>
                   Logout
-                </button>
+                </button> */}
               </div>
             )}
           </div>

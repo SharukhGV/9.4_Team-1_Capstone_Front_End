@@ -144,6 +144,7 @@ export default function Home({
         <div className='div' />
         <br />
         <CatCarousel setSelectedCategory={setSelectedCategory} />
+        <br />
         <div className='selected-cat-sect'>
           {selectedCategory ? <h3> {selectedCategory} </h3> : null}
           <br />
