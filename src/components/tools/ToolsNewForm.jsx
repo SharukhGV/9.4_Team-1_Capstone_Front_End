@@ -12,6 +12,7 @@ import {
   CardContent,
   CardActionArea,
 } from "@mui/material";
+import { Input } from "@mui/joy";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUploadOutlined";
 import "./toolsForm.css";
@@ -161,14 +162,16 @@ function ToolsNewForm({ user }) {
             </Select>
           </FormControl>
 
-          <TextField
+          <Input onChange={handleTextChange} placeholder="Amount" id="price" type="number" name="price" startDecorator={{ dollar: '$'}['dollar']} />
+
+          {/* <TextField
             label="Price"
             sx={{ width: "25%" }}
             id="price"
             type="number"
             name="price"
             onChange={handleTextChange}
-          />
+          /> */}
           <TextField
             label="Stock Quantity"
             sx={{ width: "25%" }}
