@@ -8,7 +8,7 @@ import './toolsDetails.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 function ToolsDetails({addToCart}) {
-  const { state } = useLocation(); 
+
   const {username, tools_id} = useParams();
   const [tool, setTool] = useState({
     tool:'',

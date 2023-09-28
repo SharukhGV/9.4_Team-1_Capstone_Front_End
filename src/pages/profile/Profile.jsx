@@ -82,16 +82,18 @@ export default function Profile({user}) {
               <div className='profile-posts-list'>
                 <div className='scroll'>
                   {posts.map(post => (
-                    <aside key={uuidv4()} className='aside-spacing' onClick={() => navigate(`/post/${post.post_id}`, {
-                      state: {
-                        title: post.title,
-                        category: post.category,
-                        body: post.body,
-                        created_at: post.created_at,
-                        created_by: post.created_by,
-                        //file: files,
-                      }
-                    })}>
+                    <aside key={uuidv4()} className='aside-spacing' onClick={() => navigate(`/post/${post.post_id}`
+                    // , {
+                    //   state: {
+                    //     title: post.title,
+                    //     category: post.category,
+                    //     body: post.body,
+                    //     created_at: post.created_at,
+                    //     created_by: post.created_by,
+                    //     //file: files,
+                    //   }
+                    // }
+                    )}>
                       <PostCard post={post} />
                     </aside>
                   ))}
@@ -130,7 +132,8 @@ export default function Profile({user}) {
               <div className='profile-tools-list'>
                 <div className='scroll'>
                   {tools.map(tool => (
-                    <aside key={uuidv4()} className='aside-spacing' onClick={() => navigate(`/tools/${tool.tool_id}`, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}})}>
+                    <aside key={uuidv4()} className='aside-spacing' onClick={() => navigate(`/tools/${tool.tool_id}`//, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}}
+                    )}>
                       <ToolsCard
                         tool={tool}
                         reloadTools={getTools}

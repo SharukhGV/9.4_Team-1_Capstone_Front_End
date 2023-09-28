@@ -160,7 +160,7 @@ export default function Home({
                   //     created_by: post.created_by,
                   //     //file: files,
                   //   }
-                  // }
+                  // } 
                   )
                 }
                   >
@@ -234,7 +234,9 @@ export default function Home({
                 //console.log(tool);
                 if (tool.category === user.current_skillset) {
                   return (
-                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}})}
+                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`//, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}}
+                    )
+                  }
                     >
                     <ToolsCard tool={tool} />
                     </div>
@@ -306,7 +308,8 @@ export default function Home({
                 if (tool.category === user.learning_interest) {
                   //console.log(tool);
                   return (
-                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}})}
+                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`//, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}}
+                    )}
                     >
                     <ToolsCard tool={tool} />
                     </div>

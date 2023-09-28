@@ -175,6 +175,8 @@ function App() {
           dataLoader={dataLoader}
           searchResults={searchResults}
           setSearchResults={setSearchResults}
+          cartItems={cartItems}
+          cartView={cartView}
         />
         <div>
           {/* <Box>
@@ -193,9 +195,8 @@ function App() {
           }
           </Box> */}
         </div>
-        <div className='navbar'>
+        {/* <div className='navbar'>
           <aside>
-            {/* <Link to='/about' className='about-link'> About </Link> */}
             <button onClick={() => navigate('/about')} className='signup-btn'>
               {' '}
               About{' '}
@@ -248,13 +249,8 @@ function App() {
             {user && (
               <div className='auth-btns'>
                 {/* > */}
-                <Link to={`${user.username}/profile`}>
+                {/* <Link to={`${user.username}/profile`}>
                   <button className='login-btn'>Profile</button>
-                  {/* <BasicPopover
-                className='login-btn'
-                buttonText='Profile'
-                popoverContent='Profile options will go here'
-              /> */}
                 </Link>
                 <button className='login-btn' onClick={handleLogout}>
                   Logout
@@ -262,7 +258,7 @@ function App() {
               </div>
             )}
           </div>
-        </div>
+        </div> */} 
       </header>
       <main>
         <Routes>
@@ -282,7 +278,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
-          <Route path='/tools' element={<ToolsDetails />} />
+          {/* <Route path='/tools' element={<ToolsDetails />} /> */}
           {/* <Route path='/tools/:id' element={<ToolsUserDetails />} /> */}
           <Route path='/tools/:id' element={<ToolsDetails addToCart={addToCart} />} />
           <Route element={<ProtectedRoute user={user} />}>

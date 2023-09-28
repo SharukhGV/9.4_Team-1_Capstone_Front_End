@@ -9,6 +9,7 @@ import {
   MenuItem,
   Input,
   CardActionArea,
+  Breadcrumbs
 } from '@mui/material';
 import {styled} from '@mui/system';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -30,6 +31,8 @@ import {
 import './NewPost.css'
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
+
+//we want to implement the about and the categories as breadcrumbs
 
 export default function NewPost({user}) {
   const navigate = useNavigate();

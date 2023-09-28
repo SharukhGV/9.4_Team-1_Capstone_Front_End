@@ -1,4 +1,11 @@
-.top-left {
+.search-sect {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  margin-top: 0;
+}
+
+/* .top-left {
   display: flex;
   align-items: center;
   gap: 17px;
@@ -27,7 +34,7 @@ nav {
 }
 
 /*  */
-.nav-logo:hover {
+/* .nav-logo:hover {
   opacity: 1;
   cursor: pointer;
 }
@@ -86,14 +93,6 @@ nav {
   background-color: #14cc8c;
 }
 
-.nav-logo {
-  max-width: 100px;
-  max-height: 100px;
-  border-radius: 50%;
-  width: 79px;
-  margin: 7px;
-}
-
 .nav-logo:hover {
   max-width: 0px;
   max-height: 0px;
@@ -119,4 +118,4 @@ nav {
   display: flex;
   align-items: center;
   position: relative;
-}
+} */ 
