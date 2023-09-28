@@ -53,7 +53,6 @@ function App() {
   const [cartView, setCartView] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [posts, setposts] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
   const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
     Painting: [],
@@ -174,8 +173,6 @@ function App() {
           setTab={setTab}
           posts={posts}
           dataLoader={dataLoader}
-          searchResults={searchResults}
-          setSearchResults={setSearchResults}
         />
         <div>
           {/* <Box>
