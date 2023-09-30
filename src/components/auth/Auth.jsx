@@ -102,7 +102,6 @@ export default function Auth({modal, tab, setTab, setModal, handleSignIn}) {
   }
 
   function handleLogin(event) {
-    //itinerary
     event.preventDefault();
     axios
       .post(`${API}/auth/login`, user)

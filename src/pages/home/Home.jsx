@@ -10,7 +10,7 @@ import ToolsCard from '../../components/tools/ToolsCard';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {Card, Button} from '@mui/joy';
+import {Card} from '@mui/joy';
 import './home.css';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
@@ -40,14 +40,9 @@ export default function Home({
     axios.get(`${API}/tools`).then(response => {
       const allTools = response.data;
       setTools(allTools);
-      //setToolsLoader(false);
     })
     .catch(error => console.error('catch', error));
   }, []);
-
-  //console.log(tools)
-  //console.log(postsCategorized)
-  //; undefined on page load 
 
   if (!dataLoader) {
     for (let i = 0; i < 5; i++) {
@@ -84,18 +79,17 @@ export default function Home({
       }        
     }
   }  
- 
-  //console.log(tools);
 
   return (
     <div className='home-page'>
-      <br />
+     
       <div className='home-header'>
-        <img src={ArtistsGraphic} className='artistsGraphic' loading='lazy' />
-        <h2 className='header-h2'>
+      <h2 className='header-h2'>
           {' '}
           Ignight Your Creativity, Equip Your Creativity{' '}
-        </h2>
+      </h2>
+      <br />
+      <img src={ArtistsGraphic} className='artistsGraphic' loading='lazy' />
       </div>
       <div className='assesement-sect'>
         {!user.learning_interest || !user.current_skillset ? (
@@ -122,10 +116,9 @@ export default function Home({
         ) : null}
       </div>
       <br />
-      <div className='div' />
       <main>
         <div className='post-cta-sect'>
-          <h3> Connect & Exchange: Share Knowledge or Supplies </h3>
+          {/* <h3> Connect & Exchange: Share Knowledge or Supplies </h3> */}
           <div className='content-container'>
             <div className='post-ctas'>
               <div className='post-cta'>
@@ -139,13 +132,13 @@ export default function Home({
                     No matter your level, you can inspire and empower fellow
                     creatives. Post tutorials, guides, and classes.{' '}
                   </p>
-                  <Button
+                  <button
                     className='cta-btn'
                     onClick={() => navigate(`/${user.username}/post/new`)}
                   >
                     {' '}
                     Make a Post{' '}
-                  </Button>
+                  </button>
                 </Card>
               </div>
               <div className='post-cta'>
@@ -159,13 +152,13 @@ export default function Home({
                     Give new life to neglected supplies. Exchange for fresh
                     inspiration. Trade and discover possibilities.{' '}
                   </p>
-                  <Button
+                  <button
                     className='cta-btn'
                     onClick={() => navigate(`/${user.username}/tools/new`)}
                   >
                     {' '}
                     Make an item listing{' '}
-                  </Button>
+                  </button>
                 </Card>
               </div>
             </div>
@@ -192,13 +185,13 @@ export default function Home({
               : null}
           </div>
         </div>
-        <div />
-        <br />
+        {/* <div /> */}
+        {/* <br /> */}
         <div className='curated-posts-sect'>
-          <h2> Creativity Hub </h2>
+          <h4 className='curations-h4'> Curations </h4>
           <aside>
-            <button className={tab ? 'view-tab' : 'view-tab selected'} onClick={() => setTab(false)}> Posts </button>
-            <button className={!tab ? 'view-tab' : 'view-tab selected'} onClick={() => setTab(true)}> Tools </button>
+            <button className={tab ? 'view-tab' : 'view-tab selected'} onClick={() => setTab(false)} style={{ cursor: 'pointer' }}> Posts </button>
+            <button className={!tab ? 'view-tab' : 'view-tab selected'} onClick={() => setTab(true)} style={{ cursor: 'pointer' }}> Tools </button>
           </aside>
           {
             !tab ? (
@@ -314,7 +307,8 @@ export default function Home({
               ))}
               {user.learning_interest === 'Unsure' && tools ? (tools.filter((tool) => tool?.category === 'Painting').length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : tools && user.learning_interest ? (tools.filter((tool) => tool?.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
             </div>
-            </div></>)
+            </div>
+            </>)
           }
         </div>
       </main>

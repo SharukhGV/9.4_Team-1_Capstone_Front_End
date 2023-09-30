@@ -108,7 +108,12 @@ export default function NavBar({
       <div className='navbar'>
       <div className='nav-left'>
       <aside>
-        <button className='categories-nav-btn' ref={categoriesBtnRef} onClick={() => setCategoriesPopOpen(true)}> <div style={{ display: 'flex', width: 'auto', fontSize: '14px', cursor: 'pointer', alignItems: 'center', fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#1A237E' }}> Categories <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </div> </button>
+        <Link to='/about' className='about-link' >
+              {' '}
+              About{' '}
+        </Link>
+        /
+        <button className='categories-nav-btn' ref={categoriesBtnRef} onClick={() => setCategoriesPopOpen(true)}> <div className='nav-categories-btn-text' style={{ display: 'flex', width: 'auto', fontSize: '14px', cursor: 'pointer', alignItems: 'center', fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}> Categories <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </div> </button>
         <Popover open={categoriesPopOpen} anchorEl={categoriesBtnRef.current} onClose={() => setCategoriesPopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}}>
           <MenuItem onClick={() => handleMenuItemNav('All')}> All Posts & Tools </MenuItem>
           <MenuItem onClick={() => handleMenuItemNav('Photography')}> Photography </MenuItem>
@@ -123,16 +128,11 @@ export default function NavBar({
           <MenuItem onClick={() => handleMenuItemNav('Sculpting')}> Sculpting </MenuItem>
         </Popover>
         /
-        <button className='share-nav-btn' ref={shareBtnRef} onClick={() => setSharePopOpen(true)}> <div style={{ display: 'flex', alignItems: 'center', width: 'auto', fontSize: '14px', cursor: 'pointer', fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#1A237E' }}> Share <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </div> </button>
+        <button className='share-nav-btn' ref={shareBtnRef} onClick={() => setSharePopOpen(true)}> <div className='share-btn-text' style={{ display: 'flex', alignItems: 'center', width: 'auto', fontSize: '14px', cursor: 'pointer', fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}> Share <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </div> </button>
         <Popover open={sharePopOpen} anchorEl={shareBtnRef.current} onClose={() => setSharePopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}} >
           <MenuItem onClick={() => navigate(`/${user.username}/post/new`)}> Make a post </MenuItem>
           <MenuItem onClick={() => navigate(`/${user.username}/tools/new`)}> Make an item listing </MenuItem>
         </Popover>
-        /
-        <Link to='/about' className='about-link' >
-              {' '}
-              About{' '}
-        </Link>
         </aside>
         </div>
       <div className='nav-right'>

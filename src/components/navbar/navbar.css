@@ -48,7 +48,11 @@ nav {
 .about-link {
   text-decoration: none;
   color: #1A237E;
-  margin-left: 7px;
+  margin-right: 7px;
+}
+
+.about-link:hover {
+  color: #388e3c;
 }
 
 .nav-left > * {
@@ -61,6 +65,26 @@ nav {
   border: none;
   background: transparent;
 }
+
+.nav-categories-btn-text {
+  color: #1A237E;
+}
+
+.nav-categories-btn-text:hover {
+  color: #388e3c;
+}
+
+.share-btn-text {
+  color: #1A237E;
+}
+
+.share-btn-text:hover {
+  color: #388e3c;
+}
+
+/* .categories-nav-btn:hover {
+  color: #388e3c;
+} */
 
 .share-nav-btn {
   border: none;
