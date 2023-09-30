@@ -1,15 +1,17 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router';
 import {v4 as uuid} from 'uuid';
 import CatCarousel from '../../components/carousels/CatCarousel';
 import Assesment from '../../components/assesment/Assesment';
 import PostCard from '../../components/posts/PostCard';
+import ToolsCard from '../../components/tools/ToolsCard';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {Paper} from '@mui/material';
 import {Card, Button} from '@mui/joy';
 import './home.css';
+import axios from 'axios';
+const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function Home({
   user,
@@ -20,7 +22,9 @@ export default function Home({
   const navigate = useNavigate();
   const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
   const [assesmentCompleted, setAssesmentCompleted] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [currentInterestPost, setCurrentInterestPost] = useState(0);
+  const [tools, setTools] = useState();
   const [currentHobbyPost, setCurrentHobbyPost] = useState(0);
   let visibleInterestPosts = [];
   let visibleCurrentHobbyPosts = [];
@@ -30,7 +34,8 @@ export default function Home({
       const currentHobbyIndex =
         (currentHobbyPost + i) % postsCategorized[user.current_skillset].length;
       const currentInterestIndex =
-        (currentInterestPost + i) % postsCategorized[user.learning_interest].length;
+        (currentInterestPost + i) %
+        postsCategorized[user.learning_interest].length;
       visibleCurrentHobbyPosts.push(
         postsCategorized[user.current_skillset][currentHobbyIndex]
       );
@@ -39,8 +44,15 @@ export default function Home({
       );
     }
   }
-  console.log(postsCategorized[user.current_skillset])
-  console.log(user.current_skillset)
+
+  useEffect(() => {
+    axios.get(`${API}/tools`).then(response => {
+      setTools(response.data);;
+    });
+  }, []);
+
+  //console.log(tools);
+
   return (
     <div className='home-page'>
       <br />
@@ -130,13 +142,24 @@ export default function Home({
         </div>
         <div className='div' />
         <br />
-        <CatCarousel />
+        <CatCarousel setSelectedCategory={setSelectedCategory} />
+        <div className='selected-cat-sect'>
+          {selectedCategory ? <h3> {selectedCategory} </h3> : null}
+          <br />
+          <div className='selected-posts'>
+            {selectedCategory && !dataLoader && selectedCategory.length > 1 //
+              ? postsCategorized[selectedCategory].map((post) => {
+                  return <PostCard post={post} />;
+                })
+              : null}
+          </div>
+        </div>
         <div />
         <br />
         <div className='curated-posts-sect'>
-          {/* <h2>  </h2> */}
+          <h2> Creativity Hub </h2>
           <div className='user-current-hobby-posts'>
-            <h4> {user.current_skillset} </h4>
+            <h4 className='main-h4'> {user.current_skillset} </h4>
             <div className='posts-slider-container'>
               <button
                 className='arrow'
@@ -151,14 +174,15 @@ export default function Home({
                 {' '}
                 <ArrowBackIosIcon />{' '}
               </button>
-              {visibleCurrentHobbyPosts.map((post, ) => {
-                return <PostCard post={post} key={uuid()}/>;
+              {visibleCurrentHobbyPosts.map(post => {
+                return <PostCard post={post} key={uuid()} />;
               })}
               <button
                 className='arrow'
                 onClick={() =>
                   setCurrentHobbyPost(prevPost =>
-                    prevPost === postsCategorized[user.current_skillset].length - 1
+                    prevPost ===
+                    postsCategorized[user.current_skillset].length - 1
                       ? 0
                       : prevPost + 1
                   )
@@ -168,10 +192,27 @@ export default function Home({
                 <ArrowForwardIosIcon />{' '}
               </button>
             </div>
+            <br />
+            <div className='tools-sect'>
+              {/* <h5> Tools </h5> */}
+            <div className='posts-slider-container'>
+              {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
+            {
+              tools && user.current_skillset ? tools.map((tool, i) => {
+                if (tool.category === user.current_skillset) {
+                  return (
+                    <ToolsCard tool={tool} />
+                  )
+                }
+              }) : null
+            }
+              {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
+            </div>
+            </div>
           </div>
           <br />
           <div className='user-interest-posts'>
-            <h4> {user.current_skillset} </h4>
+            <h4 className='main-h4'> {user.learning_interest} </h4>
             <div className='posts-slider-container'>
               <button
                 className='arrow'
@@ -186,14 +227,15 @@ export default function Home({
                 {' '}
                 <ArrowBackIosIcon />{' '}
               </button>
-              {visibleInterestPosts.map((post) => {
+              {visibleInterestPosts.map(post => {
                 return <PostCard post={post} key={uuid()} />;
               })}
               <button
                 className='arrow'
                 onClick={() =>
                   setCurrentInterestPost(prevPost =>
-                    prevPost === postsCategorized[user.learning_interest].length - 1
+                    prevPost ===
+                    postsCategorized[user.learning_interest].length - 1
                       ? 0
                       : prevPost + 1
                   )
@@ -202,6 +244,23 @@ export default function Home({
                 {' '}
                 <ArrowForwardIosIcon />{' '}
               </button>
+            </div>
+            <br />
+            <div className='tools-sect'>
+              {/* <h5> Tools </h5> */}
+            <div className='posts-slider-container'>
+              {tools && user.learning_interest ? (tools.filter((tool) => tool.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
+            {
+              tools && user.learning_interest ? tools.map((tool, i) => {
+                if (tool.category === user.learning_interest) {
+                  return (
+                    <ToolsCard tool={tool} />
+                  )
+                }
+              }) : null
+            }
+              {tools && user.learning_interest ? (tools.filter((tool) => tool.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
+            </div>
             </div>
           </div>
         </div>

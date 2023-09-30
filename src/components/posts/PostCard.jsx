@@ -1,4 +1,4 @@
-import {Card, CardCover, CardContent, CardOverflow, Divider, AspectRatio, Typography} from '@mui/joy';
+import {Card, CardContent, CardOverflow, AspectRatio, Typography} from '@mui/joy';
 //import { Typography } from '@mui/material';
 // import "./postsCard.css";
 import './PostCard.css';

@@ -7,10 +7,11 @@ import CatCarousel from '../../components/carousels/CatCarousel';
 import PostCard from '../../components/posts/PostCard';
 import './landing.css';
 
-export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
+export default function Landing({setModal, ArtistsGraphic, postsCategorized, dataLoader}) {
   const [currentFilmmakingPost, setCurrentFilmmakingPost] = useState(0);
   const [currentPaintPost, setCurrentPaintPost] = useState(0);
   const [currentPhotographyPost, setCurrentPhotographyPost] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState('');
   let visibleFilmmakingPosts = []; 
   let visiblePhotographyPosts = [];
   let visiblePaintPosts = [];
@@ -18,10 +19,10 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
   for (let i = 0; i < 5; i++) {
     const filmmakingIndex = (currentFilmmakingPost + i) % postsCategorized.Filmmaking.length;
     const photographyIndex = (currentPhotographyPost + i) % postsCategorized.Photography.length;
-    const paintIndex = (currentPaintPost + i) % postsCategorized.Paint.length;
+    const paintIndex = (currentPaintPost + i) % postsCategorized.Painting.length;
     visibleFilmmakingPosts.push(postsCategorized.Filmmaking[filmmakingIndex]);
     visiblePhotographyPosts.push(postsCategorized.Photography[photographyIndex]);
-    visiblePaintPosts.push(postsCategorized.Paint[paintIndex]);  
+    visiblePaintPosts.push(postsCategorized.Painting[paintIndex]);  
   }
 
   return (
@@ -52,10 +53,30 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
           <br /> */}
         </div>
         <br />
-        <CatCarousel />
+        <CatCarousel setSelectedCategory={setSelectedCategory} />
         <br />
-      <br />
+      {/* <br /> */}
       <main>
+        <div className='top-categories-sect'>
+        {selectedCategory ? (<h3 className='top-categories-h3'> {selectedCategory} </h3>) : null}
+        <br />
+        <div className='selected-posts'>
+        {
+          selectedCategory && !dataLoader && selectedCategory.length > 1 ? //
+          postsCategorized[selectedCategory].map((post, i) => {
+            return (
+              <PostCard post={post} />
+            )
+          }) 
+          : null 
+        }
+        </div>
+        <br />
+        {selectedCategory ? (<> <br /> <div className='div' /> <br /> </>) : null}
+        </div>
+        {/* <div className='div' /> */}
+        {/* <br /> */}
+      <div className='top-categories-sect'>
       <h3 className='top-categories-h3'> Top Categories </h3>
       <br />
       <div className='top-category-1'>
@@ -78,7 +99,7 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
       <div className='top-category-2'>
         <h4 className='main-h4'> Painting </h4>
         <div className='posts-slider-container'>
-        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === 0 ? postsCategorized.Paint.length - 1 : prevPost - 1)}>{' '} <ArrowBackIosIcon />{' '} </button>
+        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === 0 ? postsCategorized.Painting.length - 1 : prevPost - 1)}>{' '} <ArrowBackIosIcon />{' '} </button>
         {
           visiblePaintPosts.map((post) => {
             return (
@@ -86,7 +107,7 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
             )
           })
         }
-        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === postsCategorized.Paint.length - 1 ? 0 : prevPost + 1)}>
+        <button className='arrow' onClick={() => setCurrentPaintPost(prevPost => prevPost === postsCategorized.Painting.length - 1 ? 0 : prevPost + 1)}>
         {' '}
         <ArrowForwardIosIcon />{' '}
         </button>
@@ -108,6 +129,7 @@ export default function Landing({setModal, ArtistsGraphic, postsCategorized}) {
         <ArrowForwardIosIcon />{' '}
         </button>
         </div>
+      </div>
       </div>
       </main>
     </div>
