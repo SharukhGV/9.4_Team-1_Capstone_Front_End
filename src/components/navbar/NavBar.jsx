@@ -44,12 +44,11 @@ export default function NavBar({
     <nav>
       <div className='top-left'>
         <Link to='/home'>
-          {' '}
           <img
             style={{maxWidth: '100px', maxHeight: '100px'}}
             src={craftopiaLogo2}
             className='nav-logo'
-          />{' '}
+          />
         </Link>
       </div>
       <h1 className='title'>Craftopia</h1>

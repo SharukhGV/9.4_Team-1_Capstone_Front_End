@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import './catCarousel.css';
-
+import { v4 as uuidv4 } from 'uuid';
 import {Card, CardCover, CardContent} from '@mui/joy';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -65,6 +65,7 @@ export default function CatCarousel({ setSelectedCategory }) {
           sx={{height: 40, width: '100%'}}
           value={img.name}
           onClick={() => setSelectedCategory(img.name)}
+          key={uuidv4()}
         >
           <CardCover>
             <img
