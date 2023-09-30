@@ -1,0 +1,12 @@
+.about-logo {
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    justify-content: center;
+    width: 90%;
+}
+
+img {
+    /* border-style: solid; */
+    border-radius: 50px;
+}

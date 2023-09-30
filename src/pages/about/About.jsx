@@ -2,10 +2,17 @@ import './About.css'
 
 export default function About() {
   return (
-    <div className="about">
+    <div
+      className="about"
+      style={{ display: 'grid' }}
+    >
       <br />
       <div className="about-logo">
-        <img src="src/assets/craftLogoFlatPurple.png" alt="Craftopia Logo" />
+        <img
+          src="src/assets/craftLogoFlatPurple.png"
+          alt="Craftopia Logo"
+          style={{ width: '85%', maxWidth: '100%' }}
+        />
       </div>
       <h2>About our App</h2>
       <div className="app-description">
