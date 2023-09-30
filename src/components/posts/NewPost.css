@@ -11,9 +11,10 @@ main h1 {
 }
 
 main h3 {
-  font-family: 'Bellota';
+  font-family: 'Montserrat', sans-serif;
   font-size: 17px;
   color: #3c415c;
+  font-weight: 400;
 }
 
 .content-sect {
@@ -42,11 +43,7 @@ main h3 {
 }
 
 .add-svg {
-  width: 60%;
-  height: auto;
-  margin-top: 10%;
-  margin-left: 20%;
-  color: #800080;
+  width: 100%;
 }
 .caption {
   margin-top: 0;
@@ -63,15 +60,18 @@ main h3 {
   margin: 0 5px;
   color: white;
   border-radius: 7px;
-  height: 24px;
+  height: 27px;
   border: none;
-  font-family: 'Lato';
+  cursor: pointer;
+  text-align: center;
+  padding-left: 9px;
+  padding-right: 9px;
 }
 
 .logo {
-    border-radius: 50%;
-    width: 79px;
-    margin: 7px;
+  border-radius: 50%;
+  width: 79px;
+  margin: 7px;
 }
 
 .x {
@@ -83,6 +83,8 @@ main h3 {
   width: 77px;
   margin-left: 620px;
   justify-content: flex-end;
+  font-family:  'Open Sans', sans-serif;
+  cursor: pointer;
 }
 
 .preview-modal {

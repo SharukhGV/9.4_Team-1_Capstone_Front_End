@@ -108,7 +108,7 @@ export default function Profile({user}) {
                 right: '5%',
               }}
             >
-              <Button
+              <button
                 className='button'
                 role='button'
                 onClick={() => navigate(`/${username}/post/new`)}
@@ -116,7 +116,7 @@ export default function Profile({user}) {
                 color='primary'
               >
                 New
-              </Button>
+              </button>
             </CardActions>
           </CardContent>
         </Card>
@@ -150,7 +150,7 @@ export default function Profile({user}) {
           <CardActions
             sx={{width: '10%', position: 'absolute', bottom: '5%', right: '5%'}}
           >
-            <Button
+            <button
               className='button'
               role='button'
               onClick={() => navigate(`/${username}/tools/new`)}
@@ -158,7 +158,7 @@ export default function Profile({user}) {
               color='primary'
             >
               New
-            </Button>
+            </button>
           </CardActions>
         </Card>{' '}
       </div>

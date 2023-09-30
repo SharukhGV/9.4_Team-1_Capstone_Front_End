@@ -144,8 +144,7 @@ export default function ProfileEdit({user, refreshUser}) {
                     name='current_skillset'
                     value={currentSkillset}
                     label='Current Skillset'
-                    onChange={handleSelectChange}
-                  >
+                    onChange={handleSelectChange}>
                     <MenuItem value='Beginner'>Beginner</MenuItem>
                     <MenuItem value='Painting'>Painting</MenuItem>
                     <MenuItem value='Drawing'>Drawing</MenuItem>
@@ -156,13 +155,10 @@ export default function ProfileEdit({user, refreshUser}) {
                     <MenuItem value='Graffiti'>Graffiti</MenuItem>
                     <MenuItem value='Fashion Design'>Fashion Design</MenuItem>
                     <MenuItem value='Filmmaking'>Filmmaking</MenuItem>
-                    <MenuItem value='Digital Artistry'>
-                      Digital Artistry
-                    </MenuItem>
+                    <MenuItem value='Digital Artistry'> Digital Artistry </MenuItem>
                   </Select>
                 </FormControl>
               </aside>
-
               <TextField
                 name='city_state'
                 label='City State'

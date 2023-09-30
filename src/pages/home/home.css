@@ -227,6 +227,7 @@
   border-right: none;
   background: none;
   border-bottom: 2px solid #388e3c;
+  width: 50px;
 }
 
 .selected {

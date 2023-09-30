@@ -2,7 +2,7 @@ import {useState, useRef, useEffect} from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
 import './navbar.css';
-import {Input, Popover, MenuItem, Badge, Breadcrumbs} from '@mui/material';
+import {Input, Popover, MenuItem, Badge} from '@mui/material';
 import { Avatar } from '@mui/joy';
 import Auth from '../../components/auth/Auth';
 import shoppingCartIcon from '../../assets/circularShoppingCart.png';
@@ -61,7 +61,7 @@ export default function NavBar({
     setNavCategory(selectedCategory);
     navigate(`/posts`, {state: {category: selectedCategory}});
   }
-  //console.log(user)
+ 
   return (
     <nav>
       <div className='top'>
@@ -114,7 +114,7 @@ export default function NavBar({
         </Link>
         /
         <button className='categories-nav-btn' ref={categoriesBtnRef} onClick={() => setCategoriesPopOpen(true)}> <div className='nav-categories-btn-text' style={{ display: 'flex', width: 'auto', fontSize: '14px', cursor: 'pointer', alignItems: 'center', fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}> Categories <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </div> </button>
-        <Popover open={categoriesPopOpen} anchorEl={categoriesBtnRef.current} onClose={() => setCategoriesPopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}}>
+        <Popover open={categoriesPopOpen} sx={{ marginTop: '7px' }} anchorEl={categoriesBtnRef.current} onClose={() => setCategoriesPopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}}>
           <MenuItem onClick={() => handleMenuItemNav('All')}> All Posts & Tools </MenuItem>
           <MenuItem onClick={() => handleMenuItemNav('Photography')}> Photography </MenuItem>
           <MenuItem onClick={() => handleMenuItemNav('Ceramics')}> Ceramics </MenuItem>
@@ -129,7 +129,7 @@ export default function NavBar({
         </Popover>
         /
         <button className='share-nav-btn' ref={shareBtnRef} onClick={() => setSharePopOpen(true)}> <div className='share-btn-text' style={{ display: 'flex', alignItems: 'center', width: 'auto', fontSize: '14px', cursor: 'pointer', fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}> Share <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </div> </button>
-        <Popover open={sharePopOpen} anchorEl={shareBtnRef.current} onClose={() => setSharePopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}} >
+        <Popover open={sharePopOpen} sx={{ marginTop: '7px' }} anchorEl={shareBtnRef.current} onClose={() => setSharePopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}} >
           <MenuItem onClick={() => navigate(`/${user.username}/post/new`)}> Make a post </MenuItem>
           <MenuItem onClick={() => navigate(`/${user.username}/tools/new`)}> Make an item listing </MenuItem>
         </Popover>
@@ -195,7 +195,7 @@ export default function NavBar({
             {user && (
               <div className='auth-btns' onMouseEnter={handleAvatarPopover} onMouseLeave={() => setAvatarPopover(false)}>
                 <Avatar variant='soft' ref={avatarRef} />
-                <Popover open={avatarPopOver} anchorEl={avatarRef.current} onClose={() => setAvatarPopover(false)} anchorOrigin={{vertical: 'bottom',horizontal: 'left'}} transformOrigin={{vertical: 'top',horizontal: 'left'}}>
+                <Popover open={avatarPopOver} sx={{ marginTop: '4px' }} anchorEl={avatarRef.current} onClose={() => setAvatarPopover(false)} anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} transformOrigin={{vertical: 'top', horizontal: 'left'}}>
                   <MenuItem onClick={() => navigate(`${user.username}/profile`)}> Profile </MenuItem>
                   <MenuItem onClick={handleLogout}> LogOut </MenuItem>
                 </Popover>

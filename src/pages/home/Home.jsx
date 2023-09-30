@@ -308,7 +308,8 @@ export default function Home({
               {user.learning_interest === 'Unsure' && tools ? (tools.filter((tool) => tool?.category === 'Painting').length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : tools && user.learning_interest ? (tools.filter((tool) => tool?.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
             </div>
             </div>
-            </>)
+            </>
+            )
           }
         </div>
       </main>

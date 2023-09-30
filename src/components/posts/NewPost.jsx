@@ -105,13 +105,14 @@ export default function NewPost({user}) {
 
   return (
     <main>
+      <br />
       <h1> Share Your Expertise </h1>
       <h3>
         {' '}
         No matter your level, you can inspire and empower fellow creatives. Post
         tutorials, guides, and classes.{' '}
       </h3>
-
+      <br />
       <div className='content-sect'>
         <aside className='post-title'>
           <Input
@@ -124,9 +125,7 @@ export default function NewPost({user}) {
             <InputLabel sx={{fontFamily: 'Lato'}}> Category </InputLabel>
             <Select
               onChange={event =>
-                setPost({...post, category: event.target.value})
-              }
-            >
+                setPost({...post, category: event.target.value})}>
               <MenuItem value=''> Category </MenuItem>
               <MenuItem value='Photography'> Photography </MenuItem>
               <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
@@ -141,7 +140,6 @@ export default function NewPost({user}) {
             </Select>
           </FormControl>
         </aside>
-
         <div className='post-body'>
           <Textarea
             className='textarea'
@@ -151,7 +149,6 @@ export default function NewPost({user}) {
             onChange={event => setPost({...post, body: event.target.value})}
           />
           <div className='img-slider-container'>
-            <h5>Add Images</h5>
             {files.map((img, i) => (
               <aside key={`post-image-upload-preview${i}`}>
                 <img

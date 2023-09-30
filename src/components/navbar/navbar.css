@@ -82,10 +82,6 @@ nav {
   color: #388e3c;
 }
 
-/* .categories-nav-btn:hover {
-  color: #388e3c;
-} */
-
 .share-nav-btn {
   border: none;
   background: transparent;
@@ -203,3 +199,6 @@ nav {
 .search-display-box.show {
   visibility: visible;
 }
+
+
+
