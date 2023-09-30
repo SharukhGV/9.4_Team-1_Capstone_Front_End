@@ -9,28 +9,28 @@ const stripePromise = loadStripe(
 export default function CheckoutFormMain(props) {
 
 
-  function handleCheckout() {
-    // const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
-let amountDollarInteger = Math.ceil(props.grandTotal)
-    fetch('/checkout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount: amountDollarInteger }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("successfully checked out")
-        // Handle the response, e.g., display a success message
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
+//   function handleCheckout() {
+//     // const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+//     fetch('/checkout', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ amount: props.grandTotal }),
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         // Handle the response, e.g., display a success message
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//     });
+// }
+const amountInCents = Math.round(props.grandTotal * 100)
+
     const options = {
         mode: 'payment',
-        amount: props.grandTotal,
+        amount: amountInCents,
         currency: 'usd',
         // Fully customizable with appearance API.
       };
@@ -44,7 +44,7 @@ let amountDollarInteger = Math.ceil(props.grandTotal)
         </div>
         <div></div>
     <Elements stripe={stripePromise} options={options}>
-      <CheckoutForm handleCheckout={handleCheckout}/>
+      <CheckoutForm />
     </Elements></div>
   );
 }

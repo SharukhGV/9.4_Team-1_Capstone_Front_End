@@ -103,8 +103,26 @@ export default function CheckoutForm(props) {
 // }
 
 
+function handleCheckout() {
+    // const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+    fetch('/checkout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amount: props.options.amount }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response, e.g., display a success message
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
   return (
-    <form onSubmit={props.handleCheckout}>
+    <form onSubmit={handleCheckout}>
       <PaymentElement />
       <button type="submit" disabled={!stripe || !elements}>
         Pay
