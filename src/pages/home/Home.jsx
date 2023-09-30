@@ -28,8 +28,7 @@ export default function Home({
   const [currentInterestPost, setCurrentInterestPost] = useState(0);
   const [tools, setTools] = useState([]);
   const [currentHobbyPost, setCurrentHobbyPost] = useState(0);
-  const [currentInterestTool, setCurrentInterestTool] = useState(0);
-  const [toolsLoader, setToolsLoader] = useState(true);
+  const [currentInterestTool, setCurrentInterestTool] = useState(0); //is this why ?
   const [currentHobbyTool, setCurrentHobbyTool] = useState(0);
   const [tab, setTab] = useState(false);
   let visibleInterestPosts = [];
@@ -46,26 +45,27 @@ export default function Home({
     .catch(error => console.error('catch', error));
   }, []);
 
-  ///console.log(tools)
+  //console.log(tools)
+  //console.log(postsCategorized)
   //; undefined on page load 
 
   if (!dataLoader) {
     for (let i = 0; i < 5; i++) {
       const currentHobbyIndex = user.current_skillset === 'Beginner' 
-        ? (currentHobbyPost + i) % (postsCategorized.Photography ? postsCategorized.Photography.length : 0)
-        : (currentHobbyPost + i) % (postsCategorized[user.current_skillset] ? postsCategorized[user.current_skillset].length : 0);
+      ? (currentHobbyPost + i) % (postsCategorized.Photography ? postsCategorized.Photography.length : 0)
+      : (currentHobbyPost + i) % (postsCategorized[user.current_skillset] ? postsCategorized[user.current_skillset].length : 0);
         
       const currentInterestIndex = user.learning_interest === 'Unsure' 
-        ? (currentInterestPost + i) % (postsCategorized.Painting ? postsCategorized.Painting.length : 0)
-        : (currentInterestPost + i) % (postsCategorized[user.learning_interest] ? postsCategorized[user.learning_interest].length : 0);
+      ? (currentInterestPost + i) % (postsCategorized.Painting ? postsCategorized.Painting.length : 0)
+      : (currentInterestPost + i) % (postsCategorized[user.learning_interest] ? postsCategorized[user.learning_interest].length : 0);
 
       const currentHobbyToolIndex = user.current_skillset === 'Beginner'
-        ? (currentHobbyTool + i) % (tools.filter(tool => tool?.category === 'Photography').length || 0)
-        : (currentHobbyTool + i) % (tools.filter(tool => tool?.category === user.current_skillset).length || 0);
+      ? (currentHobbyTool + i) % (tools.filter(tool => tool?.category === 'Photography').length)
+      : (currentHobbyTool + i) % (tools.filter(tool => tool?.category === user.current_skillset).length);
         
       const currentInterestToolIndex = user.learning_interest === 'Unsure'
-        ? (currentInterestTool + i) % (tools.filter(tool => tool?.category === 'Painting').length || 0)
-        : (currentInterestTool + i) % (tools.filter(tool => tool?.category === user.learning_interest).length || 0);
+      ? (currentInterestTool + i) % (tools.filter(tool => tool?.category === 'Painting').length)
+      : (currentInterestTool + i) % (tools.filter(tool => tool?.category === user.learning_interest).length);
 
       if (user.current_skillset === 'Beginner') {
         visibleCurrentHobbyPosts.push(postsCategorized.Photography[currentHobbyIndex]);

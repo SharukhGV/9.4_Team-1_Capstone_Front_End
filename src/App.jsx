@@ -101,6 +101,8 @@ function App() {
     getPosts();
   }, []);
 
+  //console.log(posts)
+
   useEffect(() => {
     checkToken();
     getCart();
