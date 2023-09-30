@@ -9,31 +9,4 @@ header {
   background-color: #f8f8f8;
 }
 
-.navbar {
-  border-top: #800080 solid 1px;
-  border-bottom: #800080 solid 1px;
-  height: 1.5rem;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  /* background: radial-gradient(#9878bfd5 20%, #7851a9d5 60%) ; */
-}
 
-.cart-auth-buttons {
-  display: flex;
-  flex-direction: row;
-}
-
-.aside-cart {
-  height: 100%;
-  width: fit-content;
-  margin-right: 15px;
-}
-
-.shopping-cart:hover {
-  cursor: pointer;
-  color: grey;
-}

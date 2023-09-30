@@ -49,7 +49,7 @@ function App() {
   const [tab, setTab] = useState(false); 
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState();
-  const [cartView, setCartView] = useState(false);
+  
   const [cartItems, setCartItems] = useState([]);
   const [posts, setposts] = useState([]);
   const [searchResults, setSearchResults] = useState('');
@@ -178,7 +178,7 @@ function App() {
           searchResults={searchResults}
           setSearchResults={setSearchResults}
           cartItems={cartItems}
-          cartView={cartView}
+          
         />
       </header>
       <main>

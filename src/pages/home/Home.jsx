@@ -221,7 +221,7 @@ export default function Home({
               </button>
               {visibleCurrentHobbyPosts.map(post => {
                 return (
-                <div onClick={() => navigate(`/post/${post.post_id}`)} key={post.post_id} >
+                <div onClick={() => navigate(`/post/${post?.post_id}`)} key={post?.post_id} >
                 <PostCard post={post} />
                 </div>
                 )
@@ -262,7 +262,7 @@ export default function Home({
               </button>
               {visibleInterestPosts.map(post => {
                 return (
-                <div onClick={() => navigate(`/post/${post.post_id}`)} key={post.post_id} >
+                <div onClick={() => navigate(`/post/${post?.post_id}`)} key={post?.post_id} >
                 <PostCard post={post} />
                 </div>
                 )

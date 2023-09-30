@@ -2,11 +2,10 @@ import {useState, useRef, useEffect} from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
 import './navbar.css';
-import {Input, Popover, MenuItem, Badge} from '@mui/material';
+import {Input, Popover, MenuItem, Badge, Breadcrumbs} from '@mui/material';
 import { Avatar } from '@mui/joy';
 import Auth from '../../components/auth/Auth';
-import SearchIcon from '@mui/icons-material/Search';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import shoppingCartIcon from '../../assets/circularShoppingCart.png';
 import CraftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
@@ -18,7 +17,6 @@ export default function NavBar({
   setModal,
   posts,
   cartItems,
-  cartView,
 }) {
   const navigate = useNavigate()
   const [search, setSearch] = useState('');
@@ -28,6 +26,7 @@ export default function NavBar({
   const [navCategory, setNavCategory] = useState('');
   const [tab, setTab] = useState(false);
   const categoriesBtnRef = useRef(null);
+  const [cartView, setCartView] = useState(false);
   const avatarRef = useRef(null);
   const [avatarPopOver, setAvatarPopover] = useState(false);
   const [avatarAnchorEl, setAvatarAnchorEl] = useState(null);
@@ -65,7 +64,7 @@ export default function NavBar({
   //console.log(user)
   return (
     <nav>
-      <div className='top-left'>
+      <div className='top'>
         <Link to='/home'>
           {' '}
           <img
@@ -75,14 +74,7 @@ export default function NavBar({
             loading='lazy'
           />{' '}
         </Link>
-      </div>
-      <div className='nav-right-container'>
         <div className='search-sect'>
-          <SearchIcon
-            className='search-icon'
-            fontSize='small'
-            sx={{color: '#1a237e'}}
-          />
           <Input
             type='text'
             placeholder='Search...'
@@ -106,24 +98,17 @@ export default function NavBar({
               {searchResults.length - 3>=1?<p>{searchResults.length - 3} other results</p>:null}
             </div>
           ) : null}
+          {/* <SearchIcon
+            className='search-icon'
+            fontSize='small'
+            sx={{color: '#1a237e'}}
+          /> */}
         </div>
-        <Auth
-          user={user}
-          modal={modal}
-          tab={tab}
-          setTab={setTab}
-          setModal={setModal}
-          handleLogout={handleLogout}
-          handleSignIn={handleSignIn}
-        />
       </div>
       <div className='navbar'>
+      <div className='nav-left'>
       <aside>
-        <button onClick={() => navigate('/about')} className='signup-btn'>
-              {' '}
-              About{' '}
-        </button>
-        <button className='categories-nav-btn' ref={categoriesBtnRef} onClick={() => setCategoriesPopOpen(true)}> Categories <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </button>
+        <button className='categories-nav-btn' ref={categoriesBtnRef} onClick={() => setCategoriesPopOpen(true)}> <div style={{ display: 'flex', width: 'auto', fontSize: '14px', cursor: 'pointer', alignItems: 'center', fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#1A237E' }}> Categories <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </div> </button>
         <Popover open={categoriesPopOpen} anchorEl={categoriesBtnRef.current} onClose={() => setCategoriesPopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}}>
           <MenuItem onClick={() => handleMenuItemNav('All')}> All Posts & Tools </MenuItem>
           <MenuItem onClick={() => handleMenuItemNav('Photography')}> Photography </MenuItem>
@@ -137,23 +122,43 @@ export default function NavBar({
           <MenuItem onClick={() => handleMenuItemNav('Digital Artistry')}> Digital Artistry </MenuItem>
           <MenuItem onClick={() => handleMenuItemNav('Sculpting')}> Sculpting </MenuItem>
         </Popover>
-        <button className='share-nav-btn' ref={shareBtnRef} onClick={() => setSharePopOpen(true)}> Share <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </button>
+        /
+        <button className='share-nav-btn' ref={shareBtnRef} onClick={() => setSharePopOpen(true)}> <div style={{ display: 'flex', alignItems: 'center', width: 'auto', fontSize: '14px', cursor: 'pointer', fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#1A237E' }}> Share <KeyboardArrowDownIcon sx={{ color: '#1a237e' }}/> </div> </button>
         <Popover open={sharePopOpen} anchorEl={shareBtnRef.current} onClose={() => setSharePopOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left'}} transformOrigin={{ vertical: 'top', horizontal: 'left'}} >
           <MenuItem onClick={() => navigate(`/${user.username}/post/new`)}> Make a post </MenuItem>
           <MenuItem onClick={() => navigate(`/${user.username}/tools/new`)}> Make an item listing </MenuItem>
         </Popover>
-          </aside>
-          <div className='cart-auth-buttons'>
+        /
+        <Link to='/about' className='about-link' >
+              {' '}
+              About{' '}
+        </Link>
+        </aside>
+        </div>
+      <div className='nav-right'>
+        <Auth
+          user={user}
+          modal={modal}
+          tab={tab}
+          setTab={setTab}
+          setModal={setModal}
+          handleLogout={handleLogout}
+          handleSignIn={handleSignIn}
+        />
+         <div className='cart-auth-buttons'>
             <aside className='aside-cart'>
               <Badge
                 badgeContent={cartItems.length}
                 color='error'
                 onClick={() => setCartView(!cartView)}
               >
-                <ShoppingCartIcon
+                <button className='shopping-cart' onClick={() => setCartView(!cartView)} style={{ background: 'transparent', border: 'none', cursor: 'pointer'}}>
+                  <img src={shoppingCartIcon} style={{maxWidth: '37px', maxHeight: '37px', borderRadius: '50%'}} />
+                </button>
+                {/* <ShoppingCartIcon
                   className='shopping-cart'
                   onClick={() => setCartView(!cartView)}
-                />
+                /> */}
               </Badge>
               {cartView && (
                 <Cart
@@ -197,6 +202,7 @@ export default function NavBar({
               </div>
             )}
           </div>
+      </div>
       </div>
     </nav>
   );
