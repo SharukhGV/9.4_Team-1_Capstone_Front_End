@@ -1,6 +1,15 @@
 import './About.css'
 
 export default function About() {
+
+  const headerStyle = {
+    fontFamily: 'Bellota, sans-serif'
+  };
+
+  const bodyStyle = {
+    fontFamily: 'Bellota Text, sans-serif'
+  };
+
   return (
     <div
       className="about"
@@ -14,12 +23,12 @@ export default function About() {
           style={{ width: '85%', maxWidth: '100%' }}
         />
       </div>
-      <h2>About our App</h2>
+      <h2 style={headerStyle}>About Our App</h2>
       <div className="app-description">
         {/* Description of your app */}
       </div>
       <img src="path_to_another_image" alt="Another Image" />
-      <h2>Meet the Team</h2>
+      <h2 style={headerStyle}>Meet the Team</h2>
       <img src="path_to_team_member_image_1" alt="Team Member 1" />
       <div className="team-member-description">
         {/* Description of team member #1 */}
