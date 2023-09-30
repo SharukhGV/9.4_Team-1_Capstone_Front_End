@@ -20,39 +20,71 @@ export default function Home({
   dataLoader,
   ArtistsGraphic,
   postsCategorized,
+  updateUser,
 }) {
   const navigate = useNavigate();
   const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentInterestPost, setCurrentInterestPost] = useState(0);
-  const [tools, setTools] = useState();
+  const [tools, setTools] = useState([]);
   const [currentHobbyPost, setCurrentHobbyPost] = useState(0);
+  const [currentInterestTool, setCurrentInterestTool] = useState(0);
+  const [toolsLoader, setToolsLoader] = useState(true);
+  const [currentHobbyTool, setCurrentHobbyTool] = useState(0);
   const [tab, setTab] = useState(false);
   let visibleInterestPosts = [];
   let visibleCurrentHobbyPosts = [];
-
-  if (!dataLoader) {
-    for (let i = 0; i < 5; i++) {
-      const currentHobbyIndex =
-        (currentHobbyPost + i) % postsCategorized[user.current_skillset].length;
-      const currentInterestIndex =
-        (currentInterestPost + i) %
-        postsCategorized[user.learning_interest].length;
-      visibleCurrentHobbyPosts.push(
-        postsCategorized[user.current_skillset][currentHobbyIndex]
-      );
-      visibleInterestPosts.push(
-        postsCategorized[user.learning_interest][currentInterestIndex]
-      );
-    }
-  }
+  let visibleInterestTools = [];
+  let visibleCurrentHobbyTools = [];
 
   useEffect(() => {
     axios.get(`${API}/tools`).then(response => {
-      setTools(response.data);;
-    });
+      const allTools = response.data;
+      setTools(allTools);
+      //setToolsLoader(false);
+    })
+    .catch(error => console.error('catch', error));
   }, []);
 
+  ///console.log(tools)
+  //; undefined on page load 
+
+  if (!dataLoader) {
+    for (let i = 0; i < 5; i++) {
+      const currentHobbyIndex = user.current_skillset === 'Beginner' 
+        ? (currentHobbyPost + i) % (postsCategorized.Photography ? postsCategorized.Photography.length : 0)
+        : (currentHobbyPost + i) % (postsCategorized[user.current_skillset] ? postsCategorized[user.current_skillset].length : 0);
+        
+      const currentInterestIndex = user.learning_interest === 'Unsure' 
+        ? (currentInterestPost + i) % (postsCategorized.Painting ? postsCategorized.Painting.length : 0)
+        : (currentInterestPost + i) % (postsCategorized[user.learning_interest] ? postsCategorized[user.learning_interest].length : 0);
+
+      const currentHobbyToolIndex = user.current_skillset === 'Beginner'
+        ? (currentHobbyTool + i) % (tools.filter(tool => tool?.category === 'Photography').length || 0)
+        : (currentHobbyTool + i) % (tools.filter(tool => tool?.category === user.current_skillset).length || 0);
+        
+      const currentInterestToolIndex = user.learning_interest === 'Unsure'
+        ? (currentInterestTool + i) % (tools.filter(tool => tool?.category === 'Painting').length || 0)
+        : (currentInterestTool + i) % (tools.filter(tool => tool?.category === user.learning_interest).length || 0);
+
+      if (user.current_skillset === 'Beginner') {
+        visibleCurrentHobbyPosts.push(postsCategorized.Photography[currentHobbyIndex]);
+        visibleCurrentHobbyTools.push(tools.filter(tool => tool?.category === 'Photography')[currentHobbyToolIndex]);
+      } else if (postsCategorized[user.current_skillset]) {
+        visibleCurrentHobbyPosts.push(postsCategorized[user.current_skillset][currentHobbyIndex]);
+        visibleCurrentHobbyTools.push(tools.filter(tool => tool?.category === user.current_skillset)[currentHobbyToolIndex]);
+      }
+        
+      if (user.learning_interest === 'Unsure') {
+        visibleInterestPosts.push(postsCategorized.Painting[currentInterestIndex]);
+        visibleInterestTools.push(tools.filter(tool => tool?.category === 'Painting')[currentInterestToolIndex]);
+      } else if (postsCategorized[user.learning_interest]) {
+        visibleInterestPosts.push(postsCategorized[user.learning_interest][currentInterestIndex]);
+        visibleInterestTools.push(tools.filter(tool => tool?.category === user.learning_interest)[currentInterestToolIndex]);
+      }        
+    }
+  }  
+ 
   //console.log(tools);
 
   return (
@@ -152,9 +184,7 @@ export default function Home({
             {selectedCategory && !dataLoader && selectedCategory.length > 1 //
               ? postsCategorized[selectedCategory].map((post) => {
                   return (
-                  <div onClick={() => navigate(`/post/${post.post_id}`)
-                }
-                  >
+                  <div onClick={() => navigate(`/post/${post.post_id}`)} key={post.post_id}>
                   <PostCard post={post} />
                   </div>
                   )
@@ -174,11 +204,11 @@ export default function Home({
             !tab ? (
             <>
             <div className='user-current-hobby-posts'>
-            <h4 className='main-h4'> {user.current_skillset} </h4>
+            <h4 className='main-h4'> {user.current_skillset === 'Beginner' ? 'Photography' : user.current_skillset} </h4>
             <div className='posts-slider-container'>
               <button
                 className='arrow'
-                onClick={() =>
+                onClick={() => user.current_skillset === 'Beginner' ? setCurrentHobbyPost(prevPost => prevPost === 0 ? postsCategorized.Photography.length - 1 : prevPost - 1) :
                   setCurrentHobbyPost(prevPost =>
                     prevPost === 0
                       ? postsCategorized[user.current_skillset].length - 1
@@ -191,15 +221,14 @@ export default function Home({
               </button>
               {visibleCurrentHobbyPosts.map(post => {
                 return (
-                <div onClick={() => navigate(`/post/${post.post_id}`
-                )}>
-                <PostCard post={post} key={uuid()} />
+                <div onClick={() => navigate(`/post/${post.post_id}`)} key={post.post_id} >
+                <PostCard post={post} />
                 </div>
                 )
               })}
               <button
                 className='arrow'
-                onClick={() =>
+                onClick={() => user.current_skillset === 'Beginner' ? setCurrentHobbyPost(prevPost => prevPost === 0 ? postsCategorized.Photography.length - 1 : prevPost + 1) :
                   setCurrentHobbyPost(prevPost =>
                     prevPost ===
                     postsCategorized[user.current_skillset].length - 1
@@ -213,16 +242,15 @@ export default function Home({
               </button>
             </div>
             <br />
-
           </div>
           <br />
           <div className='user-interest-posts'>
-            <h4 className='main-h4'> {user.learning_interest} </h4>
+            <h4 className='main-h4'> {user.learning_interest === 'Unsure' ? 'Painting' : user.learning_interest} </h4>
             <div className='posts-slider-container'>
               <button
                 className='arrow'
-                onClick={() =>
-                  setCurrentInterestPost(prevPost =>
+                onClick={() => user.learning_interest === 'Unsure' ? setCurrentInterestPost(prevPost => prevPost === 0 ? postsCategorized.Painting.length - 1 : prevPost - 1) :
+                  setCurrentInterestPost(prevPost => 
                     prevPost === 0
                       ? postsCategorized[user.learning_interest].length - 1
                       : prevPost - 1
@@ -234,15 +262,14 @@ export default function Home({
               </button>
               {visibleInterestPosts.map(post => {
                 return (
-                <div onClick={() => navigate(`/post/${post.post_id}`
-                )}>
-                <PostCard post={post} key={uuid()} />
+                <div onClick={() => navigate(`/post/${post.post_id}`)} key={post.post_id} >
+                <PostCard post={post} />
                 </div>
                 )
               })}
               <button
                 className='arrow'
-                onClick={() =>
+                onClick={() => user.learning_interest === 'Unsure' ? setCurrentInterestPost(prevPost => prevPost === 0 ? postsCategorized.Painting.length - 1 : prevPost + 1) :
                   setCurrentInterestPost(prevPost =>
                     prevPost ===
                     postsCategorized[user.learning_interest].length - 1
@@ -256,50 +283,36 @@ export default function Home({
               </button>
             </div>
             <br />
-    
           </div>
           </>
           ) : (
           <>   
           <br />         
           <div className='tools-sect'>
-          <h4 className='main-h4'> {user.current_skillset} </h4>
+          <h4 className='main-h4'> {user.current_skillset === 'Beginner' ? 'Photography' : user.current_skillset} </h4>
             <div className='posts-slider-container'>
-              {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
-            {
-              tools && user.current_skillset ? tools.map((tool, i) => {
-                if (tool.category === user.current_skillset) {
-                  return (
-                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`)
-                  }
-                    >
+              {user.current_skillset === 'Beginner' && tools ? (tools.filter((tool) => tool?.category === 'Photography').length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : tools && user.current_skillset ? (tools.filter((tool) => tool?.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
+              {
+                visibleCurrentHobbyTools.map((tool, i) => (
+                  <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool?.tool_id}`)}  >
                     <ToolsCard tool={tool} />
-                    </div>
-                  )
-                }
-              }) : null
-            }
-              {tools && user.current_skillset ? (tools.filter((tool) => tool.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
+                  </div>
+                ))
+              }
+              {user.current_skillset === 'Beginner' && tools ? (tools.filter((tool) => tool?.category === 'Photography').length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : tools && user.current_skillset ? (tools.filter((tool) => tool?.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
             </div>
             </div>
             <br />
             <div className='tools-sect'>
-            <h4 className='main-h4'> {user.learning_interest} </h4>
+            <h4 className='main-h4'> {user.learning_interest === 'Unsure' ? 'Painting' : user.learning_interest} </h4>
             <div className='posts-slider-container'>
-              {tools && user.learning_interest ? (tools.filter((tool) => tool.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
-            { 
-              tools && user.learning_interest ? tools.map((tool, i) => {
-                if (tool.category === user.learning_interest) {
-                  return (
-                    <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool.tool_id}`)}
-                    >
-                    <ToolsCard tool={tool} />
-                    </div>
-                  )
-                }
-              }) : null
-            }
-              {tools && user.learning_interest ? (tools.filter((tool) => tool.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
+              {user.learning_interest === 'Unsure' && tools ? (tools.filter((tool) => tool?.category === 'Painting').length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : tools && user.learning_interest ? (tools.filter((tool) => tool?.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
+              {visibleInterestTools.map((tool, i) => (
+                <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool?.tool_id}`)} >
+                  <ToolsCard tool={tool} />
+                </div>
+              ))}
+              {user.learning_interest === 'Unsure' && tools ? (tools.filter((tool) => tool?.category === 'Painting').length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : tools && user.learning_interest ? (tools.filter((tool) => tool?.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
             </div>
             </div></>)
           }

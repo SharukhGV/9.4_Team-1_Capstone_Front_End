@@ -54,7 +54,7 @@ export default function CatCarousel({setSelectedCategory}) {
   ];
 
   return (
-    <div className='slider-container'>
+    <div className='slider-container' key='cat-carousel'>
       <button onClick={prevSlide} className='arrow'>
         {' '}
         <ArrowBackIosIcon />{' '}
@@ -65,6 +65,7 @@ export default function CatCarousel({setSelectedCategory}) {
           sx={{height: 40, width: '100%', cursor: 'pointer'}}
           value={img.name}
           onClick={() => setSelectedCategory(img.name)}
+          key={i}
         >
           <CardCover>
             <img

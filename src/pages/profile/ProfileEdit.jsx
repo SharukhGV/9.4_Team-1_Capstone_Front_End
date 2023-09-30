@@ -20,6 +20,9 @@ export default function ProfileEdit({user, refreshUser}) {
   const {username} = useParams();
   const navigate = useNavigate();
   const [updatedUser, setUpdatedUser] = useState(user);
+  const [learningInterest, setLearningInterest] = useState('Unsure');
+  const [currentSkillset, setCurrentSkillset] = useState('Beginner');
+
   const [file, setFile] = useState({
     preview: '',
     data: '',
@@ -60,6 +63,12 @@ export default function ProfileEdit({user, refreshUser}) {
   };
 
   const handleSelectChange = e => {
+    if (e.target.name === 'learning_interest') {
+      setLearningInterest(e.target.value)
+    }
+    if (e.target.name === 'current_skillset') {
+      setCurrentSkillset(e.target.value)
+    }
     setUpdatedUser({
       ...updatedUser,
       [e.target.name]: e.target.value,
@@ -105,7 +114,7 @@ export default function ProfileEdit({user, refreshUser}) {
                     labelId='learning-interest-label'
                     id='learning-interest-select'
                     name='learning_interest'
-                    value={updatedUser.learning_interest}
+                    value={learningInterest}
                     label='Learning Interest'
                     onChange={handleSelectChange}
                   >
@@ -133,7 +142,7 @@ export default function ProfileEdit({user, refreshUser}) {
                     labelId='current-skillset-label'
                     id='current-skillset-select'
                     name='current_skillset'
-                    value={updatedUser.current_skillset}
+                    value={currentSkillset}
                     label='Current Skillset'
                     onChange={handleSelectChange}
                   >
