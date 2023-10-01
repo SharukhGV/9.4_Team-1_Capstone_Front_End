@@ -20,18 +20,6 @@ export default function About() {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       <br />
 
-      <div className='about-body' style={bodyStyle}>
-        <h2 style={headerStyle}>About Our App</h2>
-        <div className="app-description">
-          'Craftopia is inspired by the human desire for creativity and connection.  The bar to starting a new hobby can be high due to the required time and money investment, we aim to lower this bar and to rekindle the joy of crafting and hobbies.  We believe everyone has unique talents waiting to be explored, and we're here to break barriers to creativity.  Craftopia fosters a supportive community where you can learn, create, and connect.
-          <br />
-          <br />
-          Craftopia is a vibrant crafting community that empowers all skill levels.  Learn from experts, buy/sell crafting gear, and connect with like-minded crafters.  Enjoy personalized learning, access resources, showcase your creations, trade items, and swap skills.  Craftopia is where hobbies become fun again. Join us and nurture your creativity today!'
-        </div>
-      </div>
-
-      <br />
-
       <div className="about-logo">
         <img
           src="src/assets/craftLogoFlatPurple.png"
@@ -39,6 +27,8 @@ export default function About() {
           style={{ width: '85%', maxWidth: '100%' }}
         />
       </div>
+
+      <br />
 
       <div
         className='team'
@@ -56,13 +46,15 @@ export default function About() {
               src="src/assets/CraftopiaTeamJuan.jpg"
               alt="Juan Feliz"
               className='team-img'
-              style={{ width: '100%', maxWidth: '100%' }}
+            // style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Juan Feliz</h1>
             <p className="title">Technical Lead & SQL Master</p>
             <p>PERSONAL DESCRIP HERE</p>
-            <a href="https://github.com/felizj17" className='card-a'><i className="fa fa-github"></i></a>
-            <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            <div>
+              <a href="https://github.com/felizj17" className='card-a'><i className="fa fa-github"></i></a>
+              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            </div>
           </div>
 
           <div className="card">
@@ -70,13 +62,15 @@ export default function About() {
               src="src/assets/CraftopiaTeamSharukh.png"
               alt="Sharukh Velupillai"
               className='team-img'
-              style={{ width: '100%', maxWidth: '100%' }}
+            // style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Sharukh Velupillai</h1>
             <p className="title">Demo Lead & Back-End Ninja</p>
             <p>PERSONAL DESCRIP HERE</p>
-            <a href="https://github.com/SharukhGV" className='card-a'><i className="fa fa-github"></i></a>
-            <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            <div>
+              <a href="https://github.com/SharukhGV" className='card-a'><i className="fa fa-github"></i></a>
+              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            </div>
           </div>
 
           <div className="card">
@@ -84,13 +78,15 @@ export default function About() {
               src="src/assets/CraftopiaTeamMichel.png"
               alt="Michel Batista"
               className='team-img'
-              style={{ width: '100%', maxWidth: '100%' }}
+            // style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Michel Batista</h1>
             <p className="title">Design Lead & 3am Push Champion</p>
             <p>PERSONAL DESCRIP HERE</p>
-            <a href="https://github.com/MichelBDLC" className='card-a'><i className="fa fa-github"></i></a>
-            <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            <div>
+              <a href="https://github.com/MichelBDLC" className='card-a'><i className="fa fa-github"></i></a>
+              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            </div>
           </div>
 
           <div className="card">
@@ -98,14 +94,25 @@ export default function About() {
               src="src/assets/CraftopiaTeamEvan.png"
               alt="Evan Velush"
               className='team-img'
-              style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Evan Velush</h1>
             <p className="title">Project Manager & CSS Wizard</p>
             <p>PERSONAL DESCRIP HERE</p>
-            <a href="https://github.com/SuperNinjaEv" className='card-a'><i className="fa fa-github"></i></a>
-            <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            <div>
+              <a href="https://github.com/SuperNinjaEv" className='card-a'><i className="fa fa-github"></i></a>
+              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div className='about-body' style={bodyStyle}>
+        <h2 style={headerStyle}>About Our App</h2>
+        <div className="app-description">
+          'Craftopia is inspired by the human desire for creativity and connection.  The bar to starting a new hobby can be high due to the required time and money investment, we aim to lower this bar and to rekindle the joy of crafting and hobbies.  We believe everyone has unique talents waiting to be explored, and we're here to break barriers to creativity.  Craftopia fosters a supportive community where you can learn, create, and connect.
+          <br />
+          <br />
+          Craftopia is a vibrant crafting community that empowers all skill levels.  Learn from experts, buy/sell crafting gear, and connect with like-minded crafters.  Enjoy personalized learning, access resources, showcase your creations, trade items, and swap skills.  Craftopia is where hobbies become fun again. Join us and nurture your creativity today!'
         </div>
       </div>
 
