@@ -82,7 +82,7 @@ export default function Home({
     }
   }  
 
-  console.log(user)
+  //console.log(user)
   //console.log(user.learning_interest)
   //console.log(user.current_skillset)
   return (

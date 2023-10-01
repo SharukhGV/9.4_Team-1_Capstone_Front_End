@@ -19,6 +19,7 @@ export default function Assesment({
 }) {
   const API = import.meta.env.VITE_REACT_APP_API_URL;
   const [updatedUser, setUpdatedUser] = useState(user);
+  const [isFormValid, setIsFormValid] = useState(false);
   
   const assesmentModalStyle = {
     position: 'absolute',
@@ -34,18 +35,30 @@ export default function Assesment({
   };
   
   const handleRadioSelect = e => {
-    setUpdatedUser({
+    const updatedUserCopy = {
       ...updatedUser,
       [e.target.name]: e.target.value,
-    });
+    };
+    
+    setUpdatedUser(updatedUserCopy);
+    
+    const isValid = 
+      !!updatedUserCopy.learning_interest && 
+      !!updatedUserCopy.current_skillset; 
+    
+    setIsFormValid(isValid);
+    // setUpdatedUser({
+    //   ...updatedUser,
+    //   [e.target.name]: e.target.value,
+    // });
   };
 
   function handleAssesmentBtns(event) {
     event.preventDefault();
+
     axios.put(`${API}/auth/${updatedUser.user_id}`, updatedUser).then(res => {
       updateUser(res.data.updatedAccount);
-    });//error here ?
-    
+    });
   }
 
   return (
@@ -70,7 +83,7 @@ export default function Assesment({
               Which virtual arts hobby are you interested in learning /
               exploring?{' '}
             </p>
-            <FormControl>
+            <FormControl required>
               <RadioGroup
                 name='learning_interest'
                 onChange={handleRadioSelect}
@@ -136,7 +149,7 @@ export default function Assesment({
           </div>
           <div>
             <p> Which virtual arts hobby do you have good experience in? </p>
-            <FormControl>
+            <FormControl required>
               <RadioGroup
                 name='current_skillset'
                 onChange={handleRadioSelect}
@@ -209,6 +222,7 @@ export default function Assesment({
           <button
             className='done-btn'
             value='done-btn'
+            disabled={!isFormValid}
             onClick={event => handleAssesmentBtns(event)}
           >
             {' '}

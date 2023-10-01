@@ -56,7 +56,7 @@ export default function Profile({user}) {
             <aside className='profile-desc'>
               <h1>{user.username}</h1>
               <h3>{user.city_state}</h3>
-              <p>{user.aboutme}</p>
+              <p>{user.aboutme && user.aboutme !== 'null' ? user.aboutme : "About Me"}</p>
             </aside>
           </div>
           {user.username === username && (
