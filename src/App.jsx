@@ -33,12 +33,12 @@ import FourOFour from './pages/fourOFour/FourOFour';
 import Posts from './components/posts/Posts';
 import ArtistsGraphic from './assets/artistsgraphic.jpg';
 
-import './App.css';
-import ToolsUsers from './components/tools/ToolsUsers';
-import {Badge} from '@mui/material';
-import CheckoutFormMain from './components/cart/CheckoutFormMain';
-import ToolsIndexSingle from './components/tools/toolsIndexSingle';
-import SuccessPage from './components/cart/SuccessPage';
+import "./App.css";
+import ToolsUsers from "./components/tools/ToolsUsers";
+import { Badge } from "@mui/material";
+import CheckoutFormMain from "./components/cart/CheckoutFormMain";
+import ToolsIndexSingle from './components/tools/ToolsIndexSingle';
+import SuccessPage from "./components/cart/SuccessPage";
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 const ProtectedRoute = ({user, redirectPath}) => {

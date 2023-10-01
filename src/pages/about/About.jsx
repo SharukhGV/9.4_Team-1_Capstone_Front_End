@@ -49,11 +49,13 @@ export default function About() {
             // style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Juan Feliz</h1>
-            <p className="title">Technical Lead & SQL Master</p>
-            <p>PERSONAL DESCRIP HERE</p>
+            <p className="title">Technical Lead & Master Debugger</p>
+            <p>Nothing better than creating fun and engaging interfaces that capture the attention of your viewers.<br />
+              ...now if only we knew how to do that.<br />
+              Oh wait that's right all it takes is practice, collaboration, patience, and a little more practice.</p>
             <div>
               <a href="https://github.com/felizj17" className='card-a'><i className="fa fa-github"></i></a>
-              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+              <a href="https://www.linkedin.com/in/juan-feliz/" className='card-a'><i className="fa fa-linkedin"></i></a>
             </div>
           </div>
 
@@ -66,10 +68,10 @@ export default function About() {
             />
             <h1>Sharukh Velupillai</h1>
             <p className="title">Demo Lead & Back-End Ninja</p>
-            <p>PERSONAL DESCRIP HERE</p>
+            <p>What motivates me to learn and push forward is to see genuine smiles on the faces of others due to something Ive done for them. Sometimes this smile might originate from a cup of cardamom-tea. Other times it might be due to simple conversation. Being grateful for what I have has allowed me to never give up despite adversity, and continue to learn new things to improve the quality of life for myself and those around me.</p>
             <div>
               <a href="https://github.com/SharukhGV" className='card-a'><i className="fa fa-github"></i></a>
-              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+              <a href="https://www.linkedin.com/in/sharukh-velupillai-08b98b7a/" className='card-a'><i className="fa fa-linkedin"></i></a>
             </div>
           </div>
 
@@ -85,7 +87,7 @@ export default function About() {
             <p>PERSONAL DESCRIP HERE</p>
             <div>
               <a href="https://github.com/MichelBDLC" className='card-a'><i className="fa fa-github"></i></a>
-              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+              <a href="https://www.linkedin.com/in/michelbdlc" className='card-a'><i className="fa fa-linkedin"></i></a>
             </div>
           </div>
 
@@ -100,7 +102,7 @@ export default function About() {
             <p>PERSONAL DESCRIP HERE</p>
             <div>
               <a href="https://github.com/SuperNinjaEv" className='card-a'><i className="fa fa-github"></i></a>
-              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+              <a href="https://www.linkedin.com/in/evanvelush/" className='card-a'><i className="fa fa-linkedin"></i></a>
             </div>
           </div>
         </div>
@@ -124,12 +126,10 @@ export default function About() {
 
       <div>
         <img
-          src="src/assets/craftBanner.jpg"
+          src="src/assets/craftBanner2.jpg"
           alt="Craft Collective"
-          style={{ width: '1000px', maxWidth: '100%' }}
+          style={{ width: '1000px', height: '250px', maxWidth: '100%' }}
         />
-        {/* <p>Photo by <a href="https://unsplash.com/@penrosekaren?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Karen Penroz</a> on <a href="https://unsplash.com/photos/0TvE4CQ33_I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-        </p> */}
       </div>
 
     </div >
