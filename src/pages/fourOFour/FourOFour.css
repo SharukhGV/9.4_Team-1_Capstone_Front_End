@@ -27,6 +27,9 @@
     justify-items: center;
     background-color: azure;
     border-radius: 50%;
+    /* border-style: ridge; */
+    /* border-color: #7851A9; */
+    /* box-shadow: 15px; */
 }
 
 .colorset1 {
