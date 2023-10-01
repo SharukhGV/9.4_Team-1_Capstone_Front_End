@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
+import axios from "axios";
 const API = import.meta.env.VITE_REACT_APP_API_URL;
+
 function ToolsUserDetails({
+  removeItem,
+  addToCart,
   // name,
   user,
   // description,
@@ -15,22 +19,27 @@ function ToolsUserDetails({
   // username,
   inKEY,
 }) {
+
+//   const [cart, setCart] = useState([]);
+//   function addToCart(item) {
+//     setCart(prevCart => [...prevCart, item]);
+// }
   const [thecolor, setthecolor] = useState("black");
-  const { tools_id } = useParams();
-  const [tools, setTools] = useState([]);
+  const { id } = useParams();
+  const [tools, setTools] = useState({});
 
   useEffect(() => {
     axios
-      .get(`${API}/tools/${id}/${user.user_id}`)
-      .then((response) => {
-        console.log(response.data)
-        setTools(response.data);
-      })
-      .catch((err) => {
-        // navigate("/not-found");
-        console.log(err);
-      });
-  }, [API, id]);
+        .get(`${API}/tools/one/${id}`)
+        .then(res => {
+          console.log(res.data)
+            setTools(res.data.tool); 
+        })
+        .catch(error => {
+            console.error("There was an error fetching the tools:", error);
+        });
+}, [id]);
+
 
   const deletetool = () => {
     axios
@@ -41,36 +50,22 @@ function ToolsUserDetails({
       .catch((error) => console.error(error));
   };
 
-  const handleDelete = () => {
-    deletetool();
-  };
+  // const handleDelete = () => {
+  //   deletetool();
+  // };
 
   // let thecolordeterminate = "black"
-  // if(tool.good_tool === "good")
+  // if(good_tool === "good")
 
   const textcoloring = {
     color: thecolor,
   };
 
-  useEffect(() => {
-    if (tools.condition === "good") {
-      setthecolor("green");
-    }
-    if (tools.condition === "bad") {
-      setthecolor("orange");
-    }
-    if (tools.condition === "neutral") {
-      setthecolor("black");
-    }
-  }, [tools.condition]);
-
   return (
-    <article className="cardContact" key={uuidv4()}>
-      <fieldset style={textcoloring}>
-        <legend>
+          <>
+          {tools.condition &&  (<>   <legend key={tools.tool_id}>
           <strong>Your Tools for Sale</strong>
         </legend>
-        <table className="thetooltableSHOW">
           <tr>
             <th>Category</th>
             <th>Information</th>
@@ -79,10 +74,6 @@ function ToolsUserDetails({
             <td>Name: </td>
             <td>{tools.name}</td>
           </tr>
-          {/* <tr>
-  <td>Date: </td>
-  <td>{createdTim}</td>
-</tr> */}
           <tr>
             <td>Condition: </td>
             <td>{tools.condition}</td>
@@ -99,29 +90,23 @@ function ToolsUserDetails({
           <tr>
             <td>Quantity: </td>
             <td>{tools.quantity}</td>
-          </tr>
-        </table>
-      </fieldset>
+          </tr>       <aside className='tool-info'>
+          <h5>Posted by: {tools.created_by}</h5>
+   
+          <aside className='tools-action-buttons'>
+            <button onClick={()=>addToCart(tools)}>Add to Cart</button>
+          </aside>
+        </aside>
+      </>)}
 
-      <div className="showNavigation">
+      <span className="showNavigation">
         <span>
           <Link to={`/tools`}>
             <button>Back</button>
           </Link>
-        </span>
-        <span>
-          <Link to={`/tools/${tools_id}/edit`}>
-            <button className="editbutton">Edit</button>
-          </Link>
-        </span>
-        <span>
-          <button className="delete" onClick={handleDelete}>
-            Delete
-          </button>
-        </span>
-      </div>
-    </article>
-  );
+        </span> 
+      </span>
+</>  );
 }
 
 export default ToolsUserDetails;

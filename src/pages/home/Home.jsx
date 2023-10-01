@@ -13,6 +13,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Card} from '@mui/joy';
 import './home.css';
 
+
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function Home({

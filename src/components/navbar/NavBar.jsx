@@ -8,6 +8,7 @@ import Auth from '../../components/auth/Auth';
 import shoppingCartIcon from '../../assets/circularShoppingCart.png';
 import CraftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Cart from '../cart/Cart';
 
 export default function NavBar({
   user,
@@ -17,6 +18,8 @@ export default function NavBar({
   setModal,
   posts,
   cartItems,
+  removeItem,
+  setGrandTotal,
 }) {
   const navigate = useNavigate()
   const [search, setSearch] = useState('');
@@ -66,7 +69,6 @@ export default function NavBar({
     <nav>
       <div className='top'>
         <Link to='/home'>
-          {' '}
           <img
             style={{maxWidth: '100px', maxHeight: '100px', borderRadius: '50%', width: '79px', margin: '7px'}}
             src={CraftopiaLogo}
@@ -162,6 +164,7 @@ export default function NavBar({
               </Badge>
               {cartView && (
                 <Cart
+                  setGrandTotal={setGrandTotal}
                   items={cartItems}
                   removeItem={removeItem}
                   handleClose={() => setCartView(false)}
