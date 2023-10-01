@@ -66,7 +66,6 @@ export default function NavBar({
     <nav>
       <div className='top'>
         <Link to='/home'>
-          {' '}
           <img
             style={{maxWidth: '100px', maxHeight: '100px', borderRadius: '50%', width: '79px', margin: '7px'}}
             src={CraftopiaLogo}

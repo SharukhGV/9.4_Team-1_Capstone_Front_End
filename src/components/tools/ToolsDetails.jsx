@@ -4,8 +4,8 @@ import {Link, useParams} from 'react-router-dom';
 import noImage from '../../assets/placeholder-img.jpeg';
 import {useLocation} from 'react-router';
 
-import './toolsDetails.css'
-const API = import.meta.env.VITE_REACT_APP_API_URL;
+// import './toolsDetails.css'
+// const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 function ToolsDetails({addToCart}) {
 
@@ -65,4 +65,4 @@ function ToolsDetails({addToCart}) {
   );
 }
 
-export default ToolsDetails;
+// export default ToolsDetails;
