@@ -13,17 +13,57 @@ img {
 }
 
 .about-team {
-grid-template-columns: 45% 45%;
-justify-content: space-between;
-padding: 10px 10px;
+    grid-template-columns: 45% 45%;
+    justify-content: space-between;
+    padding: 10px 10px;
 }
 
 .member {
     padding: 10px;
     display: grid;
-    justify-items: center;
+    justify-items: left;
 }
 
 .team-member-description {
-text-align: left;
+    text-align: left;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    border-style: ridge;
+    border-color: #7851A9;
+    border-radius: 5px;
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+}
+
+button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    padding: 5px;
+    font-size: 22px;
+    color: black;
+}
+
+button:hover,
+a:hover {
+    opacity: 0.7;
 }

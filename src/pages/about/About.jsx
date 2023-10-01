@@ -12,18 +12,13 @@ export default function About() {
   };
 
   return (
+
     <div
       className="about"
       style={{ display: 'grid', alignContent: 'center', backgroundColor: '#f8f8f8' }}
     >
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       <br />
-      <div className="about-logo">
-        <img
-          src="src/assets/craftLogoFlatPurple.png"
-          alt="Craftopia Logo"
-          style={{ width: '85%', maxWidth: '100%' }}
-        />
-      </div>
 
       <div className='about-body' style={bodyStyle}>
         <h2 style={headerStyle}>About Our App</h2>
@@ -37,11 +32,18 @@ export default function About() {
 
       <br />
 
-      <img
+      <div className="about-logo">
+        <img
+          src="src/assets/craftLogoFlatPurple.png"
+          alt="Craftopia Logo"
+          style={{ width: '85%', maxWidth: '100%' }}
+        />
+      </div>
+      {/* <img
         src="src/assets/artistsgraphic.jpg"
         alt="Craft Collective"
         style={{ width: '85%', maxWidth: '100%' }}
-      />
+      /> */}
       <div
         className='team'
         style={bodyStyle}
@@ -52,6 +54,20 @@ export default function About() {
           style={{ display: 'grid', alignContent: 'center' }}
         >
 
+          <div className="card">
+            <img
+              src="src/assets/CraftopiaTeamJuan.jpg"
+              alt="Juan Feliz"
+              className='team-img'
+              style={{ width: '100%', maxWidth: '100%' }} 
+              />
+            <h1>Juan Feliz</h1>
+            <p className="title">Technical Lead</p>
+            <p>PERSONAL DESCRIP HERE</p>
+            <a href="https://github.com/felizj17"><i className="fa fa-github"></i></a>
+            <a href="#"><i className="fa fa-linkedin"></i></a>
+          </div>
+
           <div className='member'>
             <div className="team-member-description">
               Juan Feliz
@@ -60,6 +76,7 @@ export default function About() {
               <img
                 src="src/assets/CraftopiaTeamJuan.jpg"
                 alt="Team Member Juan Feliz"
+                className='team-img'
                 style={{ width: '80%', maxWidth: '100%' }} />
             </Link>
           </div>
@@ -72,6 +89,7 @@ export default function About() {
               <img
                 src="src/assets/CraftopiaTeamSharukh.png"
                 alt="Team Member Sharukh Velupillai"
+                className='team-img'
                 style={{ width: '80%', maxWidth: '100%' }} />
             </Link>
           </div>
@@ -84,6 +102,7 @@ export default function About() {
               <img
                 src="src/assets/CraftopiaTeamMichel.png"
                 alt="Team Member Michel Batista"
+                className='team-img'
                 style={{ width: '80%', maxWidth: '100%' }} />
             </Link>
           </div>
@@ -96,15 +115,13 @@ export default function About() {
               <img
                 src="src/assets/CraftopiaTeamEvan.png"
                 alt="Team Member Evan Velush"
+                className='team-img'
                 style={{ width: '80%', maxWidth: '100%' }} />
             </Link>
           </div>
         </div>
       </div>
-      <img
-        src="src/assets/craftLogo2.png"
-        alt="Another Image"
-        style={{ width: '80%', maxWidth: '100%' }} />
+
     </div >
   );
 }
