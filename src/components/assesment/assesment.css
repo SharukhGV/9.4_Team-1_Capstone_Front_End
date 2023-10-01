@@ -3,6 +3,7 @@
   border: none;
   background-color: #f8f8f8;
   font-size: large;
+  cursor: pointer;
 }
 
 .questions-sect {
@@ -26,6 +27,7 @@
   font-family: 'Lato';
   letter-spacing: 0.5px;
   border-style: none;
+  cursor: pointer;
 }
 
 .later-btn {
@@ -34,5 +36,6 @@
   border-radius: 4px;
   font-family: 'Lato';
   border-style: none;
+  cursor: pointer;
 }
 

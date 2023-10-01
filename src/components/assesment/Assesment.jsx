@@ -17,6 +17,9 @@ export default function Assesment({
   assesmentModalOpen,
   updateUser,
 }) {
+  const API = import.meta.env.VITE_REACT_APP_API_URL;
+  const [updatedUser, setUpdatedUser] = useState(user);
+  
   const assesmentModalStyle = {
     position: 'absolute',
     top: '50%',
@@ -29,10 +32,7 @@ export default function Assesment({
     boxShadow: 14,
     p: 4,
   };
-  const API = import.meta.env.VITE_REACT_APP_API_URL;
-
-  const [updatedUser, setUpdatedUser] = useState(user); // Initialize with the default selected value
-
+  
   const handleRadioSelect = e => {
     setUpdatedUser({
       ...updatedUser,
@@ -44,8 +44,10 @@ export default function Assesment({
     event.preventDefault();
     axios.put(`${API}/auth/${updatedUser.user_id}`, updatedUser).then(res => {
       updateUser(res.data.updatedAccount);
-    });
+    });//error here ?
+    
   }
+
   return (
     <Modal
       open={assesmentModalOpen}
@@ -136,7 +138,7 @@ export default function Assesment({
             <p> Which virtual arts hobby do you have good experience in? </p>
             <FormControl>
               <RadioGroup
-                name='current_hobby'
+                name='current_skillset'
                 onChange={handleRadioSelect}
                 id='current_hobby'
               >
@@ -154,11 +156,6 @@ export default function Assesment({
                   value='Photography'
                   control={<Radio />}
                   label='Photography'
-                />
-                <FormControlLabel
-                  value='Pottery'
-                  control={<Radio />}
-                  label='Pottery'
                 />
                 <FormControlLabel
                   value='Sculpture'

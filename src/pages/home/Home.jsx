@@ -28,7 +28,7 @@ export default function Home({
   const [currentInterestPost, setCurrentInterestPost] = useState(0);
   const [tools, setTools] = useState([]);
   const [currentHobbyPost, setCurrentHobbyPost] = useState(0);
-  const [currentInterestTool, setCurrentInterestTool] = useState(0); //is this why ?
+  const [currentInterestTool, setCurrentInterestTool] = useState(0); 
   const [currentHobbyTool, setCurrentHobbyTool] = useState(0);
   const [tab, setTab] = useState(false);
   let visibleInterestPosts = [];
@@ -65,7 +65,7 @@ export default function Home({
       if (user.current_skillset === 'Beginner') {
         visibleCurrentHobbyPosts.push(postsCategorized.Photography[currentHobbyIndex]);
         visibleCurrentHobbyTools.push(tools.filter(tool => tool?.category === 'Photography')[currentHobbyToolIndex]);
-      } else if (postsCategorized[user.current_skillset]) {
+      } else {
         visibleCurrentHobbyPosts.push(postsCategorized[user.current_skillset][currentHobbyIndex]);
         visibleCurrentHobbyTools.push(tools.filter(tool => tool?.category === user.current_skillset)[currentHobbyToolIndex]);
       }
@@ -73,13 +73,16 @@ export default function Home({
       if (user.learning_interest === 'Unsure') {
         visibleInterestPosts.push(postsCategorized.Painting[currentInterestIndex]);
         visibleInterestTools.push(tools.filter(tool => tool?.category === 'Painting')[currentInterestToolIndex]);
-      } else if (postsCategorized[user.learning_interest]) {
+      } else {
         visibleInterestPosts.push(postsCategorized[user.learning_interest][currentInterestIndex]);
         visibleInterestTools.push(tools.filter(tool => tool?.category === user.learning_interest)[currentInterestToolIndex]);
       }        
     }
   }  
 
+  console.log(user)
+  //console.log(user.learning_interest)
+  //console.log(user.current_skillset)
   return (
     <div className='home-page'>
      
@@ -92,7 +95,7 @@ export default function Home({
       <img src={ArtistsGraphic} className='artistsGraphic' loading='lazy' />
       </div>
       <div className='assesement-sect'>
-        {!user.learning_interest || !user.current_skillset ? (
+        {/* {!user.learning_interest || !user.current_skillset ? (
           <div className='assesment-sect'>
             <h4 className='home-h4'> Let's Get Personal </h4>
             <p className='assesment-p'>
@@ -113,7 +116,7 @@ export default function Home({
               user={user}
             />
           </div>
-        ) : null}
+        ) : null} */}
       </div>
       <br />
       <main>
@@ -141,6 +144,30 @@ export default function Home({
                   </button>
                 </Card>
               </div>
+              {user.learning_interest === 'Unsure' && user.current_skillset === 'Beginner' ? (
+          <div className='post-cta'>
+            <Card className='overlay-card' sx={{backgroundColor: 'rgba(209, 196, 233, 0.75)'}}>
+            <h4 className='home-h4'> Let's Get Personal </h4>
+            <p className='post-cta-p'>
+              {' '}
+              Take our quick assesment for a better curated homepage{' '}
+            </p>
+            <button
+              className='cta-btn'
+              onClick={() => setAssesmentModalOpen(true)}
+            >
+              {' '}
+              Take Assesment{' '}
+            </button>
+            <Assesment
+              assesmentModalOpen={assesmentModalOpen}
+              setAssesmentModalOpen={setAssesmentModalOpen}
+              updateUser={updateUser}
+              user={user}
+            />
+            </Card>
+          </div>
+        ) : null}
               <div className='post-cta'>
                 <Card
                   className='overlay-card'
@@ -254,6 +281,8 @@ export default function Home({
                 <ArrowBackIosIcon />{' '}
               </button>
               {visibleInterestPosts.map(post => {
+                // console.log(visibleInterestPosts)
+                // console.log(post)
                 return (
                 <div onClick={() => navigate(`/post/${post?.post_id}`)} key={post?.post_id} >
                 <PostCard post={post} />

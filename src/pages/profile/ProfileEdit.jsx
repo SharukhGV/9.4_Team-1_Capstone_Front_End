@@ -63,16 +63,16 @@ export default function ProfileEdit({user, refreshUser}) {
   };
 
   const handleSelectChange = e => {
+    setUpdatedUser({
+      ...updatedUser,
+      [e.target.name]: e.target.value,
+    });
     if (e.target.name === 'learning_interest') {
       setLearningInterest(e.target.value)
     }
     if (e.target.name === 'current_skillset') {
       setCurrentSkillset(e.target.value)
     }
-    setUpdatedUser({
-      ...updatedUser,
-      [e.target.name]: e.target.value,
-    });
   };
 
   return (
@@ -106,7 +106,7 @@ export default function ProfileEdit({user, refreshUser}) {
             <aside className='profile-desc-edit'>
               <h1>{user.username}</h1>
               <aside className='select-inputs'>
-                <FormControl fullWidth sx={{marginRight: '5px'}}>
+                <FormControl variant='standard' fullWidth sx={{marginRight: '5px'}}>
                   <InputLabel id='learning-interest-label'>
                     Learning Interest
                   </InputLabel>
@@ -134,7 +134,7 @@ export default function ProfileEdit({user, refreshUser}) {
                   </Select>
                 </FormControl>
 
-                <FormControl fullWidth sx={{marginLeft: '5px'}}>
+                <FormControl fullWidth variant='standard' sx={{marginLeft: '5px'}}>
                   <InputLabel id='current-skillset-label'>
                     Current Skillset
                   </InputLabel>

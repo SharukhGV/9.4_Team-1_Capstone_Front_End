@@ -4,16 +4,11 @@ import {
   Route,
   Navigate,
   Outlet,
-  useNavigate,
-  Link,
 } from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import axios from 'axios';
 
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
 import NavBar from './components/navbar/NavBar';
-import Cart from './components/cart/Cart';
 import Landing from './pages/landing/Landing';
 import Footer from './components/footer/Footer';
 import Home from './pages/home/Home';
@@ -23,7 +18,6 @@ import Post from './components/posts/Post';
 import ToolsEditForm from './components/tools/ToolsEditForm';
 import ToolsNewForm from './components/tools/ToolsNewForm';
 import ToolsDetails from './components/tools/ToolsDetails';
-import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import About from './pages/about/About';
 import Posts from './components/posts/Posts';
@@ -32,7 +26,6 @@ import ArtistsGraphic from './assets/artistsgraphic.jpg';
 
 import './App.css';
 import ToolsUsers from './components/tools/ToolsUsers';
-import {Badge} from '@mui/material';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
