@@ -169,7 +169,7 @@ export default function ProfileEdit({user, refreshUser}) {
               <label>Bio</label>
               <TextareaAutosize
                 name='aboutme'
-                value={updatedUser.aboutme}
+                value={updatedUser.aboutme && updatedUser.aboutme !== 'null' ? updatedUser.aboutme : 'About Me'}
                 sx={{width: '100%'}}
                 onChange={handleUpdatedUser}
               />
