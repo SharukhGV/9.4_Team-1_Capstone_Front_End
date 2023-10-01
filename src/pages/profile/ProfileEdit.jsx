@@ -165,6 +165,7 @@ export default function ProfileEdit({user, refreshUser}) {
                 value={updatedUser.city_state}
                 sx={{marginBottom: 4}}
                 onChange={handleUpdatedUser}
+                variant='standard'
               />
               <label>Bio</label>
               <TextareaAutosize

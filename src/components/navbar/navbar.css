@@ -43,6 +43,7 @@ nav {
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  color: #1A237E;
 }
 
 .about-link {

@@ -22,10 +22,9 @@ import ProfileEdit from "./pages/profile/ProfileEdit";
 import Post from "./components/posts/Post";
 import ToolsEditForm from "./components/tools/ToolsEditForm";
 import ToolsNewForm from "./components/tools/ToolsNewForm";
-// import ToolsDetails from "./components/tools/ToolsDetails";
+import ToolsDetails from "./components/tools/ToolsDetails";
 import ToolsUserDetails from "./components/tools/ToolsUserDetails";
 import NewPost from "./components/posts/NewPost";
-import PostPreview from "./components/posts/PostPreview";
 import About from "./pages/about/About";
 
 import FourOFour from './pages/fourOFour/FourOFour';
@@ -54,6 +53,7 @@ function App() {
   const [tab, setTab] = useState(false); 
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState();
+  const [cartView, setCartView] = useState(false);
   
   const [cartItems, setCartItems] = useState([]);
   const [posts, setposts] = useState([]);
@@ -194,8 +194,7 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <NavBar
+         <NavBar
           user={user}
           handleLogout={handleLogout}
           handleSignIn={handleSignIn}
@@ -208,80 +207,9 @@ function App() {
           searchResults={searchResults}
           setSearchResults={setSearchResults}
           cartItems={cartItems}
+          removeItem={removeItem}
+          setGrandTotal={setGrandTotal}
         />
-        <div className='navbar'>
-          <aside>
-            {/* <Link to='/about' className='about-link'> About </Link> */}
-            <button onClick={() => navigate('/about')} className='signup-btn'>
-              {' '}
-              About{' '}
-            </button>
-          </aside>
-          <div className='cart-auth-buttons'>
-            <aside className='aside-cart'>
-              <Badge
-                badgeContent={cartItems.length}
-                color='error'
-                onClick={() => setCartView(!cartView)}
-              >
-                <ShoppingCartIcon
-                  className='shopping-cart'
-                  onClick={() => setCartView(!cartView)}
-                />
-              </Badge>
-              {cartView && (
-                <Cart
-                  items={cartItems}
-                  removeItem={removeItem}
-                  handleClose={() => setCartView(false)}
-                  setGrandTotal={setGrandTotal}
-                  grandTotal={grandTotal}
-                />
-              )}
-            </aside>
-            {!user && (
-              <aside className='auth-btns'>
-                <button
-                  onClick={() => {
-                    setModal(true);
-                    setTab(false);
-                  }}
-                  className='login-btn'
-                >
-                  {' '}
-                  Login{' '}
-                </button>
-                <button
-                  className='signup-btn'
-                  onClick={() => {
-                    setModal(true);
-                    setTab(true);
-                  }}
-                >
-                  {' '}
-                  Sign Up{' '}
-                </button>
-              </aside>
-            )}
-            {user && (
-              <div className='auth-btns'>
-                {/* > */}
-                <Link to={`${user.username}/profile`}>
-                  <button className='login-btn'>Profile</button>
-                  {/* <BasicPopover
-                className='login-btn'
-                buttonText='Profile'
-                popoverContent='Profile options will go here'
-              /> */}
-                </Link>
-                <button className='login-btn' onClick={handleLogout}>
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </header>
       <main>
         <Routes>
           <Route
@@ -310,11 +238,11 @@ function App() {
           <Route path='/*' element={<FourOFour />} />
           <Route path="/about" element={<About />} />
           <Route path='/posts' element={<Posts posts={posts} />}  />
-          <Route path="/post/:id" element={<Post />} />
+          <Route path='/posts/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           {/* <Route path='/tools' element={<ToolsDetails />} /> */}
           {/* <Route path='/tools/:id' element={<ToolsUserDetails />} /> */}
-          <Route path='/tools/:id' element={<ToolsDetails addToCart={addToCart} />} />
+          <Route path='/tools/:id' element={<ToolsUserDetails addToCart={addToCart} />} />
           <Route element={<ProtectedRoute user={user} />}>
             {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path="/:username/post/:id" element={<Post user={user} />} />
@@ -334,10 +262,6 @@ function App() {
             <Route
               path="/:username/post/new"
               element={<NewPost user={user} />}
-            />
-            <Route
-              path="/:username/post/preview"
-              element={<PostPreview user={user} />}
             />
             <Route
               path="/:username/post/new"
