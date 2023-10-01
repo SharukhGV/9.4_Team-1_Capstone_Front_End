@@ -1,5 +1,5 @@
 import {useState, useEffect, lazy} from 'react';
-import {useNavigate} from 'react-router';
+import {useNavigate, useLocation} from 'react-router';
 import {v4 as uuid} from 'uuid';
 import axios from 'axios';
 
@@ -12,7 +12,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Card} from '@mui/joy';
 import './home.css';
-
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -32,10 +31,13 @@ export default function Home({
   const [currentInterestTool, setCurrentInterestTool] = useState(0); 
   const [currentHobbyTool, setCurrentHobbyTool] = useState(0);
   const [tab, setTab] = useState(false);
+  const location = useLocation();
   let visibleInterestPosts = [];
   let visibleCurrentHobbyPosts = [];
   let visibleInterestTools = [];
   let visibleCurrentHobbyTools = [];
+
+  //console.log(location.state)
 
   useEffect(() => {
     axios.get(`${API}/tools`).then(response => {
@@ -43,6 +45,8 @@ export default function Home({
       setTools(allTools);
     })
     .catch(error => console.error('catch', error));
+    
+    //if ()
   }, []);
 
   if (!dataLoader) {
@@ -93,28 +97,6 @@ export default function Home({
       <img src={ArtistsGraphic} className='artistsGraphic' loading='lazy' />
       </div>
       <div className='assesement-sect'>
-        {/* {!user.learning_interest || !user.current_skillset ? (
-          <div className='assesment-sect'>
-            <h4 className='home-h4'> Let's Get Personal </h4>
-            <p className='assesment-p'>
-              {' '}
-              Take our quick assesment for a better curated homepage{' '}
-            </p>
-            <button
-              className='take-assesment-btn'
-              onClick={() => setAssesmentModalOpen(true)}
-            >
-              {' '}
-              Take Assesment{' '}
-            </button>
-            <Assesment
-              assesmentModalOpen={assesmentModalOpen}
-              setAssesmentModalOpen={setAssesmentModalOpen}
-              updateUser={updateUser}
-              user={user}
-            />
-          </div>
-        ) : null} */}
       </div>
       <br />
       <main>
@@ -195,7 +177,7 @@ export default function Home({
         <br />
         <CatCarousel setSelectedCategory={setSelectedCategory} />
         <br />
-        <div className='selected-cat-sect'>
+        <div className='selected-cat-sect' id='category-nav'>
           {selectedCategory ? <h3> {selectedCategory} </h3> : null}
           <br />
           <div className='selected-posts'>
