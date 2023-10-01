@@ -10,14 +10,14 @@
     --blue-background: #18C7ED;
     --green-background: #01B6C8;
     --dark-purple-background: #5D3EE2;
-    --light-purple-background: #7961FC;
+    --light-purple-background: #7851A9;
     --yellow-flower: #FFFC0D;
     --red-flower: #E23242;
     --pink-flower: #F98893;
     --fuchsia-background: #CC126F;
     --light-fuchsia-background: #D06897;
     --dark-blue-purple-background: #4B76B5;
-    --light-blue-purple-background: #817ECB;
+    --light-blue-purple-background: #7851A9;
     --light-pink-background: #D4BFCC;
 }
 
@@ -115,6 +115,11 @@
         fill: var(--fuchsia-background);
         stroke: var(--fuchsia-background);
     }
+
+    0% {
+        fill: var(--blue-background);
+        stroke: var(--blue-background);
+    }
 }
 
 @keyframes changeColorSetTwo {
@@ -126,6 +131,11 @@
     100% {
         fill: var(--light-fuchsia-background);
         stroke: var(--light-fuchsia-background);
+    }
+
+    0% {
+        fill: var(--green-background);
+        stroke: var(--green-background);
     }
 }
 
@@ -139,6 +149,11 @@
         fill: var(--dark-blue-purple-background);
         stroke: var(--dark-blue-purple-background);
     }
+
+    0% {
+        fill: var(--dark-purple-background);
+        stroke: var(--dark-purple-background);
+    }
 }
 
 @keyframes changeColorSetFour {
@@ -151,6 +166,11 @@
         fill: var(--light-blue-purple-background);
         stroke: var(--light-blue-purple-background);
     }
+
+    0% {
+        fill: var(--light-purple-background);
+        stroke: var(--light-purple-background);
+    }
 }
 
 @keyframes changeColorSetFive {
@@ -162,6 +182,11 @@
     100% {
         fill: var(--light-pink-background);
         stroke: var(--light-pink-background);
+    }
+
+    0% {
+        fill: var(--pink-flower);
+        stroke: var(--pink-flower);
     }
 }
 
