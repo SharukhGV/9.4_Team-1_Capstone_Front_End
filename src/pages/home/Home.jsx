@@ -80,9 +80,6 @@ export default function Home({
     }
   }  
 
-  //console.log(user)
-  //console.log(user.learning_interest)
-  //console.log(user.current_skillset)
   return (
     <div className='home-page'>
      
@@ -204,7 +201,7 @@ export default function Home({
             {selectedCategory && !dataLoader && selectedCategory.length > 1 //
               ? postsCategorized[selectedCategory].map((post) => {
                   return (
-                  <div onClick={() => navigate(`/post/${post.post_id}`)} key={post.post_id}>
+                  <div onClick={() => navigate(`/posts/${post.post_id}`)} key={post.post_id}>
                   <PostCard post={post} />
                   </div>
                   )

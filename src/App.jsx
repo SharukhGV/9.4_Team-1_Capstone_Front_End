@@ -191,7 +191,7 @@ function App() {
           />
           <Route path='/about' element={<About />} />
           <Route path='/posts' element={<Posts posts={posts} />}  />
-          <Route path='/post/:id' element={<Post />} />
+          <Route path='/posts/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
           {/* <Route path='/tools' element={<ToolsDetails />} /> */}
           {/* <Route path='/tools/:id' element={<ToolsUserDetails />} /> */}
