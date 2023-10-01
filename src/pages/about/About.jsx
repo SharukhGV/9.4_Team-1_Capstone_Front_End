@@ -53,7 +53,7 @@ export default function About() {
             <p>PERSONAL DESCRIP HERE</p>
             <div>
               <a href="https://github.com/felizj17" className='card-a'><i className="fa fa-github"></i></a>
-              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+              <a href="https://www.linkedin.com/in/juan-feliz/" className='card-a'><i className="fa fa-linkedin"></i></a>
             </div>
           </div>
 
