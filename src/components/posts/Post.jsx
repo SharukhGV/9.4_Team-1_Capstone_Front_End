@@ -26,8 +26,6 @@ export default function Post() {
           <h3> {post.title} </h3>
           <p> {post.category} </p>
           <div>
-            
-            <img src={`https://craftopia-media-bucket.s3.us-east-2.amazonaws.com/post_113_thumbnail`} />
             <img src={media[0].file_url} alt='post-img' />
             {post.body}
           </div>
