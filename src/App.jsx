@@ -1,11 +1,11 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import {
   Routes,
   Route,
   Navigate,
   Outlet,
 } from 'react-router-dom';
-import {useCookies} from 'react-cookie';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 import NavBar from './components/navbar/NavBar';
@@ -20,6 +20,9 @@ import ToolsNewForm from './components/tools/ToolsNewForm';
 import ToolsDetails from './components/tools/ToolsDetails';
 import NewPost from './components/posts/NewPost';
 import About from './pages/about/About';
+
+import FourOFour from './pages/fourOFour/FourOFour';
+
 import Posts from './components/posts/Posts';
 
 import ArtistsGraphic from './assets/artistsgraphic.jpg';
@@ -29,7 +32,7 @@ import ToolsUsers from './components/tools/ToolsUsers';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
-const ProtectedRoute = ({user, redirectPath = '/'}) => {
+const ProtectedRoute = ({ user, redirectPath = '/' }) => {
   if (!user) {
     return <Navigate to={redirectPath} replace />;
   }
@@ -138,7 +141,7 @@ function App() {
       axios
         .post(
           `${API}/auth/token`,
-          {cookie: cookies.token},
+          { cookie: cookies.token },
           {
             withCredentials: true,
           }
@@ -189,6 +192,7 @@ function App() {
               />
             }
           />
+          <Route path='/*' element={<FourOFour />} />
           <Route path='/about' element={<About />} />
           <Route path='/posts' element={<Posts posts={posts} />}  />
           <Route path='/post/:id' element={<Post />} />
