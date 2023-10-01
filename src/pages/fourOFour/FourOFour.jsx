@@ -5,10 +5,14 @@ export default function FourOFour() {
 
     return (
         <div className='four-o-four'>
-            
+
             <div className="paper-pink">
                 <div className="tape-section"></div>
-                <h1>Sometimes errors happen.  Time to head <Link to={'/home'}>home.</Link></h1>
+                <h1>
+                    Sometimes errors happen.
+                    <br />
+                    Time to head <Link to={'/home'}>home.</Link>
+                </h1>
                 <div className="tape-section"></div>
             </div>
 

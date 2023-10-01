@@ -1,3 +1,8 @@
+h1 {
+    text-decoration: black;
+    color: black !important;
+}
+
 .four-o-four {
     margin: 15px;
     padding: 15px;
@@ -217,6 +222,7 @@
             var(--transparent)),
         var(--paper-color);
     min-width: 250px;
+    max-width: 60%;
     min-height: 130px;
     display: flex;
     align-items: center;
@@ -303,9 +309,4 @@
     transform: rotate(45deg);
     left: -4vmin;
     bottom: 0;
-}
-
-h1 {
-    text-decoration: black;
-    color: black !important;
 }
