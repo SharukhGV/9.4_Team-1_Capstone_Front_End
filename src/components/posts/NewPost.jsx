@@ -61,9 +61,10 @@ export default function NewPost({user}) {
   const sendToServer = async event => {
     event.preventDefault();
     const formData = new FormData();
+    console.log(files)
     files.forEach((file, index) => {
       if (file) {
-        formData.append(`file-${index}`, file);
+        formData.append(`file-${index}`, file.data);
       }
     });
 
@@ -78,14 +79,6 @@ export default function NewPost({user}) {
       })
       .then(res => {
         navigate(`/${user.username}/post/${res.data.createdPost.post_id}`
-        // , {
-        //   state: {
-        //     title: post.title,
-        //     category: post.category,
-        //     body: post.body,
-        //     file: files,
-        //   },
-        // }
         );
       })
       .catch(error => console.log(error));
