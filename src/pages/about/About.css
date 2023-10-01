@@ -7,7 +7,9 @@
 }
 
 img {
+    display: grid;
     border-radius: 50px;
+    justify-self: center;
 }
 
 .about-team {

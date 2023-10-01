@@ -32,14 +32,15 @@ export default function About() {
           <br />
           Craftopia is a vibrant crafting community that empowers all skill levels.  Learn from experts, buy/sell crafting gear, and connect with like-minded crafters.  Enjoy personalized learning, access resources, showcase your creations, trade items, and swap skills.  Craftopia is where hobbies become fun again. Join us and nurture your creativity today!'
         </div>
-        <br />
-
-        <img
-          src="src/assets/artistsgraphic.jpg"
-          alt="Craft Collective"
-          style={{ width: '85%', maxWidth: '100%' }}
-        />
       </div>
+
+      <br />
+
+      <img
+        src="src/assets/artistsgraphic.jpg"
+        alt="Craft Collective"
+        style={{ width: '85%', maxWidth: '100%' }}
+      />
       <div
         className='team'
         style={bodyStyle}
