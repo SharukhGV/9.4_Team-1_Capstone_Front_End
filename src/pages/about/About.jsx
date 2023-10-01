@@ -49,7 +49,7 @@ export default function About() {
             // style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Juan Feliz</h1>
-            <p className="title">Technical Lead & SQL Master</p>
+            <p className="title">Technical Lead & Master Debugger</p>
             <p>PERSONAL DESCRIP HERE</p>
             <div>
               <a href="https://github.com/felizj17" className='card-a'><i className="fa fa-github"></i></a>
@@ -69,7 +69,7 @@ export default function About() {
             <p>PERSONAL DESCRIP HERE</p>
             <div>
               <a href="https://github.com/SharukhGV" className='card-a'><i className="fa fa-github"></i></a>
-              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+              <a href="https://www.linkedin.com/in/sharukh-velupillai-08b98b7a/" className='card-a'><i className="fa fa-linkedin"></i></a>
             </div>
           </div>
 
@@ -85,7 +85,7 @@ export default function About() {
             <p>PERSONAL DESCRIP HERE</p>
             <div>
               <a href="https://github.com/MichelBDLC" className='card-a'><i className="fa fa-github"></i></a>
-              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+              <a href="https://www.linkedin.com/in/michelbdlc" className='card-a'><i className="fa fa-linkedin"></i></a>
             </div>
           </div>
 
@@ -100,7 +100,7 @@ export default function About() {
             <p>PERSONAL DESCRIP HERE</p>
             <div>
               <a href="https://github.com/SuperNinjaEv" className='card-a'><i className="fa fa-github"></i></a>
-              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+              <a href="https://www.linkedin.com/in/evanvelush/" className='card-a'><i className="fa fa-linkedin"></i></a>
             </div>
           </div>
         </div>
