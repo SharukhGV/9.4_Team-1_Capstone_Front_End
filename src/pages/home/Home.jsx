@@ -23,6 +23,7 @@ export default function Home({
   updateUser,
 }) {
   const navigate = useNavigate();
+  const location = useLocation()
   const [assesmentModalOpen, setAssesmentModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentInterestPost, setCurrentInterestPost] = useState(0);
@@ -31,24 +32,30 @@ export default function Home({
   const [currentInterestTool, setCurrentInterestTool] = useState(0); 
   const [currentHobbyTool, setCurrentHobbyTool] = useState(0);
   const [tab, setTab] = useState(false);
-  const location = useLocation();
   let visibleInterestPosts = [];
   let visibleCurrentHobbyPosts = [];
   let visibleInterestTools = [];
   let visibleCurrentHobbyTools = [];
 
-  //console.log(location.state)
-
   useEffect(() => {
+    
     axios.get(`${API}/tools`).then(response => {
       const allTools = response.data;
       setTools(allTools);
     })
     .catch(error => console.error('catch', error));
-    
-    //if ()
   }, []);
 
+ 
+  useEffect(()=>{
+    if(location.state){
+      window.scrollTo({
+        top:800,
+        behavior:'smooth'
+      })
+        setSelectedCategory(location.state.category)
+    }
+  }, [location.state])
   if (!dataLoader) {
     for (let i = 0; i < 5; i++) {
       const currentHobbyIndex = user.current_skillset === 'Beginner' 
