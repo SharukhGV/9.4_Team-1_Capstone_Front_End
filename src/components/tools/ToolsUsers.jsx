@@ -2,7 +2,6 @@ import ToolsCard from './ToolsCard';
 import {useState} from 'react';
 import {useEffect} from 'react';
 import axios from 'axios';
-import Carousel from 'react-material-ui-carousel';
 import ToolsDetails from './ToolsDetails';
 
 function ToolsUsers({user}) {
