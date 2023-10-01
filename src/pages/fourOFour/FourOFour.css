@@ -1,0 +1,167 @@
+.four-o-four {
+    margin: 15px;
+    padding: 15px;
+    justify-content: center;
+    text-align: center;
+    /* background-image: linear-gradient(to bottom right, #FBE9AA, #F2D881); */
+}
+
+:root {
+    --blue-background: #18C7ED;
+    --green-background: #01B6C8;
+    --dark-purple-background: #5D3EE2;
+    --light-purple-background: #7961FC;
+    --yellow-flower: #FFFC0D;
+    --red-flower: #E23242;
+    --pink-flower: #F98893;
+    --fuchsia-background: #CC126F;
+    --light-fuchsia-background: #D06897;
+    --dark-blue-purple-background: #4B76B5;
+    --light-blue-purple-background: #817ECB;
+    --light-pink-background: #D4BFCC;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.colorset1 {
+    stroke: var(--blue-background);
+    fill: var(--blue-background);
+    animation-name: changeColorSetOne;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.colorset2 {
+    stroke: var(--green-background);
+    fill: var(--green-background);
+    animation-name: changeColorSetTwo;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.colorset3 {
+    stroke: var(--dark-purple-background);
+    fill: var(--dark-purple-background);
+    animation-name: changeColorSetThree;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.colorset4 {
+    stroke: var(--light-purple-background);
+    fill: var(--light-purple-background);
+    animation-name: changeColorSetFour;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+#wingy-right {
+    animation-name: changeWing;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    transform-origin: 870px 427px;
+    animation-direction: alternate;
+}
+
+#wingy-left {
+    animation-name: changeWing;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    transform-origin: 455px 423px;
+    animation-direction: alternate;
+}
+
+.flower-center {
+    stroke: var(--yellow-flower);
+    fill: var(--yellow-flower);
+}
+
+.flower-red {
+    stroke: var(--red-flower);
+    fill: var(--red-flower);
+}
+
+.flower-pink {
+    stroke: var(--pink-flower);
+    fill: var(--pink-flower);
+    animation-name: changeColorSetFive;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes changeColorSetOne {
+    0% {
+        fill: var(--blue-background);
+        stroke: var(--blue-background);
+    }
+
+    100% {
+        fill: var(--fuchsia-background);
+        stroke: var(--fuchsia-background);
+    }
+}
+
+@keyframes changeColorSetTwo {
+    0% {
+        fill: var(--green-background);
+        stroke: var(--green-background);
+    }
+
+    100% {
+        fill: var(--light-fuchsia-background);
+        stroke: var(--light-fuchsia-background);
+    }
+}
+
+@keyframes changeColorSetThree {
+    0% {
+        fill: var(--dark-purple-background);
+        stroke: var(--dark-purple-background);
+    }
+
+    100% {
+        fill: var(--dark-blue-purple-background);
+        stroke: var(--dark-blue-purple-background);
+    }
+}
+
+@keyframes changeColorSetFour {
+    0% {
+        fill: var(--light-purple-background);
+        stroke: var(--light-purple-background);
+    }
+
+    100% {
+        fill: var(--light-blue-purple-background);
+        stroke: var(--light-blue-purple-background);
+    }
+}
+
+@keyframes changeColorSetFive {
+    0% {
+        fill: var(--pink-flower);
+        stroke: var(--pink-flower);
+    }
+
+    100% {
+        fill: var(--light-pink-background);
+        stroke: var(--light-pink-background);
+    }
+}
+
+@keyframes changeWing {
+    100% {
+        transform: rotateX(50deg);
+
+    }
+}
