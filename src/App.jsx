@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Routes,
   Route,
@@ -28,6 +28,9 @@ import NewPost from "./components/posts/NewPost";
 import PostPreview from "./components/posts/PostPreview";
 import About from "./pages/about/About";
 
+import FourOFour from './pages/fourOFour/FourOFour';
+
+import Posts from './components/posts/Posts';
 import ArtistsGraphic from "./assets/artistsgraphic.jpg";
 
 import "./App.css";
@@ -38,7 +41,7 @@ import ToolsIndexSingle from "./components/tools/toolsIndexSingle";
 import SuccessPage from "./components/cart/SuccessPage";
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
-const ProtectedRoute = ({ user, redirectPath = "/" }) => {
+const ProtectedRoute = ({ user, redirectPath = '/' }) => {
   if (!user) {
     return <Navigate to={redirectPath} replace />;
   }
@@ -46,15 +49,15 @@ const ProtectedRoute = ({ user, redirectPath = "/" }) => {
 };
 
 function App() {
-  const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies();
   const [modal, setModal] = useState(false);
-  const [tab, setTab] = useState(false);
+  const [tab, setTab] = useState(false); 
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState();
-  const [cartView, setCartView] = useState(false);
+  
   const [cartItems, setCartItems] = useState([]);
   const [posts, setposts] = useState([]);
+  const [searchResults, setSearchResults] = useState('');
   const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
     Painting: [],
@@ -122,6 +125,8 @@ function App() {
     getPosts();
   }, []);
 
+  //console.log(posts)
+
   useEffect(() => {
     checkToken();
     getCart();
@@ -165,6 +170,7 @@ function App() {
         .post(
           `${API}/auth/token`,
           { cookie: cookies.token },
+          { cookie: cookies.token },
           {
             withCredentials: true,
           }
@@ -199,24 +205,27 @@ function App() {
           setTab={setTab}
           posts={posts}
           dataLoader={dataLoader}
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+          cartItems={cartItems}
         />
-        <div className="navbar">
+        <div className='navbar'>
           <aside>
             {/* <Link to='/about' className='about-link'> About </Link> */}
-            <button onClick={() => navigate("/about")} className="signup-btn">
-              {" "}
-              About{" "}
+            <button onClick={() => navigate('/about')} className='signup-btn'>
+              {' '}
+              About{' '}
             </button>
           </aside>
-          <div className="cart-auth-buttons">
-            <aside className="aside-cart">
+          <div className='cart-auth-buttons'>
+            <aside className='aside-cart'>
               <Badge
                 badgeContent={cartItems.length}
-                color="error"
+                color='error'
                 onClick={() => setCartView(!cartView)}
               >
                 <ShoppingCartIcon
-                  className="shopping-cart"
+                  className='shopping-cart'
                   onClick={() => setCartView(!cartView)}
                 />
               </Badge>
@@ -231,41 +240,41 @@ function App() {
               )}
             </aside>
             {!user && (
-              <aside className="auth-btns">
+              <aside className='auth-btns'>
                 <button
                   onClick={() => {
                     setModal(true);
                     setTab(false);
                   }}
-                  className="login-btn"
+                  className='login-btn'
                 >
-                  {" "}
-                  Login{" "}
+                  {' '}
+                  Login{' '}
                 </button>
                 <button
-                  className="signup-btn"
+                  className='signup-btn'
                   onClick={() => {
                     setModal(true);
                     setTab(true);
                   }}
                 >
-                  {" "}
-                  Sign Up{" "}
+                  {' '}
+                  Sign Up{' '}
                 </button>
               </aside>
             )}
             {user && (
-              <div className="auth-btns">
+              <div className='auth-btns'>
                 {/* > */}
                 <Link to={`${user.username}/profile`}>
-                  <button className="login-btn">Profile</button>
+                  <button className='login-btn'>Profile</button>
                   {/* <BasicPopover
                 className='login-btn'
                 buttonText='Profile'
                 popoverContent='Profile options will go here'
               /> */}
                 </Link>
-                <button className="login-btn" onClick={handleLogout}>
+                <button className='login-btn' onClick={handleLogout}>
                   Logout
                 </button>
               </div>
@@ -298,10 +307,14 @@ function App() {
             }
           />
 
+          <Route path='/*' element={<FourOFour />} />
           <Route path="/about" element={<About />} />
+          <Route path='/posts' element={<Posts posts={posts} />}  />
           <Route path="/post/:id" element={<Post />} />
           {/* create public profile view for outside viewers */}
-
+          {/* <Route path='/tools' element={<ToolsDetails />} /> */}
+          {/* <Route path='/tools/:id' element={<ToolsUserDetails />} /> */}
+          <Route path='/tools/:id' element={<ToolsDetails addToCart={addToCart} />} />
           <Route element={<ProtectedRoute user={user} />}>
             {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path="/:username/post/:id" element={<Post user={user} />} />

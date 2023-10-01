@@ -11,6 +11,15 @@
   width: 80%;
   margin-left: 10%;
 }
+
+.profile-desc h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.profile-desc p {
+  font-family:  'Open Sans', sans-serif;
+}
+
 .profile-desc-edit {
   grid-column-start: 2;
   text-align: center;
@@ -29,10 +38,14 @@
   margin-bottom: 5%;
   justify-content: space-evenly;
 }
-.profile-subtitle{
+
+.profile-subtitle {
   margin-top: 0;
-  text-decoration: underline;
+  font-family: 'Roboto', sans-serif;
+  color: #1a237e;
+  font-weight: 400;
 }
+
 .profile-posts {
   width: 50%;
   margin-right: 2.5%;
@@ -43,30 +56,31 @@
   margin-left: 2.5%;
   position: relative;
 }
-.profile-posts-list{
+.profile-posts-list {
   position: relative;
   overflow: scroll;
-  z-index:1;
-  margin:0;
-  padding:0;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
   padding-bottom: 10px;
   width: 100%;
-  max-height:50vh ;
+  max-height: 50vh;
+  text-decoration: none;
 }
-.profile-tools-list{
+.profile-tools-list {
   position: relative;
   overflow: scroll;
-  z-index:1;
-  margin:0;
-  padding:0;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
   padding-bottom: 10px;
   width: 100%;
 }
-.aside-spacing{
-  margin-right:10px;
+.aside-spacing {
+  margin-right: 10px;
   margin-bottom: 10px;
 }
-.scroll{
+.scroll {
   overflow: hidden;
   white-space: nowrap;
   margin: 0;
@@ -74,24 +88,28 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-
 }
 
 .button {
-  background-color: rgb(43, 58, 226);
+  background-color: #1a237e;
+  color: white;
+  font-family:  'Open Sans', sans-serif;
   width: 50px;
-  height:25px;
-  padding-top: 12px;
-  color: aliceblue;
-  padding-left: 15px;
-  padding-right: 15px;
+  height: 25px;
   margin: auto;
+  border: none;
+  border-radius: 4px;
+  width: 70px;
 }
 
-.select-inputs{
-  display:flex;
+.profile-subtitle p {
+  color: #3C415C;
+}
+
+.select-inputs {
+  display: flex;
   flex-direction: row;
-  width:100%;
+  width: 100%;
   margin-bottom: 5%;
 }
 
@@ -100,3 +118,4 @@
   background-color: transparent;
   color: #1a237e;
 }
+

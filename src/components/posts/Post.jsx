@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {useLocation, useParams} from 'react-router';
+import { useParams} from 'react-router';
 import axios from 'axios';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;

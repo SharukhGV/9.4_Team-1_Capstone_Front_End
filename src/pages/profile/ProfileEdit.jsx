@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -20,6 +20,9 @@ export default function ProfileEdit({user, refreshUser}) {
   const {username} = useParams();
   const navigate = useNavigate();
   const [updatedUser, setUpdatedUser] = useState(user);
+  const [learningInterest, setLearningInterest] = useState('Unsure');
+  const [currentSkillset, setCurrentSkillset] = useState('Beginner');
+
   const [file, setFile] = useState({
     preview: '',
     data: '',
@@ -64,6 +67,12 @@ export default function ProfileEdit({user, refreshUser}) {
       ...updatedUser,
       [e.target.name]: e.target.value,
     });
+    if (e.target.name === 'learning_interest') {
+      setLearningInterest(e.target.value)
+    }
+    if (e.target.name === 'current_skillset') {
+      setCurrentSkillset(e.target.value)
+    }
   };
 
   return (
@@ -82,6 +91,7 @@ export default function ProfileEdit({user, refreshUser}) {
             <aside className='img-update'>
               <img
                 className='profile-img'
+                loading='lazy'
                 src={
                   file.preview
                     ? file.preview
@@ -96,7 +106,7 @@ export default function ProfileEdit({user, refreshUser}) {
             <aside className='profile-desc-edit'>
               <h1>{user.username}</h1>
               <aside className='select-inputs'>
-                <FormControl fullWidth sx={{marginRight:'5px'}}>
+                <FormControl variant='standard' fullWidth sx={{marginRight: '5px'}}>
                   <InputLabel id='learning-interest-label'>
                     Learning Interest
                   </InputLabel>
@@ -104,7 +114,7 @@ export default function ProfileEdit({user, refreshUser}) {
                     labelId='learning-interest-label'
                     id='learning-interest-select'
                     name='learning_interest'
-                    value={updatedUser.learning_interest}
+                    value={learningInterest}
                     label='Learning Interest'
                     onChange={handleSelectChange}
                   >
@@ -124,7 +134,7 @@ export default function ProfileEdit({user, refreshUser}) {
                   </Select>
                 </FormControl>
 
-                <FormControl fullWidth sx={{marginLeft:'5px'}}>
+                <FormControl fullWidth variant='standard' sx={{marginLeft: '5px'}}>
                   <InputLabel id='current-skillset-label'>
                     Current Skillset
                   </InputLabel>
@@ -132,10 +142,9 @@ export default function ProfileEdit({user, refreshUser}) {
                     labelId='current-skillset-label'
                     id='current-skillset-select'
                     name='current_skillset'
-                    value={updatedUser.current_skillset}
+                    value={currentSkillset}
                     label='Current Skillset'
-                    onChange={handleSelectChange}
-                  >
+                    onChange={handleSelectChange}>
                     <MenuItem value='Beginner'>Beginner</MenuItem>
                     <MenuItem value='Painting'>Painting</MenuItem>
                     <MenuItem value='Drawing'>Drawing</MenuItem>
@@ -146,27 +155,10 @@ export default function ProfileEdit({user, refreshUser}) {
                     <MenuItem value='Graffiti'>Graffiti</MenuItem>
                     <MenuItem value='Fashion Design'>Fashion Design</MenuItem>
                     <MenuItem value='Filmmaking'>Filmmaking</MenuItem>
-                    <MenuItem value='Digital Artistry'>
-                      Digital Artistry
-                    </MenuItem>
+                    <MenuItem value='Digital Artistry'> Digital Artistry </MenuItem>
                   </Select>
                 </FormControl>
               </aside>
-              {/* <TextField
-                name='current_skillset'
-                label='Current Skillset'
-                value={updatedUser.current_skillset}
-                sx={{marginBottom: 4}}
-                onChange={handleUpdatedUser}
-              />
-
-              <TextField
-                name='learning_interest'
-                label='Learning Interest'
-                value={updatedUser.learning_interest}
-                sx={{marginBottom: 4}}
-                onChange={handleUpdatedUser}
-              /> */}
               <TextField
                 name='city_state'
                 label='City State'
@@ -181,7 +173,6 @@ export default function ProfileEdit({user, refreshUser}) {
                 sx={{width: '100%'}}
                 onChange={handleUpdatedUser}
               />
-              {/* <p>{user.aboutme}</p> */}
             </aside>
           </div>
           {user.username === username && (
@@ -196,50 +187,6 @@ export default function ProfileEdit({user, refreshUser}) {
           )}
         </CardContent>
       </Card>
-      {/* <div>
-        <Card className='profile-posts'>
-          <CardContent>
-            {posts.length < 1 ? (
-              <div>
-                <p>No Post yet </p>
-              </div>
-            ) : (
-              <div>
-                {posts.map(post => (
-                  <Card>
-                    <CardContent>
-                      <img src={post.thumbnail} alt='thumbnail' />
-                      <p>{post.title}</p>
-                      <p>{post.created_at}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-        <Card className='profile-tools'>
-          <CardContent>
-            {tools.length < 1 ? (
-              <div>
-                <p>No Tools yet </p>
-              </div>
-            ) : (
-              <div>
-                {tools.map(tool => (
-                  <Card>
-                    <CardContent>
-                      <img src={tool.thumbnail} alt='thumbnail' />
-                      <p>{tool.title}</p>
-                      <p>{tool.created_at}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div> */}
     </div>
   );
 }

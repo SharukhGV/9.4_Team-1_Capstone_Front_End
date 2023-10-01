@@ -1,6 +1,6 @@
-import {useState, useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {Link} from 'react-router-dom';
-import {v4 as uuid} from 'uuid'
+import {v4 as uuid} from 'uuid';
 import CartItem from './CartItem';
 import './cart.css';  
 import {loadStripe} from '@stripe/stripe-js';
@@ -72,11 +72,13 @@ const navigate=useNavigate()
 
    <div>
       {items.length > 0 ? (
-         items.map((item, i) => (
+        items.map((item, i) => {
+          price += item.price;
+          return (
             <aside key={uuid()}>
                <CartItem tool={item} index={i} removeItem={removeItem} />
             </aside>
-         ))
+        )})
       ) : (
          <aside>
             <h4>Cart is empty</h4>

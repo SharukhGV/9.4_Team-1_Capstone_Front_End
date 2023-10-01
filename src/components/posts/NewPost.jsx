@@ -3,13 +3,13 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router';
 import Add from '../../assets/add.svg'
 import {
-  TextField,
   Select,
   FormControl,
   InputLabel,
   MenuItem,
   Input,
   CardActionArea,
+  Breadcrumbs
 } from '@mui/material';
 import {styled} from '@mui/system';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -31,6 +31,8 @@ import {
 import './NewPost.css'
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
+
+//we want to implement the about and the categories as breadcrumbs
 
 export default function NewPost({user}) {
   const navigate = useNavigate();
@@ -75,14 +77,16 @@ export default function NewPost({user}) {
         headers: {'Content-Type': 'multipart/form-data'},
       })
       .then(res => {
-        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`, {
-          state: {
-            title: post.title,
-            category: post.category,
-            body: post.body,
-            file: files,
-          },
-        });
+        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`
+        // , {
+        //   state: {
+        //     title: post.title,
+        //     category: post.category,
+        //     body: post.body,
+        //     file: files,
+        //   },
+        // }
+        );
       })
       .catch(error => console.log(error));
   };
@@ -101,13 +105,14 @@ export default function NewPost({user}) {
 
   return (
     <main>
+      <br />
       <h1> Share Your Expertise </h1>
       <h3>
         {' '}
         No matter your level, you can inspire and empower fellow creatives. Post
         tutorials, guides, and classes.{' '}
       </h3>
-
+      <br />
       <div className='content-sect'>
         <aside className='post-title'>
           <Input
@@ -120,13 +125,10 @@ export default function NewPost({user}) {
             <InputLabel sx={{fontFamily: 'Lato'}}> Category </InputLabel>
             <Select
               onChange={event =>
-                setPost({...post, category: event.target.value})
-              }
-            >
+                setPost({...post, category: event.target.value})}>
               <MenuItem value=''> Category </MenuItem>
               <MenuItem value='Photography'> Photography </MenuItem>
               <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
-              <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
               <MenuItem value='Ceramics'> Ceramics </MenuItem>
               <MenuItem value='Drawing'> Drawing </MenuItem>
               <MenuItem value='Sculpture'> Sculpture </MenuItem>
@@ -134,10 +136,10 @@ export default function NewPost({user}) {
               <MenuItem value='Painting'> Painting </MenuItem>
               <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
               <MenuItem value='Graffiti'> Graffiti </MenuItem>
+              <MenuItem value='Digital Atistry'> Digital Artistry </MenuItem>
             </Select>
           </FormControl>
         </aside>
-
         <div className='post-body'>
           <Textarea
             className='textarea'
@@ -147,13 +149,13 @@ export default function NewPost({user}) {
             onChange={event => setPost({...post, body: event.target.value})}
           />
           <div className='img-slider-container'>
-            <h5>Add Images</h5>
             {files.map((img, i) => (
               <aside key={`post-image-upload-preview${i}`}>
                 <img
                   src={img.preview}
                   alt={`fig-${i}`}
                   style={{width: '100%', height: 'auto'}}
+                  loading='lazy'
                 />
                 <p className='caption'>
                   <em>figure - {i}</em>
@@ -178,6 +180,7 @@ export default function NewPost({user}) {
                   src={Add}
                   className='add-svg'
                   alt='click to add an image'
+                  loading='lazy'
                 />
                 <VisuallyHiddenInput
                   type='file'
@@ -203,6 +206,7 @@ export default function NewPost({user}) {
           <ModalDialog layout='fullscreen'>
             {/* <img className='logo' src={craftopiaLogo} /> */}
             {/* <div className='top-btns'> */}
+            <div className='top-btns'>
             <button className='back-btn' onClick={() => setOpenPreview(false)}>
               {' '}
               Back to editing{' '}
@@ -211,16 +215,24 @@ export default function NewPost({user}) {
               {' '}
               &times;{' '}
             </button>
+            </div>
             {/* </div> */}
             <br />
             <div className='content-preview'>
-              <Typography> {post.title} </Typography>
-              {/* <p> {post.category} </p>
-            <img src={selectedFile} />
-            <p> {post.body} </p> */}
+              <h3> {post.title} </h3>
+              <p> {post.category} </p>
+            {/* <img src={URL.createObjectURL(selected)} /> */}
+            <p> {post.body} </p>
+            <div>
+              {/* {
+                files && files.length > 0 ? files.map(file => (
+                  <img src={URL.createObjectURL(file)} />
+                ) 
+                ) : null
+              } */}
             </div>
-
-            <button className='post-btn' onClick={sendToServer}>
+            </div>
+            <button className='preview-post-btn' onClick={sendToServer}>
               {' '}
               Post{' '}
             </button>
@@ -231,41 +243,3 @@ export default function NewPost({user}) {
   );
 }
 
-// function prevSlide() {
-//   setCurrentPlaceholder(prevImg =>
-//     prevImg === 0 ? placeholders.length - 1 : prevImg - 1
-//   );
-// };
-
-// function nextSlide() {
-//   setCurrentPlaceholder(prevImg =>
-//     prevImg === placeholders.length - 1 ? 0 : prevImg + 1
-//   );
-// }
-
-// const addPlaceHolder = () => {
-//   if (files.length < placeholders.length) {
-//     setFiles([...files, null]);
-//   }
-// }
-
-// const removePlaceholder = (index) => {
-//   const newFiles = [...files];
-//   newFiles.splice(index, 1);
-//   setFiles(newFiles);
-// }
-
-// function handleFileSelection(event, index) {
-//   const newSelectedFiles = [...files];
-//   newSelectedFiles[index] = event.target.files[0];
-//   setFiles(newSelectedFiles);
-//   addPlaceHolder();
-// }
-
-//apply lazyloading to images & everything possible
-
-// const visibleImgs = [
-//   placeholders[currentPlaceholder],
-//   placeholders[(currentPlaceholder + 1) % placeholders.length],
-//   //placeholders[(currentPlaceholder + 2) % placeholders.length],
-// ];

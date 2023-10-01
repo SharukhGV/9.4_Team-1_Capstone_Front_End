@@ -17,7 +17,7 @@ import digitalArtImg from '../../assets/categoryImg/digitalArtImg.jpg';
 import sculptureImg from '../../assets/categoryImg/sculptureImg.jpg';
 import printmakingImg from '../../assets/categoryImg/printmakingImg.jpg';
 
-export default function CatCarousel({ setSelectedCategory }) {
+export default function CatCarousel({setSelectedCategory}) {
   const [currentImg, setCurrentImg] = useState(0);
 
   const artsImgs = [
@@ -26,24 +26,24 @@ export default function CatCarousel({ setSelectedCategory }) {
     {name: 'Painting', imageUrl: paintingImg},
     {name: 'Graffiti', imageUrl: graffitiImg},
     {name: 'Filmmaking', imageUrl: filmmakingImg},
-    {name: 'Fashion Design', imageUrl: fashionDesignImg}, 
+    {name: 'Fashion Design', imageUrl: fashionDesignImg},
     {name: 'Drawing', imageUrl: drawingImg},
     {name: 'Digital Artistry', imageUrl: digitalArtImg},
     {name: 'Sculpting', imageUrl: sculptureImg},
-    {name: 'Printmaking', imageUrl: printmakingImg}, 
+    {name: 'Printmaking', imageUrl: printmakingImg},
   ];
 
   function prevSlide() {
     setCurrentImg(prevImg =>
       prevImg === 0 ? artsImgs.length - 1 : prevImg - 1
     );
-  } 
+  } //set inline
 
   function nextSlide() {
     setCurrentImg(prevImg =>
       prevImg === artsImgs.length - 1 ? 0 : prevImg + 1
     );
-  } 
+  }
 
   const visibleImgs = [
     artsImgs[(currentImg - 1 + artsImgs.length) % artsImgs.length],
@@ -54,7 +54,7 @@ export default function CatCarousel({ setSelectedCategory }) {
   ];
 
   return (
-    <div className='slider-container'>
+    <div className='slider-container' key='cat-carousel'>
       <button onClick={prevSlide} className='arrow'>
         {' '}
         <ArrowBackIosIcon />{' '}
@@ -62,7 +62,7 @@ export default function CatCarousel({ setSelectedCategory }) {
       {visibleImgs.map((img, i) => (
         <Card
           component='li'
-          sx={{height: 40, width: '100%'}}
+          sx={{height: 40, width: '100%', cursor: 'pointer'}}
           value={img.name}
           onClick={() => setSelectedCategory(img.name)}
           key={uuidv4()}
