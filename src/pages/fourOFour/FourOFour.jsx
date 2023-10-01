@@ -6,15 +6,17 @@ export default function FourOFour() {
     return (
         <div className='four-o-four'>
 
-            <div className="paper-pink">
-                <div className="tape-section"></div>
-                <h1>
-                    Sometimes errors happen.
-                    <br />
-                    Time to head <Link to={'/home'}>home.</Link>
-                </h1>
-                <div className="tape-section"></div>
-            </div>
+            <Link to={'/home'} style={{textDecoration: 'none'}}>
+                <div className="paper-pink">
+                    <div className="tape-section"></div>
+                    <h1>
+                        Sometimes errors happen.
+                        <br />
+                        Time to head home.
+                    </h1>
+                    <div className="tape-section"></div>
+                </div>
+            </Link>
 
             <div className="container">
                 <svg id="tsuru" className="container" width="500" height="500">

@@ -223,6 +223,7 @@ h1 {
         var(--paper-color);
     min-width: 250px;
     max-width: 60%;
+    width: 500px;
     min-height: 130px;
     display: flex;
     align-items: center;
@@ -309,4 +310,8 @@ h1 {
     transform: rotate(45deg);
     left: -4vmin;
     bottom: 0;
+}
+
+Link:link {
+    text-decoration: none;
 }
