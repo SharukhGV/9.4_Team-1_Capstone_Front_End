@@ -7,11 +7,16 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+
 
 export default function CheckoutForm(props) {
+    // const { emptyCart } = props;
+
   const stripe = useStripe();
   const elements = useElements();
-
+// const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState(null);
 
 //   const handleSubmit = async (event) => {
@@ -103,7 +108,8 @@ export default function CheckoutForm(props) {
 // }
 
 
-function handleCheckout() {
+
+function handleCheckout(props) {
     // const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
     fetch('/checkout', {
         method: 'POST',
@@ -114,19 +120,29 @@ function handleCheckout() {
     })
     .then(response => response.json())
     .then(data => {
+
         // Handle the response, e.g., display a success message
     })
     .catch(error => {
         console.error('Error:', error);
     });
+
+    // navigate('/success')
 }
 
+
+
+
   return (
-    <form onSubmit={handleCheckout}>
+    <form onSubmit={(e) => {
+        e.preventDefault(); 
+        handleCheckout();
+    //    emptyCart();
+    }}>
       <PaymentElement />
-      <button type="submit" disabled={!stripe || !elements}>
+      <Link to="/success"><button type="submit" disabled={!stripe || !elements}>
         Pay
-      </button>
+      </button></Link>
       {/* Show error message to your customers */}
       {errorMessage && <div>{errorMessage}</div>}
     </form>

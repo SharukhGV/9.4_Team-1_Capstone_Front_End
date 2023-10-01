@@ -35,6 +35,7 @@ import ToolsUsers from "./components/tools/ToolsUsers";
 import { Badge } from "@mui/material";
 import CheckoutFormMain from "./components/cart/CheckoutFormMain";
 import ToolsIndexSingle from "./components/tools/toolsIndexSingle";
+import SuccessPage from "./components/cart/SuccessPage";
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 const ProtectedRoute = ({ user, redirectPath = "/" }) => {
@@ -67,25 +68,25 @@ function App() {
     Filmmaking: [],
     "Digital Artistry": [],
   });
-const [grandTotal,setGrandTotal]=useState([])
+  const [grandTotal, setGrandTotal] = useState([]);
 
-// function handleCheckout() {
-//   // const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+  // function handleCheckout() {
+  //   // const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
 
-//   fetch('/checkout', {
-//       method: 'POST',
-//       headers: {
-//           'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({ amount: grandTotal }),
-//   })
-//   .then(response => response.json())
-//   .then(data => {
-//       })
-//   .catch(error => {
-//       console.error('Error:', error);
-//   });
-// }
+  //   fetch('/checkout', {
+  //       method: 'POST',
+  //       headers: {
+  //           'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ amount: grandTotal }),
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //       })
+  //   .catch(error => {
+  //       console.error('Error:', error);
+  //   });
+  // }
 
   useEffect(() => {
     const getPosts = () => {
@@ -125,8 +126,6 @@ const [grandTotal,setGrandTotal]=useState([])
     checkToken();
     getCart();
   }, []);
-
-
 
   useEffect(() => {
     if (cartItems) {
@@ -181,6 +180,11 @@ const [grandTotal,setGrandTotal]=useState([])
         });
     }
   }
+
+  const emptyCart = () => {
+    setCartItems([]);
+    localStorage.setItem("cart", JSON.stringify([]));
+  };
 
   return (
     <div className="App">
@@ -284,12 +288,20 @@ const [grandTotal,setGrandTotal]=useState([])
               />
             }
           />
-          <Route path="/checkout" element={<CheckoutFormMain grandTotal={grandTotal}  />} />
+          <Route
+            path="/checkout"
+            element={
+              <CheckoutFormMain
+              emptyCart={emptyCart}
+                grandTotal={grandTotal}
+              />
+            }
+          />
 
           <Route path="/about" element={<About />} />
           <Route path="/post/:id" element={<Post />} />
           {/* create public profile view for outside viewers */}
-          
+
           <Route element={<ProtectedRoute user={user} />}>
             {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path="/:username/post/:id" element={<Post user={user} />} />
@@ -334,7 +346,7 @@ const [grandTotal,setGrandTotal]=useState([])
               path="/:username/tools/:tools_id"
               element={<ToolsEditForm user={user} />}
             />
-            
+
             <Route
               path="/:username/tools/new"
               element={<ToolsNewForm user={user} />}
@@ -357,7 +369,14 @@ const [grandTotal,setGrandTotal]=useState([])
           <Route path="/post/:id" element={<Post />} />
 
           <Route path="/tools" element={<ToolsUsers />} />
-          <Route path="/tools/:id" element={<ToolsUserDetails removeItem={removeItem} addToCart={addToCart} />} />
+          <Route
+            path="/tools/:id"
+            element={
+              <ToolsUserDetails removeItem={removeItem} addToCart={addToCart} />
+            }
+          />
+          <Route path="/success" element={<SuccessPage emptyCart={emptyCart} user={user} />} />
+
           {/* create public profile view for outside viewers */}
           {/* <Route path='/tools' element={<Tools />} />
           <Route path='/tools/:tools_id' element={<ToolsUserDetails />} /> */}
