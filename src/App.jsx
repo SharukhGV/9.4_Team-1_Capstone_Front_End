@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import {
   Routes,
   Route,
@@ -7,7 +7,7 @@ import {
   useNavigate,
   Link,
 } from 'react-router-dom';
-import {useCookies} from 'react-cookie';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -27,16 +27,17 @@ import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import PostPreview from './components/posts/PostPreview';
 import About from './pages/about/About';
+import FourOFour from './pages/fourOFour/FourOFour';
 
 import ArtistsGraphic from './assets/artistsgraphic.jpg';
 
 import './App.css';
 import ToolsUsers from './components/tools/ToolsUsers';
-import {Badge} from '@mui/material';
+import { Badge } from '@mui/material';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
-const ProtectedRoute = ({user, redirectPath = '/'}) => {
+const ProtectedRoute = ({ user, redirectPath = '/' }) => {
   if (!user) {
     return <Navigate to={redirectPath} replace />;
   }
@@ -143,7 +144,7 @@ function App() {
       axios
         .post(
           `${API}/auth/token`,
-          {cookie: cookies.token},
+          { cookie: cookies.token },
           {
             withCredentials: true,
           }
@@ -260,6 +261,7 @@ function App() {
               />
             }
           />
+          <Route path='/*' element={<FourOFour />} />
           <Route path='/about' element={<About />} />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
