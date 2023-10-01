@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import {Button, CardActionArea, CardActions} from '@mui/material';
 import {Card, CardContent, CardOverflow, AspectRatio, Typography} from '@mui/joy';
@@ -8,13 +8,12 @@ import './toolsCard.css';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 export default function ToolsCard({tool, reloadTools}) {
   const navigate = useNavigate();
-  const {username} = useParams()
+  const {username} = useParams();
   const handleDelete = () => {
     axios
       .delete(`${API}/tools/${tool.tool_id}`)
       .then(res => {
         reloadTools();
-        console.log(res);
       })
       .catch(err => console.log(err));
   };

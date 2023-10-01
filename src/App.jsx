@@ -4,16 +4,11 @@ import {
   Route,
   Navigate,
   Outlet,
-  useNavigate,
-  Link,
 } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
 import NavBar from './components/navbar/NavBar';
-import Cart from './components/cart/Cart';
 import Landing from './pages/landing/Landing';
 import Footer from './components/footer/Footer';
 import Home from './pages/home/Home';
@@ -23,17 +18,17 @@ import Post from './components/posts/Post';
 import ToolsEditForm from './components/tools/ToolsEditForm';
 import ToolsNewForm from './components/tools/ToolsNewForm';
 import ToolsDetails from './components/tools/ToolsDetails';
-import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
-import PostPreview from './components/posts/PostPreview';
 import About from './pages/about/About';
+
 import FourOFour from './pages/fourOFour/FourOFour';
+
+import Posts from './components/posts/Posts';
 
 import ArtistsGraphic from './assets/artistsgraphic.jpg';
 
 import './App.css';
 import ToolsUsers from './components/tools/ToolsUsers';
-import { Badge } from '@mui/material';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -45,15 +40,15 @@ const ProtectedRoute = ({ user, redirectPath = '/' }) => {
 };
 
 function App() {
-  const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies();
   const [modal, setModal] = useState(false);
-  const [tab, setTab] = useState(false);
+  const [tab, setTab] = useState(false); 
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState();
-  const [cartView, setCartView] = useState(false);
+  
   const [cartItems, setCartItems] = useState([]);
   const [posts, setposts] = useState([]);
+  const [searchResults, setSearchResults] = useState('');
   const [dataLoader, setDataLoader] = useState(true);
   const [postsCategorized, setPostsCategorized] = useState({
     Painting: [],
@@ -101,6 +96,8 @@ function App() {
     };
     getPosts();
   }, []);
+
+  //console.log(posts)
 
   useEffect(() => {
     checkToken();
@@ -174,77 +171,11 @@ function App() {
           setTab={setTab}
           posts={posts}
           dataLoader={dataLoader}
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+          cartItems={cartItems}
+          
         />
-        <div className='navbar'>
-          <aside>
-            {/* <Link to='/about' className='about-link'> About </Link> */}
-            <button onClick={() => navigate('/about')} className='signup-btn'>
-              {' '}
-              About{' '}
-            </button>
-          </aside>
-          <div className='cart-auth-buttons'>
-            <aside className='aside-cart'>
-              <Badge
-                badgeContent={cartItems.length}
-                color='error'
-                onClick={() => setCartView(!cartView)}
-              >
-                <ShoppingCartIcon
-                  className='shopping-cart'
-                  onClick={() => setCartView(!cartView)}
-                />
-              </Badge>
-              {cartView && (
-                <Cart
-                  items={cartItems}
-                  removeItem={removeItem}
-                  handleClose={() => setCartView(false)}
-                />
-              )}
-            </aside>
-            {!user && (
-              <aside className='auth-btns'>
-                <button
-                  onClick={() => {
-                    setModal(true);
-                    setTab(false);
-                  }}
-                  className='login-btn'
-                >
-                  {' '}
-                  Login{' '}
-                </button>
-                <button
-                  className='signup-btn'
-                  onClick={() => {
-                    setModal(true);
-                    setTab(true);
-                  }}
-                >
-                  {' '}
-                  Sign Up{' '}
-                </button>
-              </aside>
-            )}
-            {user && (
-              <div className='auth-btns'>
-                {/* > */}
-                <Link to={`${user.username}/profile`}>
-                  <button className='login-btn'>Profile</button>
-                  {/* <BasicPopover
-                className='login-btn'
-                buttonText='Profile'
-                popoverContent='Profile options will go here'
-              /> */}
-                </Link>
-                <button className='login-btn' onClick={handleLogout}>
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
       </header>
       <main>
         <Routes>
@@ -263,10 +194,12 @@ function App() {
           />
           <Route path='/*' element={<FourOFour />} />
           <Route path='/about' element={<About />} />
+          <Route path='/posts' element={<Posts posts={posts} />}  />
           <Route path='/post/:id' element={<Post />} />
           {/* create public profile view for outside viewers */}
-          <Route path='/tools' element={<ToolsDetails />} />
-          <Route path='/tools/:id' element={<ToolsUserDetails />} />
+          {/* <Route path='/tools' element={<ToolsDetails />} /> */}
+          {/* <Route path='/tools/:id' element={<ToolsUserDetails />} /> */}
+          <Route path='/tools/:id' element={<ToolsDetails addToCart={addToCart} />} />
           <Route element={<ProtectedRoute user={user} />}>
             {/* <Route path='/home/:username' element={<Home user={user} />} /> */}
             <Route path='/:username/post/:id' element={<Post user={user} />} />
@@ -285,10 +218,6 @@ function App() {
             <Route
               path='/:username/post/new'
               element={<NewPost user={user} />}
-            />
-            <Route
-              path='/:username/post/preview'
-              element={<PostPreview user={user} />}
             />
             <Route
               path='/:username/post/new'

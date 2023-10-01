@@ -105,7 +105,6 @@ export default function About() {
         src="src/assets/craftLogo2.png"
         alt="Another Image"
         style={{ width: '80%', maxWidth: '100%' }} />
-
     </div >
   );
 }

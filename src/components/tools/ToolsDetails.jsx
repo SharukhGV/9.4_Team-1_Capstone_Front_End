@@ -2,11 +2,13 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link, useParams} from 'react-router-dom';
 import noImage from '../../assets/placeholder-img.jpeg';
+import {useLocation} from 'react-router';
 
 import './toolsDetails.css'
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 function ToolsDetails({addToCart}) {
+
   const {username, tools_id} = useParams();
   const [tool, setTool] = useState({
     tool:'',
@@ -32,15 +34,15 @@ function ToolsDetails({addToCart}) {
         {tool.media.length > 0 ? (
           <div>
             <div className='main-image-div'>
-              <img className='selected-img' src={noImage} />
+              <img className='selected-img' src={noImage} loading='lazy' />
             </div>
             {tool.media.map(img => (
-              <img src={img.file_url} />
+              <img src={img.file_url} loading='lazy' />
             ))}
           </div>
         ) : (
           <div className='main-image-div'>
-            <img className='selected-img' src={noImage} />
+            <img className='selected-img' src={noImage} loading='lazy' />
           </div>
         )}
       </aside>
