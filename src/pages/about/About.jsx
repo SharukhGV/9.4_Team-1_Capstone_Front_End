@@ -39,17 +39,13 @@ export default function About() {
           style={{ width: '85%', maxWidth: '100%' }}
         />
       </div>
-      {/* <img
-        src="src/assets/artistsgraphic.jpg"
-        alt="Craft Collective"
-        style={{ width: '85%', maxWidth: '100%' }}
-      /> */}
+
       <div
         className='team'
         style={bodyStyle}
       >
         <h2 style={headerStyle}>Meet the Team</h2>
-        
+
         <div
           className='about-team'
           style={{ display: 'grid', alignContent: 'center' }}
@@ -63,7 +59,7 @@ export default function About() {
               style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Juan Feliz</h1>
-            <p className="title">Technical Lead</p>
+            <p className="title">Technical Lead & SQL Master</p>
             <p>PERSONAL DESCRIP HERE</p>
             <a href="https://github.com/felizj17" className='card-a'><i className="fa fa-github"></i></a>
             <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
@@ -77,7 +73,7 @@ export default function About() {
               style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Sharukh Velupillai</h1>
-            <p className="title">Demo Lead</p>
+            <p className="title">Demo Lead & Back-End Ninja</p>
             <p>PERSONAL DESCRIP HERE</p>
             <a href="https://github.com/SharukhGV" className='card-a'><i className="fa fa-github"></i></a>
             <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
@@ -91,7 +87,7 @@ export default function About() {
               style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Michel Batista</h1>
-            <p className="title">Technical Lead</p>
+            <p className="title">Design Lead & 3am Push Champion</p>
             <p>PERSONAL DESCRIP HERE</p>
             <a href="https://github.com/MichelBDLC" className='card-a'><i className="fa fa-github"></i></a>
             <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
@@ -105,15 +101,19 @@ export default function About() {
               style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Evan Velush</h1>
-            <p className="title">Project Manager & SCRUM Master</p>
+            <p className="title">Project Manager & CSS Wizard</p>
             <p>PERSONAL DESCRIP HERE</p>
             <a href="https://github.com/SuperNinjaEv" className='card-a'><i className="fa fa-github"></i></a>
             <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
           </div>
-
-
         </div>
       </div>
+
+      <img
+        src="src/assets/craftBanner.jpg"
+        alt="Craft Collective"
+        style={{ width: '1000px', maxWidth: '100%' }}
+      />
 
     </div >
   );

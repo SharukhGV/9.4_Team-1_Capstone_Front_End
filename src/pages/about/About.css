@@ -22,6 +22,7 @@ img {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
     margin: auto;
+    margin-bottom: 20px;
     text-align: center;
     border-style: ridge;
     border-color: #7851A9;
