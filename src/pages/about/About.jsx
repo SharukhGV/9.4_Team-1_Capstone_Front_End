@@ -109,11 +109,15 @@ export default function About() {
         </div>
       </div>
 
-      <img
-        src="src/assets/craftBanner.jpg"
-        alt="Craft Collective"
-        style={{ width: '1000px', maxWidth: '100%' }}
-      />
+      <div>
+        <img
+          src="src/assets/craftBanner.jpg"
+          alt="Craft Collective"
+          style={{ width: '1000px', maxWidth: '100%' }}
+        />
+        {/* <p>Photo by <a href="https://unsplash.com/@penrosekaren?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Karen Penroz</a> on <a href="https://unsplash.com/photos/0TvE4CQ33_I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+        </p> */}
+      </div>
 
     </div >
   );
