@@ -24,6 +24,9 @@
 .container {
     display: flex;
     justify-content: center;
+    justify-items: center;
+    background-color: azure;
+    border-radius: 50%;
 }
 
 .colorset1 {
