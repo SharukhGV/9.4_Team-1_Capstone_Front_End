@@ -204,7 +204,14 @@ export default function NavBar({
             {user && (
               <div className='auth-btns' onMouseEnter={handleAvatarPopover} onMouseLeave={() => setAvatarPopover(false)}>
                 <Avatar variant='soft' ref={avatarRef} />
-                <Popover open={avatarPopOver} sx={{ marginTop: '4px' }} anchorEl={avatarRef.current} onClose={() => setAvatarPopover(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} transformOrigin={{ vertical: 'top', horizontal: 'left' }}>
+                <Popover
+                  open={avatarPopOver}
+                  sx={{ marginTop: '4px' }}
+                  anchorEl={avatarRef.current}
+                  onClose={() => setAvatarPopover(false)}
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                  transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                >
                   <MenuItem onClick={() => navigate(`${user.username}/profile`)}> Profile </MenuItem>
                   <MenuItem onClick={handleLogout}> LogOut </MenuItem>
                 </Popover>
