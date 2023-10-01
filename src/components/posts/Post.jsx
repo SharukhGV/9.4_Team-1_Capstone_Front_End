@@ -26,7 +26,13 @@ export default function Post() {
           <h3> {post.title} </h3>
           <p> {post.category} </p>
           <div>
-            <img src={media[0].file_url} alt='post-img' />
+            {
+              post &&
+              <img loading='lazy' src={post.thumbnail} />
+            }
+            { media[0] &&
+              <img src={media[0].file_url} alt='post-img' />
+            }
             {post.body}
           </div>
         </div>
