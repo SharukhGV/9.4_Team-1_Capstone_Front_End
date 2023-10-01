@@ -106,6 +106,8 @@ export default function About() {
         </div>
       </div>
 
+      <br />
+
       <div className='about-body' style={bodyStyle}>
         <h2 style={headerStyle}>About Our App</h2>
         <div className="app-description">
@@ -115,6 +117,10 @@ export default function About() {
           Craftopia is a vibrant crafting community that empowers all skill levels.  Learn from experts, buy/sell crafting gear, and connect with like-minded crafters.  Enjoy personalized learning, access resources, showcase your creations, trade items, and swap skills.  Craftopia is where hobbies become fun again. Join us and nurture your creativity today!'
         </div>
       </div>
+
+      <br />
+      <br />
+      <br />
 
       <div>
         <img
