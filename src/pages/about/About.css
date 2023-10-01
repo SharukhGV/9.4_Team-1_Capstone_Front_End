@@ -18,16 +18,6 @@ img {
     padding: 10px 10px;
 }
 
-.member {
-    padding: 10px;
-    display: grid;
-    justify-items: left;
-}
-
-.team-member-description {
-    text-align: left;
-}
-
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
@@ -43,20 +33,7 @@ img {
     font-size: 18px;
 }
 
-button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-}
-
-a {
+.card-a {
     text-decoration: none;
     padding: 5px;
     font-size: 22px;
