@@ -13,7 +13,7 @@ export default function About() {
   return (
     <div
       className="about"
-      style={{ display: 'grid' }}
+      style={{ display: 'grid', alignContent: 'center' }}
     >
       <br />
       <div className="about-logo">
@@ -40,26 +40,59 @@ export default function About() {
           style={{ width: '85%', maxWidth: '100%' }}
         />
       </div>
+      <div
+        className='team'
+        style={{ display: 'grid', alignContent: 'center' }}>
 
-      <div className='about-team'>
-        <h2 style={headerStyle}>Meet the Team</h2>
-        <img src="path_to_team_member_image_1" alt="Team Member 1" />
-        <div className="team-member-description">
-          Juan Feliz
+        <div
+          className='about-team'
+          style={bodyStyle}
+        >
+          <h2 style={headerStyle}>Meet the Team</h2>
+          <div>
+            <div className="team-member-description">
+              Juan Feliz
+            </div>
+            <img
+              src="src/assets/CraftopiaTeamJuan.jpg"
+              alt="Team Member 1"
+              style={{ width: '35%', maxWidth: '50%' }} />
+          </div>
+
+          <div>
+            <div className="team-member-description">
+              Sharukh Velupillai
+            </div>
+            <img
+              src="src/assets/CraftopiaTeamSharukh.png"
+              alt="Team Member 2"
+              style={{ width: '35%', maxWidth: '50%' }} />
+          </div>
+
+          <div>
+            <div className="team-member-description">
+              Michel Batista
+            </div>
+            <img
+              src="src/assets/CraftopiaTeamMichel.png"
+              alt="Team Member 3"
+              style={{ width: '35%', maxWidth: '50%' }} />
+          </div>
+
+          <div>
+            <div className="team-member-description">
+              Evan Velush
+            </div>
+            <img
+              src="src/assets/CraftopiaTeamEvan.png"
+              alt="Team Member 4"
+              style={{ width: '35%', maxWidth: '50%' }} />
+          </div>
         </div>
-        <img src="path_to_team_member_image_2" alt="Team Member 2" />
-        <div className="team-member-description">
-          Sharukh Velupillai
-        </div>
-        <img src="path_to_team_member_image_3" alt="Team Member 3" />
-        <div className="team-member-description">
-          Michel Batista
-        </div>
-        <img src="path_to_team_member_image_4" alt="Team Member 4" />
-        <div className="team-member-description">
-          Evan Velush
-        </div>
-        <img src="path_to_another_image" alt="Another Image" />
+        <img
+          src="path_to_another_image"
+          alt="Another Image"
+          style={{ width: '35%', maxWidth: '50%' }} />
       </div>
 
       <img src="path_to_another_image" alt="Another Image" />

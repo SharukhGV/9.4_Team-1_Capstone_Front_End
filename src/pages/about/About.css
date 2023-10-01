@@ -9,3 +9,8 @@
 img {
     border-radius: 50px;
 }
+
+.team {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
