@@ -1,4 +1,5 @@
 import './About.css'
+import { Link } from 'react-router-dom';
 
 export default function About() {
 
@@ -55,40 +56,48 @@ export default function About() {
             <div className="team-member-description">
               Juan Feliz
             </div>
-            <img
-              src="src/assets/CraftopiaTeamJuan.jpg"
-              alt="Team Member 1"
-              style={{ width: '80%', maxWidth: '100%' }} />
+            <Link to={'https://github.com/felizj17'}>
+              <img
+                src="src/assets/CraftopiaTeamJuan.jpg"
+                alt="Team Member Juan Feliz"
+                style={{ width: '80%', maxWidth: '100%' }} />
+            </Link>
           </div>
 
           <div className='member'>
             <div className="team-member-description">
               Sharukh Velupillai
             </div>
-            <img
-              src="src/assets/CraftopiaTeamSharukh.png"
-              alt="Team Member 2"
-              style={{ width: '80%', maxWidth: '100%' }} />
+            <Link to={'https://github.com/SharukhGV'}>
+              <img
+                src="src/assets/CraftopiaTeamSharukh.png"
+                alt="Team Member Sharukh Velupillai"
+                style={{ width: '80%', maxWidth: '100%' }} />
+            </Link>
           </div>
 
           <div className='member'>
             <div className="team-member-description">
               Michel Batista
             </div>
-            <img
-              src="src/assets/CraftopiaTeamMichel.png"
-              alt="Team Member 3"
-              style={{ width: '80%', maxWidth: '100%' }} />
+            <Link to={'https://github.com/MichelBDLC'}>
+              <img
+                src="src/assets/CraftopiaTeamMichel.png"
+                alt="Team Member Michel Batista"
+                style={{ width: '80%', maxWidth: '100%' }} />
+            </Link>
           </div>
 
           <div className='member'>
             <div className="team-member-description">
               Evan Velush
             </div>
-            <img
-              src="src/assets/CraftopiaTeamEvan.png"
-              alt="Team Member 4"
-              style={{ width: '80%', maxWidth: '100%' }} />
+            <Link to={'https://github.com/SuperNinjaEv'}>
+              <img
+                src="src/assets/CraftopiaTeamEvan.png"
+                alt="Team Member Evan Velush"
+                style={{ width: '80%', maxWidth: '100%' }} />
+            </Link>
           </div>
         </div>
       </div>
