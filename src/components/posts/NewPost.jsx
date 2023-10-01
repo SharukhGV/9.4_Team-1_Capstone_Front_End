@@ -118,12 +118,13 @@ export default function NewPost({user}) {
           <Input
             placeholder='Title'
             sx={{width: '45%', alignItems: 'flex-end'}}
-            focused
+            //focused
             onChange={event => setPost({...post, title: event.target.value})}
           />
           <FormControl variant='standard' sx={{width: '45%'}}>
             <InputLabel sx={{fontFamily: 'Lato'}}> Category </InputLabel>
             <Select
+              value={post.category}
               onChange={event =>
                 setPost({...post, category: event.target.value})}>
               <MenuItem value=''> Category </MenuItem>
@@ -136,7 +137,7 @@ export default function NewPost({user}) {
               <MenuItem value='Painting'> Painting </MenuItem>
               <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
               <MenuItem value='Graffiti'> Graffiti </MenuItem>
-              <MenuItem value='Digital Atistry'> Digital Artistry </MenuItem>
+              <MenuItem value='Digital Artistry'> Digital Artistry </MenuItem>
             </Select>
           </FormControl>
         </aside>
@@ -158,7 +159,7 @@ export default function NewPost({user}) {
                   loading='lazy'
                 />
                 <p className='caption'>
-                  <em>figure - {i}</em>
+                  <em>figure - {i + 1}</em>
                 </p>
               </aside>
             ))}

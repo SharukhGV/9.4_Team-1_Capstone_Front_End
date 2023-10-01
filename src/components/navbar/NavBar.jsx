@@ -62,7 +62,9 @@ export default function NavBar({
 
   function handleMenuItemNav(selectedCategory) {
     setNavCategory(selectedCategory);
-    navigate(`/posts`, {state: {category: selectedCategory}});
+    navigate(`/home/#category-nav`,
+    {state: {category: selectedCategory}}
+    );
   }
  
   return (
