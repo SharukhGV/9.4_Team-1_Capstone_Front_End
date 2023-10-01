@@ -5,7 +5,13 @@ export default function FourOFour() {
 
     return (
         <div className='four-o-four'>
-            <h1>Sometimes errors happen.  Time to head <Link to={'/home'}>home.</Link></h1>
+            
+            <div className="paper-pink">
+                <div className="tape-section"></div>
+                <h1>Sometimes errors happen.  Time to head <Link to={'/home'}>home.</Link></h1>
+                <div className="tape-section"></div>
+            </div>
+
             <div className="container">
                 <svg id="tsuru" className="container" width="500" height="500">
                     <g id="tsuru-origami" transform="scale(0.5)">
