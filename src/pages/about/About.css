@@ -12,4 +12,16 @@ img {
 
 .about-team {
 grid-template-columns: 45% 45%;
+justify-content: space-between;
+padding: 10px 10px;
+}
+
+.member {
+    padding: 10px;
+    display: grid;
+    justify-items: center;
+}
+
+.team-member-description {
+text-align: left;
 }

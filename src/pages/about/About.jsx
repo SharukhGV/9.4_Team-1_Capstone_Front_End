@@ -13,7 +13,7 @@ export default function About() {
   return (
     <div
       className="about"
-      style={{ display: 'grid', alignContent: 'center' }}
+      style={{ display: 'grid', alignContent: 'center', backgroundColor: '#f8f8f8' }}
     >
       <br />
       <div className="about-logo">
@@ -50,7 +50,7 @@ export default function About() {
           style={{ display: 'grid', alignContent: 'center' }}
         >
 
-          <div>
+          <div className='member'>
             <div className="team-member-description">
               Juan Feliz
             </div>
@@ -60,7 +60,7 @@ export default function About() {
               style={{ width: '80%', maxWidth: '100%' }} />
           </div>
 
-          <div>
+          <div className='member'>
             <div className="team-member-description">
               Sharukh Velupillai
             </div>
@@ -70,7 +70,7 @@ export default function About() {
               style={{ width: '80%', maxWidth: '100%' }} />
           </div>
 
-          <div>
+          <div className='member'>
             <div className="team-member-description">
               Michel Batista
             </div>
@@ -80,7 +80,7 @@ export default function About() {
               style={{ width: '80%', maxWidth: '100%' }} />
           </div>
 
-          <div>
+          <div className='member'>
             <div className="team-member-description">
               Evan Velush
             </div>
@@ -92,14 +92,10 @@ export default function About() {
         </div>
       </div>
       <img
-        src="path_to_another_image"
+        src="src/assets/craftLogo2.png"
         alt="Another Image"
         style={{ width: '80%', maxWidth: '100%' }} />
 
-      <img
-        src="path_to_another_image"
-        alt="Another Image"
-        style={{ width: '80%', maxWidth: '100%' }} />
     </div >
   );
 }
