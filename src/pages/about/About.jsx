@@ -36,19 +36,20 @@ export default function About() {
 
         <img
           src="src/assets/artistsgraphic.jpg"
-          alt="Another Image"
+          alt="Craft Collective"
           style={{ width: '85%', maxWidth: '100%' }}
         />
       </div>
       <div
         className='team'
-        style={{ display: 'grid', alignContent: 'center' }}>
-
+        style={bodyStyle}
+      >
+        <h2 style={headerStyle}>Meet the Team</h2>
         <div
           className='about-team'
-          style={bodyStyle}
+          style={{ display: 'grid', alignContent: 'center' }}
         >
-          <h2 style={headerStyle}>Meet the Team</h2>
+
           <div>
             <div className="team-member-description">
               Juan Feliz
@@ -56,7 +57,7 @@ export default function About() {
             <img
               src="src/assets/CraftopiaTeamJuan.jpg"
               alt="Team Member 1"
-              style={{ width: '35%', maxWidth: '50%' }} />
+              style={{ width: '80%', maxWidth: '100%' }} />
           </div>
 
           <div>
@@ -66,7 +67,7 @@ export default function About() {
             <img
               src="src/assets/CraftopiaTeamSharukh.png"
               alt="Team Member 2"
-              style={{ width: '35%', maxWidth: '50%' }} />
+              style={{ width: '80%', maxWidth: '100%' }} />
           </div>
 
           <div>
@@ -76,7 +77,7 @@ export default function About() {
             <img
               src="src/assets/CraftopiaTeamMichel.png"
               alt="Team Member 3"
-              style={{ width: '35%', maxWidth: '50%' }} />
+              style={{ width: '80%', maxWidth: '100%' }} />
           </div>
 
           <div>
@@ -86,16 +87,19 @@ export default function About() {
             <img
               src="src/assets/CraftopiaTeamEvan.png"
               alt="Team Member 4"
-              style={{ width: '35%', maxWidth: '50%' }} />
+              style={{ width: '80%', maxWidth: '100%' }} />
           </div>
         </div>
-        <img
-          src="path_to_another_image"
-          alt="Another Image"
-          style={{ width: '35%', maxWidth: '50%' }} />
       </div>
+      <img
+        src="path_to_another_image"
+        alt="Another Image"
+        style={{ width: '80%', maxWidth: '100%' }} />
 
-      <img src="path_to_another_image" alt="Another Image" />
-    </div>
+      <img
+        src="path_to_another_image"
+        alt="Another Image"
+        style={{ width: '80%', maxWidth: '100%' }} />
+    </div >
   );
 }
