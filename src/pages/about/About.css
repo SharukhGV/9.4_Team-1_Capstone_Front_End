@@ -12,18 +12,44 @@ img {
     justify-self: center;
 }
 
+.team-img {
+    width: 80%;
+}
+
 .about-team {
-grid-template-columns: 45% 45%;
-justify-content: space-between;
-padding: 10px 10px;
+    grid-template-columns: 45% 45%;
+    justify-content: flex-end;
+    padding: 10px 10px;
 }
 
-.member {
-    padding: 10px;
+.card {
     display: grid;
-    justify-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+
+    margin-bottom: 20px;
+    text-align: center;
+    border-style: ridge;
+    border-color: #7851A9;
+    border-radius: 50px;
+    border-width: 3px;
+    padding: 22px 1px;
+    justify-content: center;
 }
 
-.team-member-description {
-text-align: left;
+.title {
+    color: grey;
+    font-size: 18px;
+}
+
+.card-a {
+    text-decoration: none;
+    padding: 5px;
+    font-size: 22px;
+    color: black;
+}
+
+button:hover,
+a:hover {
+    opacity: 0.7;
 }

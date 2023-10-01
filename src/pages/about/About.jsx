@@ -12,11 +12,14 @@ export default function About() {
   };
 
   return (
+
     <div
       className="about"
       style={{ display: 'grid', alignContent: 'center', backgroundColor: '#f8f8f8' }}
     >
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       <br />
+
       <div className="about-logo">
         <img
           src="src/assets/craftLogoFlatPurple.png"
@@ -24,6 +27,86 @@ export default function About() {
           style={{ width: '85%', maxWidth: '100%' }}
         />
       </div>
+
+      <br />
+
+      <div
+        className='team'
+        style={bodyStyle}
+      >
+        <h2 style={headerStyle}>Meet the Team</h2>
+
+        <div
+          className='about-team'
+          style={{ display: 'grid', alignContent: 'center' }}
+        >
+
+          <div className="card">
+            <img
+              src="src/assets/CraftopiaTeamJuan.jpg"
+              alt="Juan Feliz"
+              className='team-img'
+            // style={{ width: '100%', maxWidth: '100%' }}
+            />
+            <h1>Juan Feliz</h1>
+            <p className="title">Technical Lead & SQL Master</p>
+            <p>PERSONAL DESCRIP HERE</p>
+            <div>
+              <a href="https://github.com/felizj17" className='card-a'><i className="fa fa-github"></i></a>
+              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div className="card">
+            <img
+              src="src/assets/CraftopiaTeamSharukh.png"
+              alt="Sharukh Velupillai"
+              className='team-img'
+            // style={{ width: '100%', maxWidth: '100%' }}
+            />
+            <h1>Sharukh Velupillai</h1>
+            <p className="title">Demo Lead & Back-End Ninja</p>
+            <p>PERSONAL DESCRIP HERE</p>
+            <div>
+              <a href="https://github.com/SharukhGV" className='card-a'><i className="fa fa-github"></i></a>
+              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div className="card">
+            <img
+              src="src/assets/CraftopiaTeamMichel.png"
+              alt="Michel Batista"
+              className='team-img'
+            // style={{ width: '100%', maxWidth: '100%' }}
+            />
+            <h1>Michel Batista</h1>
+            <p className="title">Design Lead & 3am Push Champion</p>
+            <p>PERSONAL DESCRIP HERE</p>
+            <div>
+              <a href="https://github.com/MichelBDLC" className='card-a'><i className="fa fa-github"></i></a>
+              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div className="card">
+            <img
+              src="src/assets/CraftopiaTeamEvan.png"
+              alt="Evan Velush"
+              className='team-img'
+            />
+            <h1>Evan Velush</h1>
+            <p className="title">Project Manager & CSS Wizard</p>
+            <p>PERSONAL DESCRIP HERE</p>
+            <div>
+              <a href="https://github.com/SuperNinjaEv" className='card-a'><i className="fa fa-github"></i></a>
+              <a href="#" className='card-a'><i className="fa fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
 
       <div className='about-body' style={bodyStyle}>
         <h2 style={headerStyle}>About Our App</h2>
@@ -36,75 +119,19 @@ export default function About() {
       </div>
 
       <br />
+      <br />
+      <br />
 
-      <img
-        src="src/assets/artistsgraphic.jpg"
-        alt="Craft Collective"
-        style={{ width: '85%', maxWidth: '100%' }}
-      />
-      <div
-        className='team'
-        style={bodyStyle}
-      >
-        <h2 style={headerStyle}>Meet the Team</h2>
-        <div
-          className='about-team'
-          style={{ display: 'grid', alignContent: 'center' }}
-        >
-
-          <div className='member'>
-            <div className="team-member-description">
-              Juan Feliz
-            </div>
-            <Link to={'https://github.com/felizj17'}>
-              <img
-                src="src/assets/CraftopiaTeamJuan.jpg"
-                alt="Team Member Juan Feliz"
-                style={{ width: '80%', maxWidth: '100%' }} />
-            </Link>
-          </div>
-
-          <div className='member'>
-            <div className="team-member-description">
-              Sharukh Velupillai
-            </div>
-            <Link to={'https://github.com/SharukhGV'}>
-              <img
-                src="src/assets/CraftopiaTeamSharukh.png"
-                alt="Team Member Sharukh Velupillai"
-                style={{ width: '80%', maxWidth: '100%' }} />
-            </Link>
-          </div>
-
-          <div className='member'>
-            <div className="team-member-description">
-              Michel Batista
-            </div>
-            <Link to={'https://github.com/MichelBDLC'}>
-              <img
-                src="src/assets/CraftopiaTeamMichel.png"
-                alt="Team Member Michel Batista"
-                style={{ width: '80%', maxWidth: '100%' }} />
-            </Link>
-          </div>
-
-          <div className='member'>
-            <div className="team-member-description">
-              Evan Velush
-            </div>
-            <Link to={'https://github.com/SuperNinjaEv'}>
-              <img
-                src="src/assets/CraftopiaTeamEvan.png"
-                alt="Team Member Evan Velush"
-                style={{ width: '80%', maxWidth: '100%' }} />
-            </Link>
-          </div>
-        </div>
+      <div>
+        <img
+          src="src/assets/craftBanner.jpg"
+          alt="Craft Collective"
+          style={{ width: '1000px', maxWidth: '100%' }}
+        />
+        {/* <p>Photo by <a href="https://unsplash.com/@penrosekaren?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Karen Penroz</a> on <a href="https://unsplash.com/photos/0TvE4CQ33_I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+        </p> */}
       </div>
-      <img
-        src="src/assets/craftLogo2.png"
-        alt="Another Image"
-        style={{ width: '80%', maxWidth: '100%' }} />
+
     </div >
   );
 }
