@@ -1,0 +1,38 @@
+.tool-index {
+    align-items: center;
+}
+
+.tool-name {
+    text-align: center;
+    font-size: larger;
+    font-family: 'Roboto', sans-serif;
+    color: #800080;
+}
+
+.tool-desc {
+    text-align: center;
+}
+
+.tool-info {
+    justify-content: center;
+    display: flex;
+    gap: 17px;
+}
+
+.tool-info p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.to-cart-btn {
+    background: linear-gradient(to bottom, #9cd393, #388e3c);
+    color: white;
+    height: 21px;
+    width: 80px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.tools-action-btn {
+    display: flex;
+    justify-content: center;
+}

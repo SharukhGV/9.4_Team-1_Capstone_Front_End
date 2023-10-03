@@ -1,5 +1,4 @@
 import './About.css'
-import { Link } from 'react-router-dom';
 
 export default function About() {
 
@@ -43,7 +42,7 @@ export default function About() {
 
           <div className="card">
             <img
-              src="src/assets/CraftopiaTeamJuan.jpg"
+              src='src/assets/members/CraftopiaTeamJuan.jpg'
               alt="Juan Feliz"
               className='team-img'
             // style={{ width: '100%', maxWidth: '100%' }}
@@ -61,7 +60,7 @@ export default function About() {
 
           <div className="card">
             <img
-              src="src/assets/CraftopiaTeamSharukh.png"
+              src="src/assets/members/CraftopiaTeamSharukh.png"
               alt="Sharukh Velupillai"
               className='team-img'
             // style={{ width: '100%', maxWidth: '100%' }}
@@ -77,7 +76,7 @@ export default function About() {
 
           <div className="card">
             <img
-              src="src/assets/CraftopiaTeamMichel.png"
+              src="src/assets/members/CraftopiaTeamMichel.png"
               alt="Michel Batista"
               className='team-img'
             // style={{ width: '100%', maxWidth: '100%' }}
@@ -93,7 +92,7 @@ export default function About() {
 
           <div className="card">
             <img
-              src="src/assets/CraftopiaTeamEvan.png"
+              src="src/assets/members/CraftopiaTeamEvan.png"
               alt="Evan Velush"
               className='team-img'
             />
