@@ -1,6 +1,7 @@
 import Empty from '../../assets/placeholder-img.jpeg';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import {Tooltip} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function CartItem({tool, removeItem, index}) {
   return (
@@ -13,10 +14,10 @@ export default function CartItem({tool, removeItem, index}) {
       />
       <aside className='cart-item-details'>
         <p>{tool.name}</p>
-        <p>{tool.price}</p>
+        <p>${tool.price}</p>
       </aside>
       <Tooltip title='Remove'>
-        <DeleteForeverIcon
+        <DeleteIcon color='#3C415C'
           className='cart-item-delete'
           onClick={() => removeItem(index)}
         />

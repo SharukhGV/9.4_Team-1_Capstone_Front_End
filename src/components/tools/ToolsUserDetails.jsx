@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
-import axios from "axios";
+import {useState, useEffect} from 'react';
+import {Link, useParams, useNavigate} from 'react-router-dom';
+import {v4 as uuidv4} from 'uuid';
+import axios from 'axios';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
+import './ToolsUserDetails.css';
+import { Divider } from '@mui/material';
+import back from '../../assets/back.png';
 
 function ToolsUserDetails({
   removeItem,
@@ -19,27 +22,26 @@ function ToolsUserDetails({
   // username,
   inKEY,
 }) {
-
-//   const [cart, setCart] = useState([]);
-//   function addToCart(item) {
-//     setCart(prevCart => [...prevCart, item]);
-// }
-  const [thecolor, setthecolor] = useState("black");
-  const { id } = useParams();
+  //   const [cart, setCart] = useState([]);
+  //   function addToCart(item) {
+  //     setCart(prevCart => [...prevCart, item]);
+  // }
+  const [thecolor, setthecolor] = useState('black');
+  const {id} = useParams();
   const [tools, setTools] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
-        .get(`${API}/tools/one/${id}`)
-        .then(res => {
-          console.log(res.data)
-            setTools(res.data.tool); 
-        })
-        .catch(error => {
-            console.error("There was an error fetching the tools:", error);
-        });
-}, [id]);
-
+      .get(`${API}/tools/one/${id}`)
+      .then(res => {
+        //console.log(res.data);
+        setTools(res.data.tool);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the tools:', error);
+      });
+  }, [id]);
 
   const deletetool = () => {
     axios
@@ -47,66 +49,41 @@ function ToolsUserDetails({
       .then(() => {
         navigate(`/tools`);
       })
-      .catch((error) => console.error(error));
+      .catch(error => console.error(error));
   };
 
-  // const handleDelete = () => {
-  //   deletetool();
-  // };
-
-  // let thecolordeterminate = "black"
-  // if(good_tool === "good")
-
-  const textcoloring = {
-    color: thecolor,
-  };
+  //console.log(tools)
 
   return (
-          <>
-          {tools.condition &&  (<>   <legend key={tools.tool_id}>
-          <strong>Your Tools for Sale</strong>
-        </legend>
-          <tr>
-            <th>Category</th>
-            <th>Information</th>
-          </tr>
-          <tr>
-            <td>Name: </td>
-            <td>{tools.name}</td>
-          </tr>
-          <tr>
-            <td>Condition: </td>
-            <td>{tools.condition}</td>
-          </tr>
-          <tr>
-            <td>Description of tool</td>
-            <td>{tools.description}</td>
-          </tr>
-
-          <tr>
-            <td>price </td>
-            <td>{tools.price}</td>
-          </tr>
-          <tr>
-            <td>Quantity: </td>
-            <td>{tools.quantity}</td>
-          </tr>       <aside className='tool-info'>
-          <h5>Posted by: {tools.created_by}</h5>
-   
-          <aside className='tools-action-buttons'>
-            <button onClick={()=>addToCart(tools)}>Add to Cart</button>
+    <div className='tool-index'>
+      <br />
+      <button onClick={() => navigate(-1)} style={{ color: '#1A237E'}}> <img src={back} className='back-img' /> Go Back </button>
+      {tools.condition && (
+        <>
+        <div className='tool-name'>
+          <p>{tools.name}</p>
+        </div>
+        <br />
+        {/* img here */}
+        <div className='tool-desc'><p>Description: {tools.description}</p></div>
+        <br />
+        <div className='tool-info'>
+        <p> By: {tools.created_by} </p>
+        <Divider orientation='vertical' sx={{ height: '40px' }} flexItem />
+        <p>Condition: {tools.condition}</p>
+        <Divider orientation='vertical' sx={{ height: '40px' }} flexItem />
+        <p>price: ${tools.price} </p>
+        <Divider orientation='vertical' sx={{ height: '40px' }} flexItem />
+        <p>Quantity: {tools.stock} </p>
+        </div>
+        <br />
+          <aside className='tools-action-btn'>
+            <button onClick={() => addToCart(tools)} className='to-cart-btn'>Add to Cart</button>
           </aside>
-        </aside>
-      </>)}
-
-      <span className="showNavigation">
-        <span>
-          <Link to={`/tools`}>
-            <button>Back</button>
-          </Link>
-        </span> 
-      </span>
-</>  );
+        </>
+      )}
+    </div>
+  );
 }
 
 export default ToolsUserDetails;

@@ -1,20 +1,8 @@
 import {useState, useEffect} from 'react';
-import {
-  Routes,
-  Route,
-  Navigate,
-  Outlet,
-  useNavigate,
-  Link,
-  useLocation,
-} from 'react-router-dom';
+import {Routes, Route, Navigate, Outlet} from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import axios from 'axios';
-
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
 import NavBar from './components/navbar/NavBar';
-import Cart from './components/cart/Cart';
 import Landing from './pages/landing/Landing';
 import Footer from './components/footer/Footer';
 import Home from './pages/home/Home';
@@ -23,22 +11,18 @@ import ProfileEdit from './pages/profile/ProfileEdit';
 import Post from './components/posts/Post';
 import ToolsEditForm from './components/tools/ToolsEditForm';
 import ToolsNewForm from './components/tools/ToolsNewForm';
-import ToolsDetails from './components/tools/ToolsDetails';
 import ToolsUserDetails from './components/tools/ToolsUserDetails';
 import NewPost from './components/posts/NewPost';
 import About from './pages/about/About';
-
 import FourOFour from './pages/fourOFour/FourOFour';
-
 import Posts from './components/posts/Posts';
 import ArtistsGraphic from './assets/artistsgraphic.jpg';
 
-import "./App.css";
-import ToolsUsers from "./components/tools/ToolsUsers";
-import { Badge } from "@mui/material";
-import CheckoutFormMain from "./components/cart/CheckoutFormMain";
+import './App.css';
+import ToolsUsers from './components/tools/ToolsUsers';
+import CheckoutFormMain from './components/cart/CheckoutFormMain';
 import ToolsIndexSingle from './components/tools/ToolsIndexSingle';
-import SuccessPage from "./components/cart/SuccessPage";
+import SuccessPage from './components/cart/SuccessPage';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 const ProtectedRoute = ({user, redirectPath}) => {
@@ -49,7 +33,6 @@ const ProtectedRoute = ({user, redirectPath}) => {
 };
 
 function App() {
-  const location = useLocation();
   const [cookies, removeCookie] = useCookies();
   const [modal, setModal] = useState(false);
   const [tab, setTab] = useState(false);
@@ -195,12 +178,7 @@ function App() {
       <main>
         <Routes>
           <Route
-            element={
-              <ProtectedRoute
-                user={!user}
-                redirectPath={'/home'}
-              />
-            }
+            element={<ProtectedRoute user={!user} redirectPath={'/home'} />}
           >
             <Route
               path='/'
@@ -222,7 +200,6 @@ function App() {
               <CheckoutFormMain emptyCart={emptyCart} grandTotal={grandTotal} />
             }
           />
-
           <Route path='/*' element={<FourOFour />} />
           <Route path='/about' element={<About />} />
           <Route path='/posts' element={<Posts posts={posts} />} />
