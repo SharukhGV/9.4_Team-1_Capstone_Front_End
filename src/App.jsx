@@ -16,7 +16,7 @@ import NewPost from './components/posts/NewPost';
 import About from './pages/about/About';
 import FourOFour from './pages/fourOFour/FourOFour';
 import Posts from './components/posts/Posts';
-import ArtistsGraphic from './assets/artistsgraphic.jpg';
+import ArtistsGraphic from './assets/craftBanner2.jpg';
 
 import './App.css';
 import ToolsUsers from './components/tools/ToolsUsers';
