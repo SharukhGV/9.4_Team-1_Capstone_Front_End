@@ -1,19 +1,25 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import "./success.css"
+export default function SuccessPage({ emptyCart }) {
+    
+  const navigate = useNavigate();
 
-import { useEffect } from "react"
+  useEffect(() => {
+    emptyCart();
+    setTimeout(() => {
+      navigate("/home");
+    }, 5000);
+  }, []);
 
-export default function SuccessPage({emptyCart}){
+  return <>
+      <div class="cardCheckmark">
 
-useEffect(()=>{
-    emptyCart()
+<div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+          <p className="checkmark">✓</p>
 
-
-},[])
-
-return(
-
-<>Your Payment was successful!</>
-
-)
-
-
+  <h1>Success</h1> 
+        <p>We received your purchase request;<br/> we'll be in touch shortly!</p>
+  </div></div>
+  </>;
 }
