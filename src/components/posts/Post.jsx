@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import { useParams, useNavigate} from 'react-router';
 import axios from 'axios';
 import './Post.css';
-import { Link } from 'react-router-dom';
 import back from '../../assets/back.png';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
@@ -23,7 +22,6 @@ export default function Post() {
   }, [id]);
 
   //console.log(post)
-
 
   return (
     <div className='post'>

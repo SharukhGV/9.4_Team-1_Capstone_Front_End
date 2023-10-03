@@ -9,7 +9,6 @@ import {
   MenuItem,
   Input,
   CardActionArea,
-  Breadcrumbs,
 } from '@mui/material';
 import {styled} from '@mui/system';
 import {
@@ -24,6 +23,7 @@ import {
   Typography,
 } from '@mui/joy';
 import './NewPost.css';
+import back from '../../assets/back.png';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -192,13 +192,11 @@ export default function NewPost({user}) {
       <div className='preview-modal'>
         <Modal open={openPreview} onClose={() => setOpenPreview(false)}>
           <ModalDialog layout='fullscreen'>
-            {/* <img className='logo' src={craftopiaLogo} /> */}
-            {/* <div className='top-btns'> */}
             <div className='top-btns'>
               <button
                 className='back-btn'
                 onClick={() => setOpenPreview(false)}
-              >
+              > <img src={back} className='back-img' />
                 {' '}
                 Back to editing{' '}
               </button>
@@ -212,6 +210,7 @@ export default function NewPost({user}) {
             <div className='content-preview'>
               <h3> {post.title} </h3>
               <p> {post.category} </p>
+              <p style={{ fontFamily: 'Montserrat, sans serif', color: '#1A237E', fontSize: '17px' }}> By:{post.created_by} </p>
               {/* <img src={URL.createObjectURL(selected)} /> */}
               <p> {post.body} </p>
               <div>
