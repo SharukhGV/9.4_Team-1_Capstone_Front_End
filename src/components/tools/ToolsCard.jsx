@@ -9,6 +9,7 @@ const API = import.meta.env.VITE_REACT_APP_API_URL;
 export default function ToolsCard({tool, reloadTools}) {
   const navigate = useNavigate();
   const {username} = useParams();
+  console.log(tool)
   const handleDelete = () => {
     axios
       .delete(`${API}/tools/${tool.tool_id}`)
@@ -17,6 +18,7 @@ export default function ToolsCard({tool, reloadTools}) {
       })
       .catch(err => console.log(err));
   };
+
   return (
     <Card component='li' variant='solid' sx={{ height: 119, minWidth: '11vw', maxWidth: '11vw', backgroundColor: '#f8f8f8' }}  >
     <CardOverflow sx={{ height: '88px' }}>

@@ -33,7 +33,7 @@ export default function NavBar({
   const categoriesBtnRef = useRef(null);
   const [cartView, setCartView] = useState(false);
   const avatarRef = useRef(null);
-  const [avatarPopOver, setAvatarPopover] = useState(false);
+  const [avatarPopOver, setAvatarPopOver] = useState(false);
   const [avatarAnchorEl, setAvatarAnchorEl] = useState(null);
   const shareBtnRef = useRef(null);
   const handleTextChange = e => {
@@ -59,8 +59,8 @@ export default function NavBar({
     navigate(`/post/${id}`);
   };
 
-  const handleAvatarPopover = event => {
-    setAvatarPopover(true);
+  const handleAvatarPopOver = event => {
+    setAvatarPopOver(true);
     setAvatarAnchorEl(event.currentTarget);
   };
 
@@ -280,9 +280,9 @@ export default function NavBar({
                     }}
                   />
                 </button> */}
-                <IconButton color='#EAEEF6' className='shopping-cart'>
+                  
+                <IconButton color='#EAEEF6' className='shopping-cart' onClick={() => setCartView(!cartView)}>
                   <ShoppingCartIcon
-                    onClick={() => setCartView(!cartView)}
                   />
                 </IconButton>
               </Badge>
@@ -322,20 +322,20 @@ export default function NavBar({
             {user && (
               <div
                 className='auth-btns'
-                onMouseEnter={handleAvatarPopover}
-                onMouseLeave={() => setAvatarPopover(false)}
+                onMouseEnter={handleAvatarPopOver}
+                onMouseLeave={() => setAvatarPopOver(false)}
               >
                 <Avatar variant='soft' ref={avatarRef} />
                 <Popover
                   open={avatarPopOver}
                   sx={{marginTop: '4px'}}
                   anchorEl={avatarRef.current}
-                  onClose={() => setAvatarPopover(false)}
+                  onClose={() => setAvatarPopOver(false)}
                   anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                   transformOrigin={{vertical: 'top', horizontal: 'left'}}
                 >
                   <MenuItem
-                    onClick={() => navigate(`${user.username}/profile`)}
+                    onClick={() => {navigate(`${user.username}/profile`); setAvatarPopOver(false)}}
                   >
                     {' '}
                     Profile{' '}
