@@ -46,3 +46,10 @@
   bottom: 5%;
   right: 5%;
 }
+.title-new-tool{
+  font-family: 'Bellota';
+  color: #800080;
+  font-size: 22px;
+  margin-left:10%;
+  margin-top: 4%;
+}

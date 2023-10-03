@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
-import axios from "axios";
+import {useState, useEffect} from 'react';
+import {Link, useParams, useNavigate} from 'react-router-dom';
+import {v4 as uuidv4} from 'uuid';
+import axios from 'axios';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 function ToolsUserDetails({
@@ -19,27 +19,25 @@ function ToolsUserDetails({
   // username,
   inKEY,
 }) {
-
-//   const [cart, setCart] = useState([]);
-//   function addToCart(item) {
-//     setCart(prevCart => [...prevCart, item]);
-// }
-  const [thecolor, setthecolor] = useState("black");
-  const { id } = useParams();
+  //   const [cart, setCart] = useState([]);
+  //   function addToCart(item) {
+  //     setCart(prevCart => [...prevCart, item]);
+  // }
+  const [thecolor, setthecolor] = useState('black');
+  const {id} = useParams();
   const [tools, setTools] = useState({});
 
   useEffect(() => {
     axios
-        .get(`${API}/tools/one/${id}`)
-        .then(res => {
-          console.log(res.data)
-            setTools(res.data.tool); 
-        })
-        .catch(error => {
-            console.error("There was an error fetching the tools:", error);
-        });
-}, [id]);
-
+      .get(`${API}/tools/one/${id}`)
+      .then(res => {
+        console.log(res.data);
+        setTools(res.data.tool);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the tools:', error);
+      });
+  }, [id]);
 
   const deletetool = () => {
     axios
@@ -47,25 +45,17 @@ function ToolsUserDetails({
       .then(() => {
         navigate(`/tools`);
       })
-      .catch((error) => console.error(error));
-  };
-
-  // const handleDelete = () => {
-  //   deletetool();
-  // };
-
-  // let thecolordeterminate = "black"
-  // if(good_tool === "good")
-
-  const textcoloring = {
-    color: thecolor,
+      .catch(error => console.error(error));
   };
 
   return (
-          <>
-          {tools.condition &&  (<>   <legend key={tools.tool_id}>
-          <strong>Your Tools for Sale</strong>
-        </legend>
+    <>
+      {tools.condition && (
+        <>
+          {' '}
+          <legend key={tools.tool_id}>
+            <strong>Your Tools for Sale</strong>
+          </legend>
           <tr>
             <th>Category</th>
             <th>Information</th>
@@ -82,7 +72,6 @@ function ToolsUserDetails({
             <td>Description of tool</td>
             <td>{tools.description}</td>
           </tr>
-
           <tr>
             <td>price </td>
             <td>{tools.price}</td>
@@ -90,23 +79,26 @@ function ToolsUserDetails({
           <tr>
             <td>Quantity: </td>
             <td>{tools.quantity}</td>
-          </tr>       <aside className='tool-info'>
-          <h5>Posted by: {tools.created_by}</h5>
-   
-          <aside className='tools-action-buttons'>
-            <button onClick={()=>addToCart(tools)}>Add to Cart</button>
-          </aside>
-        </aside>
-      </>)}
+          </tr>{' '}
+          <aside className='tool-info'>
+            <h5>Posted by: {tools.created_by}</h5>
 
-      <span className="showNavigation">
+            <aside className='tools-action-buttons'>
+              <button onClick={() => addToCart(tools)}>Add to Cart</button>
+            </aside>
+          </aside>
+        </>
+      )}
+
+      <span className='showNavigation'>
         <span>
-          <Link to={`/tools`}>
+          <Link to={-1}>
             <button>Back</button>
           </Link>
-        </span> 
+        </span>
       </span>
-</>  );
+    </>
+  );
 }
 
 export default ToolsUserDetails;

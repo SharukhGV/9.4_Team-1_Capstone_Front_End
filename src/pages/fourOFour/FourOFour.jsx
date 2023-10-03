@@ -9,7 +9,7 @@ export default function FourOFour() {
             <Link to={'/home'} style={{textDecoration: 'none'}}>
                 <div className="paper-pink">
                     <div className="tape-section"></div>
-                    <h1>
+                    <h1 className='title-404'>
                         Sometimes errors happen.
                         <br />
                         Time to head home.

@@ -20,8 +20,6 @@ export default function ProfileEdit({user, refreshUser}) {
   const {username} = useParams();
   const navigate = useNavigate();
   const [updatedUser, setUpdatedUser] = useState(user);
-  const [learningInterest, setLearningInterest] = useState('Unsure');
-  const [currentSkillset, setCurrentSkillset] = useState('Beginner');
 
   const [file, setFile] = useState({
     preview: '',
@@ -42,6 +40,7 @@ export default function ProfileEdit({user, refreshUser}) {
       })
       .then(res => {
         refreshUser();
+        console.log(res)
         navigate(`/${user.username}/profile`);
       })
       .catch(err => console.log(err));
@@ -67,12 +66,6 @@ export default function ProfileEdit({user, refreshUser}) {
       ...updatedUser,
       [e.target.name]: e.target.value,
     });
-    if (e.target.name === 'learning_interest') {
-      setLearningInterest(e.target.value)
-    }
-    if (e.target.name === 'current_skillset') {
-      setCurrentSkillset(e.target.value)
-    }
   };
 
   return (
@@ -114,7 +107,7 @@ export default function ProfileEdit({user, refreshUser}) {
                     labelId='learning-interest-label'
                     id='learning-interest-select'
                     name='learning_interest'
-                    value={learningInterest}
+                    value={user.learning_interest}
                     label='Learning Interest'
                     onChange={handleSelectChange}
                   >
@@ -142,7 +135,7 @@ export default function ProfileEdit({user, refreshUser}) {
                     labelId='current-skillset-label'
                     id='current-skillset-select'
                     name='current_skillset'
-                    value={currentSkillset}
+                    value={user.current_skillset}
                     label='Current Skillset'
                     onChange={handleSelectChange}>
                     <MenuItem value='Beginner'>Beginner</MenuItem>

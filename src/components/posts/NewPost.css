@@ -19,6 +19,9 @@ main h3 {
 
 .content-sect {
   position: relative;
+  border: solid 5px #7851a9;
+  padding: 5%;
+  background-color: white;
 }
 .post-title {
   margin-bottom: 5%;
@@ -49,12 +52,10 @@ main h3 {
   margin-top: 0;
 }
 .post-buttons {
-  margin-top: 5%;
-  margin-bottom: 5%;
-  margin-left: 85%;
-  margin-top: auto;
-  width: 100%;
-  display: flex;
+  position: absolute;
+  bottom:5%;
+  right:5%;
+  width: fit-content;
 }
 .post-buttons button {
   margin: 0 5px;

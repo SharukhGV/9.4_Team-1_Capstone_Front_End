@@ -23,7 +23,7 @@ export default function Profile({user}) {
   }, []);
 
   const getPosts = () => {
-    axios.get(`${API}/posts/${user.user_id}`).then(res => {
+    axios.get(`${API}/posts/all/${user.user_id}`).then(res => {
       setPosts(res.data);
     });
   };
@@ -50,7 +50,7 @@ export default function Profile({user}) {
             <img
               className='profile-img'
               loading='lazy'
-              src={profile_pic}
+              src={user.profile_pic?user.profile_pic:profile_pic}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
             <aside className='profile-desc'>
@@ -82,18 +82,7 @@ export default function Profile({user}) {
               <div className='profile-posts-list'>
                 <div className='scroll'>
                   {posts.map(post => (
-                    <aside key={uuidv4()} className='aside-spacing' onClick={() => navigate(`/post/${post.post_id}`
-                    // , {
-                    //   state: {
-                    //     title: post.title,
-                    //     category: post.category,
-                    //     body: post.body,
-                    //     created_at: post.created_at,
-                    //     created_by: post.created_by,
-                    //     //file: files,
-                    //   }
-                    // }
-                    )}>
+                    <aside key={uuidv4()} className='aside-spacing' onClick={() => navigate(`/post/${post.post_id}`)}>
                       <PostCard post={post} />
                     </aside>
                   ))}

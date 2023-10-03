@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {useState} from 'react';
 import {useNavigate} from 'react-router';
-import Add from '../../assets/add.svg'
+import Add from '../../assets/add.svg';
 import {
   Select,
   FormControl,
@@ -9,14 +9,9 @@ import {
   MenuItem,
   Input,
   CardActionArea,
-  Breadcrumbs
+  Breadcrumbs,
 } from '@mui/material';
 import {styled} from '@mui/system';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import placeholderImg from '../../assets/placeholder-img.jpeg';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 import {
   Textarea,
   Card,
@@ -28,7 +23,7 @@ import {
   ModalDialog,
   Typography,
 } from '@mui/joy';
-import './NewPost.css'
+import './NewPost.css';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -54,14 +49,12 @@ export default function NewPost({user}) {
         data: e.target.files[0],
       },
     ]);
-
-    //addPlaceHolder();
   }
 
   const sendToServer = async event => {
     event.preventDefault();
     const formData = new FormData();
-    console.log(files)
+    console.log(files);
     files.forEach((file, index) => {
       if (file) {
         formData.append(`file-${index}`, file.data);
@@ -78,8 +71,7 @@ export default function NewPost({user}) {
         headers: {'Content-Type': 'multipart/form-data'},
       })
       .then(res => {
-        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`
-        );
+        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`);
       })
       .catch(error => console.log(error));
   };
@@ -119,7 +111,9 @@ export default function NewPost({user}) {
             <Select
               value={post.category}
               onChange={event =>
-                setPost({...post, category: event.target.value})}>
+                setPost({...post, category: event.target.value})
+              }
+            >
               <MenuItem value=''> Category </MenuItem>
               <MenuItem value='Photography'> Photography </MenuItem>
               <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
@@ -184,7 +178,6 @@ export default function NewPost({user}) {
             </Card>
           </div>
         </div>
-      </div>
       <div className='post-buttons'>
         <button className='preview-btn' onClick={() => setOpenPreview(true)}>
           {' '}
@@ -195,36 +188,40 @@ export default function NewPost({user}) {
           Post{' '}
         </button>
       </div>
+      </div>
       <div className='preview-modal'>
         <Modal open={openPreview} onClose={() => setOpenPreview(false)}>
           <ModalDialog layout='fullscreen'>
             {/* <img className='logo' src={craftopiaLogo} /> */}
             {/* <div className='top-btns'> */}
             <div className='top-btns'>
-            <button className='back-btn' onClick={() => setOpenPreview(false)}>
-              {' '}
-              Back to editing{' '}
-            </button>
-            <button className='x' onClick={() => setOpenPreview(false)}>
-              {' '}
-              &times;{' '}
-            </button>
+              <button
+                className='back-btn'
+                onClick={() => setOpenPreview(false)}
+              >
+                {' '}
+                Back to editing{' '}
+              </button>
+              <button className='x' onClick={() => setOpenPreview(false)}>
+                {' '}
+                &times;{' '}
+              </button>
             </div>
             {/* </div> */}
             <br />
             <div className='content-preview'>
               <h3> {post.title} </h3>
               <p> {post.category} </p>
-            {/* <img src={URL.createObjectURL(selected)} /> */}
-            <p> {post.body} </p>
-            <div>
-              {/* {
+              {/* <img src={URL.createObjectURL(selected)} /> */}
+              <p> {post.body} </p>
+              <div>
+                {/* {
                 files && files.length > 0 ? files.map(file => (
                   <img src={URL.createObjectURL(file)} />
                 ) 
                 ) : null
               } */}
-            </div>
+              </div>
             </div>
             <button className='preview-post-btn' onClick={sendToServer}>
               {' '}
@@ -236,4 +233,3 @@ export default function NewPost({user}) {
     </main>
   );
 }
-
