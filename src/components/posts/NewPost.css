@@ -77,6 +77,7 @@ main h3 {
 
 .x {
   float: inline-end;
+  font-size: larger;
 }
 
 .preview-post-btn {
@@ -86,18 +87,37 @@ main h3 {
   justify-content: flex-end;
   font-family:  'Open Sans', sans-serif;
   cursor: pointer;
+  background: linear-gradient(to bottom, #9cd393, #388e3c);
+  color: white;
+  height: 17px;
+  border-radius: 7px;
 }
 
-.preview-modal {
-  /* align-items: center;
-  align-content: center;
-  align-tracks: center;
-  justify-content: center;
-  justify-items: center;
-  justify-tracks: center; */
-  /* display: flex;
-  flex-direction: column; */
-  height: 100%;
+.content-preview {
+  text-align: center;
+}
+
+.content-preview h3 {
+  font-family: 'Roboto', sans-serif;
+  color: #800080;
+  font-size: larger;
+}
+
+.post-btn {
+  background: linear-gradient(to bottom, #9cd393, #388e3c);
+}
+
+.preview-btn {
+  background: linear-gradient(to bottom, #3278b2, #1a237e);
+}
+
+.back-img {
+  width: 19px;
+  height: 19px;
+}
+
+.back-btn {
+  font-family: 'Open Sans', sans-serif;
 }
 
 

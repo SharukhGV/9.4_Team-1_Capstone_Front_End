@@ -71,11 +71,14 @@ export default function Assesment({
           {' '}
           &times;{' '}
         </button>
+        <div style={{ textAlign: 'center' }}>
         <p>
           {' '}
           These quick assesment questions will help us curate your homapage with
           suggestions on equipment, hobby discoveries & more{' '}
         </p>
+        <br />
+        </div>
         <div className='questions-sect'>
           <div>
             <p>
@@ -89,6 +92,7 @@ export default function Assesment({
                 onChange={handleRadioSelect}
                 id='learning_interest'
               >
+                <div>
                 <FormControlLabel
                   value='Painting'
                   control={<Radio />}
@@ -119,6 +123,8 @@ export default function Assesment({
                   control={<Radio />}
                   label='Printmaking'
                 />
+                </div>
+                <div>
                 <FormControlLabel
                   value='Fashion Design'
                   control={<Radio />}
@@ -144,9 +150,11 @@ export default function Assesment({
                   control={<Radio />}
                   label='Unsure'
                 />
+                </div>
               </RadioGroup>
             </FormControl>
           </div>
+          <br />
           <div>
             <p> Which virtual arts hobby do you have good experience in? </p>
             <FormControl required>
@@ -155,6 +163,7 @@ export default function Assesment({
                 onChange={handleRadioSelect}
                 id='current_hobby'
               >
+                <div>
                 <FormControlLabel
                   value='Painting'
                   control={<Radio />}
@@ -171,9 +180,9 @@ export default function Assesment({
                   label='Photography'
                 />
                 <FormControlLabel
-                  value='Sculpture'
+                  value='Sculpting'
                   control={<Radio />}
-                  label='Sculpture'
+                  label='Sculpting'
                 />
                 <FormControlLabel
                   value='Printmaking'
@@ -185,10 +194,17 @@ export default function Assesment({
                   control={<Radio />}
                   label='Fashion Design'
                 />
+                </div>
+                <div>
                 <FormControlLabel
                   value='Graffiti'
                   control={<Radio />}
                   label='Graffiti'
+                />
+                <FormControlLabel
+                  value='Ceramics'
+                  control={<Radio />}
+                  label='Ceramics'
                 />
                 <FormControlLabel
                   value='Filmmaking'
@@ -205,6 +221,7 @@ export default function Assesment({
                   control={<Radio />}
                   label='Beginner / None'
                 />
+                </div>
               </RadioGroup>
             </FormControl>
           </div>

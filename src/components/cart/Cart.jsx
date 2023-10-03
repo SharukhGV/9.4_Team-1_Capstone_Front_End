@@ -67,10 +67,9 @@ const navigate=useNavigate()
       {/* <Elements stripe={stripePromise} options={options}>
     <CheckoutForm />
   </Elements> */}
-      <h3 style={{margin: 0}}>Your Cart</h3>
-      <hr></hr>
-
-   <div>
+      <h4 style={{margin: 0}}>Cart</h4>
+      <br />
+   <div className='adiv'>
       {items.length > 0 ? (
         items.map((item, i) => {
           price += item.price;
@@ -88,8 +87,8 @@ const navigate=useNavigate()
       
       {items.length > 0 && (
          <div>
-            <h5>Total Price: ${total}</h5>
-            <Link to="/checkout">Go to Checkout</Link> {/* Assuming you're using react-router */}
+            <h5>Total - ${total}</h5>
+            <Link to="/checkout" style={{ textDecoration: 'none', color: '#388E3C' }}>Go to Checkout</Link> {/* Assuming you're using react-router */}
          </div>
       )}
    </div>

@@ -200,7 +200,6 @@ function App() {
               <CheckoutFormMain emptyCart={emptyCart} grandTotal={grandTotal} />
             }
           />
-
           <Route path='/*' element={<FourOFour />} />
           <Route path='/about' element={<About />} />
           <Route path='/posts' element={<Posts posts={posts} />} />
