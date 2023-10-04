@@ -21,6 +21,7 @@ export default function Home({
   ArtistsGraphic,
   postsCategorized,
   updateUser,
+  addToCart
 }) {
   const navigate = useNavigate();
   const location = useLocation()
@@ -304,7 +305,7 @@ export default function Home({
               {
                 visibleCurrentHobbyTools.map((tool, i) => (
                   <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool?.tool_id}`)}  >
-                    <ToolsCard tool={tool} />
+                    <ToolsCard addToCart={addToCart} tool={tool} />
                   </div>
                 ))
               }
@@ -318,7 +319,7 @@ export default function Home({
               {user.learning_interest === 'Unsure' && tools ? (tools.filter((tool) => tool?.category === 'Painting').length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : tools && user.learning_interest ? (tools.filter((tool) => tool?.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}
               {visibleInterestTools.map((tool, i) => (
                 <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool?.tool_id}`)} >
-                  <ToolsCard tool={tool} />
+                  <ToolsCard addToCart={addToCart} tool={tool} />
                 </div>
               ))}
               {user.learning_interest === 'Unsure' && tools ? (tools.filter((tool) => tool?.category === 'Painting').length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : tools && user.learning_interest ? (tools.filter((tool) => tool?.category === user.learning_interest).length > 5 ? (<button className='arrow'> <ArrowForwardIosIcon /> </button>) : null) : null}

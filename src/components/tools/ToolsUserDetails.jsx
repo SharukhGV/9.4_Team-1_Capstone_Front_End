@@ -6,6 +6,7 @@ const API = import.meta.env.VITE_REACT_APP_API_URL;
 import './ToolsUserDetails.css';
 import { Divider } from '@mui/material';
 import back from '../../assets/back.png';
+import { height } from '@mui/system';
 
 function ToolsUserDetails({
   removeItem,
@@ -63,6 +64,7 @@ function ToolsUserDetails({
         <div className='tool-name'>
           <p>{tools.name}</p>
         </div>
+        <img style={{maxWidth:"300px",height: "auto", margin:"auto"}} src={tools.thumbnail}></img>
         <br />
         {/* img here */}
         <div className='tool-desc'><p>Description: {tools.description}</p></div>

@@ -214,6 +214,7 @@ function App() {
               path='/home'
               element={
                 <Home
+                addToCart={addToCart}
                   user={user}
                   postsCategorized={postsCategorized}
                   ArtistsGraphic={ArtistsGraphic}
