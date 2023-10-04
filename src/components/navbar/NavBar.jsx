@@ -72,6 +72,10 @@ export default function NavBar({
   return (
     <nav>
       <div className='top'>
+        
+      </div>
+      <div className='navbar'>
+        <div className='nav-left'>
         <Link to='/home'>
           <img
             style={{
@@ -86,40 +90,6 @@ export default function NavBar({
             loading='lazy'
           />{' '}
         </Link>
-        <div className='search-sect'>
-          <Input
-            type='text'
-            placeholder='Search...'
-            value={search}
-            onChange={handleTextChange}
-            size='xsmall'
-            sx={{width: '100%', marginBottom: '-4px'}}
-            inputProps={{style: {fontSize: '17px', marginBottom: '-2px'}}}
-          />
-          {searchResults.length > 0 ? (
-            <div className='search-results'>
-              {searchResults.map((res, i) => {
-                if (i < 3) {
-                  return (
-                    <aside
-                      className='result-item'
-                      onClick={() => handleSearch(res.post_id)}
-                      key={uuid()}
-                    >
-                      <p>{res.title}</p>
-                    </aside>
-                  );
-                }
-              })}
-              {searchResults.length - 3 >= 1 ? (
-                <p>{searchResults.length - 3} other results</p>
-              ) : null}
-            </div>
-          ) : null}
-        </div>
-      </div>
-      <div className='navbar'>
-        <div className='nav-left'>
           <aside>
             <Link to='/about' className='about-link'>
               {' '}
@@ -255,6 +225,39 @@ export default function NavBar({
             handleLogout={handleLogout}
             handleSignIn={handleSignIn}
           />
+
+<div className='search-sect'>
+          <Input
+            type='text'
+            placeholder='Search...'
+            value={search}
+            onChange={handleTextChange}
+            size='xsmall'
+            sx={{width: '100%', marginBottom: '-4px'}}
+            inputProps={{style: {fontSize: '17px', marginBottom: '-2px'}}}
+          />
+          {searchResults.length > 0 ? (
+            <div className='search-results'>
+              {searchResults.map((res, i) => {
+                if (i < 3) {
+                  return (
+                    <aside
+                      className='result-item'
+                      onClick={() => handleSearch(res.post_id)}
+                      key={uuid()}
+                    >
+                      <p>{res.title}</p>
+                    </aside>
+                  );
+                }
+              })}
+              {searchResults.length - 3 >= 1 ? (
+                <p>{searchResults.length - 3} other results</p>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
+
           <div className='cart-auth-buttons'>
             <aside className='aside-cart'>
               <Badge
@@ -301,16 +304,6 @@ export default function NavBar({
             {!user && (
               <aside className='auth-btns'>
                 <button
-                  onClick={() => {
-                    setModal(true);
-                    setTab(false);
-                  }}
-                  className='login-btn'
-                >
-                  {' '}
-                  Login{' '}
-                </button>
-                <button
                   className='signup-btn'
                   onClick={() => {
                     setModal(true);
@@ -319,6 +312,16 @@ export default function NavBar({
                 >
                   {' '}
                   Sign Up{' '}
+                </button>
+                <button
+                  onClick={() => {
+                    setModal(true);
+                    setTab(false);
+                  }}
+                  className='login-btn'
+                >
+                  {' '}
+                  Login{' '}
                 </button>
               </aside>
             )}
