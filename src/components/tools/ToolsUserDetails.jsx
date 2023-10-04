@@ -76,7 +76,7 @@ function ToolsUserDetails({removeItem, addToCart, user}) {
             </div>
             <aside className='image-array-display'>
               {media.map(img => (
-                <aside className={selectedImage===img.file_url? 'selected':'img-preview'} key={uuidv4()}>
+                <aside className={selectedImage===img.file_url? 'selected-img':'img-preview'} key={uuidv4()}>
                   <img
                     className='img'
                     src={img.file_url}
