@@ -26,11 +26,12 @@
 }
 
 .img-name {
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   position: absolute;
   bottom: 11px;
   left: 50%;
   transform: translateX(-50%);
   color: white;
   z-index: 2;
+width: 50%;
 }

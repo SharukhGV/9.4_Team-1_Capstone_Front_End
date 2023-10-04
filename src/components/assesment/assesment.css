@@ -2,13 +2,16 @@
   float: inline-end;
   border: none;
   background-color: #f8f8f8;
-  font-size: large;
+  font-size: larger;
+  cursor: pointer;
 }
 
 .questions-sect {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
   gap: 7px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .btns {
@@ -23,9 +26,11 @@
   background: linear-gradient(to bottom, #9cd393, #388e3c);
   color: white;
   border-radius: 4px;
-  font-family: 'Lato';
+  font-family: 'Open Sans', sans-serif;
   letter-spacing: 0.5px;
   border-style: none;
+  cursor: pointer;
+  width: 47px;
 }
 
 .later-btn {
@@ -34,4 +39,8 @@
   border-radius: 4px;
   font-family: 'Lato';
   border-style: none;
+  cursor: pointer;
+  width: 87px;
+  font-family: 'Open Sans', sans-serif;
 }
+

@@ -11,13 +11,17 @@ main h1 {
 }
 
 main h3 {
-  font-family: 'Bellota';
+  font-family: 'Montserrat', sans-serif;
   font-size: 17px;
   color: #3c415c;
+  font-weight: 400;
 }
 
 .content-sect {
   position: relative;
+  border: solid 5px #7851a9;
+  padding: 5%;
+  background-color: white;
 }
 .post-title {
   margin-bottom: 5%;
@@ -42,33 +46,78 @@ main h3 {
 }
 
 .add-svg {
-  width: 60%;
-  height: auto;
-  margin-top: 10%;
-  margin-left: 20%;
-  color: #800080;
+  width: 100%;
 }
 .caption {
   margin-top: 0;
 }
 .post-buttons {
-  margin-top: 5%;
-  margin-bottom: 5%;
-  margin-left: 85%;
+  position: absolute;
+  bottom:5%;
+  right:5%;
+  width: fit-content;
 }
 .post-buttons button {
   margin: 0 5px;
   color: white;
   border-radius: 7px;
-  height: 24px;
+  height: 27px;
   border: none;
-  font-family: 'Lato';
+  cursor: pointer;
+  text-align: center;
+  padding-left: 9px;
+  padding-right: 9px;
 }
 
 .logo {
-    border-radius: 50%;
-    width: 79px;
-    margin: 7px;
+  border-radius: 50%;
+  width: 79px;
+  margin: 7px;
+}
+
+.x {
+  float: inline-end;
+  font-size: larger;
+}
+
+.preview-post-btn {
+  margin-top: auto;
+  width: 77px;
+  margin-left: 620px;
+  justify-content: flex-end;
+  font-family:  'Open Sans', sans-serif;
+  cursor: pointer;
+  background: linear-gradient(to bottom, #9cd393, #388e3c);
+  color: white;
+  height: 17px;
+  border-radius: 7px;
+}
+
+.content-preview {
+  text-align: center;
+}
+
+.content-preview h3 {
+  font-family: 'Roboto', sans-serif;
+  color: #800080;
+  font-size: larger;
+}
+
+.post-btn {
+  background: linear-gradient(to bottom, #9cd393, #388e3c);
+}
+
+.preview-btn {
+  background: linear-gradient(to bottom, #3278b2, #1a237e);
+}
+
+.back-img {
+  width: 19px;
+  height: 19px;
+}
+
+.back-btn {
+  font-family: 'Open Sans', sans-serif;
 }
 
 

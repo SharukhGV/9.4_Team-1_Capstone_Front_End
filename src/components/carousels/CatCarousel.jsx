@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import './catCarousel.css';
-
+import { v4 as uuidv4 } from 'uuid';
 import {Card, CardCover, CardContent} from '@mui/joy';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -26,7 +26,7 @@ export default function CatCarousel({setSelectedCategory}) {
     {name: 'Painting', imageUrl: paintingImg},
     {name: 'Graffiti', imageUrl: graffitiImg},
     {name: 'Filmmaking', imageUrl: filmmakingImg},
-    {name: 'Fashion Design', imageUrl: fashionDesignImg},
+    {name: 'Fashion', imageUrl: fashionDesignImg},
     {name: 'Drawing', imageUrl: drawingImg},
     {name: 'Digital Artistry', imageUrl: digitalArtImg},
     {name: 'Sculpting', imageUrl: sculptureImg},
@@ -37,7 +37,7 @@ export default function CatCarousel({setSelectedCategory}) {
     setCurrentImg(prevImg =>
       prevImg === 0 ? artsImgs.length - 1 : prevImg - 1
     );
-  }
+  } //set inline
 
   function nextSlide() {
     setCurrentImg(prevImg =>
@@ -54,7 +54,7 @@ export default function CatCarousel({setSelectedCategory}) {
   ];
 
   return (
-    <div className='slider-container'>
+    <div className='slider-container' key='cat-carousel'>
       <button onClick={prevSlide} className='arrow'>
         {' '}
         <ArrowBackIosIcon />{' '}
@@ -62,9 +62,10 @@ export default function CatCarousel({setSelectedCategory}) {
       {visibleImgs.map((img, i) => (
         <Card
           component='li'
-          sx={{height: 40, width: '100%'}}
+          sx={{height: 40, width: '100%', cursor: 'pointer'}}
           value={img.name}
           onClick={() => setSelectedCategory(img.name)}
+          key={uuidv4()}
         >
           <CardCover>
             <img

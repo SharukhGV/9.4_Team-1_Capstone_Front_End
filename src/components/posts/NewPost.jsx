@@ -1,9 +1,8 @@
 import axios from 'axios';
 import {useState} from 'react';
 import {useNavigate} from 'react-router';
-import Add from '../../assets/add.svg'
+import Add from '../../assets/add.svg';
 import {
-  TextField,
   Select,
   FormControl,
   InputLabel,
@@ -12,11 +11,6 @@ import {
   CardActionArea,
 } from '@mui/material';
 import {styled} from '@mui/system';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import placeholderImg from '../../assets/placeholder-img.jpeg';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import craftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 import {
   Textarea,
   Card,
@@ -28,9 +22,12 @@ import {
   ModalDialog,
   Typography,
 } from '@mui/joy';
-import './NewPost.css'
+import './NewPost.css';
+import back from '../../assets/back.png';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
+
+//we want to implement the about and the categories as breadcrumbs
 
 export default function NewPost({user}) {
   const navigate = useNavigate();
@@ -52,16 +49,15 @@ export default function NewPost({user}) {
         data: e.target.files[0],
       },
     ]);
-
-    //addPlaceHolder();
   }
 
   const sendToServer = async event => {
     event.preventDefault();
     const formData = new FormData();
+    console.log(files);
     files.forEach((file, index) => {
       if (file) {
-        formData.append(`file-${index}`, file);
+        formData.append(`file-${index}`, file.data);
       }
     });
 
@@ -75,14 +71,7 @@ export default function NewPost({user}) {
         headers: {'Content-Type': 'multipart/form-data'},
       })
       .then(res => {
-        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`, {
-          state: {
-            title: post.title,
-            category: post.category,
-            body: post.body,
-            file: files,
-          },
-        });
+        navigate(`/${user.username}/post/${res.data.createdPost.post_id}`);
       })
       .catch(error => console.log(error));
   };
@@ -101,24 +90,26 @@ export default function NewPost({user}) {
 
   return (
     <main>
+      <br />
       <h1> Share Your Expertise </h1>
       <h3>
         {' '}
         No matter your level, you can inspire and empower fellow creatives. Post
         tutorials, guides, and classes.{' '}
       </h3>
-
+      <br />
       <div className='content-sect'>
         <aside className='post-title'>
           <Input
             placeholder='Title'
             sx={{width: '45%', alignItems: 'flex-end'}}
-            focused
+            //focused
             onChange={event => setPost({...post, title: event.target.value})}
           />
           <FormControl variant='standard' sx={{width: '45%'}}>
             <InputLabel sx={{fontFamily: 'Lato'}}> Category </InputLabel>
             <Select
+              value={post.category}
               onChange={event =>
                 setPost({...post, category: event.target.value})
               }
@@ -126,7 +117,6 @@ export default function NewPost({user}) {
               <MenuItem value=''> Category </MenuItem>
               <MenuItem value='Photography'> Photography </MenuItem>
               <MenuItem value='Filmmaking'> Filmmaking </MenuItem>
-              <MenuItem value='Digital Arts'> Digital Arts </MenuItem>
               <MenuItem value='Ceramics'> Ceramics </MenuItem>
               <MenuItem value='Drawing'> Drawing </MenuItem>
               <MenuItem value='Sculpture'> Sculpture </MenuItem>
@@ -134,10 +124,10 @@ export default function NewPost({user}) {
               <MenuItem value='Painting'> Painting </MenuItem>
               <MenuItem value='Fashion Design'> Fashion Design </MenuItem>
               <MenuItem value='Graffiti'> Graffiti </MenuItem>
+              <MenuItem value='Digital Artistry'> Digital Artistry </MenuItem>
             </Select>
           </FormControl>
         </aside>
-
         <div className='post-body'>
           <Textarea
             className='textarea'
@@ -147,16 +137,16 @@ export default function NewPost({user}) {
             onChange={event => setPost({...post, body: event.target.value})}
           />
           <div className='img-slider-container'>
-            <h5>Add Images</h5>
             {files.map((img, i) => (
               <aside key={`post-image-upload-preview${i}`}>
                 <img
                   src={img.preview}
                   alt={`fig-${i}`}
                   style={{width: '100%', height: 'auto'}}
+                  loading='lazy'
                 />
                 <p className='caption'>
-                  <em>figure - {i}</em>
+                  <em>figure - {i + 1}</em>
                 </p>
               </aside>
             ))}
@@ -178,6 +168,7 @@ export default function NewPost({user}) {
                   src={Add}
                   className='add-svg'
                   alt='click to add an image'
+                  loading='lazy'
                 />
                 <VisuallyHiddenInput
                   type='file'
@@ -187,7 +178,6 @@ export default function NewPost({user}) {
             </Card>
           </div>
         </div>
-      </div>
       <div className='post-buttons'>
         <button className='preview-btn' onClick={() => setOpenPreview(true)}>
           {' '}
@@ -198,29 +188,41 @@ export default function NewPost({user}) {
           Post{' '}
         </button>
       </div>
+      </div>
       <div className='preview-modal'>
         <Modal open={openPreview} onClose={() => setOpenPreview(false)}>
           <ModalDialog layout='fullscreen'>
-            {/* <img className='logo' src={craftopiaLogo} /> */}
-            {/* <div className='top-btns'> */}
-            <button className='back-btn' onClick={() => setOpenPreview(false)}>
-              {' '}
-              Back to editing{' '}
-            </button>
-            <button className='x' onClick={() => setOpenPreview(false)}>
-              {' '}
-              &times;{' '}
-            </button>
+            <div className='top-btns'>
+              <button
+                className='back-btn'
+                onClick={() => setOpenPreview(false)}
+              > <img src={back} className='back-img' />
+                {' '}
+                Back to editing{' '}
+              </button>
+              <button className='x' onClick={() => setOpenPreview(false)}>
+                {' '}
+                &times;{' '}
+              </button>
+            </div>
             {/* </div> */}
             <br />
             <div className='content-preview'>
-              <Typography> {post.title} </Typography>
-              {/* <p> {post.category} </p>
-            <img src={selectedFile} />
-            <p> {post.body} </p> */}
+              <h3> {post.title} </h3>
+              <p> {post.category} </p>
+              <p style={{ fontFamily: 'Montserrat, sans serif', color: '#1A237E', fontSize: '17px' }}> By:{post.created_by} </p>
+              {/* <img src={URL.createObjectURL(selected)} /> */}
+              <p> {post.body} </p>
+              <div>
+                {/* {
+                files && files.length > 0 ? files.map(file => (
+                  <img src={URL.createObjectURL(file)} />
+                ) 
+                ) : null
+              } */}
+              </div>
             </div>
-
-            <button className='post-btn' onClick={sendToServer}>
+            <button className='preview-post-btn' onClick={sendToServer}>
               {' '}
               Post{' '}
             </button>
@@ -230,42 +232,3 @@ export default function NewPost({user}) {
     </main>
   );
 }
-
-// function prevSlide() {
-//   setCurrentPlaceholder(prevImg =>
-//     prevImg === 0 ? placeholders.length - 1 : prevImg - 1
-//   );
-// };
-
-// function nextSlide() {
-//   setCurrentPlaceholder(prevImg =>
-//     prevImg === placeholders.length - 1 ? 0 : prevImg + 1
-//   );
-// }
-
-// const addPlaceHolder = () => {
-//   if (files.length < placeholders.length) {
-//     setFiles([...files, null]);
-//   }
-// }
-
-// const removePlaceholder = (index) => {
-//   const newFiles = [...files];
-//   newFiles.splice(index, 1);
-//   setFiles(newFiles);
-// }
-
-// function handleFileSelection(event, index) {
-//   const newSelectedFiles = [...files];
-//   newSelectedFiles[index] = event.target.files[0];
-//   setFiles(newSelectedFiles);
-//   addPlaceHolder();
-// }
-
-//apply lazyloading to images & everything possible
-
-// const visibleImgs = [
-//   placeholders[currentPlaceholder],
-//   placeholders[(currentPlaceholder + 1) % placeholders.length],
-//   //placeholders[(currentPlaceholder + 2) % placeholders.length],
-// ];

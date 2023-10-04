@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import {useState, useEffect} from 'react';
+import {useNavigate, Link} from 'react-router-dom';
+import axios from 'axios';
 import {
   Select,
   TextField,
@@ -11,37 +11,39 @@ import {
   Card,
   CardContent,
   CardActionArea,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import CloudUploadIcon from "@mui/icons-material/CloudUploadOutlined";
-import "./toolsForm.css";
+} from '@mui/material';
+import {Input} from '@mui/joy';
+import {styled} from '@mui/material/styles';
+import CloudUploadIcon from '@mui/icons-material/CloudUploadOutlined';
+import './toolsForm.css';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
-function ToolsNewForm({ user }) {
+function ToolsNewForm({user}) {
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [tool, setTool] = useState({
     user_id: user.user_id,
     created_by: user.username,
-    name: "",
-    condition: "",
+    name: '',
+    condition: '',
     price: 0,
     stock: 0,
-    description: "",
-    category: "",
-    thumbnail: "",
+    description: '',
+    category: '',
+    thumbnail: '',
   });
 
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
+  const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
     height: 1,
-    overflow: "hidden",
-    position: "absolute",
+    overflow: 'hidden',
+    position: 'absolute',
     bottom: 0,
     left: 0,
   });
 
-  const addTool = (newTool) => {
+  const addTool = newTool => {
+    console.log(newTool);
     const newForm = new FormData();
     images.forEach((image, i) => {
       newForm.append(`file-${i}`, image.data);
@@ -52,12 +54,12 @@ function ToolsNewForm({ user }) {
 
     axios
       .post(`${API}/tools`, newForm, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {'Content-Type': 'multipart/form-data'},
       })
-      .then((response) => {
+      .then(response => {
         navigate(-1);
       })
-      .catch((e) => console.error("catch", e));
+      .catch(e => console.error('catch', e));
   };
   function handleImages(event) {
     setImages([
@@ -69,179 +71,194 @@ function ToolsNewForm({ user }) {
     ]);
   }
 
-  const removeImage = (i) => {
+  const removeImage = i => {
     const updatedImages = [...images];
     updatedImages.splice(i, 1);
     setImages(updatedImages);
   };
 
-  const handleTextChange = (event) => {
-    if (event.target.name === "price" || event.target.name === "stock") {
-      setTool({ ...tool, [event.target.name]: Number(event.target.value) });
+  const handleTextChange = event => {
+    if (event.target.name === 'price' || event.target.name === 'stock') {
+      setTool({...tool, [event.target.name]: Number(event.target.value)});
     } else {
-      setTool({ ...tool, [event.target.name]: event.target.value });
+      setTool({...tool, [event.target.name]: event.target.value});
     }
   };
 
-  const handleSelect = (e) => {
+  const handleSelect = e => {
     setTool({
       ...tool,
       condition: e.target.value,
     });
   };
-  const handleSelectCat = (e) => {
+  const handleSelectCat = e => {
     setTool({
       ...tool,
       category: e.target.value,
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     addTool(tool);
   };
 
   return (
-    <div className="edit">
-      <h1>Create a Listing</h1>
-      <form className="tool-form" onSubmit={handleSubmit}>
+    <div className='edit'>
+      <br />
+      <div className='top-text'>
+        <h1 className='title-new-tool'>Trade Your Treasures</h1>
+        <p>Create an item listing </p>
+      </div>
+      <form className='tool-form' onSubmit={handleSubmit}>
         <TextField
-          sx={{ marginBottom: 2 }}
-          label="Listing Title"
-          id="name"
-          name="name"
-          type="text"
+          variant='standard'
+          sx={{marginBottom: 2}}
+          label='Listing Title'
+          id='name'
+          name='name'
+          type='text'
           onChange={handleTextChange}
           required
         />
         <TextField
-          label="Description"
-          sx={{ marginBottom: 2 }}
-          id="description"
-          type="text"
+          variant='standard'
+          label='Description'
+          sx={{marginBottom: 2}}
+          id='description'
+          name='description'
+          type='text'
           onChange={handleTextChange}
         />
-<div className="category" >
-        <FormControl fullWidth>
-          <InputLabel id="category-label">Category</InputLabel>
-          <Select
-            labelId="category-label"
-            onChange={handleSelectCat}
-            name="category"
-            id="category"
-            value={tool.category}
-          >
-            <MenuItem value="painting">painting</MenuItem>
-            <MenuItem value="drawing">photography</MenuItem>
-            <MenuItem value="photography">ceramics</MenuItem>
-            <MenuItem value="pottery">pottery</MenuItem>
-            <MenuItem value="sculpting">sculpting</MenuItem>
-            <MenuItem value="digital">digital</MenuItem>
-            <MenuItem value="printmaking">printmaking</MenuItem>
-            <MenuItem value="fashion">fashion</MenuItem>
-            <MenuItem value="film">film</MenuItem>
-            <MenuItem value="graffiti">graffiti</MenuItem>
-          </Select>
-        </FormControl>
-</div>
-        <div className="price-condition-stock">
-          <FormControl sx={{ width: "48%" }}>
-            <InputLabel id="condition-label">Condition</InputLabel>
+        <div className='category'>
+          <FormControl fullWidth variant='standard'>
+            <InputLabel id='category-label'>Category</InputLabel>
             <Select
-              labelId="condition-label"
+              labelId='category-label'
+              onChange={handleSelectCat}
+              name='category'
+              id='category'
+              value={tool.category}
+            >
+              <MenuItem value='painting'>painting</MenuItem>
+              <MenuItem value='drawing'>photography</MenuItem>
+              <MenuItem value='photography'>ceramics</MenuItem>
+              <MenuItem value='pottery'>pottery</MenuItem>
+              <MenuItem value='sculpting'>sculpting</MenuItem>
+              <MenuItem value='digital'>digital</MenuItem>
+              <MenuItem value='printmaking'>printmaking</MenuItem>
+              <MenuItem value='fashion'>fashion</MenuItem>
+              <MenuItem value='film'>film</MenuItem>
+              <MenuItem value='graffiti'>graffiti</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div className='price-condition-stock'>
+          <FormControl sx={{width: '48%'}} variant='standard'>
+            <InputLabel id='condition-label'>Condition</InputLabel>
+            <Select
+              labelId='condition-label'
               onChange={handleSelect}
-              name="condition"
-              id="condition"
+              name='condition'
+              id='condition'
               value={tool.condition}
             >
-              <MenuItem value="">--Please choose an option--</MenuItem>
-              <MenuItem value="good">good</MenuItem>
-              <MenuItem value="neutral">neutral</MenuItem>
-              <MenuItem value="bad">bad</MenuItem>
+              <MenuItem value=''>--Choose an option--</MenuItem>
+              <MenuItem value='good'>good</MenuItem>
+              <MenuItem value='neutral'>neutral</MenuItem>
+              <MenuItem value='bad'>bad</MenuItem>
             </Select>
           </FormControl>
 
-          <TextField
-            label="Price"
-            sx={{ width: "25%" }}
-            id="price"
-            type="number"
-            name="price"
+          <Input
+            variant='standard'
             onChange={handleTextChange}
+            placeholder='Amount'
+            id='price'
+            type='number'
+            name='price'
+            startDecorator={{dollar: '$'}['dollar']}
           />
           <TextField
-            label="Stock Quantity"
-            sx={{ width: "25%" }}
-            id="stock"
-            type="number"
-            name="stock"
+            variant='standard'
+            label='Stock'
+            sx={{width: '25%'}}
+            id='stock'
+            type='number'
+            name='stock'
             onChange={handleTextChange}
           />
         </div>
-        <h2>Upload Images</h2>
+
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            width: "90%",
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            width: '90%',
           }}
         >
-          <div className="images">
+          <div className='images'>
             {images.map((image, i) => (
-              <div className="uploaded-images" key={`${image.data.name}-${i}`}>
-                <aside className="image-box">
-                  <img className="img" src={image.preview} alt="preview" />
+              <div className='uploaded-images' key={`${image.data.name}-${i}`}>
+                <aside className='image-box'>
+                  <img
+                    className='img'
+                    src={image.preview}
+                    alt='preview'
+                    loading='lazy'
+                  />
                 </aside>
                 <Button
-                  variant="contained"
-                  color="error"
+                  variant='contained'
+                  color='error'
                   onClick={() => removeImage(i)}
                 >
                   remove
                 </Button>
               </div>
             ))}
-            <Card
-              sx={{
-                width: "8vw",
-                height: "8vw",
-                position: "relative",
-                backgroundColor: "lightgrey",
-              }}
-            >
-              <CardContent></CardContent>
-              <CardActionArea
-                sx={{ position: "absolute", bottom: 0, width: "100%" }}
+            {images.length < 5 && (
+              <Card
+                sx={{
+                  width: '8vw',
+                  height: '8vw',
+                  position: 'relative',
+                  backgroundColor: 'lightgrey',
+                }}
               >
-                <Button
-                  component="label"
-                  type="file"
-                  accept="image/*"
-                  variant="contained"
-                  onChange={handleImages}
-                  startIcon={<CloudUploadIcon />}
+                <CardActionArea
+                  sx={{position: 'absolute', bottom: 0, width: '100%'}}
                 >
-                  Select
-                  <VisuallyHiddenInput type="file" />
-                </Button>
-              </CardActionArea>
-            </Card>
+                  <Button
+                    component='label'
+                    type='file'
+                    accept='image/*'
+                    variant='contained'
+                    onChange={handleImages}
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Select
+                    <VisuallyHiddenInput type='file' />
+                  </Button>
+                </CardActionArea>
+              </Card>
+            )}
           </div>
         </div>
-        <div className="form-buttons">
+        <div className='form-buttons'>
           <Button
-            variant="contained"
-            color="error"
-            sx={{ width: "10%" }}
+            variant='contained'
+            color='error'
+            sx={{width: '10%'}}
             onClick={() => navigate(-1)}
           >
             Cancel
           </Button>
           <Button
-            variant="contained"
-            sx={{ width: "10%", marginLeft: "5%" }}
-            type="submit"
+            variant='contained'
+            sx={{width: '10%', marginLeft: '5%'}}
+            type='submit'
           >
             Submit
           </Button>

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {lazy, useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
 import axios from 'axios';
@@ -23,7 +23,7 @@ export default function Profile({user}) {
   }, []);
 
   const getPosts = () => {
-    axios.get(`${API}/posts/${user.user_id}`).then(res => {
+    axios.get(`${API}/posts/all/${user.user_id}`).then(res => {
       setPosts(res.data);
     });
   };
@@ -49,13 +49,18 @@ export default function Profile({user}) {
           <div className='profile-card'>
             <img
               className='profile-img'
-              src={profile_pic}
+              loading='lazy'
+              src={user.profile_pic ? user.profile_pic : profile_pic}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
             <aside className='profile-desc'>
               <h1>{user.username}</h1>
               <h3>{user.city_state}</h3>
-              <p>{user.aboutme}</p>
+              <p>
+                {user.aboutme && user.aboutme !== 'null'
+                  ? user.aboutme
+                  : 'About Me'}
+              </p>
             </aside>
           </div>
           {user.username === username && (
@@ -81,14 +86,17 @@ export default function Profile({user}) {
               <div className='profile-posts-list'>
                 <div className='scroll'>
                   {posts.map(post => (
-                    <aside key={uuidv4()} className='aside-spacing'>
+                    <aside
+                      key={uuidv4()}
+                      className='aside-spacing'
+                      onClick={() => navigate(`/post/${post.post_id}`)}
+                    >
                       <PostCard post={post} />
                     </aside>
                   ))}
                 </div>
               </div>
             )}
-
             <CardActions
               sx={{
                 width: '10%',
@@ -97,7 +105,7 @@ export default function Profile({user}) {
                 right: '5%',
               }}
             >
-              <Button
+              <button
                 className='button'
                 role='button'
                 onClick={() => navigate(`/${username}/post/new`)}
@@ -105,7 +113,7 @@ export default function Profile({user}) {
                 color='primary'
               >
                 New
-              </Button>
+              </button>
             </CardActions>
           </CardContent>
         </Card>
@@ -121,7 +129,15 @@ export default function Profile({user}) {
               <div className='profile-tools-list'>
                 <div className='scroll'>
                   {tools.map(tool => (
-                    <aside key={uuidv4()} className='aside-spacing'>
+                    <aside
+                      key={uuidv4()}
+                      className='aside-spacing'
+                      onClick={() =>
+                        navigate(
+                          `/tools/${tool.tool_id}` //, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}}
+                        )
+                      }
+                    >
                       <ToolsCard
                         tool={tool}
                         reloadTools={getTools}
@@ -138,7 +154,7 @@ export default function Profile({user}) {
           <CardActions
             sx={{width: '10%', position: 'absolute', bottom: '5%', right: '5%'}}
           >
-            <Button
+            <button
               className='button'
               role='button'
               onClick={() => navigate(`/${username}/tools/new`)}
@@ -146,7 +162,7 @@ export default function Profile({user}) {
               color='primary'
             >
               New
-            </Button>
+            </button>
           </CardActions>
         </Card>{' '}
       </div>

@@ -17,6 +17,10 @@ export default function Assesment({
   assesmentModalOpen,
   updateUser,
 }) {
+  const API = import.meta.env.VITE_REACT_APP_API_URL;
+  const [updatedUser, setUpdatedUser] = useState(user);
+  const [isFormValid, setIsFormValid] = useState(false);
+  
   const assesmentModalStyle = {
     position: 'absolute',
     top: '50%',
@@ -29,23 +33,34 @@ export default function Assesment({
     boxShadow: 14,
     p: 4,
   };
-  const API = import.meta.env.VITE_REACT_APP_API_URL;
-
-  const [updatedUser, setUpdatedUser] = useState(user); // Initialize with the default selected value
-
+  
   const handleRadioSelect = e => {
-    setUpdatedUser({
+    const updatedUserCopy = {
       ...updatedUser,
       [e.target.name]: e.target.value,
-    });
+    };
+    
+    setUpdatedUser(updatedUserCopy);
+    
+    const isValid = 
+      !!updatedUserCopy.learning_interest && 
+      !!updatedUserCopy.current_skillset; 
+    
+    setIsFormValid(isValid);
+    // setUpdatedUser({
+    //   ...updatedUser,
+    //   [e.target.name]: e.target.value,
+    // });
   };
 
   function handleAssesmentBtns(event) {
     event.preventDefault();
+
     axios.put(`${API}/auth/${updatedUser.user_id}`, updatedUser).then(res => {
       updateUser(res.data.updatedAccount);
     });
   }
+
   return (
     <Modal
       open={assesmentModalOpen}
@@ -56,11 +71,14 @@ export default function Assesment({
           {' '}
           &times;{' '}
         </button>
+        <div style={{ textAlign: 'center' }}>
         <p>
           {' '}
           These quick assesment questions will help us curate your homapage with
           suggestions on equipment, hobby discoveries & more{' '}
         </p>
+        <br />
+        </div>
         <div className='questions-sect'>
           <div>
             <p>
@@ -68,12 +86,13 @@ export default function Assesment({
               Which virtual arts hobby are you interested in learning /
               exploring?{' '}
             </p>
-            <FormControl>
+            <FormControl required>
               <RadioGroup
                 name='learning_interest'
                 onChange={handleRadioSelect}
                 id='learning_interest'
               >
+                <div>
                 <FormControlLabel
                   value='Painting'
                   control={<Radio />}
@@ -104,6 +123,8 @@ export default function Assesment({
                   control={<Radio />}
                   label='Printmaking'
                 />
+                </div>
+                <div>
                 <FormControlLabel
                   value='Fashion Design'
                   control={<Radio />}
@@ -129,17 +150,20 @@ export default function Assesment({
                   control={<Radio />}
                   label='Unsure'
                 />
+                </div>
               </RadioGroup>
             </FormControl>
           </div>
+          <br />
           <div>
             <p> Which virtual arts hobby do you have good experience in? </p>
-            <FormControl>
+            <FormControl required>
               <RadioGroup
-                name='current_hobby'
+                name='current_skillset'
                 onChange={handleRadioSelect}
                 id='current_hobby'
               >
+                <div>
                 <FormControlLabel
                   value='Painting'
                   control={<Radio />}
@@ -156,14 +180,9 @@ export default function Assesment({
                   label='Photography'
                 />
                 <FormControlLabel
-                  value='Pottery'
+                  value='Sculpting'
                   control={<Radio />}
-                  label='Pottery'
-                />
-                <FormControlLabel
-                  value='Sculpture'
-                  control={<Radio />}
-                  label='Sculpture'
+                  label='Sculpting'
                 />
                 <FormControlLabel
                   value='Printmaking'
@@ -175,10 +194,17 @@ export default function Assesment({
                   control={<Radio />}
                   label='Fashion Design'
                 />
+                </div>
+                <div>
                 <FormControlLabel
                   value='Graffiti'
                   control={<Radio />}
                   label='Graffiti'
+                />
+                <FormControlLabel
+                  value='Ceramics'
+                  control={<Radio />}
+                  label='Ceramics'
                 />
                 <FormControlLabel
                   value='Filmmaking'
@@ -195,6 +221,7 @@ export default function Assesment({
                   control={<Radio />}
                   label='Beginner / None'
                 />
+                </div>
               </RadioGroup>
             </FormControl>
           </div>
@@ -212,6 +239,7 @@ export default function Assesment({
           <button
             className='done-btn'
             value='done-btn'
+            disabled={!isFormValid}
             onClick={event => handleAssesmentBtns(event)}
           >
             {' '}

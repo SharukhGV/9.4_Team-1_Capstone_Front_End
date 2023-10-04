@@ -1,5 +1,4 @@
-import {useState} from 'react';
-import {useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import axios from 'axios';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -52,7 +51,7 @@ function Tools({user}) {
           <Card component='li' variant='solid'  >
             <CardOverflow>
               <AspectRatio>
-                <img />
+                <img loading='lazy' />
               </AspectRatio>
               <CardContent>
                 <p> {tool?.title || 'Loading...'}  </p>

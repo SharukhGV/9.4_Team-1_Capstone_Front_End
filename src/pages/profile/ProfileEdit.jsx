@@ -20,6 +20,7 @@ export default function ProfileEdit({user, refreshUser}) {
   const {username} = useParams();
   const navigate = useNavigate();
   const [updatedUser, setUpdatedUser] = useState(user);
+
   const [file, setFile] = useState({
     preview: '',
     data: '',
@@ -39,6 +40,7 @@ export default function ProfileEdit({user, refreshUser}) {
       })
       .then(res => {
         refreshUser();
+        console.log(res)
         navigate(`/${user.username}/profile`);
       })
       .catch(err => console.log(err));
@@ -82,6 +84,7 @@ export default function ProfileEdit({user, refreshUser}) {
             <aside className='img-update'>
               <img
                 className='profile-img'
+                loading='lazy'
                 src={
                   file.preview
                     ? file.preview
@@ -96,7 +99,7 @@ export default function ProfileEdit({user, refreshUser}) {
             <aside className='profile-desc-edit'>
               <h1>{user.username}</h1>
               <aside className='select-inputs'>
-                <FormControl fullWidth sx={{marginRight: '5px'}}>
+                <FormControl variant='standard' fullWidth sx={{marginRight: '5px'}}>
                   <InputLabel id='learning-interest-label'>
                     Learning Interest
                   </InputLabel>
@@ -124,7 +127,7 @@ export default function ProfileEdit({user, refreshUser}) {
                   </Select>
                 </FormControl>
 
-                <FormControl fullWidth sx={{marginLeft: '5px'}}>
+                <FormControl fullWidth variant='standard' sx={{marginLeft: '5px'}}>
                   <InputLabel id='current-skillset-label'>
                     Current Skillset
                   </InputLabel>
@@ -134,8 +137,7 @@ export default function ProfileEdit({user, refreshUser}) {
                     name='current_skillset'
                     value={updatedUser.current_skillset}
                     label='Current Skillset'
-                    onChange={handleSelectChange}
-                  >
+                    onChange={handleSelectChange}>
                     <MenuItem value='Beginner'>Beginner</MenuItem>
                     <MenuItem value='Painting'>Painting</MenuItem>
                     <MenuItem value='Drawing'>Drawing</MenuItem>
@@ -146,24 +148,22 @@ export default function ProfileEdit({user, refreshUser}) {
                     <MenuItem value='Graffiti'>Graffiti</MenuItem>
                     <MenuItem value='Fashion Design'>Fashion Design</MenuItem>
                     <MenuItem value='Filmmaking'>Filmmaking</MenuItem>
-                    <MenuItem value='Digital Artistry'>
-                      Digital Artistry
-                    </MenuItem>
+                    <MenuItem value='Digital Artistry'> Digital Artistry </MenuItem>
                   </Select>
                 </FormControl>
               </aside>
-
               <TextField
                 name='city_state'
                 label='City State'
                 value={updatedUser.city_state}
                 sx={{marginBottom: 4}}
                 onChange={handleUpdatedUser}
+                variant='standard'
               />
               <label>Bio</label>
               <TextareaAutosize
                 name='aboutme'
-                value={updatedUser.aboutme}
+                value={updatedUser.aboutme && updatedUser.aboutme !== 'null' ? updatedUser.aboutme : 'About Me'}
                 sx={{width: '100%'}}
                 onChange={handleUpdatedUser}
               />

@@ -1,11 +1,11 @@
-import {useState} from 'react';
-import {v4 as uuid} from 'uuid';
-import {Card} from '@mui/joy';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import CatCarousel from '../../components/carousels/CatCarousel';
-import PostCard from '../../components/posts/PostCard';
-import './landing.css';
+import { useState } from "react";
+import { v4 as uuid } from "uuid";
+import { Card } from "@mui/joy";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import CatCarousel from "../../components/carousels/CatCarousel";
+import PostCard from "../../components/posts/PostCard";
+import "./landing.css";
 
 export default function Landing({
   setModal,
@@ -16,7 +16,7 @@ export default function Landing({
   const [currentFilmmakingPost, setCurrentFilmmakingPost] = useState(0);
   const [currentPaintPost, setCurrentPaintPost] = useState(0);
   const [currentPhotographyPost, setCurrentPhotographyPost] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
   let visibleFilmmakingPosts = [];
   let visiblePhotographyPosts = [];
   let visiblePaintPosts = [];
@@ -36,24 +36,24 @@ export default function Landing({
   }
 
   return (
-    <div className='landing'>
-      <div className='header-branding'>
-        <div className='landing-action'>
+    <div className="landing">
+      <div className="header-branding">
+        <div className="landing-action">
           <Card>
-            <div className='branding-text'>
-              <h2 className='header-h2'> Ignite Your Creativity </h2>
-              <h4 className='header-h4'>
-                {' '}
-                Explore Gear & Community to Cultivate Inspired Artistry{' '}
+            <div className="branding-text">
+              <h2 className="header-h2"> Ignite Your Creativity </h2>
+              <h4 className="header-h4">
+                {" "}
+                Explore Gear & Community to Cultivate Inspired Artistry{" "}
               </h4>
-              <button className='join-btn' onClick={() => setModal(true)}>
-                {' '}
-                Join Craftopia{' '}
+              <button className="join-btn" onClick={() => setModal(true)}>
+                {" "}
+                Join Craftopia{" "}
               </button>
             </div>
           </Card>
           <div>
-            <img src={ArtistsGraphic} className='artists-graphic' />
+            <img src='src/assets/craftBanner2.jpg' className='artists-graphic' loading='lazy' />
           </div>
         </div>
         <br />
@@ -62,12 +62,12 @@ export default function Landing({
       <CatCarousel setSelectedCategory={setSelectedCategory} />
       <br />
       <main>
-        <div className='top-categories-sect'>
+        <div className="top-categories-sect">
           {selectedCategory ? (
-            <h3 className='top-categories-h3'> {selectedCategory} </h3>
+            <h3 className="top-categories-h3"> {selectedCategory} </h3>
           ) : null}
           <br />
-          <div className='selected-posts'>
+          <div className="selected-posts">
             {selectedCategory && !dataLoader && selectedCategory.length > 1 //
               ? postsCategorized[selectedCategory].map((post, i) => {
                   return <PostCard post={post} />;
@@ -77,113 +77,113 @@ export default function Landing({
           <br />
           {selectedCategory ? (
             <>
-              {' '}
-              <br /> <div className='div' /> <br />{' '}
+              {" "}
+              <br /> <div className="div" /> <br />{" "}
             </>
           ) : null}
         </div>
-        <div className='top-categories-sect'>
-          <h3 className='top-categories-h3'> Top Categories </h3>
+        <div className="top-categories-sect">
+          <h3 className="top-categories-h3"> Top Categories </h3>
           <br />
-          <div className='top-category-1'>
-            <h4 className='main-h4'> Photography </h4>
-            <div className='posts-slider-container'>
+          <div className="top-category-1">
+            <h4 className="main-h4"> Photography </h4>
+            <div className="posts-slider-container">
               <button
-                className='arrow'
+                className="arrow"
                 onClick={() =>
-                  setCurrentPhotographyPost(prevPost =>
+                  setCurrentPhotographyPost((prevPost) =>
                     prevPost === 0
                       ? postsCategorized.Photography.length - 1
                       : prevPost - 1
                   )
                 }
               >
-                {' '}
-                <ArrowBackIosIcon />{' '}
+                {" "}
+                <ArrowBackIosIcon />{" "}
               </button>
-              {visiblePhotographyPosts.map(post => {
+              {visiblePhotographyPosts.map((post) => {
                 return <PostCard post={post} key={uuid()} />;
               })}
               <button
-                className='arrow'
+                className="arrow"
                 onClick={() =>
-                  setCurrentPhotographyPost(prevPost =>
+                  setCurrentPhotographyPost((prevPost) =>
                     prevPost === postsCategorized.Photography.length - 1
                       ? 0
                       : prevPost + 1
                   )
                 }
               >
-                {' '}
-                <ArrowForwardIosIcon />{' '}
+                {" "}
+                <ArrowForwardIosIcon />{" "}
               </button>
             </div>
           </div>
-          <div className='top-category-2'>
-            <h4 className='main-h4'> Painting </h4>
-            <div className='posts-slider-container'>
+          <div className="top-category-2">
+            <h4 className="main-h4"> Painting </h4>
+            <div className="posts-slider-container">
               <button
-                className='arrow'
+                className="arrow"
                 onClick={() =>
-                  setCurrentPaintPost(prevPost =>
+                  setCurrentPaintPost((prevPost) =>
                     prevPost === 0
                       ? postsCategorized.Painting.length - 1
                       : prevPost - 1
                   )
                 }
               >
-                {' '}
-                <ArrowBackIosIcon />{' '}
+                {" "}
+                <ArrowBackIosIcon />{" "}
               </button>
-              {visiblePaintPosts.map(post => {
+              {visiblePaintPosts.map((post) => {
                 return <PostCard post={post} key={uuid()} />;
               })}
               <button
-                className='arrow'
+                className="arrow"
                 onClick={() =>
-                  setCurrentPaintPost(prevPost =>
+                  setCurrentPaintPost((prevPost) =>
                     prevPost === postsCategorized.Painting.length - 1
                       ? 0
                       : prevPost + 1
                   )
                 }
               >
-                {' '}
-                <ArrowForwardIosIcon />{' '}
+                {" "}
+                <ArrowForwardIosIcon />{" "}
               </button>
             </div>
           </div>
-          <div className='top-category-3'>
-            <h4 className='main-h4'> Filmmaking </h4>
-            <div className='posts-slider-container'>
+          <div className="top-category-3">
+            <h4 className="main-h4"> Filmmaking </h4>
+            <div className="posts-slider-container">
               <button
-                className='arrow'
+                className="arrow"
                 onClick={() =>
-                  setCurrentFilmmakingPost(prevPost =>
+                  setCurrentFilmmakingPost((prevPost) =>
                     prevPost === 0
                       ? postsCategorized.Filmmaking.length - 1
                       : prevPost - 1
                   )
                 }
               >
-                {' '}
-                <ArrowBackIosIcon />{' '}
+                {" "}
+                <ArrowBackIosIcon />{" "}
               </button>
-              {visibleFilmmakingPosts.map(post => {
+              {visibleFilmmakingPosts.map((post) => {
                 return <PostCard post={post} key={uuid()} />;
               })}
               <button
-                className='arrow'
+                className="arrow"
                 onClick={() =>
-                  setCurrentFilmmakingPost(prevPost =>
+                  setCurrentFilmmakingPost((prevPost) =>
                     prevPost === postsCategorized.Filmmaking.length - 1
                       ? 0
                       : prevPost + 1
                   )
                 }
               >
-                {' '}
-                <ArrowForwardIosIcon />{' '}
+                {" "}
+                <ArrowForwardIosIcon />{" "}
               </button>
             </div>
           </div>
