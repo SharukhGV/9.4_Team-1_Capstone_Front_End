@@ -52,3 +52,10 @@ button {
     padding:10px;
 }
 
+
+.fade-in-image { animation: fadeIn 5s;
+    font-size: large; }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }

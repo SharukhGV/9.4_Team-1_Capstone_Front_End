@@ -12,7 +12,12 @@ import {
 import CardMedia from '@mui/material/CardMedia';
 import './toolsCard.css';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
-export default function ToolsCard({tool, reloadTools}) {
+export default function ToolsCard({
+  addToCart,
+  tool,
+  reloadTools,
+  addToCartnStock,
+}) {
   const navigate = useNavigate();
   const {username} = useParams();
   const handleDelete = () => {
