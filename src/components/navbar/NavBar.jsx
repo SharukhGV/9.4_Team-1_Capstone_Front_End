@@ -128,10 +128,6 @@ export default function NavBar({
               anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
               transformOrigin={{vertical: 'top', horizontal: 'left'}}
             >
-              <MenuItem onClick={() => handleMenuItemNav('All')}>
-                {' '}
-                All Posts & Tools{' '}
-              </MenuItem>
               <MenuItem onClick={() => handleMenuItemNav('Photography')}>
                 {' '}
                 Photography{' '}
