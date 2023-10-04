@@ -42,7 +42,7 @@ export default function ToolsCard({
     >
       <CardOverflow sx={{height: '88px'}}>
         <AspectRatio ratio='2'>
-          <img loading='lazy' src={tool.thumbnail}/>
+          <img loading='lazy' src={tool?.thumbnail}/>
         </AspectRatio>
       </CardOverflow>
       <CardContent>
