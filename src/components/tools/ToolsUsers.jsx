@@ -4,7 +4,7 @@ import axios from 'axios';
 // import Carousel from 'react-material-ui-carousel';
 // import ToolsDetails from './ToolsDetails';
 import { v4 as uuidv4 } from 'uuid';
-import ToolsIndexSingle from './toolsIndexSingle';
+import ToolsIndexSingle from './ToolsIndexSingle';
 import './toolsUsers.css'
 
 
