@@ -55,7 +55,6 @@ function App() {
     'Digital Artistry': [],
   });
   const [grandTotal, setGrandTotal] = useState([]);
-
   useEffect(() => {
     const getPosts = () => {
       axios
