@@ -17,7 +17,7 @@
 }
 
 .profile-desc p {
-  font-family:  'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .profile-desc-edit {
@@ -93,7 +93,7 @@
 .button {
   background-color: #1a237e;
   color: white;
-  font-family:  'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   width: 50px;
   height: 25px;
   margin: auto;
@@ -101,9 +101,13 @@
   border-radius: 4px;
   width: 70px;
 }
+.button:hover {
+  cursor: pointer;
+  background-color: #121a6c;
+}
 
 .profile-subtitle p {
-  color: #3C415C;
+  color: #3c415c;
 }
 
 .select-inputs {
@@ -118,4 +122,7 @@
   background-color: transparent;
   color: #1a237e;
 }
-
+.edit-btn:hover {
+  cursor: pointer;
+  color: #121a6c;
+}

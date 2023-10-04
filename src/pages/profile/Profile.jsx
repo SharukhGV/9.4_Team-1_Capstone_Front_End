@@ -50,13 +50,17 @@ export default function Profile({user}) {
             <img
               className='profile-img'
               loading='lazy'
-              src={user.profile_pic?user.profile_pic:profile_pic}
+              src={user.profile_pic ? user.profile_pic : profile_pic}
               style={{borderRadius: '50%', width: '200px', height: '200px'}}
             />
             <aside className='profile-desc'>
               <h1>{user.username}</h1>
               <h3>{user.city_state}</h3>
-              <p>{user.aboutme && user.aboutme !== 'null' ? user.aboutme : "About Me"}</p>
+              <p>
+                {user.aboutme && user.aboutme !== 'null'
+                  ? user.aboutme
+                  : 'About Me'}
+              </p>
             </aside>
           </div>
           {user.username === username && (
@@ -82,7 +86,11 @@ export default function Profile({user}) {
               <div className='profile-posts-list'>
                 <div className='scroll'>
                   {posts.map(post => (
-                    <aside key={uuidv4()} className='aside-spacing' onClick={() => navigate(`/post/${post.post_id}`)}>
+                    <aside
+                      key={uuidv4()}
+                      className='aside-spacing'
+                      onClick={() => navigate(`/post/${post.post_id}`)}
+                    >
                       <PostCard post={post} />
                     </aside>
                   ))}
@@ -121,8 +129,15 @@ export default function Profile({user}) {
               <div className='profile-tools-list'>
                 <div className='scroll'>
                   {tools.map(tool => (
-                    <aside key={uuidv4()} className='aside-spacing' onClick={() => navigate(`/tools/${tool.tool_id}`//, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}}
-                    )}>
+                    <aside
+                      key={uuidv4()}
+                      className='aside-spacing'
+                      onClick={() =>
+                        navigate(
+                          `/tools/${tool.tool_id}` //, {state: {category: tool.category, condition: tool.condition, created_at: tool.created_at, created_by: tool.created_by, description: tool.description, name: tool.name, price: tool.price, stock: tool.stock}}
+                        )
+                      }
+                    >
                       <ToolsCard
                         tool={tool}
                         reloadTools={getTools}

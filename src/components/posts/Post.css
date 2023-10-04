@@ -23,13 +23,32 @@ button {
 .back-img:hover {
     width: 24px;
     height: 24px;
+    cursor: pointer;
 }
 
 .back-btn-container {
     width: 100%;
     text-align: left;
 }
+.post-info{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.post-details{
+    grid-column-start: 1;
 
+}
+.post-images{
+    grid-column-start: 2;
+    display: flex;
+    flex-direction: column;
+}
 
-
+.post-img{
+    width:50%;
+    margin:5%;
+    height:auto;
+    border:solid 1px grey;
+    padding:10px;
+}
 

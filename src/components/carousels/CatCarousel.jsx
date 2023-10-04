@@ -26,7 +26,7 @@ export default function CatCarousel({setSelectedCategory}) {
     {name: 'Painting', imageUrl: paintingImg},
     {name: 'Graffiti', imageUrl: graffitiImg},
     {name: 'Filmmaking', imageUrl: filmmakingImg},
-    {name: 'Fashion Design', imageUrl: fashionDesignImg},
+    {name: 'Fashion', imageUrl: fashionDesignImg},
     {name: 'Drawing', imageUrl: drawingImg},
     {name: 'Digital Artistry', imageUrl: digitalArtImg},
     {name: 'Sculpting', imageUrl: sculptureImg},
