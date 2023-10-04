@@ -6,10 +6,12 @@ const API = import.meta.env.VITE_REACT_APP_API_URL;
 import './ToolsUserDetails.css';
 import { Divider } from '@mui/material';
 import back from '../../assets/back.png';
+import { height } from '@mui/system';
 
 function ToolsUserDetails({
   removeItem,
   addToCart,
+
   // name,
   user,
   // description,
@@ -30,13 +32,21 @@ function ToolsUserDetails({
   const {id} = useParams();
   const [tools, setTools] = useState({});
   const navigate = useNavigate();
+  const [stockRemaining, setStockRemaining] = useState([]);
 
+  function addToCartnStock(tools){
+    let amountStockRemaining = stockRemaining
+    amountStockRemaining===-1 ? null : setStockRemaining(amountStockRemaining-=1);
+
+    amountStockRemaining===-1 ? null : addToCart(tools);
+  }
   useEffect(() => {
     axios
       .get(`${API}/tools/one/${id}`)
       .then(res => {
         //console.log(res.data);
         setTools(res.data.tool);
+        setStockRemaining(res.data.tool.stock)
       })
       .catch(error => {
         console.error('There was an error fetching the tools:', error);
@@ -52,8 +62,14 @@ function ToolsUserDetails({
       .catch(error => console.error(error));
   };
 
-  //console.log(tools)
+  function addToCartnStock(tools){
+    let amountStockRemaining = stockRemaining
+    amountStockRemaining===-1 ? null : setStockRemaining(amountStockRemaining-=1);
 
+    amountStockRemaining===-1 ? null : addToCart(tools);
+  }
+
+  //console.log(tools)
   return (
     <div className='tool-index'>
       <br />
@@ -63,6 +79,7 @@ function ToolsUserDetails({
         <div className='tool-name'>
           <p>{tools.name}</p>
         </div>
+        <img style={{maxWidth:"300px",height: "auto", margin:"auto"}} src={tools.thumbnail}></img>
         <br />
         {/* img here */}
         <div className='tool-desc'><p>Description: {tools.description}</p></div>
@@ -78,7 +95,7 @@ function ToolsUserDetails({
         </div>
         <br />
           <aside className='tools-action-btn'>
-            <button onClick={() => addToCart(tools)} className='to-cart-btn'>Add to Cart</button>
+            <button onClick={() =>{addToCartnStock(tools)}} className='to-cart-btn'>Add to Cart</button>
           </aside>
         </>
       )}

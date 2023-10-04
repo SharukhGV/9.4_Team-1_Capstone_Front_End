@@ -20,6 +20,7 @@ export default function Home({
   ArtistsGraphic,
   postsCategorized,
   updateUser,
+  addToCart
 }) {
   const navigate = useNavigate();
   const location = useLocation();

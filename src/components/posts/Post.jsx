@@ -3,6 +3,7 @@ import {useParams, useNavigate} from 'react-router';
 import axios from 'axios';
 import './Post.css';
 import back from '../../assets/back.png';
+import { maxWidth } from '@mui/system';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 export default function Post() {
@@ -17,6 +18,7 @@ export default function Post() {
         console.log(res.data);
         setPost(res.data.post);
         setMedia(res.data.media);
+        console.log(media)
       })
       .catch(err => console.log(err));
   }, [id]);
