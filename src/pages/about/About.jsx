@@ -125,10 +125,12 @@ export default function About() {
 
       <div>
         <img
-          src="src/assets/craftBanner2.jpg"
+          src="src/assets/craftBanner.svg"
           alt="Craft Collective"
-          style={{ width: '1000px', height: '250px', maxWidth: '100%' }}
+
+          style={{ width: '1000px', height: 'auto', maxWidth: '100%' }}
           className='about-img'
+
         />
       </div>
 
