@@ -7,7 +7,6 @@
   margin-left: auto;
   margin-right: auto;
   padding: 5%;
-  border: solid #7851a9 5px;
 }
 .price-condition-stock {
   display: flex;
@@ -53,3 +52,12 @@
   margin-left:10%;
   margin-top: 4%;
 }
+
+.top-text {
+  text-align: center;
+}
+
+.top-text p {
+  font-family: 'Open Sans', sans-serif;
+}
+
