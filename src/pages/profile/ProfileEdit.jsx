@@ -107,7 +107,7 @@ export default function ProfileEdit({user, refreshUser}) {
                     labelId='learning-interest-label'
                     id='learning-interest-select'
                     name='learning_interest'
-                    value={user.learning_interest}
+                    value={updatedUser.learning_interest}
                     label='Learning Interest'
                     onChange={handleSelectChange}
                   >
@@ -135,7 +135,7 @@ export default function ProfileEdit({user, refreshUser}) {
                     labelId='current-skillset-label'
                     id='current-skillset-select'
                     name='current_skillset'
-                    value={user.current_skillset}
+                    value={updatedUser.current_skillset}
                     label='Current Skillset'
                     onChange={handleSelectChange}>
                     <MenuItem value='Beginner'>Beginner</MenuItem>

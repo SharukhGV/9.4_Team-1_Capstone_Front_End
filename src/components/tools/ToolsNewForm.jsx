@@ -126,6 +126,7 @@ function ToolsNewForm({user}) {
           label='Description'
           sx={{marginBottom: 2}}
           id='description'
+          name='description'
           type='text'
           onChange={handleTextChange}
         />
@@ -217,7 +218,7 @@ function ToolsNewForm({user}) {
                 </Button>
               </div>
             ))}
-            <Card
+            {images.length<5&&<Card
               sx={{
                 width: '8vw',
                 height: '8vw',
@@ -225,7 +226,6 @@ function ToolsNewForm({user}) {
                 backgroundColor: 'lightgrey',
               }}
             >
-              <CardContent></CardContent>
               <CardActionArea
                 sx={{position: 'absolute', bottom: 0, width: '100%'}}
               >
@@ -241,7 +241,7 @@ function ToolsNewForm({user}) {
                   <VisuallyHiddenInput type='file' />
                 </Button>
               </CardActionArea>
-            </Card>
+            </Card>}
           </div>
         </div>
         <div className='form-buttons'>
