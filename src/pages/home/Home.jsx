@@ -7,7 +7,6 @@ import CatCarousel from '../../components/carousels/CatCarousel';
 import Assesment from '../../components/assesment/Assesment';
 import PostCard from '../../components/posts/PostCard';
 import ToolsCard from '../../components/tools/ToolsCard';
-
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Card} from '@mui/joy';
@@ -56,6 +55,7 @@ export default function Home({
       setSelectedCategory(location.state.category);
     }
   }, [location.state]);
+
   if (!dataLoader) {
     for (let i = 0; i < 5; i++) {
       const currentHobbyIndex =
@@ -248,8 +248,6 @@ export default function Home({
               : null}
           </div>
         </div>
-        {/* <div /> */}
-        {/* <br /> */}
         <div className='curated-posts-sect'>
           <h4 className='curations-h4'> Curations </h4>
           <aside>
