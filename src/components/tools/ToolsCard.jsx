@@ -23,7 +23,7 @@ export default function ToolsCard({addToCart,tool, reloadTools}) {
     <Card component='li' variant='solid' sx={{ height: 119, minWidth: '11vw', maxWidth: '11vw', backgroundColor: '#f8f8f8' }}  >
     <CardOverflow sx={{ height: '88px' }}>
       <AspectRatio ratio='2'>
-      <img loading='lazy' />
+      <img src={tool.thumbnail} loading='lazy' />
       </AspectRatio>
     </CardOverflow>
         <CardContent >

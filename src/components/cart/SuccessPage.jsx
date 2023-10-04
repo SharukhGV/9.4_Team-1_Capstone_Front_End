@@ -13,13 +13,12 @@ export default function SuccessPage({ emptyCart }) {
   }, []);
 
   return <>
-      <div class="cardCheckmark">
+      <div style ={{margine:"auto"}} class="cardCheckmark">
 
-<div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
-          <p className="checkmark">✓</p>
+          <div className="checkmark">✓</div>
 
   <h1>Success</h1> 
-        <p>We received your purchase request;<br/> we'll be in touch shortly!</p>
-  </div></div>
+        <p>We received your purchase request;<br/> You will be Redirected to the Home Page!</p>
+  </div>
   </>;
 }

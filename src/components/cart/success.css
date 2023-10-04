@@ -3,8 +3,6 @@
     padding: 60px;
     border-radius: 4px;
     box-shadow: 0 2px 3px #C8D0D8;
-    display: inline-block;
-    margin: 0 auto;
     text-align: center;
         padding: 40px 0;
         background: #EBF0F5;
@@ -15,5 +13,5 @@
     color: #9ABC66;
         font-size: 100px;
         line-height: 200px;
-        margin-left:-15px;
+    
 }

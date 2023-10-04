@@ -59,14 +59,15 @@ export default function Home({
   }, [location.state])
   if (!dataLoader) {
     for (let i = 0; i < 5; i++) {
+
       const currentHobbyIndex = user.current_skillset === 'Beginner' 
       ? (currentHobbyPost + i) % (postsCategorized.Photography ? postsCategorized.Photography.length : 0)
       : (currentHobbyPost + i) % (postsCategorized[user.current_skillset] ? postsCategorized[user.current_skillset].length : 0);
-        
+
+
       const currentInterestIndex = user.learning_interest === 'Unsure' 
       ? (currentInterestPost + i) % (postsCategorized.Painting ? postsCategorized.Painting.length : 0)
       : (currentInterestPost + i) % (postsCategorized[user.learning_interest] ? postsCategorized[user.learning_interest].length : 0);
-
       const currentHobbyToolIndex = user.current_skillset === 'Beginner'
       ? (currentHobbyTool + i) % (tools.filter(tool => tool?.category === 'Photography').length)
       : (currentHobbyTool + i) % (tools.filter(tool => tool?.category === user.current_skillset).length);
@@ -301,7 +302,7 @@ export default function Home({
           <div className='tools-sect'>
           <h4 className='main-h4'> {user.current_skillset === 'Beginner' ? 'Photography' : user.current_skillset} </h4>
             <div className='posts-slider-container'>
-              {user.current_skillset === 'Beginner' && tools ? (tools.filter((tool) => tool?.category === 'Photography').length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : tools && user.current_skillset ? (tools.filter((tool) => tool?.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
+              {user.current_skillset === 'Beginner' && tools ? (tools.filter((tool) => tool?.category === ('Photography' || 'Painting' || 'Grafitti' || 'Sculpting' ||'Filmmaking' || 'Drawing' || 'Fashion Design' || 'Digital Artistry' || 'Ceramics')).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : tools && user.current_skillset ? (tools.filter((tool) => tool?.category === user.current_skillset).length > 5 ? (<button className='arrow'> <ArrowBackIosIcon /> </button>) : null) : null}
               {
                 visibleCurrentHobbyTools.map((tool, i) => (
                   <div style={{ cursor: 'pointer'}} onClick={() => navigate(`/tools/${tool?.tool_id}`)}  >
