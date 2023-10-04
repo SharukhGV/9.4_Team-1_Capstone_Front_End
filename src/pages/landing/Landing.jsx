@@ -53,15 +53,7 @@ export default function Landing({
             </div>
           </Card>
           <div>
-
             <img src='src/assets/craftBanner2.jpg' className='artists-graphic' loading='lazy' />
-// =======
-//             <img
-//               src={ArtistsGraphic}
-//               className="artists-graphic"
-//               loading="lazy"
-//             />
-// >>>>>>> dev
           </div>
         </div>
         <br />

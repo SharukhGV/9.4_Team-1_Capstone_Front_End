@@ -105,9 +105,14 @@ function ToolsNewForm({user}) {
 
   return (
     <div className='edit'>
-      <h1 className='title-new-tool'>Create a Listing</h1>
+      <br />
+      <div className='top-text'>
+      <h1 className='title-new-tool'>Trade Your Treasures</h1>
+      <p>Create an item listing </p>
+      </div>
       <form className='tool-form' onSubmit={handleSubmit}>
-        <TextField
+        <TextField 
+          variant='standard'
           sx={{marginBottom: 2}}
           label='Listing Title'
           id='name'
@@ -117,6 +122,7 @@ function ToolsNewForm({user}) {
           required
         />
         <TextField
+          variant='standard'
           label='Description'
           sx={{marginBottom: 2}}
           id='description'
@@ -124,7 +130,7 @@ function ToolsNewForm({user}) {
           onChange={handleTextChange}
         />
         <div className='category'>
-          <FormControl fullWidth>
+          <FormControl fullWidth variant='standard'>
             <InputLabel id='category-label'>Category</InputLabel>
             <Select
               labelId='category-label'
@@ -147,7 +153,7 @@ function ToolsNewForm({user}) {
           </FormControl>
         </div>
         <div className='price-condition-stock'>
-          <FormControl sx={{width: '48%'}}>
+          <FormControl sx={{width: '48%'}} variant='standard'>
             <InputLabel id='condition-label'>Condition</InputLabel>
             <Select
               labelId='condition-label'
@@ -156,7 +162,7 @@ function ToolsNewForm({user}) {
               id='condition'
               value={tool.condition}
             >
-              <MenuItem value=''>--Please choose an option--</MenuItem>
+              <MenuItem value=''>--Choose an option--</MenuItem>
               <MenuItem value='good'>good</MenuItem>
               <MenuItem value='neutral'>neutral</MenuItem>
               <MenuItem value='bad'>bad</MenuItem>
@@ -164,6 +170,7 @@ function ToolsNewForm({user}) {
           </FormControl>
 
           <Input
+            variant='standard'
             onChange={handleTextChange}
             placeholder='Amount'
             id='price'
@@ -171,17 +178,9 @@ function ToolsNewForm({user}) {
             name='price'
             startDecorator={{dollar: '$'}['dollar']}
           />
-
-          {/* <TextField
-            label="Price"
-            sx={{ width: "25%" }}
-            id="price"
-            type="number"
-            name="price"
-            onChange={handleTextChange}
-          /> */}
           <TextField
-            label='Stock Quantity'
+            variant='standard'
+            label='Stock'
             sx={{width: '25%'}}
             id='stock'
             type='number'
@@ -189,7 +188,7 @@ function ToolsNewForm({user}) {
             onChange={handleTextChange}
           />
         </div>
-        <h2>Upload Images</h2>
+
         <div
           style={{
             display: 'flex',
