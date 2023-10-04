@@ -234,11 +234,11 @@ export default function NavBar({
               anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
               transformOrigin={{vertical: 'top', horizontal: 'left'}}
             >
-              <MenuItem onClick={() => navigate(`/${user.username}/post/new`)}>
+              <MenuItem onClick={() => {navigate(`/${user.username}/post/new`); setSharePopOpen(false)}}>
                 {' '}
                 Make a post{' '}
               </MenuItem>
-              <MenuItem onClick={() => navigate(`/${user.username}/tools/new`)}>
+              <MenuItem onClick={() => {navigate(`/${user.username}/tools/new`);setSharePopOpen(false)}}>
                 {' '}
                 Make an item listing{' '}
               </MenuItem>
@@ -280,10 +280,13 @@ export default function NavBar({
                     }}
                   />
                 </button> */}
-                  
-                <IconButton color='#EAEEF6' className='shopping-cart' onClick={() => setCartView(!cartView)}>
-                  <ShoppingCartIcon
-                  />
+
+                <IconButton
+                  color='#EAEEF6'
+                  className='shopping-cart'
+                  onClick={() => setCartView(!cartView)}
+                >
+                  <ShoppingCartIcon />
                 </IconButton>
               </Badge>
               {cartView && (
@@ -335,7 +338,10 @@ export default function NavBar({
                   transformOrigin={{vertical: 'top', horizontal: 'left'}}
                 >
                   <MenuItem
-                    onClick={() => {navigate(`${user.username}/profile`); setAvatarPopOver(false)}}
+                    onClick={() => {
+                      navigate(`${user.username}/profile`);
+                      setAvatarPopOver(false);
+                    }}
                   >
                     {' '}
                     Profile{' '}
