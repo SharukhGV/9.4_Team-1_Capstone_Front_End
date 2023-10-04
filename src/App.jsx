@@ -55,7 +55,6 @@ function App() {
     'Digital Artistry': [],
   });
   const [grandTotal, setGrandTotal] = useState([]);
-
   useEffect(() => {
     const getPosts = () => {
       axios
@@ -214,6 +213,7 @@ function App() {
               path='/home'
               element={
                 <Home
+                addToCart={addToCart}
                   user={user}
                   postsCategorized={postsCategorized}
                   ArtistsGraphic={ArtistsGraphic}
