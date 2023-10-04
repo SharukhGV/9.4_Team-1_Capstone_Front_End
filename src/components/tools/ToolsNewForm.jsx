@@ -107,9 +107,10 @@ function ToolsNewForm({user}) {
     <div className='edit'>
       <br />
       <div className='top-text'>
-      <h1 className='title-new-tool'>Trade Your Treasures</h1>
-      <p>Create an item listing </p>
+        <h1> List An Item </h1>
+        <p> pass on treasures to someone who'll cherish them </p>
       </div>
+      <br />
       <form className='tool-form' onSubmit={handleSubmit}>
         <TextField 
           variant='standard'
@@ -245,21 +246,15 @@ function ToolsNewForm({user}) {
           </div>
         </div>
         <div className='form-buttons'>
-          <Button
-            variant='contained'
-            color='error'
-            sx={{width: '10%'}}
-            onClick={() => navigate(-1)}
-          >
+          <button className='cancel-btn'
+            onClick={() => navigate(-1)}>
             Cancel
-          </Button>
-          <Button
-            variant='contained'
-            sx={{width: '10%', marginLeft: '5%'}}
+          </button>
+          <button
             type='submit'
-          >
+            className='submit-btn'>
             Submit
-          </Button>
+          </button>
         </div>
       </form>
     </div>
