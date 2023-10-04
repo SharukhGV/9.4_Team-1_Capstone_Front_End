@@ -6,7 +6,7 @@ import {Card, CardContent, CardOverflow, AspectRatio, Typography} from '@mui/joy
 import CardMedia from '@mui/material/CardMedia';
 import './toolsCard.css';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
-export default function ToolsCard({addToCart,tool, reloadTools}) {
+export default function ToolsCard({addToCart,tool, reloadTools,addToCartnStock}) {
   const navigate = useNavigate();
   const {username} = useParams();
   console.log(tool)
@@ -31,7 +31,8 @@ export default function ToolsCard({addToCart,tool, reloadTools}) {
         <Typography level='title-sm' sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}> {tool?.name} </Typography>
         <p className='post-category'> ${tool?.price} </p>
         <p className='created-by'>By: {tool?.created_by}</p>
-        <button onClick={addToCart}>Add to Cart</button>
+        <button style={{backgroundColor:"rgb(167, 133, 167", color:"white", borderRadius:'10px', padding:"5px"}}>View Item</button>
+        {/* onClick={() =>{addToCart(tool)}}    ---> add this code to the button to enable cart functionality. The reason I did not put it is because it is not set up to calculate for the stock discrepency. For example, a user will be able to add one extra item to the cart than listed stock amount */}
         </div>
         </CardContent>
     </Card>

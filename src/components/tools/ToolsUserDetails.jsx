@@ -34,6 +34,12 @@ function ToolsUserDetails({
   const navigate = useNavigate();
   const [stockRemaining, setStockRemaining] = useState([]);
 
+  function addToCartnStock(tools){
+    let amountStockRemaining = stockRemaining
+    amountStockRemaining===-1 ? null : setStockRemaining(amountStockRemaining-=1);
+
+    amountStockRemaining===-1 ? null : addToCart(tools);
+  }
   useEffect(() => {
     axios
       .get(`${API}/tools/one/${id}`)
