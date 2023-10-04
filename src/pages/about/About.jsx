@@ -62,7 +62,7 @@ export default function About() {
             <img
               src="src/assets/members/CraftopiaTeamSharukh.png"
               alt="Sharukh Velupillai"
-              className='team-img'
+              className='team-img about-img'
             // style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Sharukh Velupillai</h1>
@@ -78,7 +78,7 @@ export default function About() {
             <img
               src="src/assets/members/CraftopiaTeamMichel.png"
               alt="Michel Batista"
-              className='team-img'
+              className='team-img about-img'
             // style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Michel Batista</h1>
@@ -94,7 +94,7 @@ export default function About() {
             <img
               src="src/assets/members/CraftopiaTeamEvan.png"
               alt="Evan Velush"
-              className='team-img'
+              className='team-img about-img'
             />
             <h1>Evan Velush</h1>
             <p className="title">Project Manager & CSS Wizard</p>
@@ -128,6 +128,7 @@ export default function About() {
           src="src/assets/craftBanner2.jpg"
           alt="Craft Collective"
           style={{ width: '1000px', height: '250px', maxWidth: '100%' }}
+          className='about-img'
         />
       </div>
 

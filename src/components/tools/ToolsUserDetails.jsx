@@ -57,7 +57,7 @@ function ToolsUserDetails({
   return (
     <div className='tool-index'>
       <br />
-      <button onClick={() => navigate(-1)} style={{ color: '#1A237E'}}> <img src={back} className='back-img' /> Go Back </button>
+      <button onClick={() => navigate(-1)} className='back-btn'> <img src={back} className='back-img' /> Go Back </button>
       {tools.condition && (
         <>
         <div className='tool-name'>

@@ -6,7 +6,7 @@
     width: 90%;
 }
 
-img {
+.about-img {
     display: grid;
     border-radius: 50px;
     justify-self: center;

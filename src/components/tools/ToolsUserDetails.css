@@ -36,3 +36,9 @@
     display: flex;
     justify-content: center;
 }
+.back-btn{
+    color: '#1A237E'
+}
+.back-btn:hover{
+    cursor: pointer;
+}
