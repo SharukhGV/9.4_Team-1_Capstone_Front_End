@@ -28,7 +28,8 @@ export default function About() {
         <img
           src='src/assets/craftLogoFlatPurple.png'
           alt='Craftopia Logo'
-          style={{width: '85%', maxWidth: '100%'}}
+          style={{ width: '85%', maxWidth: '100%' }}
+          className='about-img'
         />
       </div>
 
@@ -39,14 +40,14 @@ export default function About() {
 
         <div
           className='about-team'
-          style={{display: 'grid', alignContent: 'center'}}
+          style={{ display: 'grid', alignContent: 'center' }}
         >
           <div className='card'>
             <img
               src='src/assets/members/CraftopiaTeamJuan.jpg'
               alt='Juan Feliz'
               className='team-img about-img'
-              // style={{ width: '100%', maxWidth: '100%' }}
+            // style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Juan Feliz</h1>
             <p className='title'>Technical Lead & Master Debugger</p>
@@ -77,16 +78,15 @@ export default function About() {
               src='src/assets/members/CraftopiaTeamSharukh.png'
               alt='Sharukh Velupillai'
               className='team-img about-img'
-              // style={{ width: '100%', maxWidth: '100%' }}
+            // style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Sharukh Velupillai</h1>
             <p className='title'>Demo Lead & Back-End Ninja</p>
             <p>
               What motivates me to learn and push forward is to see genuine
-              smiles on the faces of others due to something Ive done for them.
-              Sometimes this smile might originate from a cup of cardamom-tea.
-              Other times it might be due to simple conversation. Being grateful
-              for what I have has allowed me to never give up despite adversity,
+              smiles on the faces of others.
+              <br />
+              Being grateful for what I have has allowed me to never give up despite adversity,
               and continue to learn new things to improve the quality of life
               for myself and those around me.
             </p>
@@ -108,11 +108,15 @@ export default function About() {
               src='src/assets/members/CraftopiaTeamMichel.png'
               alt='Michel Batista'
               className='team-img about-img'
-              // style={{ width: '100%', maxWidth: '100%' }}
+            // style={{ width: '100%', maxWidth: '100%' }}
             />
             <h1>Michel Batista</h1>
             <p className='title'>Design Lead & 3am Push Champion</p>
-            <p>PERSONAL DESCRIP HERE</p>
+            <p>
+              I love to learn, & I love to create. These two passions have been the driving force behind my journey in programming.
+              <br />
+              Sometimes when envisioning a new project, one doesn’t always know how to specifically execute every single concept.
+            </p>
             <div>
               <a href='https://github.com/MichelBDLC' className='card-a'>
                 <i className='fa fa-github'></i>
@@ -134,7 +138,11 @@ export default function About() {
             />
             <h1>Evan Velush</h1>
             <p className='title'>Project Manager & CSS Wizard</p>
-            <p>PERSONAL DESCRIP HERE</p>
+            <p>
+              Nothing brings me more joy than appreciating the beauty of our planet and uplifting people around me.
+              <br />
+              My curious and altruistic nature has always fed my desire for radical disruption and improvement in our world.
+            </p>
             <div>
               <a href='https://github.com/SuperNinjaEv' className='card-a'>
                 <i className='fa fa-github'></i>
@@ -181,7 +189,7 @@ export default function About() {
         <img
           src='src/assets/craftBanner.svg'
           alt='Craft Collective'
-          style={{width: '1000px', height: 'auto', maxWidth: '100%'}}
+          style={{ width: '1000px', height: 'auto', maxWidth: '100%' }}
           className='about-img'
         />
       </div>
