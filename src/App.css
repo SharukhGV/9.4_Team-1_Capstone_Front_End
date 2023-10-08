@@ -1,11 +1,25 @@
 #root {
-  margin: 0 auto;
+  margin: 0;
+  /* overflow-x: hidden; */
 }
 
-  /* position: sticky;
-  top: 0;
-  z-index: 10;
-  background-color: #f8f8f8; */
+.App {
+  position: relative;
+}
+.main {
+  padding-top: 5%;
+  min-height: 100vh;
+  padding-bottom: 200px;
+}
 
-
-
+.footer {
+  padding-top: 50px;
+  text-align: center;
+  padding-bottom: 50px;
+  background-color: rgba(138, 96, 177, 0.5);
+  display: block;
+  width: 102%;
+  margin-left:-1.5%;
+  margin-bottom: -1%;
+  color:Black;
+}
