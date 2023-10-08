@@ -231,7 +231,7 @@ export default function Home({
         <CatCarousel setSelectedCategory={setSelectedCategory} />
         <br />
         <div className='selected-cat-sect' id='category-nav'>
-          {selectedCategory ? <h3> {selectedCategory} </h3> : null}
+          {selectedCategory ? <div style={{fontSize:'25px', textAlign:'center', color:'#800080', fontFamily:'Bellota, cursive'}}> {selectedCategory} </div> : null}
           <br />
           <div className='selected-posts'>
             {selectedCategory && !dataLoader && selectedCategory.length > 1
@@ -249,7 +249,8 @@ export default function Home({
           </div>
         </div>
         <div className='curated-posts-sect'>
-          <h4 className='curations-h4'> Curations </h4>
+    
+          <div style={{paddingTop:'75px', fontSize:'30px', textAlign:'center', color:'#800080', fontFamily:'Bellota, cursive'}} className='curations-h4'> Curations </div>
           <aside>
             <button
               className={tab ? 'view-tab' : 'view-tab selected'}
@@ -274,8 +275,8 @@ export default function Home({
                 <h4 className='main-h4'>
                   {' '}
                   {user.current_skillset === 'Beginner'
-                    ? 'Photography'
-                    : user.current_skillset}{' '}
+                    ? <div style={{fontSize:'25px'}}>Photography</div>
+                    : <div style={{fontSize:'25px'}}>{user.current_skillset}</div>}{' '}
                 </h4>
                 <div className='posts-slider-container'>
                   <button
@@ -336,8 +337,8 @@ export default function Home({
                 <h4 className='main-h4'>
                   {' '}
                   {user.learning_interest === 'Unsure'
-                    ? 'Painting'
-                    : user.learning_interest}{' '}
+                    ? <div style={{fontSize:'25px'}}>Painting</div>
+                    : <div style={{fontSize:'25px'}}>{user.learning_interest}</div>}{' '}
                 </h4>
                 <div className='posts-slider-container'>
                   <button
@@ -402,8 +403,8 @@ export default function Home({
                 <h4 className='main-h4'>
                   {' '}
                   {user.current_skillset === 'Beginner'
-                    ? 'Photography'
-                    : user.current_skillset}{' '}
+                    ? <div style={{fontSize:'25px'}}>Photography</div>
+                    : <div style={{fontSize:'25px'}}>{user.current_skillset}</div>}{' '}
                 </h4>
                 <div className='posts-slider-container'>
                   {user.current_skillset === 'Beginner' && tools ? (
@@ -458,8 +459,8 @@ export default function Home({
                 <h4 className='main-h4'>
                   {' '}
                   {user.learning_interest === 'Unsure'
-                    ? 'Painting'
-                    : user.learning_interest}{' '}
+                    ? <div style={{fontSize:'25px'}}>Painting</div>
+                    : <div style={{fontSize:'25px'}}>{user.learning_interest}</div>}
                 </h4>
                 <div className='posts-slider-container'>
                   {user.learning_interest === 'Unsure' && tools ? (

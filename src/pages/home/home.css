@@ -204,12 +204,12 @@
   justify-content: center;
 }
 
-.post-cta-sect h3, .selected-cat-sect h3 {
+/* .post-cta-sect div .selected-cat-sect h3 {
   font-family: 'Bellota', cursive;
   text-align: center;
   color: #800080;
   font-size: 17px;
-}
+} */
 
 .home-h4 h4, .post-cta-sect h4, .post-cta h4 {
   font-family: 'Montserrat', sans-serif;
