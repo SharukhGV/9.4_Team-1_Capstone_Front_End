@@ -23,6 +23,7 @@ export default function About() {
         href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
       ></link>
       <br />
+      <br />
 
       <div className='about-logo'>
         <img
@@ -31,6 +32,30 @@ export default function About() {
           style={{ width: '85%', maxWidth: '100%' }}
           className='about-img'
         />
+      </div>
+
+      <br />
+      <br />
+
+      <div className='about-body' style={bodyStyle}>
+        <h2 style={headerStyle}>About Our App</h2>
+        <div className='app-description'>
+          'Craftopia is inspired by the human desire for creativity and
+          connection. The bar to starting a new hobby can be high due to the
+          required time and money investment, we aim to lower this bar and to
+          rekindle the joy of crafting and hobbies. We believe everyone has
+          unique talents waiting to be explored, and we're here to break
+          barriers to creativity. Craftopia fosters a supportive community where
+          you can learn, create, and connect.
+          <br />
+          <br />
+          Craftopia is a vibrant crafting community that empowers all skill
+          levels. Learn from experts, buy/sell crafting gear, and connect with
+          like-minded crafters. Enjoy personalized learning, access resources,
+          showcase your creations, trade items, and swap skills. Craftopia is
+          where hobbies become fun again. Join us and nurture your creativity
+          today!'
+        </div>
       </div>
 
       <br />
@@ -159,29 +184,6 @@ export default function About() {
       </div>
 
       <br />
-
-      <div className='about-body' style={bodyStyle}>
-        <h2 style={headerStyle}>About Our App</h2>
-        <div className='app-description'>
-          'Craftopia is inspired by the human desire for creativity and
-          connection. The bar to starting a new hobby can be high due to the
-          required time and money investment, we aim to lower this bar and to
-          rekindle the joy of crafting and hobbies. We believe everyone has
-          unique talents waiting to be explored, and we're here to break
-          barriers to creativity. Craftopia fosters a supportive community where
-          you can learn, create, and connect.
-          <br />
-          <br />
-          Craftopia is a vibrant crafting community that empowers all skill
-          levels. Learn from experts, buy/sell crafting gear, and connect with
-          like-minded crafters. Enjoy personalized learning, access resources,
-          showcase your creations, trade items, and swap skills. Craftopia is
-          where hobbies become fun again. Join us and nurture your creativity
-          today!'
-        </div>
-      </div>
-
-      <br />
       <br />
       <br />
 
@@ -193,6 +195,8 @@ export default function About() {
           className='about-img'
         />
       </div>
+      <br />
+
     </div>
   );
 }
