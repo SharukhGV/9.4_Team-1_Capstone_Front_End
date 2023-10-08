@@ -2,7 +2,6 @@ import {useState, useEffect, lazy} from 'react';
 import {useNavigate, useLocation} from 'react-router';
 import {v4 as uuid} from 'uuid';
 import axios from 'axios';
-
 import CatCarousel from '../../components/carousels/CatCarousel';
 import Assesment from '../../components/assesment/Assesment';
 import PostCard from '../../components/posts/PostCard';
@@ -255,7 +254,7 @@ export default function Home({
             <button
               className={tab ? 'view-tab' : 'view-tab selected'}
               onClick={() => setTab(false)}
-              style={{cursor: 'pointer'}}
+              style={{cursor: 'pointer', padding:'5px', fontSize:'15px'}}
             >
               {' '}
               Posts{' '}
@@ -263,7 +262,7 @@ export default function Home({
             <button
               className={!tab ? 'view-tab' : 'view-tab selected'}
               onClick={() => setTab(true)}
-              style={{cursor: 'pointer'}}
+              style={{cursor: 'pointer',padding:'5px', fontSize:'15px'}}
             >
               {' '}
               Tools{' '}
