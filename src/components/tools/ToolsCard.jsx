@@ -56,10 +56,10 @@ export default function ToolsCard({
             }}
           >
             {' '}
-            {tool?.name}{' '}
+            <div style={{fontSize:'17px'}}>{tool?.name}</div>{' '}
           </Typography>
-          <p className='post-category'> ${tool?.price} </p>
-          <p className='created-by'>By: {tool?.created_by}</p>
+          <p style={{fontSize:'15px'}} className='post-category'> ${tool?.price} </p>
+          <p style={{fontSize:'13px'}} className='created-by'>By: {tool?.created_by}</p>
         </div>
       </CardContent>
     </Card>
