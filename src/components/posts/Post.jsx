@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router';
+import { v4 as uuid } from "uuid";
 import axios from 'axios';
 import './Post.css';
 import back from '../../assets/back.png';
@@ -60,13 +61,17 @@ export default function Post() {
           <div className='post-images'>
             {post && (
               <aside>
-                <img loading='lazy' className='post-img' src={post.thumbnail} />
+                <img 
+                loading='lazy' 
+                className='post-img' 
+                src={post.thumbnail}
+                 />
                 <p className='caption'>fig-1</p>
               </aside>
             )}
             {media[0] &&
               media.map((file, i) => (
-                <aside>
+                <aside key={uuid()}>
                   <img
                     src={file.file_url}
                     alt='post-img'
