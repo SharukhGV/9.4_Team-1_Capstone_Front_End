@@ -9,7 +9,7 @@ export default function SuccessPage({ emptyCart }) {
     emptyCart();
     setTimeout(() => {
       navigate("/home");
-    }, 5000);
+    }, 2000);
   }, []);
 
   return <>

@@ -24,6 +24,7 @@ export default function Cart({items, handleClose, removeItem, setGrandTotal}) {
     setGrandTotal(totalPrice);
     setTotal(totalPrice);
   }, [items]);
+  
   useEffect(() => {
     const handleClickOutside = event => {
       if (!ref.current.contains(event.target)) {
@@ -35,23 +36,6 @@ export default function Cart({items, handleClose, removeItem, setGrandTotal}) {
       document.removeEventListener('click', handleClickOutside, true);
     };
   });
-  //   function handleCheckout() {
-  //     const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
-
-  //     fetch('/checkout', {
-  //         method: 'POST',
-  //         headers: {
-  //             'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({ amount: totalAmount }),
-  //     })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //         })
-  //     .catch(error => {
-  //         console.error('Error:', error);
-  //     });
-  // }
 
   return (
     <div className='cart' ref={ref}>
@@ -79,14 +63,14 @@ export default function Cart({items, handleClose, removeItem, setGrandTotal}) {
 
         {items.length > 0 && (
           <div>
-            <h5>Total - ${total}</h5>
+            <h5>Total - ${total.toFixed(2)}</h5>
+            <Link to='/tools'>Browse items now</Link>
             <Link
               to='/checkout'
               style={{textDecoration: 'none', color: '#388E3C'}}
             >
               Go to Checkout
             </Link>{' '}
-            {/* Assuming you're using react-router */}
           </div>
         )}
       </div>

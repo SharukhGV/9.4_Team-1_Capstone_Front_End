@@ -1,6 +1,8 @@
 .cart {
   position: absolute;
   width: 30%;
+  max-height: 60vh;
+  overflow: scroll;
   padding: 1%;
   border: solid grey 2px;
   z-index: 10;
