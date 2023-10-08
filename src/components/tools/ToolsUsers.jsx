@@ -19,11 +19,7 @@ function ToolsUsers({addToCart}) {
       {tools.map((tool, index) => {
         return (
           <div className='tool-container'>
-            <ToolsIndexSingle
-              key={uuidv4()}
-              tool={tool}
-              index={index}
-            />
+            <ToolsIndexSingle key={uuidv4()} tool={tool} index={index} />
             <button className='add-to-cart-btn' onClick={() => addToCart(tool)}>
               Add to Cart
             </button>

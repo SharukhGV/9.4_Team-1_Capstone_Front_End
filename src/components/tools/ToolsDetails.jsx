@@ -8,17 +8,15 @@ import {useLocation} from 'react-router';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
 function ToolsDetails({addToCart}) {
-
   const {username, tools_id} = useParams();
   const [tool, setTool] = useState({
-    tool:'',
-    media:[]
+    tool: '',
+    media: [],
   });
   useEffect(() => {
     axios
       .get(`${API}/tools/one/${tools_id}`)
       .then(res => {
-        console.log(res.data)
         setTool({
           tool: res.data.tool,
           media: res.data.media,
@@ -53,7 +51,7 @@ function ToolsDetails({addToCart}) {
           <h3>${tool.tool.price}</h3>
           <aside className='tools-action-buttons'>
             <button>Buy it Now</button>
-            <button onClick={()=>addToCart(tool.tool)}>Add to Cart</button>
+            <button onClick={() => addToCart(tool.tool)}>Add to Cart</button>
           </aside>
         </aside>
       )}

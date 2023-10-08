@@ -1,80 +1,75 @@
 .post {
-    text-align: center;
-    display: grid;
+  text-align: center;
+  display: grid;
 }
 
 button {
-    border: none;
-    background: transparent;
-    margin: 0;
-    padding: 0;
+  border: none;
+  background: transparent;
+  margin: 0;
+  padding: 0;
 }
 
 .post h3 {
-    font-family: 'Roboto', sans-serif;
-    color: #800080;
-    font-size: larger;
-}
-
-.back-img {
-    width: 19px;
-    height: 19px;
+  font-family: 'Roboto', sans-serif;
+  color: #800080;
+  font-size: larger;
 }
 
 .back-img:hover {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
 
 .back-btn-container {
-    width: 100%;
-    text-align: left;
+  width: 100%;
+  text-align: left;
 }
 
 .post-info {
-    display: grid;
-    grid-template-rows: 1fr 3fr;
+  display: grid;
+  grid-template-rows: 1fr 3fr;
 }
 
 .post-details {
-    grid-row-start: 2;
+  grid-row-start: 2;
 }
 
 .post-images {
-    padding-left: 5px;
-    padding-right: 5px;
-    grid-row-start: 1;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+  padding-left: 5px;
+  padding-right: 5px;
+  grid-row-start: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .post-aside {
-    margin: 5px;
-    max-width: 400px;
+  margin: 5px;
+  max-width: 400px;
 }
 
 .post-img {
-    margin: 5%;
-    width: 300px;
-    border: solid 1px grey;
-    padding: 15px;
-    transition: width 2s, height 2s;
+  margin: 5%;
+  width: 300px;
+  border: solid 1px grey;
+  padding: 15px;
+  transition: width 2s, height 2s;
 }
 
 .fade-in-image {
-    animation: fadeIn 5s;
-    font-size: large;
+  animation: fadeIn 5s;
+  font-size: large;
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }
