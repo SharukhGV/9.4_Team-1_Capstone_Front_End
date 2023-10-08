@@ -54,7 +54,7 @@ function App() {
     Filmmaking: [],
     'Digital Artistry': [],
   });
-  const [grandTotal, setGrandTotal] = useState([]);
+  const [grandTotal, setGrandTotal] = useState(0.001);
   useEffect(() => {
     const getPosts = () => {
       axios
@@ -89,7 +89,10 @@ function App() {
     getPosts();
   }, []);
 
-  //console.log(posts)
+  useEffect(() => {
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+    setGrandTotal(totalPrice);
+  }, [cartItems]);
 
   useEffect(() => {
     checkToken();
@@ -196,7 +199,12 @@ function App() {
           <Route
             path='/checkout'
             element={
-              <CheckoutFormMain emptyCart={emptyCart} grandTotal={grandTotal} />
+              <CheckoutFormMain
+                emptyCart={emptyCart}
+                removeItem={removeItem}
+                cart={cartItems}
+                grandTotal={grandTotal}
+              />
             }
           />
           <Route path='/*' element={<FourOFour />} />
@@ -213,7 +221,7 @@ function App() {
               path='/home'
               element={
                 <Home
-                addToCart={addToCart}
+                  addToCart={addToCart}
                   user={user}
                   postsCategorized={postsCategorized}
                   ArtistsGraphic={ArtistsGraphic}
@@ -261,7 +269,7 @@ function App() {
 
           <Route path='/post/:id' element={<Post />} />
 
-          <Route path='/tools' element={<ToolsUsers />} />
+          <Route path='/tools' element={<ToolsUsers addToCart={addToCart}/>} />
           <Route
             path='/tools/:id'
             element={

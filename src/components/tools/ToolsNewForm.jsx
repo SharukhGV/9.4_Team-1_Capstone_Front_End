@@ -107,11 +107,11 @@ function ToolsNewForm({user}) {
     <div className='edit'>
       <br />
       <div className='top-text'>
-      <h1 className='title-new-tool'>Trade Your Treasures</h1>
-      <p>Create an item listing </p>
+        <h1 className='title-new-tool'>Trade Your Treasures</h1>
+        <p>Create an item listing </p>
       </div>
       <form className='tool-form' onSubmit={handleSubmit}>
-        <TextField 
+        <TextField
           variant='standard'
           sx={{marginBottom: 2}}
           label='Listing Title'
@@ -218,30 +218,32 @@ function ToolsNewForm({user}) {
                 </Button>
               </div>
             ))}
-            {images.length<5&&<Card
-              sx={{
-                width: '8vw',
-                height: '8vw',
-                position: 'relative',
-                backgroundColor: 'lightgrey',
-              }}
-            >
-              <CardActionArea
-                sx={{position: 'absolute', bottom: 0, width: '100%'}}
+            {images.length < 5 && (
+              <Card
+                sx={{
+                  width: '8vw',
+                  height: '8vw',
+                  position: 'relative',
+                  backgroundColor: 'lightgrey',
+                }}
               >
-                <Button
-                  component='label'
-                  type='file'
-                  accept='image/*'
-                  variant='contained'
-                  onChange={handleImages}
-                  startIcon={<CloudUploadIcon />}
+                <CardActionArea
+                  sx={{position: 'absolute', bottom: 0, width: '100%'}}
                 >
-                  Select
-                  <VisuallyHiddenInput type='file' />
-                </Button>
-              </CardActionArea>
-            </Card>}
+                  <Button
+                    component='label'
+                    type='file'
+                    accept='image/*'
+                    variant='contained'
+                    onChange={handleImages}
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Select
+                    <VisuallyHiddenInput type='file' />
+                  </Button>
+                </CardActionArea>
+              </Card>
+            )}
           </div>
         </div>
         <div className='form-buttons'>

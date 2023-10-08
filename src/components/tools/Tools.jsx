@@ -1,5 +1,4 @@
-import {useState} from 'react';
-import {useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -12,10 +11,11 @@ function Tools({user}) {
   const [currentTool, setCurrentTool] = useState(0);
 
   useEffect(() => {
-      axios.get(`${API}/tools`)
-        .then(response => setTools(response.data))
-        .catch(e => console.error('catch', e))
-        .finally(() => updateVisibleTools())
+    axios
+      .get(`${API}/tools`)
+      .then(response => setTools(response.data))
+      .catch(e => console.error('catch', e))
+      .finally(() => updateVisibleTools());
   }, []);
 
   function updateVisibleTools() {
@@ -34,36 +34,40 @@ function Tools({user}) {
       prevTool === 0 ? tools.length - 1 : prevTool - 1
     );
     updateVisibleTools();
-  } 
+  }
 
   function nextSlide() {
     setCurrentTool(prevTool =>
       prevTool === tools.length - 1 ? 0 : prevTool + 1
     );
     updateVisibleTool();
-  } 
+  }
   return (
-    <> 
-    <br />
-    <div className='slider-container'>
-      <button className='arrow' onClick={prevSlide}>{' '} <ArrowBackIosIcon />{' '} </button>
-      {
-        visibleTools.map((tool) => (
-          <Card component='li' variant='solid'  >
+    <div>
+      <br />
+      <div className='slider-container'>
+        <button className='arrow' onClick={prevSlide}>
+          {' '}
+          <ArrowBackIosIcon />{' '}
+        </button>
+        {visibleTools.map(tool => (
+          <Card component='li' variant='solid'>
             <CardOverflow>
               <AspectRatio>
-                <img loading='lazy' />
+                <img loading='lazy' src={tool?.thumbnail} />
               </AspectRatio>
               <CardContent>
-                <p> {tool?.title || 'Loading...'}  </p>
+                <p> {tool?.title || 'Loading...'} </p>
               </CardContent>
             </CardOverflow>
           </Card>
-        ))
-      }
-      <button className='arrow' onClick={nextSlide}> <ArrowForwardIosIcon /> </button>
+        ))}
+        <button className='arrow' onClick={nextSlide}>
+          {' '}
+          <ArrowForwardIosIcon />{' '}
+        </button>
+      </div>
     </div>
-    </>
   );
 }
 

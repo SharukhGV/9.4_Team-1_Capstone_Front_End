@@ -1,5 +1,5 @@
 import {useState, useRef, useEffect} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useLocation} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
 
 import Auth from '../../components/auth/Auth';
@@ -24,6 +24,7 @@ export default function NavBar({
   removeItem,
   setGrandTotal,
 }) {
+  const location = useLocation()
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -59,6 +60,10 @@ export default function NavBar({
     navigate(`/post/${id}`);
   };
 
+  useEffect(()=>{
+    setCartView(false)
+  }, [location.pathname])
+  
   const handleAvatarPopOver = event => {
     setAvatarPopOver(true);
     setAvatarAnchorEl(event.currentTarget);
@@ -128,10 +133,6 @@ export default function NavBar({
               anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
               transformOrigin={{vertical: 'top', horizontal: 'left'}}
             >
-              <MenuItem onClick={() => handleMenuItemNav('All')}>
-                {' '}
-                All Posts & Tools{' '}
-              </MenuItem>
               <MenuItem onClick={() => handleMenuItemNav('Photography')}>
                 {' '}
                 Photography{' '}

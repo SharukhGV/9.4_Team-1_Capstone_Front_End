@@ -7,6 +7,8 @@
   margin-left: auto;
   margin-right: auto;
   padding: 5%;
+  border:solid #7851a9 2px;
+  background-color: white;
 }
 .price-condition-stock {
   display: flex;
@@ -49,7 +51,6 @@
   font-family: 'Bellota';
   color: #800080;
   font-size: 22px;
-  margin-left:10%;
   margin-top: 4%;
 }
 

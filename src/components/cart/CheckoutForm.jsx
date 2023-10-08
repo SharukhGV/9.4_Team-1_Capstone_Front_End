@@ -1,150 +1,92 @@
 import React, {useState} from 'react';
-import ReactDOM from 'react-dom';
-import {loadStripe} from '@stripe/stripe-js';
-import {
-  PaymentElement,
-  Elements,
-  useStripe,
-  useElements,
-} from '@stripe/react-stripe-js';
-import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import {PaymentElement, useStripe, useElements} from '@stripe/react-stripe-js';
+import {v4 as uuid} from 'uuid';
+import {Tooltip} from '@mui/material';
+import {Link} from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
 
+import './checkoutForm.css';
 
 export default function CheckoutForm(props) {
-    // const { emptyCart } = props;
-
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
-// const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState(null);
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-
-//     if (elements == null) {
-//       return;
-//     }
-
-//     // Trigger form validation and wallet collection
-//     const {error: submitError} = await elements.submit();
-//     if (submitError) {
-//       // Show error to your customer
-//       setErrorMessage(submitError.message);
-//       return;
-//     }
-
-//     // Create the PaymentIntent and obtain clientSecret from your server endpoint
-//     const res = await fetch('/create-intent', {
-//       method: 'POST',
-//     });
-
-//     const {client_secret: clientSecret} = await res.json();
-
-//     const {error} = await stripe.confirmPayment({
-//       //`Elements` instance that was used to create the Payment Element
-//       elements,
-//       clientSecret,
-//       confirmParams: {
-//         return_url: 'https://example.com/order/123/complete',
-//       },
-//     });
-
-//     if (error) {
-//       // This point will only be reached if there is an immediate error when
-//       // confirming the payment. Show error to your customer (for example, payment
-//       // details incomplete)
-//       setErrorMessage(error.message);
-//     } else {
-//       // Your customer will be redirected to your `return_url`. For some payment
-//       // methods like iDEAL, your customer will be redirected to an intermediate
-//       // site first to authorize the payment, then redirected to the `return_url`.
-//     }
-//   };
-
-// const handleSubmit = async (event) => {
-//     event.preventDefault();
-  
-//     if (!stripe || !elements) {
-//       return;
-//     }
-  
-//     const cardElement = elements.getElement(CardElement);
-  
-//     // Fetch the PaymentIntent client secret from the backend
-//     const res = await fetch('/create-intent', { method: 'POST' });
-//     const { clientSecret } = await res.json();
-  
-//     // Confirm the payment with the client secret
-//     const { error } = await stripe.confirmCardPayment(clientSecret, {
-//       payment_method: {
-//         card: cardElement,
-//       },
-//     });
-  
-//     if (error) {
-//       console.error(error);
-//     } else {
-//       // Payment succeeded
-//       console.log('Payment Success!');
-//     }
-//   };
-//   function handleCheckout() {
-//     const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
-
-//     fetch('/checkout', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({ amount: totalAmount }),
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         })
-//     .catch(error => {
-//         console.error('Error:', error);
-//     });
-// }
-
-
-
-function handleCheckout(props) {
-    // const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+  function handleCheckout(props) {
     fetch('/checkout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount: props.options.amount }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({amount: props.options.amount}),
     })
-    .then(response => response.json())
-    .then(data => {
-
+      .then(response => response.json())
+      .then(data => {
         // Handle the response, e.g., display a success message
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         console.error('Error:', error);
-    });
+      });
 
     // navigate('/success')
-}
-
-
-
+  }
 
   return (
-    <form onSubmit={(e) => {
-        e.preventDefault(); 
-        handleCheckout();
-    //    emptyCart();
-    }}>
-      <PaymentElement />
-      <Link to="/success"><button type="submit" disabled={!stripe || !elements}>
-        Pay
-      </button></Link>
-      {/* Show error message to your customers */}
-      {errorMessage && <div>{errorMessage}</div>}
-    </form>
+    <div className='checkout-page'>
+      <aside className='cart-view'>
+        <h2>Shopping Cart</h2>
+        <hr />
+        {props.cart?.map((item,index) => (
+          <div className='cart-item' key={uuid()}>
+            <img
+              src={item.thumbnail ? item.thumbnail : Empty}
+              alt='tool thumbnail'
+              className='cart-item-thumbnail'
+              loading='lazy'
+            />
+            <aside
+              className='cart-item-details'
+              onClick={() => navigate(`/tools/${item.tool_id}`)}
+            >
+              <p className='item-name'>{item.name}</p>
+              <p>${item.price}</p>
+            </aside>
+            <Tooltip title='Remove'>
+              <DeleteIcon
+                color='#3C415C'
+                className='cart-item-delete'
+                onClick={() => props.removeItem(index)}
+              />
+            </Tooltip>
+          </div>
+        ))}
+        <span className='total'>
+          Subtotal({props.cart.length} item{props.cart.length > 1 ? 's' : null}
+          ): <b>${props.grandTotal.toFixed(2)}</b>
+        </span>
+      </aside>
+      <form
+        className='checkout-form'
+        onSubmit={e => {
+          e.preventDefault();
+          handleCheckout();
+        }}
+      >
+        <PaymentElement />
+          <button
+          onClick={()=>navigate('/success')}
+            className='pay-btn'
+            type='submit'
+            disabled={!stripe || !elements}
+          >
+            Pay
+          </button>
+          <button className='secondary-btn' onClick={()=>navigate('/tools')}>
+            Keep Shopping
+          </button>
+        {errorMessage && <div>{errorMessage}</div>}
+      </form>
+    </div>
   );
-};
+}
