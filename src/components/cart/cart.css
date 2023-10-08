@@ -7,9 +7,9 @@
   border: solid grey 2px;
   z-index: 10;
   right: 15%;
-  top: 21%;
-  background-color: #f8f8f8;
-  border-radius: 9px;
+  top: 115%;
+  background-color: white;
+  /* border-radius: 9px; */
 }
 
 .cart h4 {

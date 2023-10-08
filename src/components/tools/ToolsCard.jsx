@@ -31,21 +31,21 @@ export default function ToolsCard({
 
   return (
     <Card
-      component='li'
+      component='div'
       variant='solid'
       sx={{
-        height: 119,
+        height: 'fit-content',
         minWidth: '11vw',
         maxWidth: '11vw',
         backgroundColor: '#f8f8f8',
       }}
     >
-      <CardOverflow sx={{height: '88px'}}>
+      <CardOverflow sx={{height: '118px'}}>
         <AspectRatio ratio='2'>
           <img loading='lazy' src={tool?.thumbnail}/>
         </AspectRatio>
       </CardOverflow>
-      <CardContent>
+      <CardContent sx={{marginTop:'5px'}}>
         <div className='card-content-info'>
           <Typography
             level='title-sm'
@@ -56,7 +56,7 @@ export default function ToolsCard({
             }}
           >
             {' '}
-            <div style={{fontSize:'17px'}}>{tool?.name}</div>{' '}
+            <span style={{fontSize:'17px'}}>{tool?.name}</span>{' '}
           </Typography>
           <p style={{fontSize:'15px'}} className='post-category'> ${tool?.price} </p>
           <p style={{fontSize:'13px'}} className='created-by'>By: {tool?.created_by}</p>

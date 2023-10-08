@@ -20,7 +20,7 @@ export default function Home({
   ArtistsGraphic,
   postsCategorized,
   updateUser,
-  addToCart
+  addToCart,
 }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -246,7 +246,7 @@ export default function Home({
           <br />
           <div className='selected-posts'>
             {selectedCategory && !dataLoader && selectedCategory.length > 1
-              ? postsCategorized[selectedCategory].map(post => {
+              ? postsCategorized[selectedCategory]?.map(post => {
                 return (
                   <div
                     onClick={() => navigate(`/posts/${post.post_id}`)}
@@ -316,7 +316,7 @@ export default function Home({
                     {' '}
                     <ArrowBackIosIcon />{' '}
                   </button>
-                  {visibleCurrentHobbyPosts.map(post => {
+                  {visibleCurrentHobbyPosts?.map(post => {
                     return (
                       <div
                         onClick={() => navigate(`/post/${post?.post_id}`)}
@@ -378,8 +378,7 @@ export default function Home({
                     {' '}
                     <ArrowBackIosIcon />{' '}
                   </button>
-                  {visibleInterestPosts.map(post => {
-
+                  {visibleInterestPosts?.map(post => {
                     return (
                       <div
                         onClick={() => navigate(`/post/${post?.post_id}`)}

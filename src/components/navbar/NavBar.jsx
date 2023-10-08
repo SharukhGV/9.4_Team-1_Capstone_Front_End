@@ -1,22 +1,12 @@
 import {useState, useRef, useEffect} from 'react';
 import {Link, useNavigate, useLocation} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
-
 import Auth from '../../components/auth/Auth';
 import Cart from '../cart/Cart';
-
-import {
-  Input,
-  Popover,
-  MenuItem,
-  Badge,
-  IconButton,
-  Tooltip,
-} from '@mui/material';
+import {Input, Popover, MenuItem, Badge, IconButton, Tooltip} from '@mui/material';
 import {Avatar} from '@mui/joy';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-// import shoppingCartIcon from '../../assets/circularShoppingCart.png';
 import CraftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 import './navbar.css';
 

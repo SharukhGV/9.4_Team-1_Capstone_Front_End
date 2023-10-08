@@ -6,8 +6,12 @@ nav {
   padding-left: 10%;
   position: sticky;
   top: 0;
+  margin-top: -2%;
+  left: 0;
+  width: 81%;
+  transform: translateX(-0.5%);
   z-index: 11;
-  background-color: #f8f8f8;
+  background-color: white;
 }
 
 .top {
@@ -119,10 +123,10 @@ nav {
   font: 'Roboto';
 }
 
-::-webkit-input-placeholder {
+/* ::-webkit-input-placeholder {
   text-align: left;
   padding-left: 34px;
-}
+} */
 .nav-logo {
   max-width: 100px;
   max-height: 100px;
@@ -137,12 +141,12 @@ nav {
   
 } */
 
-.logo-aside:hover{
+.logo-aside:hover {
   cursor: pointer;
   animation: spin;
   animation-duration: 5000ms;
   animation-iteration-count: infinite;
-  animation-timing-function: linear; 
+  animation-timing-function: linear;
 }
 
 @keyframes spin {

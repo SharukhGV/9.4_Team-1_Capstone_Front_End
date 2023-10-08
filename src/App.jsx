@@ -177,7 +177,7 @@ function App() {
         removeItem={removeItem}
         setGrandTotal={setGrandTotal}
       />
-      <main>
+      <main className='main'>
         <Routes>
           <Route
             element={<ProtectedRoute user={!user} redirectPath={'/home'} />}
@@ -269,7 +269,7 @@ function App() {
 
           <Route path='/post/:id' element={<Post />} />
 
-          <Route path='/tools' element={<ToolsUsers addToCart={addToCart}/>} />
+          <Route path='/tools' element={<ToolsUsers addToCart={addToCart} />} />
           <Route
             path='/tools/:id'
             element={
@@ -282,7 +282,11 @@ function App() {
           />
         </Routes>
       </main>
-      <Footer />
+      <div className='div-foot'>
+        <footer className='footer'>
+          <span>Craftopia © 2023 All rights reserved </span>
+        </footer>
+      </div>
     </div>
   );
 }
