@@ -70,7 +70,7 @@ export default function Landing({
           <div className="selected-posts">
             {selectedCategory && !dataLoader && selectedCategory.length > 1 //
               ? postsCategorized[selectedCategory].map((post, i) => {
-                  return <PostCard post={post} />;
+                  return <PostCard post={post} key={uuid()} />;
                 })
               : null}
           </div>

@@ -114,6 +114,7 @@ main h3 {
 .back-img {
   width: 19px;
   height: 19px;
+  background-color: transparent;
 }
 
 .back-btn {

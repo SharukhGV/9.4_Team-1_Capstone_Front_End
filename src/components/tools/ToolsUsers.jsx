@@ -1,57 +1,32 @@
-// import ToolsCard from './ToolsCard';
-import {useState,useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import axios from 'axios';
-// import Carousel from 'react-material-ui-carousel';
-// import ToolsDetails from './ToolsDetails';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import ToolsIndexSingle from './ToolsIndexSingle';
-import './toolsUsers.css'
+import './toolsUsers.css';
 
-
-function ToolsUsers({user}) {
+function ToolsUsers({addToCart}) {
   const API = import.meta.env.VITE_REACT_APP_API_URL;
   const [tools, setTools] = useState([]);
-  
 
-useEffect(() => {
-  axios.get(`${API}/tools`).then(res => {
-    setTools(res.data);
-  });
-}, []);
-
-
-
+  useEffect(() => {
+    axios.get(`${API}/tools`).then(res => {
+      setTools(res.data);
+    });
+  }, []);
 
   return (
-    <table className='thedreamtable'>
-      <thead>
-        <tr>
-          <th>Item Number</th>
-          <th>Item Name</th>
-          <th>Description</th>
-        </tr>
-      </thead>{tools.map((individualTool, index) => {
+    <div className='thedreamtable'>
+      {tools.map((tool, index) => {
         return (
-          <ToolsIndexSingle
-            key={uuidv4()}
-            // tool={individualTool}
-            // inKEY={individualTool.tool_id}
-            // name={individualTool.name}
-            // description={individualTool.description}
-            // price={individualTool.price}
-            // quantity={individualTool.stock}
-            // condition={individualTool.condition}
-            // thumbnail={individualTool.thumbnail}
-            // index={index}
-            // user={user}
-            // username={username}
-            individualTool={individualTool}
-            index={index}
-          />
+          <div className='tool-container'>
+            <ToolsIndexSingle key={uuidv4()} tool={tool} index={index} />
+            <button className='add-to-cart-btn' onClick={() => addToCart(tool)}>
+              Add to Cart
+            </button>
+          </div>
         );
       })}
-    </table>
+    </div>
   );
-
-    }
+}
 export default ToolsUsers;

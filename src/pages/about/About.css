@@ -7,9 +7,10 @@
 }
 
 .about-img {
-    display: grid;
+    display: flex;
     border-radius: 50px;
-    justify-self: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .team-img {

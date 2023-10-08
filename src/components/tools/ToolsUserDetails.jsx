@@ -5,7 +5,7 @@ import axios from 'axios';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 import './ToolsUserDetails.css';
 import {Divider} from '@mui/material';
-import back from '../../assets/back.png';
+import back from '../../assets/back.svg';
 import {height} from '@mui/system';
 
 function ToolsUserDetails({removeItem, addToCart, user}) {
@@ -62,7 +62,7 @@ function ToolsUserDetails({removeItem, addToCart, user}) {
       <br />
       <button onClick={() => navigate(-1)} className='back-btn'>
         {' '}
-        <img src={back} className='back-img' /> Go Back{' '}
+        <img src={back} className='back-img' /> {' '}
       </button>
 
       {tools.condition && (

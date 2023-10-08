@@ -1,17 +1,22 @@
-.cardCheckmark{
-    background: white;
-    padding: 60px;
-    border-radius: 4px;
-    box-shadow: 0 2px 3px #C8D0D8;
-    text-align: center;
-        padding: 40px 0;
-        background: #EBF0F5;
-
+.success-page {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
 }
 
-.checkmark{
-    color: #9ABC66;
-        font-size: 100px;
-        line-height: 200px;
-    
+.cardCheckmark {
+  height: fit-content;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px #c8d0d8;
+  text-align: center;
+  padding: 40px 0;
+  background: #ebf0f5;
+  width: 100%;
+}
+
+.checkmark {
+  color: #9abc66;
+  font-size: 100px;
+  line-height: 200px;
 }

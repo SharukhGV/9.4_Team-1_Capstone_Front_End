@@ -23,7 +23,7 @@ import {
   Typography,
 } from '@mui/joy';
 import './NewPost.css';
-import back from '../../assets/back.png';
+import back from '../../assets/back.svg';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -54,7 +54,6 @@ export default function NewPost({user}) {
   const sendToServer = async event => {
     event.preventDefault();
     const formData = new FormData();
-    console.log(files);
     files.forEach((file, index) => {
       if (file) {
         formData.append(`file-${index}`, file.data);
@@ -178,16 +177,16 @@ export default function NewPost({user}) {
             </Card>
           </div>
         </div>
-      <div className='post-buttons'>
-        <button className='preview-btn' onClick={() => setOpenPreview(true)}>
-          {' '}
-          Preview
-        </button>
-        <button className='post-btn' onClick={sendToServer}>
-          {' '}
-          Post{' '}
-        </button>
-      </div>
+        <div className='post-buttons'>
+          <button className='preview-btn' onClick={() => setOpenPreview(true)}>
+            {' '}
+            Preview
+          </button>
+          <button className='post-btn' onClick={sendToServer}>
+            {' '}
+            Post{' '}
+          </button>
+        </div>
       </div>
       <div className='preview-modal'>
         <Modal open={openPreview} onClose={() => setOpenPreview(false)}>
@@ -196,9 +195,9 @@ export default function NewPost({user}) {
               <button
                 className='back-btn'
                 onClick={() => setOpenPreview(false)}
-              > <img src={back} className='back-img' />
+              >
                 {' '}
-                Back to editing{' '}
+                <img src={back} className='back-img' /> Back to editing{' '}
               </button>
               <button className='x' onClick={() => setOpenPreview(false)}>
                 {' '}
@@ -210,7 +209,16 @@ export default function NewPost({user}) {
             <div className='content-preview'>
               <h3> {post.title} </h3>
               <p> {post.category} </p>
-              <p style={{ fontFamily: 'Montserrat, sans serif', color: '#1A237E', fontSize: '17px' }}> By:{post.created_by} </p>
+              <p
+                style={{
+                  fontFamily: 'Montserrat, sans serif',
+                  color: '#1A237E',
+                  fontSize: '17px',
+                }}
+              >
+                {' '}
+                By:{post.created_by}{' '}
+              </p>
               {/* <img src={URL.createObjectURL(selected)} /> */}
               <p> {post.body} </p>
               <div>

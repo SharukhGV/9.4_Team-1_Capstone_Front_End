@@ -1,5 +1,5 @@
-import {useState, useEffect} from 'react';
-import {useNavigate, Link} from 'react-router-dom';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {
   Select,
@@ -9,7 +9,6 @@ import {
   InputLabel,
   FormControl,
   Card,
-  CardContent,
   CardActionArea,
 } from '@mui/material';
 import {Input} from '@mui/joy';
@@ -43,7 +42,6 @@ function ToolsNewForm({user}) {
   });
 
   const addTool = newTool => {
-    console.log(newTool);
     const newForm = new FormData();
     images.forEach((image, i) => {
       newForm.append(`file-${i}`, image.data);
