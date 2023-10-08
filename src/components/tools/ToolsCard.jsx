@@ -40,7 +40,7 @@ export default function ToolsCard({
         backgroundColor: '#f8f8f8',
       }}
     >
-      <CardOverflow sx={{height: '88px'}}>
+      <CardOverflow sx={{height: '118px'}}>
         <AspectRatio ratio='2'>
           <img loading='lazy' src={tool?.thumbnail}/>
         </AspectRatio>
