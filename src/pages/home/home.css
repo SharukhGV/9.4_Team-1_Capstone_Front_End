@@ -9,6 +9,12 @@
   width: 90%;
 }
 
+.craftopia-logo-flat {
+  max-width: 33%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .header-h2 {
   font-size: x-large;
 }

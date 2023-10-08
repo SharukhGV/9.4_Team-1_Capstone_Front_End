@@ -37,6 +37,11 @@ export default function Landing({
 
   return (
     <div className="landing">
+      <img 
+        src='./src/assets/logo-no-background.png' 
+        alt='craftopia-logo-landing'
+        className='craftopia-logo-landing'/>
+
       <div className="header-branding">
         <div className="landing-action">
           <Card>
