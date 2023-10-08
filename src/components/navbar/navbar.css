@@ -123,10 +123,10 @@ nav {
   font: 'Roboto';
 }
 
-::-webkit-input-placeholder {
+/* ::-webkit-input-placeholder {
   text-align: left;
   padding-left: 34px;
-}
+} */
 .nav-logo {
   max-width: 100px;
   max-height: 100px;
