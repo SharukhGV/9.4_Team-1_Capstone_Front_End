@@ -37,10 +37,10 @@ export default function Landing({
 
   return (
     <div className="landing">
-      <img 
-        src='./src/assets/logo-no-background.png' 
+      <img
+        src='./src/assets/logo-no-background.png'
         alt='craftopia-logo-landing'
-        className='craftopia-logo-landing'/>
+        className='craftopia-logo-landing' />
 
       <div className="header-branding">
         <div className="landing-action">
@@ -75,8 +75,8 @@ export default function Landing({
           <div className="selected-posts">
             {selectedCategory && !dataLoader && selectedCategory.length > 1 //
               ? postsCategorized[selectedCategory].map((post, i) => {
-                  return <PostCard post={post} key={uuid()} />;
-                })
+                return <PostCard post={post} key={uuid()} />;
+              })
               : null}
           </div>
           <br />

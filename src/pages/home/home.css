@@ -1,8 +1,27 @@
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(+300%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .home-page {
   font-family: 'Lato';
   margin-left: auto;
   margin-right: auto;
 }
+
 .div {
   margin: 0 auto;
   border-bottom: solid 1px #3278b2;
@@ -13,6 +32,11 @@
   max-width: 33%;
   margin-top: 15px;
   margin-bottom: 15px;
+  animation-duration: 3s;
+        animation-timing-function: ease-in-out;
+        animation-delay: 0s;
+        animation-iteration-count: 1;
+        animation-name: slideInRight;
 }
 
 .header-h2 {
@@ -77,9 +101,9 @@
 }
 
 .post-cta-p {
-  font-family:  'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #3C415C;
-  margin-top: 0;  
+  margin-top: 0;
 }
 
 .cta-btn {
@@ -89,7 +113,7 @@
   height: 34px;
   width: 111px;
   border-style: none;
-  font-family:  'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 11px;
   font-weight: 500;
   align-self: center;
@@ -115,14 +139,19 @@
   object-fit: cover;
   z-index: 2;
   margin-left: auto;
-  margin-right:auto;
+  margin-right: auto;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-name: slideInLeft;
 }
 
 .overlay-card {
   z-index: 2;
   left: 50%;
   transform: translateX(-50%);
-  height: 209px ;
+  height: 209px;
 }
 
 .content-container {
@@ -217,7 +246,9 @@
   font-size: 17px;
 } */
 
-.home-h4 h4, .post-cta-sect h4, .post-cta h4 {
+.home-h4 h4,
+.post-cta-sect h4,
+.post-cta h4 {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
 }
@@ -253,6 +284,3 @@
   display: flex;
   flex-direction: row-reverse;
 }
-
-
-

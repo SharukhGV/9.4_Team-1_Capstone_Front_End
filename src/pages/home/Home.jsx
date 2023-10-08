@@ -140,10 +140,10 @@ export default function Home({
   return (
     <div className='home-page'>
       <div className='home-header'>
-        <img 
-        src='./src/assets/logo-no-background.png' 
-        alt='craftopia-logo-flat'
-        className='craftopia-logo-flat'/>
+        <img
+          src='./src/assets/logo-no-background.png'
+          alt='craftopia-logo-flat'
+          className='craftopia-logo-flat' />
         {/* <h2 className='header-h2' style={{fontSize: '50px'}}>
           {' '}
           Equip Your Creativity{' '}
@@ -236,13 +236,13 @@ export default function Home({
         <CatCarousel setSelectedCategory={setSelectedCategory} />
         <br />
         <div className='selected-cat-sect' id='category-nav'>
-          {selectedCategory ? 
-          <div style={{
-            fontSize: '25px',
-            textAlign: 'center',
-            color: '#800080',
-            fontFamily: 'Bellota, cursive'
-          }}> {selectedCategory} </div> : null}
+          {selectedCategory ?
+            <div style={{
+              fontSize: '25px',
+              textAlign: 'center',
+              color: '#800080',
+              fontFamily: 'Bellota, cursive'
+            }}> {selectedCategory} </div> : null}
           <br />
           <div className='selected-posts'>
             {selectedCategory && !dataLoader && selectedCategory.length > 1
