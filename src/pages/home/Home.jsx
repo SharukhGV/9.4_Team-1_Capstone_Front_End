@@ -19,7 +19,7 @@ export default function Home({
   ArtistsGraphic,
   postsCategorized,
   updateUser,
-  addToCart
+  addToCart,
 }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -231,11 +231,23 @@ export default function Home({
         <CatCarousel setSelectedCategory={setSelectedCategory} />
         <br />
         <div className='selected-cat-sect' id='category-nav'>
-          {selectedCategory ? <div style={{fontSize:'25px', textAlign:'center', color:'#800080', fontFamily:'Bellota, cursive'}}> {selectedCategory} </div> : null}
+          {selectedCategory ? (
+            <div
+              style={{
+                fontSize: '25px',
+                textAlign: 'center',
+                color: '#800080',
+                fontFamily: 'Bellota, cursive',
+              }}
+            >
+              {' '}
+              {selectedCategory}{' '}
+            </div>
+          ) : null}
           <br />
           <div className='selected-posts'>
             {selectedCategory && !dataLoader && selectedCategory.length > 1
-              ? postsCategorized[selectedCategory].map(post => {
+              ? postsCategorized[selectedCategory]?.map(post => {
                   return (
                     <div
                       onClick={() => navigate(`/posts/${post.post_id}`)}
@@ -249,13 +261,24 @@ export default function Home({
           </div>
         </div>
         <div className='curated-posts-sect'>
-    
-          <div style={{paddingTop:'75px', fontSize:'30px', textAlign:'center', color:'#800080', fontFamily:'Bellota, cursive'}} className='curations-h4'> Curations </div>
+          <div
+            style={{
+              paddingTop: '75px',
+              fontSize: '30px',
+              textAlign: 'center',
+              color: '#800080',
+              fontFamily: 'Bellota, cursive',
+            }}
+            className='curations-h4'
+          >
+            {' '}
+            Curations{' '}
+          </div>
           <aside>
             <button
               className={tab ? 'view-tab' : 'view-tab selected'}
               onClick={() => setTab(false)}
-              style={{cursor: 'pointer', padding:'5px', fontSize:'15px'}}
+              style={{cursor: 'pointer', padding: '5px', fontSize: '15px'}}
             >
               {' '}
               Posts{' '}
@@ -263,7 +286,7 @@ export default function Home({
             <button
               className={!tab ? 'view-tab' : 'view-tab selected'}
               onClick={() => setTab(true)}
-              style={{cursor: 'pointer',padding:'5px', fontSize:'15px'}}
+              style={{cursor: 'pointer', padding: '5px', fontSize: '15px'}}
             >
               {' '}
               Tools{' '}
@@ -274,9 +297,13 @@ export default function Home({
               <div className='user-current-hobby-posts'>
                 <h4 className='main-h4'>
                   {' '}
-                  {user.current_skillset === 'Beginner'
-                    ? <div style={{fontSize:'25px'}}>Photography</div>
-                    : <div style={{fontSize:'25px'}}>{user.current_skillset}</div>}{' '}
+                  {user.current_skillset === 'Beginner' ? (
+                    <div style={{fontSize: '25px'}}>Photography</div>
+                  ) : (
+                    <div style={{fontSize: '25px'}}>
+                      {user.current_skillset}
+                    </div>
+                  )}{' '}
                 </h4>
                 <div className='posts-slider-container'>
                   <button
@@ -299,7 +326,7 @@ export default function Home({
                     {' '}
                     <ArrowBackIosIcon />{' '}
                   </button>
-                  {visibleCurrentHobbyPosts.map(post => {
+                  {visibleCurrentHobbyPosts?.map(post => {
                     return (
                       <div
                         onClick={() => navigate(`/post/${post?.post_id}`)}
@@ -336,9 +363,13 @@ export default function Home({
               <div className='user-interest-posts'>
                 <h4 className='main-h4'>
                   {' '}
-                  {user.learning_interest === 'Unsure'
-                    ? <div style={{fontSize:'25px'}}>Painting</div>
-                    : <div style={{fontSize:'25px'}}>{user.learning_interest}</div>}{' '}
+                  {user.learning_interest === 'Unsure' ? (
+                    <div style={{fontSize: '25px'}}>Painting</div>
+                  ) : (
+                    <div style={{fontSize: '25px'}}>
+                      {user.learning_interest}
+                    </div>
+                  )}{' '}
                 </h4>
                 <div className='posts-slider-container'>
                   <button
@@ -361,8 +392,7 @@ export default function Home({
                     {' '}
                     <ArrowBackIosIcon />{' '}
                   </button>
-                  {visibleInterestPosts.map(post => {
-
+                  {visibleInterestPosts?.map(post => {
                     return (
                       <div
                         onClick={() => navigate(`/post/${post?.post_id}`)}
@@ -402,9 +432,13 @@ export default function Home({
               <div className='tools-sect'>
                 <h4 className='main-h4'>
                   {' '}
-                  {user.current_skillset === 'Beginner'
-                    ? <div style={{fontSize:'25px'}}>Photography</div>
-                    : <div style={{fontSize:'25px'}}>{user.current_skillset}</div>}{' '}
+                  {user.current_skillset === 'Beginner' ? (
+                    <div style={{fontSize: '25px'}}>Photography</div>
+                  ) : (
+                    <div style={{fontSize: '25px'}}>
+                      {user.current_skillset}
+                    </div>
+                  )}{' '}
                 </h4>
                 <div className='posts-slider-container'>
                   {user.current_skillset === 'Beginner' && tools ? (
@@ -458,9 +492,13 @@ export default function Home({
               <div className='tools-sect'>
                 <h4 className='main-h4'>
                   {' '}
-                  {user.learning_interest === 'Unsure'
-                    ? <div style={{fontSize:'25px'}}>Painting</div>
-                    : <div style={{fontSize:'25px'}}>{user.learning_interest}</div>}
+                  {user.learning_interest === 'Unsure' ? (
+                    <div style={{fontSize: '25px'}}>Painting</div>
+                  ) : (
+                    <div style={{fontSize: '25px'}}>
+                      {user.learning_interest}
+                    </div>
+                  )}
                 </h4>
                 <div className='posts-slider-container'>
                   {user.learning_interest === 'Unsure' && tools ? (

@@ -7,12 +7,11 @@ nav {
   position: sticky;
   top: 0;
   margin-top: -2%;
-  left:0;
-  width:81%;
-transform: translateX(-.5%);
+  left: 0;
+  width: 81%;
+  transform: translateX(-0.5%);
   z-index: 11;
   background-color: white;
-  
 }
 
 .top {
@@ -142,12 +141,12 @@ transform: translateX(-.5%);
   
 } */
 
-.logo-aside:hover{
+.logo-aside:hover {
   cursor: pointer;
   animation: spin;
   animation-duration: 5000ms;
   animation-iteration-count: infinite;
-  animation-timing-function: linear; 
+  animation-timing-function: linear;
 }
 
 @keyframes spin {
