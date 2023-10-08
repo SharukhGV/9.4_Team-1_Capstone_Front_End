@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {useParams, useNavigate} from 'react-router';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router';
 import { v4 as uuid } from "uuid";
 import axios from 'axios';
 import './Post.css';
@@ -9,7 +9,7 @@ import { maxWidth } from '@mui/system';
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 export default function Post() {
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
   const [post, setPost] = useState({});
   const [media, setMedia] = useState([]);
   useEffect(() => {
@@ -24,8 +24,6 @@ export default function Post() {
       .catch(err => console.log(err));
   }, [id]);
 
-  //console.log(post)
-
   return (
     <div className='post'>
       <br />
@@ -38,6 +36,31 @@ export default function Post() {
       <br />
       {post.title && (
         <div className='post-info'>
+
+          <div className='post-images'>
+            {post && (
+              <aside className='post-aside'>
+                <img
+                  loading='lazy'
+                  className='post-img'
+                  src={post.thumbnail}
+                />
+                <p className='caption'>Image - 1</p>
+              </aside>
+            )}
+            {media[0] &&
+              media.map((file, i) => (
+                <aside key={uuid()} className='post-aside'>
+                  <img
+                    src={file.file_url}
+                    alt='post-img'
+                    className='post-img'
+                  />
+                  <p className='caption'>Image - {i + 2}</p>
+                </aside>
+              ))}
+          </div>
+
           <div className='post-details'>
             <h3> {post.title} </h3>
             <p> {post.category} </p>
@@ -58,29 +81,7 @@ export default function Post() {
             </p>
             <p> {post.body} </p>
           </div>
-          <div className='post-images'>
-            {post && (
-              <aside>
-                <img 
-                loading='lazy' 
-                className='post-img' 
-                src={post.thumbnail}
-                 />
-                <p className='caption'>fig-1</p>
-              </aside>
-            )}
-            {media[0] &&
-              media.map((file, i) => (
-                <aside key={uuid()}>
-                  <img
-                    src={file.file_url}
-                    alt='post-img'
-                    className='post-img'
-                  />
-                  <p className='caption'>fig-{i+2}</p>
-                </aside>
-              ))}
-          </div>
+
         </div>
       )}
     </div>
