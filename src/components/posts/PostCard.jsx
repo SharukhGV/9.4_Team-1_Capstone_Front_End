@@ -19,9 +19,9 @@ export default function PostCard({post}) {
             </CardOverflow>
                 <CardContent >
                 <div className='card-content-info'>
-                <Typography level='title-sm' sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}> {post?.title} </Typography>
-                <p className='post-category'> {post?.category} </p>
-                <p className='created-by'>By: {post?.created_by}</p>
+                <Typography style={{fontSize:"17px"}} level='title-sm' sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}> {post?.title} </Typography>
+                <p className='post-category' style={{fontSize:"15px"}}> {post?.category} </p>
+                <p className='created-by' style={{fontSize:"13px"}}>By: {post?.created_by}</p>
                 </div>
                 </CardContent>
         </Card>
