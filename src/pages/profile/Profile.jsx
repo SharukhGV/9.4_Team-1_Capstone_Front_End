@@ -8,6 +8,7 @@ import {Card} from '@mui/joy';
 import PostCard from '../../components/posts/PostCard';
 import ToolsCard from '../../components/tools/ToolsCard';
 import profile_pic from '../../assets/blank_profile.jpeg';
+import noPost from '../../assets/noPost.jpg'
 import './profile.css';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
@@ -79,8 +80,10 @@ export default function Profile({user}) {
             <h2 className='profile-subtitle'>Posts</h2>
 
             {posts.length < 1 ? (
-              <div>
+              <div className='empty'>
                 <p>No Post yet </p>
+                <img src={noPost} style={{width:'50%'}}/>
+                <p>Share your Knowledge</p>
               </div>
             ) : (
               <div className='profile-posts-list'>
