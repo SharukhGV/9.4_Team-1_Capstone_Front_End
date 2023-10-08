@@ -1,22 +1,12 @@
 import {useState, useRef, useEffect} from 'react';
 import {Link, useNavigate, useLocation} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
-
 import Auth from '../../components/auth/Auth';
 import Cart from '../cart/Cart';
-
-import {
-  Input,
-  Popover,
-  MenuItem,
-  Badge,
-  IconButton,
-  Tooltip,
-} from '@mui/material';
+import {Input, Popover, MenuItem, Badge, IconButton} from '@mui/material';
 import {Avatar} from '@mui/joy';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-// import shoppingCartIcon from '../../assets/circularShoppingCart.png';
 import CraftopiaLogo from '../../assets/Craftopia-Circular-Logo.svg';
 import './navbar.css';
 
@@ -31,7 +21,7 @@ export default function NavBar({
   removeItem,
   setGrandTotal,
 }) {
-  const location = useLocation();
+  const location = useLocation()
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -67,10 +57,10 @@ export default function NavBar({
     navigate(`/post/${id}`);
   };
 
-  useEffect(() => {
-    setCartView(false);
-  }, [location.pathname]);
-
+  useEffect(()=>{
+    setCartView(false)
+  }, [location.pathname])
+  
   const handleAvatarPopOver = event => {
     setAvatarPopOver(true);
     setAvatarAnchorEl(event.currentTarget);
@@ -83,19 +73,25 @@ export default function NavBar({
 
   return (
     <nav>
-      <div className='top'></div>
+      <div className='top'>
+        
+      </div>
       <div className='navbar'>
         <div className='nav-left'>
-          <Tooltip title='Home'>
-            <aside className='logo-aside'>
-              <img
-                src={CraftopiaLogo}
-                loading='lazy'
-                onClick={() => navigate('/home')}
-                className='nav-logo'
-              />{' '}
-            </aside>
-          </Tooltip>
+        <Link to='/home'>
+          <img
+            style={{
+              maxWidth: '100px',
+              maxHeight: '100px',
+              borderRadius: '50%',
+              width: '79px',
+              margin: '7px',
+            }}
+            src={CraftopiaLogo}
+            className='nav-logo'
+            loading='lazy'
+          />{' '}
+        </Link>
           <aside>
             <Link to='/about' className='about-link'>
               {' '}
@@ -206,21 +202,11 @@ export default function NavBar({
               anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
               transformOrigin={{vertical: 'top', horizontal: 'left'}}
             >
-              <MenuItem
-                onClick={() => {
-                  navigate(`/${user.username}/post/new`);
-                  setSharePopOpen(false);
-                }}
-              >
+              <MenuItem onClick={() => {navigate(`/${user.username}/post/new`); setSharePopOpen(false)}}>
                 {' '}
                 Make a post{' '}
               </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  navigate(`/${user.username}/tools/new`);
-                  setSharePopOpen(false);
-                }}
-              >
+              <MenuItem onClick={() => {navigate(`/${user.username}/tools/new`);setSharePopOpen(false)}}>
                 {' '}
                 Make an item listing{' '}
               </MenuItem>
@@ -238,37 +224,37 @@ export default function NavBar({
             handleSignIn={handleSignIn}
           />
 
-          <div className='search-sect'>
-            <Input
-              type='text'
-              placeholder='Search...'
-              value={search}
-              onChange={handleTextChange}
-              size='xsmall'
-              sx={{width: '100%', marginBottom: '-4px'}}
-              inputProps={{style: {fontSize: '17px', marginBottom: '-2px'}}}
-            />
-            {searchResults.length > 0 ? (
-              <div className='search-results'>
-                {searchResults.map((res, i) => {
-                  if (i < 3) {
-                    return (
-                      <aside
-                        className='result-item'
-                        onClick={() => handleSearch(res.post_id)}
-                        key={uuid()}
-                      >
-                        <p>{res.title}</p>
-                      </aside>
-                    );
-                  }
-                })}
-                {searchResults.length - 3 >= 1 ? (
-                  <p>{searchResults.length - 3} other results</p>
-                ) : null}
-              </div>
-            ) : null}
-          </div>
+<div className='search-sect'>
+          <Input
+            type='text'
+            placeholder='Search...'
+            value={search}
+            onChange={handleTextChange}
+            size='xsmall'
+            sx={{width: '100%', marginBottom: '-4px'}}
+            inputProps={{style: {fontSize: '17px', marginBottom: '-2px'}}}
+          />
+          {searchResults.length > 0 ? (
+            <div className='search-results'>
+              {searchResults.map((res, i) => {
+                if (i < 3) {
+                  return (
+                    <aside
+                      className='result-item'
+                      onClick={() => handleSearch(res.post_id)}
+                      key={uuid()}
+                    >
+                      <p>{res.title}</p>
+                    </aside>
+                  );
+                }
+              })}
+              {searchResults.length - 3 >= 1 ? (
+                <p>{searchResults.length - 3} other results</p>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
 
           <div className='cart-auth-buttons'>
             <aside className='aside-cart'>

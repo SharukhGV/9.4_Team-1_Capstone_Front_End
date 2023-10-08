@@ -82,7 +82,7 @@
 
 .arrow {
   border: none;
-  background-color: #f8f8f8;
+  background-color: transparent;
   color: #1a237e;
   cursor: pointer;
 }
