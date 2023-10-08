@@ -1,25 +1,23 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router';
-import { v4 as uuid } from "uuid";
+import {useEffect, useState} from 'react';
+import {useParams, useNavigate} from 'react-router';
+import {v4 as uuid} from 'uuid';
 import axios from 'axios';
 import './Post.css';
-import back from '../../assets/back.png';
-import { maxWidth } from '@mui/system';
+import back from '../../assets/back.svg';
+import {maxWidth} from '@mui/system';
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 export default function Post() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const {id} = useParams();
   const [post, setPost] = useState({});
   const [media, setMedia] = useState([]);
   useEffect(() => {
     axios
       .get(`${API}/posts/one/${id}`)
       .then(res => {
-        console.log(res.data);
         setPost(res.data.post);
         setMedia(res.data.media);
-        console.log(media)
       })
       .catch(err => console.log(err));
   }, [id]);
@@ -36,15 +34,10 @@ export default function Post() {
       <br />
       {post.title && (
         <div className='post-info'>
-
           <div className='post-images'>
             {post && (
               <aside className='post-aside'>
-                <img
-                  loading='lazy'
-                  className='post-img'
-                  src={post.thumbnail}
-                />
+                <img loading='lazy' className='post-img' src={post.thumbnail} />
                 <p className='caption'>Image - 1</p>
               </aside>
             )}
@@ -81,7 +74,6 @@ export default function Post() {
             </p>
             <p> {post.body} </p>
           </div>
-
         </div>
       )}
     </div>

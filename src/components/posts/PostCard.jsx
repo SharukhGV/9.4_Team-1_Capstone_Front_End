@@ -25,7 +25,7 @@ export default function PostCard({post}) {
           {post && <img loading='lazy' src={post.thumbnail} />}
         </AspectRatio>
       </CardOverflow>
-      <CardContent sx={{marginTop:'35px'}}>
+      <CardContent sx={{marginTop: '35px'}}>
         <div className='card-content-info'>
           <Typography
             style={{fontSize: '17px'}}

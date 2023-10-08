@@ -40,7 +40,6 @@ export default function Home({
     axios
       .get(`${API}/tools`)
       .then(response => {
-        console.log(response.data);
         setTools(response.data);
       })
       .catch(error => console.error('catch', error));
@@ -460,12 +459,8 @@ export default function Home({
                     ) : null
                   ) : null}
                   {visibleCurrentHobbyTools.map((tool, i) => (
-                    <div
-                      key={uuid()}
-                      style={{cursor: 'pointer'}}
-                      onClick={() => navigate(`/tools/${tool?.tool_id}`)}
-                    >
-                      <ToolsCard tool={tool} />
+                    <div key={uuid()} style={{cursor: 'pointer'}}>
+                      <ToolsCard tool={tool} addToCart={addToCart}/>
                     </div>
                   ))}
                   {user.current_skillset === 'Beginner' && tools ? (
@@ -520,12 +515,8 @@ export default function Home({
                     ) : null
                   ) : null}
                   {visibleInterestTools.map((tool, i) => (
-                    <div
-                      key={uuid()}
-                      style={{cursor: 'pointer'}}
-                      onClick={() => navigate(`/tools/${tool?.tool_id}`)}
-                    >
-                      <ToolsCard tool={tool} />
+                    <div key={uuid()} style={{cursor: 'pointer'}}>
+                      <ToolsCard tool={tool} addToCart={addToCart} />
                     </div>
                   ))}
                   {user.learning_interest === 'Unsure' && tools ? (
