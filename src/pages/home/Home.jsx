@@ -11,6 +11,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Card } from '@mui/joy';
 import './home.css';
 import { fontSize } from '@mui/system';
+import craftBanner from '../../assets/logo-no-background.png'
 
 const API = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -141,7 +142,7 @@ export default function Home({
     <div className='home-page'>
       <div className='home-header'>
         <img
-          src='./src/assets/logo-no-background.png'
+          src={craftBanner}
           alt='craftopia-logo-flat'
           className='craftopia-logo-flat' />
         {/* <h2 className='header-h2' style={{fontSize: '50px'}}>

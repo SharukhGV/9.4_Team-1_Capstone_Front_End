@@ -6,6 +6,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import CatCarousel from "../../components/carousels/CatCarousel";
 import PostCard from "../../components/posts/PostCard";
 import "./landing.css";
+import craftBanner from '../../assets/logo-no-background.png'
 
 export default function Landing({
   setModal,
@@ -38,7 +39,7 @@ export default function Landing({
   return (
     <div className="landing">
       <img
-        src='./src/assets/logo-no-background.png'
+        src={craftBanner}
         alt='craftopia-logo-landing'
         className='craftopia-logo-landing' />
 

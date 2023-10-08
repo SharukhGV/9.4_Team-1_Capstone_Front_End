@@ -1,4 +1,10 @@
 import './About.css';
+import craftBanner from '../../assets/craftLogoFlatPurple.png'
+import Juan from '../../assets/members/CraftopiaTeamJuan.jpg'
+import Sharukh from '../../assets/members/CraftopiaTeamSharukh.png'
+import Michel from '../../assets/members/CraftopiaTeamMichel.png'
+import Evan from '../../assets/members/CraftopiaTeamEvan.png'
+import craftFooter from '../../assets/craftBanner.svg'
 
 export default function About() {
   const headerStyle = {
@@ -27,7 +33,7 @@ export default function About() {
 
       <div className='about-logo'>
         <img
-          src='src/assets/craftLogoFlatPurple.png'
+          src={craftBanner}
           alt='Craftopia Logo'
           style={{ width: '85%', maxWidth: '100%' }}
           className='about-img'
@@ -69,7 +75,7 @@ export default function About() {
         >
           <div className='card'>
             <img
-              src='src/assets/members/CraftopiaTeamJuan.jpg'
+              src={Juan}
               alt='Juan Feliz'
               className='team-img about-img'
             // style={{ width: '100%', maxWidth: '100%' }}
@@ -100,7 +106,7 @@ export default function About() {
 
           <div className='card'>
             <img
-              src='src/assets/members/CraftopiaTeamSharukh.png'
+              src={Sharukh}
               alt='Sharukh Velupillai'
               className='team-img about-img'
             // style={{ width: '100%', maxWidth: '100%' }}
@@ -130,7 +136,7 @@ export default function About() {
 
           <div className='card'>
             <img
-              src='src/assets/members/CraftopiaTeamMichel.png'
+              src={Michel}
               alt='Michel Batista'
               className='team-img about-img'
             // style={{ width: '100%', maxWidth: '100%' }}
@@ -157,7 +163,7 @@ export default function About() {
 
           <div className='card'>
             <img
-              src='src/assets/members/CraftopiaTeamEvan.png'
+              src={Evan}
               alt='Evan Velush'
               className='team-img about-img'
             />
@@ -189,7 +195,7 @@ export default function About() {
 
       <div>
         <img
-          src='src/assets/craftBanner.svg'
+          src={craftFooter}
           alt='Craft Collective'
           style={{ width: '1000px', height: 'auto', maxWidth: '100%' }}
           className='about-img'
