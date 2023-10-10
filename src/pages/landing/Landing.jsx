@@ -7,6 +7,7 @@ import CatCarousel from "../../components/carousels/CatCarousel";
 import PostCard from "../../components/posts/PostCard";
 import "./landing.css";
 import craftBanner from '../../assets/logo-no-background.png'
+import craftBannerArt from '../../assets/craftBanner2.jpg'
 
 export default function Landing({
   setModal,
@@ -59,7 +60,7 @@ export default function Landing({
             </div>
           </Card>
           <div>
-            <img src='src/assets/craftBanner2.jpg' className='artists-graphic' loading='lazy' />
+            <img src={craftBannerArt} className='artists-graphic' loading='lazy' />
           </div>
         </div>
         <br />
